@@ -58,8 +58,9 @@ function animate() {
   layers.forEach((layer, index) => {
     const depthIndex = index + 1;
     const translateX = currentMouseX * layer.mouseXFactor;
-    const translateY = currentMouseY * layer.mouseYFactor - currentScroll * layer.scrollFactor;
-    const scale = 1 + depthIndex * 0.005;
+    const scrollOffset = scrollProgress * layer.scrollFactor * viewportHeight;
+    const translateY = currentMouseY * layer.mouseYFactor - scrollOffset;
+    const scale = 1.15 + depthIndex * 0.02;
 
     layer.element.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
   });
