@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Mountains Parallax</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      background: #000;
+      overflow-x: hidden;
+      color: transparent;
+    }
+
+    body {
+      position: relative;
+      font-family: sans-serif;
+      min-height: 400vh;
+    }
+
+    /* Parallax layers */
+    .parallax-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: auto;
+      pointer-events: none;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+      object-fit: contain;
+      object-position: bottom;
+    }
+
+    #layer1 { z-index: 6; }
+    #layer2 { z-index: 5; }
+    #layer3 { z-index: 4; }
+    #layer4 { z-index: 3; }
+    #layer5 { z-index: 2; }
+    #layer6 { z-index: 1; }
+
+    /* Scrollable area */
+    .scroll-space {
+      position: relative;
+      width: 100%;
+      height: 300vh;
+    }
+
+    /* Transition to black */
+    .black-fade {
+      position: relative;
+      width: 100%;
+      height: 150vh;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 60%, #000 100%);
+    }
+  </style>
+</head>
+<body>
+  <!-- Parallax image layers -->
+  <img id="layer1" class="parallax-layer" src="dynamic-mountains/Layer 1 - Dynamic Mountains.png" alt="" />
+  <img id="layer2" class="parallax-layer" src="dynamic-mountains/Layer 2 - Dynamic Mountains.png" alt="" />
+  <img id="layer3" class="parallax-layer" src="dynamic-mountains/Layer 3 - Dynamic Mountains.png" alt="" />
+  <img id="layer4" class="parallax-layer" src="dynamic-mountains/Layer 4 - Dynamic Mountains.png" alt="" />
+  <img id="layer5" class="parallax-layer" src="dynamic-mountains/Layer 5 - Dynamic Mountains.png" alt="" />
+  <img id="layer6" class="parallax-layer" src="dynamic-mountains/Layer 6 - Dynamic Mountains.png" alt="" />
+
+  <div class="scroll-space"></div>
+  <div class="black-fade"></div>
+
+  <script>
+    // Cache layer references with their parallax settings
+    const layers = [
+      { element: document.getElementById('layer1'), scrollMultiplier: 1.0, mouseFactorX: 0.020, mouseFactorY: 0.010 },
+      { element: document.getElementById('layer2'), scrollMultiplier: 0.85, mouseFactorX: 0.017, mouseFactorY: 0.0085 },
+      { element: document.getElementById('layer3'), scrollMultiplier: 0.7, mouseFactorX: 0.014, mouseFactorY: 0.007 },
+      { element: document.getElementById('layer4'), scrollMultiplier: 0.55, mouseFactorX: 0.011, mouseFactorY: 0.0055 },
+      { element: document.getElementById('layer5'), scrollMultiplier: 0.4, mouseFactorX: 0.008, mouseFactorY: 0.004 },
+      { element: document.getElementById('layer6'), scrollMultiplier: 0.25, mouseFactorX: 0.005, mouseFactorY: 0.0025 }
+    ];
+
+    let latestScrollY = window.scrollY;
+    let mouseOffsetX = 0;
+    let mouseOffsetY = 0;
+    let viewportCenterX = window.innerWidth / 2;
+    let viewportCenterY = window.innerHeight / 2;
+    let ticking = false;
+
+    const updateViewportCenter = () => {
+      viewportCenterX = window.innerWidth / 2;
+      viewportCenterY = window.innerHeight / 2;
+    };
+
+    const requestTick = () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(applyParallax);
+      }
+    };
+
+    const applyParallax = () => {
+      layers.forEach(({ element, scrollMultiplier, mouseFactorX, mouseFactorY }) => {
+        const scrollTranslation = -latestScrollY * scrollMultiplier;
+        const mouseTranslationX = mouseOffsetX * mouseFactorX;
+        const mouseTranslationY = mouseOffsetY * mouseFactorY;
+        element.style.transform = `translate3d(${mouseTranslationX}px, ${scrollTranslation + mouseTranslationY}px, 0)`;
+      });
+      ticking = false;
+    };
+
+    // Scroll handler
+    window.addEventListener('scroll', () => {
+      latestScrollY = window.scrollY;
+      requestTick();
+    }, { passive: true });
+
+    // Mouse move handler for depth effect
+    window.addEventListener('mousemove', (event) => {
+      mouseOffsetX = event.clientX - viewportCenterX;
+      mouseOffsetY = event.clientY - viewportCenterY;
+      requestTick();
+    });
+
+    // Update center on resize
+    window.addEventListener('resize', () => {
+      updateViewportCenter();
+      requestTick();
+    });
+
+    // Initial render
+    updateViewportCenter();
+    requestTick();
+  </script>
+</body>
+</html>
