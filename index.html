@@ -31,12 +31,13 @@
       top: 0;
       left: 0;
       width: 100vw;
-      height: auto;
+      height: 100vh;
       pointer-events: none;
       transform: translate3d(0, 0, 0);
       will-change: transform;
-      object-fit: contain;
-      object-position: bottom;
+      object-fit: cover;
+      object-position: center 75%;
+      transform-origin: bottom center;
     }
 
     #layer1 { z-index: 6; }
@@ -77,13 +78,21 @@
   <script>
     // Cache layer references with their parallax settings
     const layers = [
-      { element: document.getElementById('layer1'), scrollMultiplier: 1.0, mouseFactorX: 0.020, mouseFactorY: 0.010 },
-      { element: document.getElementById('layer2'), scrollMultiplier: 0.85, mouseFactorX: 0.017, mouseFactorY: 0.0085 },
-      { element: document.getElementById('layer3'), scrollMultiplier: 0.7, mouseFactorX: 0.014, mouseFactorY: 0.007 },
-      { element: document.getElementById('layer4'), scrollMultiplier: 0.55, mouseFactorX: 0.011, mouseFactorY: 0.0055 },
-      { element: document.getElementById('layer5'), scrollMultiplier: 0.4, mouseFactorX: 0.008, mouseFactorY: 0.004 },
-      { element: document.getElementById('layer6'), scrollMultiplier: 0.25, mouseFactorX: 0.005, mouseFactorY: 0.0025 }
+      { element: document.getElementById('layer1'), scrollMultiplier: 1.0, baseMouseFactorX: 0.020, baseMouseFactorY: 0.010 },
+      { element: document.getElementById('layer2'), scrollMultiplier: 0.85, baseMouseFactorX: 0.017, baseMouseFactorY: 0.0085 },
+      { element: document.getElementById('layer3'), scrollMultiplier: 0.7, baseMouseFactorX: 0.014, baseMouseFactorY: 0.007 },
+      { element: document.getElementById('layer4'), scrollMultiplier: 0.55, baseMouseFactorX: 0.011, baseMouseFactorY: 0.0055 },
+      { element: document.getElementById('layer5'), scrollMultiplier: 0.4, baseMouseFactorX: 0.008, baseMouseFactorY: 0.004 },
+      { element: document.getElementById('layer6'), scrollMultiplier: 0.25, baseMouseFactorX: 0.005, baseMouseFactorY: 0.0025 }
     ];
+
+    const mouseMaxY = 20;
+    const safetyMargin = 64;
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const pointerQuery = window.matchMedia('(pointer: fine)');
+
+    let hasFinePointer = pointerQuery.matches;
+    let reduceMotion = reducedMotionQuery.matches;
 
     let latestScrollY = window.scrollY;
     let mouseOffsetX = 0;
@@ -104,12 +113,44 @@
       }
     };
 
+    const addMediaQueryListener = (mediaQuery, handler) => {
+      if (typeof mediaQuery.addEventListener === 'function') {
+        mediaQuery.addEventListener('change', handler);
+      } else if (typeof mediaQuery.addListener === 'function') {
+        mediaQuery.addListener(handler);
+      }
+    };
+
+    const resizeMetrics = () => {
+      const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
+
+      layers.forEach((layer) => {
+        // Pre-compute the overscan scale and clamp distance per layer so vertical shifts never expose gaps.
+        const maxScrollShift = scrollRange * layer.scrollMultiplier;
+        const maxMouseShift = mouseMaxY * layer.baseMouseFactorY;
+        const maxShift = Math.abs(maxScrollShift) + Math.abs(maxMouseShift) + safetyMargin;
+
+        layer.requiredScale = Math.max(1.1, (window.innerHeight + maxShift) / window.innerHeight);
+        layer.maxTranslateY = maxShift;
+      });
+    };
+
     const applyParallax = () => {
-      layers.forEach(({ element, scrollMultiplier, mouseFactorX, mouseFactorY }) => {
-        const scrollTranslation = -latestScrollY * scrollMultiplier;
-        const mouseTranslationX = mouseOffsetX * mouseFactorX;
-        const mouseTranslationY = mouseOffsetY * mouseFactorY;
-        element.style.transform = `translate3d(${mouseTranslationX}px, ${scrollTranslation + mouseTranslationY}px, 0)`;
+      if (reduceMotion) {
+        layers.forEach((layer) => {
+          const scale = layer.requiredScale || 1;
+          layer.element.style.transform = `translate3d(0, 0, 0) scale(${scale})`;
+        });
+        ticking = false;
+        return;
+      }
+
+      layers.forEach((layer) => {
+        const scrollTranslation = -latestScrollY * layer.scrollMultiplier;
+        const mouseTranslationX = hasFinePointer ? mouseOffsetX * layer.baseMouseFactorX : 0;
+        const mouseTranslationY = hasFinePointer ? mouseOffsetY * layer.baseMouseFactorY : 0;
+        const clampedY = Math.max(-layer.maxTranslateY, Math.min(scrollTranslation + mouseTranslationY, layer.maxTranslateY));
+        layer.element.style.transform = `translate3d(${mouseTranslationX}px, ${clampedY}px, 0) scale(${layer.requiredScale || 1})`;
       });
       ticking = false;
     };
@@ -122,19 +163,46 @@
 
     // Mouse move handler for depth effect
     window.addEventListener('mousemove', (event) => {
+      if (!hasFinePointer) {
+        return;
+      }
       mouseOffsetX = event.clientX - viewportCenterX;
       mouseOffsetY = event.clientY - viewportCenterY;
       requestTick();
-    });
+    }, { passive: true });
 
     // Update center on resize
     window.addEventListener('resize', () => {
       updateViewportCenter();
+      resizeMetrics();
       requestTick();
+    });
+
+    const updatePointerPreference = () => {
+      hasFinePointer = pointerQuery.matches;
+      if (!hasFinePointer) {
+        mouseOffsetX = 0;
+        mouseOffsetY = 0;
+      }
+      requestTick();
+    };
+
+    const updateMotionPreference = () => {
+      reduceMotion = reducedMotionQuery.matches;
+      requestTick();
+    };
+
+    addMediaQueryListener(reducedMotionQuery, updateMotionPreference);
+    addMediaQueryListener(pointerQuery, () => {
+      updatePointerPreference();
+      resizeMetrics();
     });
 
     // Initial render
     updateViewportCenter();
+    resizeMetrics();
+    updatePointerPreference();
+    updateMotionPreference();
     requestTick();
   </script>
 </body>
