@@ -903,7 +903,7 @@
     </section>
 
     <!-- ALIANZAS ESTRATÉGICAS (WIDGETS FLOTANTES) -->
-    <section class="py-24 bg-dark-surface border-y border-white/5 relative overflow-hidden">
+    <section id="partners" class="py-24 bg-dark-surface border-y border-white/5 relative overflow-hidden">
         <div class="max-w-[1600px] mx-auto px-6 mb-16 text-center">
             <span class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-4 block">Nuestra Red</span>
             <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Colaboradores & Partners</h2>
@@ -1102,17 +1102,18 @@
                     <button onclick="zoomTo('United Kingdom')" class="px-6 py-2 rounded-full glass-apple text-xs font-bold uppercase hover:bg-white/20 transition-all border border-white/10 focus:border-accent-gold focus:text-accent-gold flex items-center gap-2"><img src="https://flagcdn.com/w20/gb.png" class="w-4 rounded-sm"> Reino Unido</button>
                     <button onclick="zoomTo('China')" class="px-6 py-2 rounded-full glass-apple text-xs font-bold uppercase hover:bg-white/20 transition-all border border-white/10 focus:border-accent-gold focus:text-accent-gold flex items-center gap-2"><img src="https://flagcdn.com/w20/cn.png" class="w-4 rounded-sm"> China</button>
                 </div>
-                <!-- Zoom Controls Overlay -->
-                <div class="absolute right-8 bottom-8 flex flex-col gap-2 z-50">
-                    <button onclick="zoomIn()" class="w-10 h-10 rounded-full glass-apple flex items-center justify-center text-white hover:bg-white/20 transition-all"><i class="fa-solid fa-plus"></i></button>
-                    <button onclick="zoomOut()" class="w-10 h-10 rounded-full glass-apple flex items-center justify-center text-white hover:bg-white/20 transition-all"><i class="fa-solid fa-minus"></i></button>
-                </div>
+                <!-- Zoom controls moved inside the map container -->
             </div>
             <!-- D3 Map Container -->
             <div id="map-container" class="glass-apple rounded-[3rem] p-4 relative shadow-2xl border border-white/10 bg-[#080808] aspect-[16/9] md:aspect-[21/9]" data-aos="zoom-in">
                 <!-- Viewport for Map (has overflow hidden) -->
                 <div id="map-viewport" class="relative w-full h-full rounded-[2.5rem] overflow-hidden cursor-grab active:cursor-grabbing">
                     <!-- SVG will be injected here by D3 -->
+                </div>
+                <!-- Zoom Controls Overlay (inside map container) -->
+                <div class="absolute top-4 right-4 flex flex-col gap-2 z-50">
+                    <button onclick="zoomIn()" class="w-10 h-10 rounded-full glass-apple flex items-center justify-center text-white hover:bg-white/20 transition-all"><i class="fa-solid fa-plus"></i></button>
+                    <button onclick="zoomOut()" class="w-10 h-10 rounded-full glass-apple flex items-center justify-center text-white hover:bg-white/20 transition-all"><i class="fa-solid fa-minus"></i></button>
                 </div>
             </div>
             <!-- Leyenda de Mapa -->
@@ -1147,7 +1148,7 @@
             <!-- Horizontal scrollable team carousel -->
             <div class="scroll-container flex gap-6 px-6 pb-12 snap-x">
                 <!-- Team Member 1 -->
-                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                <div class="scroll-item team-card relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
                     <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Roberto Martínez">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
@@ -1161,7 +1162,7 @@
                     </div>
                 </div>
                 <!-- Team Member 2 -->
-                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                <div class="scroll-item team-card relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
                     <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Elena Chen">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
@@ -1175,7 +1176,7 @@
                     </div>
                 </div>
                 <!-- Team Member 3 -->
-                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                <div class="scroll-item team-card relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
                     <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Javier López">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
@@ -1189,7 +1190,7 @@
                     </div>
                 </div>
                 <!-- Team Member 4 -->
-                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                <div class="scroll-item team-card relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
                     <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=2661&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Sarah James">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
@@ -1203,7 +1204,7 @@
                     </div>
                 </div>
                 <!-- Team Member 5 -->
-                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                <div class="scroll-item team-card relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
                     <img src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Laura Gómez">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
@@ -1217,7 +1218,7 @@
                     </div>
                 </div>
                 <!-- Team Member 6 -->
-                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                <div class="scroll-item team-card relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
                     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Tomás Rivera">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
@@ -1231,7 +1232,7 @@
                     </div>
                 </div>
                 <!-- Team Member 7 -->
-                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                <div class="scroll-item team-card relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
                     <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Priya Patel">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
@@ -1245,7 +1246,7 @@
                     </div>
                 </div>
                 <!-- Team Member 8 -->
-                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                <div class="scroll-item team-card relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
                     <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Liu Wei">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                     <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">

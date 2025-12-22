@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aisa Group | Prensa</title>
+    <!-- Fuentes y estilos externos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Tailwind CSS y configuración extendida -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Poppins"', 'sans-serif'],
+                        display: ['"Montserrat"', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: {
+                            bg: '#050505',
+                            surface: '#0F0F0F',
+                        },
+                        accent: {
+                            gold: '#FACC15',
+                            goldHover: '#EAB308',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Hoja de estilos principal -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 text-slate-800 dark:bg-dark-bg dark:text-gray-200 antialiased selection:bg-accent-gold selection:text-black">
+
+    <!-- Botón para alternar tema -->
+    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg">
+        <i class="fa-solid fa-moon dark:hidden"></i>
+        <i class="fa-solid fa-sun hidden dark:block"></i>
+    </button>
+
+    <!-- Navegación principal -->
+    <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-[1400px] mx-auto px-2">
+            <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-2xl">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="w-10 h-10 rounded-full shadow-lg" />
+                    <div class="flex flex-col">
+                        <span class="font-display font-bold text-lg tracking-tight uppercase dark:text-white text-black leading-none">Aisa</span>
+                    </div>
+                </a>
+                <!-- Menú de escritorio -->
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inicio</a>
+                    <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Nosotros</a>
+                    <a href="inversiones.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inversiones</a>
+                    <a href="proyectos.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Proyectos</a>
+                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold">Prensa</a>
+                </div>
+                <!-- Llamada a la acción -->
+                <div class="flex items-center gap-4">
+                    <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                        Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
+                    </a>
+                    <button class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <header class="py-32 text-center">
+        <div class="max-w-[1400px] mx-auto px-6 mt-32">
+            <h1 class="font-display text-5xl md:text-7xl font-bold text-slate-900 dark:text-white mb-6">Prensa</h1>
+            <p class="text-gray-500 dark:text-gray-400 max-w-3xl mx-auto text-lg">En esta sección encontrarás comunicados, noticias y artículos relacionados con nuestro grupo. Próximamente añadiremos contenido.</p>
+        </div>
+    </header>
+
+    <!-- Pie de página -->
+    <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5">
+        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+            <div class="lg:col-span-4">
+                <a href="#" class="inline-block mb-8">
+                    <span class="font-display font-bold text-3xl tracking-tight">Aisa<span class="text-accent-gold">Group</span></span>
+                </a>
+                <p class="text-gray-400 mb-8 max-w-sm">
+                    Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+                </div>
+            </div>
+            <div class="lg:col-span-2">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Compañía</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-300">
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Carreras</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Sedes Globales</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-300">
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3">
+                <div class="glass-apple p-8 rounded-3xl">
+                    <h4 class="font-display font-bold text-xl mb-4">¿Hablamos?</h4>
+                    <p class="text-sm text-gray-400 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
+                    <a href="mailto:info@aisagroup.ca" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
+                        Contactar
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-[1600px] mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest">
+            <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+            <div class="flex gap-8 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white">Política de Privacidad</a>
+                <a href="#" class="hover:text-white">Términos de Uso</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 1000, offset: 50 });
+        // Modo oscuro / claro
+        const themeBtn = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+        if (!localStorage.theme) {
+            htmlEl.classList.add('dark');
+        } else if (localStorage.theme === 'dark') {
+            htmlEl.classList.add('dark');
+        } else {
+            htmlEl.classList.remove('dark');
+        }
+        themeBtn.addEventListener('click', () => {
+            htmlEl.classList.toggle('dark');
+            localStorage.theme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
+        });
+    </script>
+    <!-- Script global -->
+    <script src="js/script.js"></script>
+</body>
+</html>
