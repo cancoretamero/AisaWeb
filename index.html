@@ -108,22 +108,21 @@
             <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-2xl">
                 
                 <!-- Logo -->
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 bg-accent-gold rounded-full flex items-center justify-center shadow-lg text-black font-display font-bold text-xl">
-                        A
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-display font-bold text-lg tracking-tight uppercase dark:text-white text-black leading-none">Aisa</span>
-                    </div>
-                </a>
+                    <a href="index.html" class="flex items-center gap-3 group">
+                        <!-- Logo image placeholder. Upload your official logo as 'aisa-logo.svg' into the images folder -->
+                        <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="w-10 h-10 rounded-full shadow-lg" />
+                        <div class="flex flex-col">
+                            <span class="font-display font-bold text-lg tracking-tight uppercase dark:text-white text-black leading-none">Aisa</span>
+                        </div>
+                    </a>
 
                 <!-- Menu Desktop -->
                 <div class="hidden lg:flex items-center gap-1">
-                    <a href="#hero" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inicio</a>
-                    <a href="#stats" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Nosotros</a>
-                    <a href="#divisiones" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inversiones</a>
-                    <a href="#gualcamayo" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all text-accent-gold">Proyectos</a>
-                    <a href="#news" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Prensa</a>
+                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inicio</a>
+                    <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Nosotros</a>
+                    <a href="inversiones.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inversiones</a>
+                    <a href="proyectos.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all text-accent-gold">Proyectos</a>
+                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Prensa</a>
                 </div>
 
                 <!-- CTA -->
@@ -252,89 +251,142 @@
                 <div class="flex marquee-track gap-6 w-max px-6 hover:[animation-play-state:paused]">
                     
                     <!-- Company 1: Minas Argentinas -->
-                    <div class="glass-apple w-72 p-6 rounded-[2rem] flex flex-col gap-3 border border-white/5 hover:border-accent-gold/50 transition-colors cursor-pointer group">
-                        <div class="w-12 h-12 bg-accent-gold rounded-xl flex items-center justify-center text-black text-xl shadow-lg mb-2">
-                            <i class="fa-regular fa-gem"></i>
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #FACC15;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#FACC15]/40 transition-colors">01</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#FACC15] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-regular fa-gem"></i>
+                            </div>
                         </div>
-                        <h4 class="font-display font-bold text-white text-lg">Minas Argentinas</h4>
-                        <div class="h-px bg-white/10 w-full"></div>
-                        <p class="text-xs text-gray-300">Operadora Minera San Juan</p>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Minas Argentinas</h4>
+                        <p class="text-xs text-gray-400">Operadora Minera San Juan</p>
                     </div>
 
                     <!-- Company 2: Gualcamayo -->
-                    <div class="glass-apple w-72 p-6 rounded-[2rem] flex flex-col gap-3 border border-white/5 hover:border-accent-gold/50 transition-colors cursor-pointer group">
-                        <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white text-xl shadow-lg mb-2">
-                            <i class="fa-solid fa-mountain"></i>
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #10B981;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#10B981]/40 transition-colors">02</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#10B981] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-mountain"></i>
+                            </div>
                         </div>
-                        <h4 class="font-display font-bold text-white text-lg">Gualcamayo</h4>
-                        <div class="h-px bg-white/10 w-full"></div>
-                        <p class="text-xs text-gray-300">Mina de Oro y Carbonatos</p>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Gualcamayo</h4>
+                        <p class="text-xs text-gray-400">Mina de Oro y Carbonatos</p>
                     </div>
 
                     <!-- Company 3: Cabo Vírgenes -->
-                    <div class="glass-apple w-72 p-6 rounded-[2rem] flex flex-col gap-3 border border-white/5 hover:border-accent-gold/50 transition-colors cursor-pointer group">
-                        <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white text-xl shadow-lg mb-2">
-                            <i class="fa-solid fa-fish-fins"></i>
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #06B6D4;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#06B6D4]/40 transition-colors">03</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#06B6D4] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-fish-fins"></i>
+                            </div>
                         </div>
-                        <h4 class="font-display font-bold text-white text-lg">Cabo Vírgenes</h4>
-                        <div class="h-px bg-white/10 w-full"></div>
-                        <p class="text-xs text-gray-300">Pesca y Exportación (Chubut)</p>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Cabo Vírgenes</h4>
+                        <p class="text-xs text-gray-400">Pesca y Exportación (Chubut)</p>
                     </div>
 
                     <!-- Company 4: Aisa Energy -->
-                    <div class="glass-apple w-72 p-6 rounded-[2rem] flex flex-col gap-3 border border-white/5 hover:border-accent-gold/50 transition-colors cursor-pointer group">
-                        <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white text-xl shadow-lg mb-2">
-                            <i class="fa-solid fa-bolt"></i>
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #F43F5E;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#F43F5E]/40 transition-colors">04</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#F43F5E] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
                         </div>
-                        <h4 class="font-display font-bold text-white text-lg">Aisa Energy</h4>
-                        <div class="h-px bg-white/10 w-full"></div>
-                        <p class="text-xs text-gray-300">Generación Renovable</p>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Aisa Energy</h4>
+                        <p class="text-xs text-gray-400">Generación Renovable</p>
                     </div>
 
                     <!-- Company 5: Calicanto Solar -->
-                    <div class="glass-apple w-72 p-6 rounded-[2rem] flex flex-col gap-3 border border-white/5 hover:border-accent-gold/50 transition-colors cursor-pointer group">
-                        <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white text-xl shadow-lg mb-2">
-                            <i class="fa-solid fa-solar-panel"></i>
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #FBBF24;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#FBBF24]/40 transition-colors">05</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#FBBF24] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-solar-panel"></i>
+                            </div>
                         </div>
-                        <h4 class="font-display font-bold text-white text-lg">Calicanto Solar</h4>
-                        <div class="h-px bg-white/10 w-full"></div>
-                        <p class="text-xs text-gray-300">Parque Fotovoltaico San Luis</p>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Calicanto Solar</h4>
+                        <p class="text-xs text-gray-400">Parque Fotovoltaico San Luis</p>
                     </div>
 
                     <!-- Company 6: Aisa Real Estate -->
-                    <div class="glass-apple w-72 p-6 rounded-[2rem] flex flex-col gap-3 border border-white/5 hover:border-accent-gold/50 transition-colors cursor-pointer group">
-                        <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white text-xl shadow-lg mb-2">
-                            <i class="fa-solid fa-city"></i>
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #8B5CF6;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#8B5CF6]/40 transition-colors">06</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#8B5CF6] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-city"></i>
+                            </div>
                         </div>
-                        <h4 class="font-display font-bold text-white text-lg">Aisa Real Estate</h4>
-                        <div class="h-px bg-white/10 w-full"></div>
-                        <p class="text-xs text-gray-300">Desarrollos Inmobiliarios</p>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Aisa Real Estate</h4>
+                        <p class="text-xs text-gray-400">Desarrollos Inmobiliarios</p>
                     </div>
 
                     <!-- DUPLICATES FOR INFINITE LOOP -->
-                    <div class="glass-apple w-72 p-6 rounded-[2rem] flex flex-col gap-3 border border-white/5 hover:border-accent-gold/50 transition-colors cursor-pointer group">
-                        <div class="w-12 h-12 bg-accent-gold rounded-xl flex items-center justify-center text-black text-xl shadow-lg mb-2">
-                            <i class="fa-regular fa-gem"></i>
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #FACC15;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#FACC15]/40 transition-colors">01</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#FACC15] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-regular fa-gem"></i>
+                            </div>
                         </div>
-                        <h4 class="font-display font-bold text-white text-lg">Minas Argentinas</h4>
-                        <div class="h-px bg-white/10 w-full"></div>
-                        <p class="text-xs text-gray-300">Operadora Minera San Juan</p>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Minas Argentinas</h4>
+                        <p class="text-xs text-gray-400">Operadora Minera San Juan</p>
                     </div>
-                    <div class="glass-apple w-72 p-6 rounded-[2rem] flex flex-col gap-3 border border-white/5 hover:border-accent-gold/50 transition-colors cursor-pointer group">
-                        <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white text-xl shadow-lg mb-2">
-                            <i class="fa-solid fa-mountain"></i>
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #10B981;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#10B981]/40 transition-colors">02</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#10B981] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-mountain"></i>
+                            </div>
                         </div>
-                        <h4 class="font-display font-bold text-white text-lg">Gualcamayo</h4>
-                        <div class="h-px bg-white/10 w-full"></div>
-                        <p class="text-xs text-gray-300">Mina de Oro y Carbonatos</p>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Gualcamayo</h4>
+                        <p class="text-xs text-gray-400">Mina de Oro y Carbonatos</p>
                     </div>
-                    <div class="glass-apple w-72 p-6 rounded-[2rem] flex flex-col gap-3 border border-white/5 hover:border-accent-gold/50 transition-colors cursor-pointer group">
-                        <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-white text-xl shadow-lg mb-2">
-                            <i class="fa-solid fa-fish-fins"></i>
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #06B6D4;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#06B6D4]/40 transition-colors">03</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#06B6D4] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-fish-fins"></i>
+                            </div>
                         </div>
-                        <h4 class="font-display font-bold text-white text-lg">Cabo Vírgenes</h4>
-                        <div class="h-px bg-white/10 w-full"></div>
-                        <p class="text-xs text-gray-300">Pesca y Exportación (Chubut)</p>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Cabo Vírgenes</h4>
+                        <p class="text-xs text-gray-400">Pesca y Exportación (Chubut)</p>
+                    </div>
+                    <!-- Duplicate Company 4: Aisa Energy -->
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #F43F5E;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#F43F5E]/40 transition-colors">04</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#F43F5E] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Aisa Energy</h4>
+                        <p class="text-xs text-gray-400">Generación Renovable</p>
+                    </div>
+
+                    <!-- Duplicate Company 5: Calicanto Solar -->
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #FBBF24;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#FBBF24]/40 transition-colors">05</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#FBBF24] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-solar-panel"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Calicanto Solar</h4>
+                        <p class="text-xs text-gray-400">Parque Fotovoltaico San Luis</p>
+                    </div>
+
+                    <!-- Duplicate Company 6: Aisa Real Estate -->
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #8B5CF6;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#8B5CF6]/40 transition-colors">06</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#8B5CF6] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-city"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Aisa Real Estate</h4>
+                        <p class="text-xs text-gray-400">Desarrollos Inmobiliarios</p>
                     </div>
                 </div>
             </div>
@@ -555,6 +607,22 @@
                     </ul>
                 </div>
             </div>
+            <!-- Widget 7: Pesca -->
+            <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[500px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Pesca">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-8">
+                    <div class="w-12 h-12 bg-white/20 backdrop-blur text-white rounded-full flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-fish-fins"></i>
+                    </div>
+                    <h3 class="font-display text-3xl text-white font-bold mb-2">Pesca</h3>
+                    <p class="text-gray-300 text-sm mb-4">Pesca y Exportación</p>
+                    <ul class="text-xs text-gray-400 space-y-1">
+                        <li>• Cabo Vírgenes</li>
+                        <li>• Puerto Rawson</li>
+                    </ul>
+                </div>
+            </div>
 
         </div>
     </section>
@@ -671,7 +739,8 @@
                             <i class="fa-solid fa-wind"></i>
                         </div>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Transición Energética</h+                    <p class="text-xs text-gray-400 mb-6 leading-relaxed">
+                    <h3 class="text-lg font-bold text-white mb-2">Transición Energética</h3>
+                    <p class="text-xs text-gray-400 mb-6 leading-relaxed">
                         Generación renovable para autoabastecimiento y venta a la red.
                     </p>
                     <div class="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
@@ -708,7 +777,8 @@
                             <i class="fa-solid fa-users"></i>
                         </div>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-2">Comunidad</h+                    <p class="text-xs text-gray-400 mb-6 leading-relaxed">
+                    <h3 class="text-lg font-bold text-white mb-2">Comunidad</h3>
+                    <p class="text-xs text-gray-400 mb-6 leading-relaxed">
                         Retorno directo a la sociedad a través de empleo y educación.
                     </p>
                     <div class="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
@@ -900,7 +970,8 @@
                             <i class="fa-solid fa-truck-fast"></i>
                         </div>
                         <div>
-                            <h4 class="font-display font-bold text-white text-lg group-hover:text-accent-gold transition-colors">TransCordillera</h+                            <p class="text-[10px] text-gray-400 uppercase tracking-widest">Logística</p>
+                        <h4 class="font-display font-bold text-white text-lg group-hover:text-accent-gold transition-colors">TransCordillera</h4>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-widest">Logística</p>
                         </div>
                     </div>
                     <div class="h-px bg-white/10 w-full"></div>
@@ -923,7 +994,8 @@
                         Desarrollo civil del Parque Fotovoltaico San Luis, incluyendo nivelación de terrenos y estructuras de soporte.
                     </p>
                 </div>
-                <!-- Duplicates for infinite loop: replicate the same partner cards again -->
+                <!-- Duplicates for infinite loop: replicate all partner cards again -->
+                <!-- TechData Solutions Duplicate -->
                 <div class="glass-apple w-80 p-6 rounded-[2rem] flex flex-col gap-4 border border-white/5 hover:border-accent-gold/50 transition-colors group cursor-default">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-black text-xl shadow-lg">
@@ -939,7 +1011,70 @@
                         Implementación de sistemas IoT para el monitoreo en tiempo real de la estabilidad de taludes en Gualcamayo.
                     </p>
                 </div>
-                <!-- Additional duplicates omitted for brevity -->
+                <!-- Nordic Power Duplicate -->
+                <div class="glass-apple w-80 p-6 rounded-[2rem] flex flex-col gap-4 border border-white/5 hover:border-accent-gold/50 transition-colors group cursor-default">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-[#00A4E4] rounded-2xl flex items-center justify-center text-white text-xl shadow-lg">
+                            <i class="fa-solid fa-wind"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-white text-lg group-hover:text-accent-gold transition-colors">Nordic Power</h4>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-widest">Ingeniería Renovable</p>
+                        </div>
+                    </div>
+                    <div class="h-px bg-white/10 w-full"></div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Consultoría técnica y provisión de turbinas para la evaluación de potencial eólico en la Patagonia.
+                    </p>
+                </div>
+                <!-- EcoAndina Duplicate -->
+                <div class="glass-apple w-80 p-6 rounded-[2rem] flex flex-col gap-4 border border-white/5 hover:border-accent-gold/50 transition-colors group cursor-default">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-[#4CAF50] rounded-2xl flex items-center justify-center text-white text-xl shadow-lg">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-white text-lg group-hover:text-accent-gold transition-colors">EcoAndina</h4>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-widest">Gestión Ambiental</p>
+                        </div>
+                    </div>
+                    <div class="h-px bg-white/10 w-full"></div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Auditoría externa de huella de carbono y planes de reforestación compensatoria en zonas áridas.
+                    </p>
+                </div>
+                <!-- TransCordillera Duplicate -->
+                <div class="glass-apple w-80 p-6 rounded-[2rem] flex flex-col gap-4 border border-white/5 hover:border-accent-gold/50 transition-colors group cursor-default">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-[#FF5722] rounded-2xl flex items-center justify-center text-white text-xl shadow-lg">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-white text-lg group-hover:text-accent-gold transition-colors">TransCordillera</h4>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-widest">Logística</p>
+                        </div>
+                    </div>
+                    <div class="h-px bg-white/10 w-full"></div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Operador logístico estratégico para el transporte seguro de mineral y suministros críticos a alta montaña.
+                    </p>
+                </div>
+                <!-- Constructora Cuyo Duplicate -->
+                <div class="glass-apple w-80 p-6 rounded-[2rem] flex flex-col gap-4 border border-white/5 hover:border-accent-gold/50 transition-colors group cursor-default">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-[#607D8B] rounded-2xl flex items-center justify-center text-white text-xl shadow-lg">
+                            <i class="fa-solid fa-helmet-safety"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-white text-lg group-hover:text-accent-gold transition-colors">Constructora Cuyo</h4>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-widest">Infraestructura</p>
+                        </div>
+                    </div>
+                    <div class="h-px bg-white/10 w-full"></div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Desarrollo civil del Parque Fotovoltaico San Luis, incluyendo nivelación de terrenos y estructuras de soporte.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -1009,13 +1144,13 @@
                     Un grupo interdisciplinario de expertos comprometidos con la excelencia operativa y la visión estratégica.
                 </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Member Cards (similar to originals) -->
-                <!-- Only included first card for brevity; replicate others in style.css or copy markup as needed -->
-                <div class="group team-card relative h-[450px] rounded-[2rem] overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="0">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="CEO">
+            <!-- Horizontal scrollable team carousel -->
+            <div class="scroll-container flex gap-6 px-6 pb-12 snap-x">
+                <!-- Team Member 1 -->
+                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Roberto Martínez">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                    <div class="absolute bottom-0 left-0 w-full p-8 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
+                    <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
                         <h3 class="text-xl font-display font-bold text-white">Roberto Martínez</h3>
                         <p class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-3">CEO & Fundador</p>
                         <p class="text-gray-300 text-xs leading-relaxed">Visionario con más de 20 años liderando inversiones en minería y energía en LATAM.</p>
@@ -1025,7 +1160,104 @@
                         </div>
                     </div>
                 </div>
-                <!-- Additional team members omitted for brevity -->
+                <!-- Team Member 2 -->
+                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Elena Chen">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
+                        <h3 class="text-xl font-display font-bold text-white">Elena Chen</h3>
+                        <p class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-3">Directora Financiera</p>
+                        <p class="text-gray-300 text-xs leading-relaxed">Experta en finanzas corporativas y estructuración de capital para proyectos a gran escala.</p>
+                        <div class="flex gap-4 mt-4">
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 3 -->
+                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Javier López">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
+                        <h3 class="text-xl font-display font-bold text-white">Javier López</h3>
+                        <p class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-3">Director de Operaciones</p>
+                        <p class="text-gray-300 text-xs leading-relaxed">Ingeniero con amplia experiencia en gestión de operaciones mineras y energéticas.</p>
+                        <div class="flex gap-4 mt-4">
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 4 -->
+                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=2661&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Sarah James">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
+                        <h3 class="text-xl font-display font-bold text-white">Sarah James</h3>
+                        <p class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-3">Legal & Compliance</p>
+                        <p class="text-gray-300 text-xs leading-relaxed">Especialista en derecho internacional y gobernanza corporativa ESG.</p>
+                        <div class="flex gap-4 mt-4">
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 5 -->
+                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                    <img src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Laura Gómez">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
+                        <h3 class="text-xl font-display font-bold text-white">Laura Gómez</h3>
+                        <p class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-3">Directora de Marketing</p>
+                        <p class="text-gray-300 text-xs leading-relaxed">Especialista en comunicación estratégica y expansión de marca global.</p>
+                        <div class="flex gap-4 mt-4">
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 6 -->
+                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Tomás Rivera">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
+                        <h3 class="text-xl font-display font-bold text-white">Tomás Rivera</h3>
+                        <p class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-3">Director de Sustentabilidad</p>
+                        <p class="text-gray-300 text-xs leading-relaxed">Promotor de iniciativas ambientales y programas de responsabilidad social.</p>
+                        <div class="flex gap-4 mt-4">
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 7 -->
+                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Priya Patel">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
+                        <h3 class="text-xl font-display font-bold text-white">Priya Patel</h3>
+                        <p class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-3">Directora de Innovación</p>
+                        <p class="text-gray-300 text-xs leading-relaxed">Lidera la transformación digital y el desarrollo de nuevas tecnologías.</p>
+                        <div class="flex gap-4 mt-4">
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 8 -->
+                <div class="scroll-item relative min-w-[300px] md:min-w-[350px] h-[450px] rounded-[2rem] overflow-hidden group cursor-pointer snap-center">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2574&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="Liu Wei">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 team-info bg-black/60 backdrop-blur-md border-t border-white/10">
+                        <h3 class="text-xl font-display font-bold text-white">Liu Wei</h3>
+                        <p class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-3">Gerente de Proyectos</p>
+                        <p class="text-gray-300 text-xs leading-relaxed">Especialista en coordinación de proyectos multidisciplinarios a nivel global.</p>
+                        <div class="flex gap-4 mt-4">
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="text-white hover:text-accent-gold"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
