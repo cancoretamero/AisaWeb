@@ -82,38 +82,31 @@ body {
 }
 
 /* --- TEAM CARD REVEAL --- */
-.team-card {
-    transition: transform 0.3s ease;
-}
-/*
- * Team card overlay
- *
- * The original design features a panel that slides up from the bottom of
- * each card when the user hovers over it.  The panel itself is semi–
- * transparent with a subtle golden glow at the top, reflecting the
- * corporate colour palette.  To achieve this effect we use a linear
- * gradient that blends from a warm gold tone into a dark translucent
- * backdrop.  The panel stays hidden by default (moved down by 100%)
- * and is revealed on hover via a transform.  A smooth easing curve
- * mirrors the original animation timing.
- */
-.team-info {
-    /* Start fully below the card */
-    transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    /* Semi‑transparent dark backdrop with golden glow at the top */
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.85) 40%,
-        rgba(0, 0, 0, 0.65) 65%,
-        rgba(250, 204, 21, 0.25) 100%
-    );
-}
-
-/* Reveal the overlay on hover */
-.team-card:hover .team-info {
-    transform: translateY(0);
-}
+ .team-card {
+     transition: transform 0.3s ease;
+ }
+ /*
+  * Team card overlay
+  *
+  * Previously the overlay used a gold-tinted gradient. We now rely on the
+  * `.glass-apple` class applied in the HTML to provide a dark liquid glass
+  * effect consistent with the rest of the UI.  This class handles the
+  * semi‑transparent backdrop and blur.  Here we define only the slide-up
+  * animation for the overlay.  The panel starts hidden below the card and
+  * moves into view on hover.
+  */
+ .team-info {
+     /* Start fully below the card */
+     transform: translateY(100%);
+     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+     /* Remove background — `.glass-apple` provides the appearance */
+     background: transparent;
+ }
+ 
+ /* Reveal the overlay on hover */
+ .team-card:hover .team-info {
+     transform: translateY(0);
+ }
 
 /* Enhance the underlying image on hover: remove grayscale and add warmth */
 .team-card img {
@@ -352,4 +345,20 @@ html:not(.dark) .text-outline {
 }
 #partners .marquee-track > *:last-child {
     margin-right: 10rem;
+}
+
+/* Márgenes para la sección de Actualidad Corporativa */
+#actualidad .scroll-container .scroll-item:first-child {
+    margin-left: 2rem; /* Espacio extra en pantallas pequeñas para separar del título */
+}
+#actualidad .scroll-container .scroll-item:last-child {
+    margin-right: 2rem;
+}
+@media (min-width: 768px) {
+    #actualidad .scroll-container .scroll-item:first-child {
+        margin-left: 10rem; /* Ajuste para que no tape el título y mantenga simetría */
+    }
+    #actualidad .scroll-container .scroll-item:last-child {
+        margin-right: 10rem;
+    }
 }
