@@ -69,8 +69,16 @@ body {
 }
 
 /* Slide effect for scroll items */
+/*
+ * Disable the vertical lift effect on hover for scroll items. The previous
+ * implementation translated the cards upward (e.g. -12px) which caused
+ * their rounded top corners to be clipped when hovering near the section
+ * header. To preserve the full card shape while still allowing the
+ * hover interactions (like darkening or scaling the image), we remove
+ * the upward translation entirely.
+ */
 .scroll-item:hover {
-    transform: translateY(-12px);
+    transform: none;
 }
 
 /* --- TEAM CARD REVEAL --- */
