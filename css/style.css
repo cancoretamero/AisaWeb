@@ -77,12 +77,42 @@ body {
 .team-card {
     transition: transform 0.3s ease;
 }
+/*
+ * Team card overlay
+ *
+ * The original design features a panel that slides up from the bottom of
+ * each card when the user hovers over it.  The panel itself is semi–
+ * transparent with a subtle golden glow at the top, reflecting the
+ * corporate colour palette.  To achieve this effect we use a linear
+ * gradient that blends from a warm gold tone into a dark translucent
+ * backdrop.  The panel stays hidden by default (moved down by 100%)
+ * and is revealed on hover via a transform.  A smooth easing curve
+ * mirrors the original animation timing.
+ */
 .team-info {
+    /* Start fully below the card */
     transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    /* Semi‑transparent dark backdrop with golden glow at the top */
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.85) 40%,
+        rgba(0, 0, 0, 0.65) 65%,
+        rgba(250, 204, 21, 0.25) 100%
+    );
 }
+
+/* Reveal the overlay on hover */
 .team-card:hover .team-info {
     transform: translateY(0);
+}
+
+/* Enhance the underlying image on hover: remove grayscale and add warmth */
+.team-card img {
+    transition: filter 0.6s ease;
+}
+.team-card:hover img {
+    filter: grayscale(0) brightness(1.1) contrast(1.1) saturate(1.3);
 }
 
 /* --- HOVERBOARD BUTTON --- */
@@ -299,11 +329,19 @@ html:not(.dark) .text-outline {
 #divisiones .scroll-container .scroll-item:last-child {
     margin-right: 2rem; /* margen derecho simétrico */
 }
-@media (min-width: 768px) {
-    #divisiones .scroll-container .scroll-item:first-child {
-        margin-left: 10rem; /* desplaza la primera tarjeta para dejar sitio al título */
+    @media (min-width: 768px) {
+        #divisiones .scroll-container .scroll-item:first-child {
+            margin-left: 10rem; /* desplaza la primera tarjeta para dejar sitio al título */
+        }
+        #divisiones .scroll-container .scroll-item:last-child {
+            margin-right: 10rem; /* margen derecho simétrico */
+        }
     }
-    #divisiones .scroll-container .scroll-item:last-child {
-        margin-right: 3rem;
-    }
+
+/* Márgenes para la sección de Colaboradores & Partners para que coincidan con Estructura Corporativa */
+#partners .marquee-track > *:first-child {
+    margin-left: 10rem;
+}
+#partners .marquee-track > *:last-child {
+    margin-right: 10rem;
 }
