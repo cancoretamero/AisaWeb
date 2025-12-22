@@ -64,6 +64,13 @@ body {
 }
 .scroll-item {
     scroll-snap-align: center;
+    /* Added slide-up effect on hover */
+    transition: transform 0.4s ease;
+}
+
+/* Slide effect for scroll items */
+.scroll-item:hover {
+    transform: translateY(-12px);
 }
 
 /* --- TEAM CARD REVEAL --- */
@@ -90,8 +97,12 @@ body {
 .btn-hoverboard::before {
     content: '';
     position: absolute;
-    top: 0; left: -100%; width: 100%; height: 100%;
-    background: #fff;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    /* Use the accent gold color for the pseudo-element so the button is fully filled */
+    background: #FACC15;
     z-index: -1;
     transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     transform: skewX(20deg);
@@ -119,6 +130,39 @@ html:not(.dark) .text-outline {
 /* --- MARQUEE --- */
 .marquee-track {
     animation: marquee 40s linear infinite;
+}
+
+/* --- CORPORATE STRUCTURE CARD AS CIRCUIT --- */
+/* Apply the neon circuit-card effect to the structure cards inside the marquee. */
+.marquee-track .glass-apple {
+    background: rgba(15, 15, 15, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Default glow color for corporate cards */
+    --glow-color: #FACC15;
+}
+.marquee-track .glass-apple::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glow-color), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+.marquee-track .glass-apple:hover {
+    transform: translateY(-10px);
+    border-color: var(--glow-color);
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8), 0 0 20px var(--glow-color);
+}
+.marquee-track .glass-apple:hover::before {
+    transform: translateX(100%);
+    transition: transform 1.5s ease-in-out infinite;
 }
 @keyframes marquee {
     0% { transform: translateX(0); }
@@ -241,3 +285,25 @@ html:not(.dark) .text-outline {
 
 /* Additional classes referenced in HTML are primarily tailwind-based.
  * When necessary, extend them here for custom behaviours. */
+
+/*
+ * Ajustes de márgenes para la sección de Áreas de Inversión.
+ * Se añade un margen extra al primer y último widget para que
+ * el carrusel no se superponga al título y mantenga el mismo
+ * espacio en el extremo derecho. Los valores se amplían en
+ * pantallas medianas y grandes para compensar el ancho del título.
+ */
+#divisiones .scroll-container .scroll-item:first-child {
+    margin-left: 2rem; /* espacio extra en pantallas pequeñas */
+}
+#divisiones .scroll-container .scroll-item:last-child {
+    margin-right: 2rem; /* margen derecho simétrico */
+}
+@media (min-width: 768px) {
+    #divisiones .scroll-container .scroll-item:first-child {
+        margin-left: 10rem; /* desplaza la primera tarjeta para dejar sitio al título */
+    }
+    #divisiones .scroll-container .scroll-item:last-child {
+        margin-right: 3rem;
+    }
+}
