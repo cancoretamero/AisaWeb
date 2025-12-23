@@ -15,6 +15,92 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// ------------------------------------------------------------
+// Contact modal logic
+// ------------------------------------------------------------
+// Este bloque gestiona la apertura y cierre del modal de contacto.
+// El modal se abre desde los botones de contacto del menú y del pie de página,
+// permite al usuario escribir su nombre, email y mensaje, y luego elegir
+// entre enviar un correo electrónico o abrir WhatsApp con un texto
+// precompletado. No utiliza servicios de pago ni APIs externas.
+document.addEventListener('DOMContentLoaded', () => {
+    const contactModal = document.getElementById('contact-modal');
+    const openContactButtons = [
+        document.getElementById('nav-contact-btn'),
+        document.getElementById('footer-contact-btn')
+    ];
+    const closeContactBtn = document.getElementById('close-contact');
+    const sendEmailBtn = document.getElementById('send-email');
+    const sendWhatsAppBtn = document.getElementById('send-whatsapp');
+    const nameInput = document.getElementById('contact-name');
+    const emailInput = document.getElementById('contact-email');
+    const messageInput = document.getElementById('contact-message');
+    // Reemplace este número con el número real de WhatsApp de contacto.
+    const whatsappNumber = '+0000000000';
+    function openContactModal(event) {
+        if (event) event.preventDefault();
+        if (!contactModal) return;
+        contactModal.classList.remove('hidden');
+        contactModal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+    }
+    function closeContactModal() {
+        if (!contactModal) return;
+        contactModal.classList.add('hidden');
+        contactModal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+    }
+    // Asigna eventos a los botones de apertura
+    openContactButtons.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', openContactModal);
+        }
+    });
+    // Asigna evento al botón de cierre
+    if (closeContactBtn) {
+        closeContactBtn.addEventListener('click', closeContactModal);
+    }
+    // Cierra el modal si se hace clic en el overlay
+    if (contactModal) {
+        contactModal.addEventListener('click', (event) => {
+            if (event.target.id === 'contact-modal-overlay') {
+                closeContactModal();
+            }
+        });
+    }
+    // Cierra con la tecla ESC
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && contactModal && !contactModal.classList.contains('hidden')) {
+            closeContactModal();
+        }
+    });
+    // Construye un mailto y abre el cliente de correo
+    if (sendEmailBtn) {
+        sendEmailBtn.addEventListener('click', () => {
+            const name = nameInput ? nameInput.value.trim() : '';
+            const email = emailInput ? emailInput.value.trim() : '';
+            const message = messageInput ? messageInput.value.trim() : '';
+            const subject = encodeURIComponent('Contacto desde Aisa Group');
+            const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\nMensaje:\n${message}`);
+            const mailtoLink = `mailto:info@aisagroup.ca?subject=${subject}&body=${body}`;
+            window.open(mailtoLink, '_blank');
+            closeContactModal();
+        });
+    }
+    // Construye un enlace a WhatsApp con el mensaje precompletado
+    if (sendWhatsAppBtn) {
+        sendWhatsAppBtn.addEventListener('click', () => {
+            const name = nameInput ? nameInput.value.trim() : '';
+            const email = emailInput ? emailInput.value.trim() : '';
+            const message = messageInput ? messageInput.value.trim() : '';
+            const whatsappText = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\nMensaje:\n${message}`);
+            const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${whatsappText}`;
+            window.open(whatsappLink, '_blank');
+            closeContactModal();
+        });
+    }
+});
+
 // Modo oscuro y tema
 const themeBtn = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
