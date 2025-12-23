@@ -127,7 +127,8 @@
 
                 <!-- CTA -->
                 <div class="flex items-center gap-4">
-                    <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                    <!-- Updated contact button: trigger the contact modal instead of jumping to a section -->
+                    <a href="#" id="nav-contact-btn" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg">
                         Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
                     </a>
                     <button class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
@@ -1482,7 +1483,8 @@
                 <div class="glass-apple p-8 rounded-3xl">
                     <h4 class="font-display font-bold text-xl mb-4">¿Hablamos?</h4>
                     <p class="text-sm text-gray-400 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
-                    <a href="mailto:info@aisagroup.ca" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
+                    <!-- Updated footer contact button: trigger the contact modal instead of direct mailto -->
+                    <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
                         Contactar
                     </a>
                 </div>
@@ -1514,6 +1516,30 @@
                 Tu navegador no soporta la reproducción de video.
             </video>
             <p class="text-xs text-gray-500 mt-3">Nuestro video corporativo resume la visión y los proyectos de Aisa Group. Usa los controles del reproductor para pausar, reproducir, ajustar el volumen, activar subtítulos, modificar la velocidad o ver el video en pantalla completa.</p>
+        </div>
+    </div>
+
+    <!-- CONTACT MODAL POPUP (hidden by default) -->
+    <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
+        <!-- Transparent overlay with blur: no tint so underlying website remains visible through a frosty blur -->
+        <div id="contact-modal-overlay" class="absolute inset-0 backdrop-blur-[40px]"></div>
+        <!-- Contact form container with glass effect -->
+        <div class="glass-apple rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible">
+            <!-- Close button for contact modal -->
+            <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[220]">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h4 class="text-2xl font-display font-bold mb-4 text-white">Contacto</h4>
+            <form id="contact-form" class="space-y-4">
+                <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
+                <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
+                <textarea id="contact-message" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none h-32" placeholder="Mensaje"></textarea>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
+                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                    <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-emerald-500 hover:text-black transition-colors"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                </div>
+            </form>
+            <p class="text-xs text-gray-500 mt-3">Completa tus datos y elige el modo de contacto. Tu mensaje se abrirá en tu cliente de email o WhatsApp para que puedas revisarlo antes de enviarlo.</p>
         </div>
     </div>
 
