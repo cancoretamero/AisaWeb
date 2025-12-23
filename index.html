@@ -1498,9 +1498,10 @@
     </footer>
 
     <!-- VIDEO MODAL POPUP (hidden by default) -->
-    <div id="video-modal" class="fixed inset-0 flex items-center justify-center hidden z-[200]">
+        <div id="video-modal" class="fixed inset-0 flex items-center justify-center hidden z-[200]">
         <!-- Semi‑transparent backdrop with blur so the page remains visible.  Remove the dark tint to allow the underlying page to show through. -->
-        <div id="video-modal-overlay" class="absolute inset-0 bg-black/0 backdrop-blur-[40px]"></div>
+        <!-- Transparent backdrop with blur: remove the background tint entirely so the underlying website remains visible through a frosty blur. -->
+        <div id="video-modal-overlay" class="absolute inset-0 backdrop-blur-[40px]"></div>
         <!-- Container for the video player with glass effect; relative positioning allows the close button to be positioned within it -->
         <div class="glass-apple rounded-3xl p-6 md:p-8 relative z-[205] max-w-3xl w-[90%] overflow-visible">
             <!-- Close button: positioned inside the modal container so it sits over the video.  The glass‑apple class gives it a frosted look. -->
@@ -1512,7 +1513,7 @@
                 <source src="videos/corporate.mp4" type="video/mp4">
                 Tu navegador no soporta la reproducción de video.
             </video>
-            <p class="text-xs text-gray-500 mt-3">Sugerencia: sube el archivo del video corporativo a la carpeta <span class="font-bold">videos</span> con el nombre <span class="font-bold">corporate.mp4</span>.</p>
+            <p class="text-xs text-gray-500 mt-3">Nuestro video corporativo resume la visión y los proyectos de Aisa Group. Usa los controles del reproductor para pausar, reproducir, ajustar el volumen, activar subtítulos, modificar la velocidad o ver el video en pantalla completa.</p>
         </div>
     </div>
 
