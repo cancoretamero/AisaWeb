@@ -118,12 +118,23 @@
 
                 <!-- Menu Desktop -->
                 <div class="hidden lg:flex items-center gap-1">
-                    <!-- Marcar 'Inicio' como activo cuando nos encontramos en la página principal -->
+                    <!-- Resaltar 'Inicio' como activo en la página principal -->
                     <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold">Inicio</a>
-                    <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Nosotros</a>
-                    <a href="inversiones.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inversiones</a>
-                    <!-- 'Proyectos' no está activo en la home -->
-                    <a href="proyectos.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Proyectos</a>
+                    <!-- Dropdown para Nosotros -->
+                    <div class="relative group">
+                        <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 dark:hover:bg-white/10 transition-all">
+                            Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
+                        </a>
+                        <!-- Menú desplegable -->
+                        <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all origin-top-left z-50 hidden group-hover:block">
+                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">El Equipo</a>
+                        </div>
+                    </div>
+                    <!-- Renombrar Inversiones -> Unidades (linkando al mismo archivo inversiones.html) -->
+                    <a href="inversiones.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Unidades</a>
+                    <!-- Renombrar Proyectos -> Sostenibilidad & ESG (link a proyectos.html) -->
+                    <a href="proyectos.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Sostenibilidad &amp; ESG</a>
                     <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Prensa</a>
                 </div>
 
