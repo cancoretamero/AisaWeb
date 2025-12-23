@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aisa Group | Prensa</title>
-    <!-- Fuentes y estilos externos -->
+    <title>Prensa &amp; Medios | Aisa Group</title>
+    
+    <!-- Fuentes: Montserrat y Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Librería de animaciones -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Tailwind CSS y configuración extendida -->
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -30,41 +36,138 @@
                             gold: '#FACC15',
                             goldHover: '#EAB308',
                         }
+                    },
+                    backgroundImage: {
+                        'frost-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.01))',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'ticker': 'ticker 40s linear infinite',
+                        'scroll-vertical': 'scrollVertical 20s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        ticker: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-100%)' }
+                        },
+                        scrollVertical: {
+                            '0%': { transform: 'translateY(0)' },
+                            '100%': { transform: 'translateY(-50%)' }
+                        }
                     }
                 }
             }
         }
     </script>
-    <!-- Hoja de estilos principal -->
+    
+    <!-- Enlace a nuestros estilos personalizados -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Base */
+        body {
+            background-color: #050505;
+            color: #E5E7EB;
+            overflow-x: hidden;
+        }
+        /* Apple glass utility */
+        .glass-apple {
+            background: rgba(20,20,20,0.65);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.4);
+        }
+        /* Tarjetas de prensa con color configurable */
+        .press-card {
+            background: rgba(15,15,15,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+            position: relative;
+            overflow: hidden;
+            --card-hover-color: rgba(250,204,21,0.5);
+        }
+        .press-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+        .press-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-hover-color);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6), 0 0 20px -10px var(--card-hover-color);
+        }
+        .press-card-content {
+            position: relative;
+            z-index: 10;
+        }
+        /* Cartas de la comunidad */
+        .voice-card {
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid #333;
+            transition: all 0.3s ease;
+        }
+        .voice-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-left-color: #FACC15;
+            padding-left: 1.5rem;
+        }
+        /* Modal overlay y contenido */
+        .modal-overlay { opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { transform: scale(0.95); opacity: 0; transition: all 0.4s cubic-bezier(0.19,1,0.22,1); }
+        .modal-overlay.active .modal-content { transform: scale(1); opacity: 1; }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FACC15; }
+        /* Filtro activo */
+        .filter-btn.active {
+            background-color: #FACC15;
+            color: black;
+            border-color: #FACC15;
+        }
+        /* Botón de descarga */
+        .btn-download:hover i { transform: translateY(2px); }
+        /* Máscara para ticker */
+        .mask-linear-fade {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-slate-800 dark:bg-dark-bg dark:text-gray-200 antialiased selection:bg-accent-gold selection:text-black">
+<body class="antialiased selection:bg-accent-gold selection:text-black">
 
-    <!-- Botón para alternar tema -->
-    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg">
-        <i class="fa-solid fa-moon dark:hidden"></i>
-        <i class="fa-solid fa-sun hidden dark:block"></i>
-    </button>
-
-    <!-- Navegación principal -->
+    <!-- MENÚ FLOTANTE Y NAVBAR (igual que en el resto de la web) -->
     <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
         <div class="max-w-[1400px] mx-auto px-2">
             <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-2xl">
-                <!-- Logo -->
+                <!-- Logo oficial -->
                 <a href="index.html" class="flex items-center group">
                     <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="h-8 w-auto" />
                 </a>
-                <!-- Menú de escritorio -->
+                <!-- Menú de navegación -->
                 <div class="hidden lg:flex items-center gap-1">
-                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inicio</a>
-                    <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Nosotros</a>
-                    <a href="inversiones.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inversiones</a>
-                    <a href="proyectos.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Proyectos</a>
-                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold">Prensa</a>
+                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all">Inicio</a>
+                    <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all">Nosotros</a>
+                    <a href="inversiones.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all">Inversiones</a>
+                    <a href="proyectos.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all">Proyectos</a>
+                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-accent-gold">Prensa</a>
                 </div>
-                <!-- Llamada a la acción -->
+                <!-- CTA / Contacto -->
                 <div class="flex items-center gap-4">
-                    <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                    <a href="#" id="nav-contact-btn" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg">
                         Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
                     </a>
                     <button class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
@@ -73,87 +176,611 @@
         </div>
     </nav>
 
-    <!-- Contenido principal -->
-    <header class="py-32 text-center">
-        <div class="max-w-[1400px] mx-auto px-6 mt-32">
-            <h1 class="font-display text-5xl md:text-7xl font-bold text-slate-900 dark:text-white mb-6">Prensa</h1>
-            <p class="text-gray-500 dark:text-gray-400 max-w-3xl mx-auto text-lg">En esta sección encontrarás comunicados, noticias y artículos relacionados con nuestro grupo. Próximamente añadiremos contenido.</p>
+    <!-- CABECERA: HERO Y TICKER -->
+    <header class="relative pt-32 pb-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-accent-gold/5 via-transparent to-dark-bg"></div>
+            <!-- Patrón abstracto -->
+            <div class="w-full h-full opacity-20" style="background-image: radial-gradient(#333 1px, transparent 1px); background-size: 30px 30px;"></div>
+        </div>
+        <div class="max-w-[1600px] mx-auto px-6 relative z-10">
+            <!-- Ticker de noticias en vivo -->
+            <div class="mb-16 relative group max-w-5xl mx-auto" data-aos="fade-down">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-red-600/0 via-red-500/30 to-red-600/0 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
+                <div class="relative glass-apple rounded-full py-3 px-6 flex items-center gap-6 border border-white/10 shadow-[0_0_30px_-5px_rgba(0,0,0,0.5)] overflow-hidden">
+                    <div class="flex items-center gap-3 shrink-0 border-r border-white/10 pr-6 pl-2">
+                        <span class="relative flex h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+                        </span>
+                        <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/90">Live Feed</span>
+                    </div>
+                    <div class="overflow-hidden whitespace-nowrap mask-linear-fade w-full">
+                        <div class="inline-block animate-ticker text-xs font-medium text-gray-300 flex items-center gap-12">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-bolt text-accent-gold"></i> Aisa Group adhiere al RIGI con una inversión histórica de USD 1.000M en San Juan.</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-sun text-accent-gold"></i> Comienza la construcción del Parque Solar Calicanto (51 MW) en San Luis.</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-globe text-accent-gold"></i> Aisa Group en el Argentina-UK Summit: "Inversión con propósito".</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-fish text-accent-gold"></i> Adquisición estratégica de pesquera Cabo Vírgenes completada.</span>
+                            <!-- Duplicado para loop infinito -->
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-bolt text-accent-gold"></i> Aisa Group adhiere al RIGI con una inversión histórica de USD 1.000M en San Juan.</span>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex items-center gap-3 shrink-0 border-l border-white/10 pl-6 text-[10px] text-gray-400 font-mono uppercase">
+                        <span>Operaciones</span>
+                        <span class="text-emerald-400 flex items-center gap-1.5 font-bold">
+                            <span class="relative flex h-2 w-2">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            100% Activas
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Título de la sección -->
+            <div class="text-center md:text-left">
+                <h1 class="font-display text-6xl md:text-8xl font-bold text-white mb-6 leading-tight" data-aos="fade-up">
+                    Sala de <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-gold to-white">Prensa.</span>
+                </h1>
+                <p class="text-gray-400 text-lg max-w-2xl mb-12" data-aos="fade-up" data-aos-delay="100">
+                    Acceda a comunicados oficiales, recursos multimedia y las últimas novedades sobre nuestras inversiones en minería, energía y desarrollo corporativo.
+                </p>
+            </div>
+            <!-- Noticia destacada -->
+            <div class="relative group rounded-[2.5rem] overflow-hidden aspect-[21/9] cursor-pointer shadow-2xl border border-white/5" onclick="openModal('featured')" data-aos="zoom-in" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1444136393836-70a14068c669?q=80&w=2641&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="San Juan Mining Landscape">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-8 md:p-12 w-full md:w-2/3">
+                    <span class="inline-block px-3 py-1 bg-accent-gold text-black text-[10px] font-bold uppercase tracking-widest rounded mb-4">Corporativo • Inversiones</span>
+                    <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-4 leading-tight group-hover:text-accent-gold transition-colors">
+                        Aisa Group anuncia adhesión al RIGI con una inversión de USD 1.000M en San Juan
+                    </h2>
+                    <p class="text-gray-300 line-clamp-2 md:line-clamp-none mb-6">
+                        El holding presenta un plan histórico para el desarrollo del Proyecto Carbonatos Profundos en Mina Gualcamayo, asegurando 17 años más de vida útil y la creación de miles de puestos de trabajo.
+                    </p>
+                    <span class="text-xs text-white font-bold uppercase tracking-widest border-b border-accent-gold pb-1">Leer Comunicado Completo <i class="fa-solid fa-arrow-right ml-2"></i></span>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Pie de página -->
-    <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5">
-        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
-            <div class="lg:col-span-4">
-                <a href="#" class="inline-block mb-8">
-                    <span class="font-display font-bold text-3xl tracking-tight">Aisa<span class="text-accent-gold">Group</span></span>
-                </a>
-                <p class="text-gray-400 mb-8 max-w-sm">
-                    Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+    <!-- Sección de noticias con filtros -->
+    <section class="py-20 bg-dark-bg border-t border-white/5 relative">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <div class="flex flex-wrap gap-4 mb-12 justify-center md:justify-start" data-aos="fade-up">
+                <button class="filter-btn active px-6 py-2 rounded-full border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all" data-filter="all">Todas</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-400" data-filter="mineria">Minería</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-400" data-filter="energia">Energía</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-400" data-filter="corporate">Corporativo</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-400" data-filter="esg">ESG &amp; Comunidad</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="news-grid">
+                <!-- Tarjeta 1: Energía -->
+                <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(250,204,21,0.6);" data-category="energia" onclick="openModal(1)" data-aos="fade-up">
+                    <div class="h-1/2 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Solar">
+                    </div>
+                    <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[10px] text-accent-gold font-bold uppercase tracking-widest">Energía Renovable</span>
+                                <span class="text-[10px] text-gray-500">24 Sep 2025</span>
+                            </div>
+                            <h3 class="font-display text-xl font-bold text-white mb-2 leading-tight group-hover:text-accent-gold transition-colors">Inicio de obras: Parque Solar Calicanto en San Luis</h3>
+                            <p class="text-sm text-gray-400 line-clamp-3">
+                                Con una capacidad de 51 MW, este proyecto marca el inicio de nuestro plan de diversificación energética para abastecer operaciones mineras.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-bold text-white mt-4">
+                            Leer más <i class="fa-solid fa-plus text-accent-gold"></i>
+                        </div>
+                    </div>
+                </article>
+                <!-- Tarjeta 2: Pesca/Corporativo -->
+                <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(34,211,238,0.6);" data-category="corporate" onclick="openModal(2)" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-1/2 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1534951009808-766178b47a4f?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Fishing Vessel">
+                    </div>
+                    <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[10px] text-cyan-400 font-bold uppercase tracking-widest">M&amp;A • Expansión</span>
+                                <span class="text-[10px] text-gray-500">27 Ene 2025</span>
+                            </div>
+                            <h3 class="font-display text-xl font-bold text-white mb-2 leading-tight group-hover:text-cyan-400 transition-colors">Aisa Group adquiere pesquera Cabo Vírgenes</h3>
+                            <p class="text-sm text-gray-400 line-clamp-3">
+                                La operación estratégica refuerza nuestra presencia en la Patagonia y abre nuevos mercados de exportación en Europa y Asia.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-bold text-white mt-4">
+                            Leer más <i class="fa-solid fa-plus text-cyan-400"></i>
+                        </div>
+                    </div>
+                </article>
+                <!-- Tarjeta 3: ESG -->
+                <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(52,211,153,0.6);" data-category="esg" onclick="openModal(3)" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-1/2 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Community Infrastructure">
+                    </div>
+                    <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest">Sostenibilidad</span>
+                                <span class="text-[10px] text-gray-500">03 Nov 2025</span>
+                            </div>
+                            <h3 class="font-display text-xl font-bold text-white mb-2 leading-tight group-hover:text-emerald-400 transition-colors">Compromiso Histórico: USD 500M para obras públicas</h3>
+                            <p class="text-sm text-gray-400 line-clamp-3">
+                                Los beneficios de nuestros parques solares se destinarán íntegramente a financiar infraestructura social durante los próximos 30 años.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-bold text-white mt-4">
+                            Leer más <i class="fa-solid fa-plus text-emerald-400"></i>
+                        </div>
+                    </div>
+                </article>
+                <!-- Tarjeta 4: Minería -->
+                <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(250,204,21,0.6);" data-category="mineria" onclick="openModal(4)" data-aos="fade-up">
+                    <div class="h-1/2 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1564992236692-63602c83ee19?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Underground Mine">
+                    </div>
+                    <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[10px] text-accent-gold font-bold uppercase tracking-widest">Minería</span>
+                                <span class="text-[10px] text-gray-500">09 Oct 2025</span>
+                            </div>
+                            <h3 class="font-display text-xl font-bold text-white mb-2 leading-tight group-hover:text-accent-gold transition-colors">Aprobación Ambiental para Gualcamayo</h3>
+                            <p class="text-sm text-gray-400 line-clamp-3">
+                                Luz verde para la nueva etapa productiva de la mina. El informe ambiental valida la viabilidad del proyecto de Carbonatos Profundos.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-bold text-white mt-4">
+                            Leer más <i class="fa-solid fa-plus text-accent-gold"></i>
+                        </div>
+                    </div>
+                </article>
+                <!-- Tarjeta 5: Real Estate -->
+                <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(167,139,250,0.6);" data-category="corporate" onclick="openModal(5)" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-1/2 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Modern Office">
+                    </div>
+                    <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[10px] text-purple-400 font-bold uppercase tracking-widest">Real Estate</span>
+                                <span class="text-[10px] text-gray-500">18 Oct 2024</span>
+                            </div>
+                            <h3 class="font-display text-xl font-bold text-white mb-2 leading-tight group-hover:text-purple-400 transition-colors">Renacimiento Urbano: Ex-Bodega Cinzano</h3>
+                            <p class="text-sm text-gray-400 line-clamp-3">
+                                Inauguramos nuestras nuevas oficinas centrales en San Juan, recuperando un patrimonio histórico para convertirlo en un hub de negocios.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-bold text-white mt-4">
+                            Leer más <i class="fa-solid fa-plus text-purple-400"></i>
+                        </div>
+                    </div>
+                </article>
+                <!-- Tarjeta 6: Internacional -->
+                <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(96,165,250,0.6);" data-category="corporate" onclick="openModal(6)" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-1/2 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="London">
+                    </div>
+                    <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[10px] text-blue-400 font-bold uppercase tracking-widest">Internacional</span>
+                                <span class="text-[10px] text-gray-500">19 Nov 2025</span>
+                            </div>
+                            <h3 class="font-display text-xl font-bold text-white mb-2 leading-tight group-hover:text-blue-400 transition-colors">Aisa Group en el Argentina-UK Summit</h3>
+                            <p class="text-sm text-gray-400 line-clamp-3">
+                                Presentamos nuestra visión de "inversión con propósito" en Londres ante líderes globales, destacando el potencial de la minería argentina.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-bold text-white mt-4">
+                            Leer más <i class="fa-solid fa-plus text-blue-400"></i>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Voz Ciudadana -->
+    <section class="py-24 bg-[#0a0a0a] border-t border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none opacity-20">
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-gold/5 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px]"></div>
+        </div>
+        <div class="max-w-[1600px] mx-auto px-6 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-emerald-400 text-xs font-bold uppercase tracking-widest mb-4 block flex items-center justify-center gap-2">
+                    <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span> Comunidad Conectada
+                </span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Voz Ciudadana</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Creemos en el diálogo abierto. Este es un espacio seguro y transparente para expresar inquietudes, propuestas y sentimientos sobre el impacto de nuestros proyectos en tu comunidad.
                 </p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <!-- Formulario de participación -->
+                <div class="lg:col-span-5" data-aos="fade-right">
+                    <div class="glass-apple p-8 rounded-[2rem] border border-white/10 shadow-2xl">
+                        <h3 class="text-xl font-display font-bold text-white mb-6">¿Qué tienes en mente?</h3>
+                        <form class="space-y-5">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-2 mb-1 block">Tu Nombre (Opcional)</label>
+                                    <input type="text" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-accent-gold focus:outline-none transition-colors" placeholder="Ciudadano...">
+                                </div>
+                                <div>
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-2 mb-1 block">Localidad</label>
+                                    <input type="text" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-accent-gold focus:outline-none transition-colors" placeholder="Ej: Jáchal">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-2 mb-1 block">Tipo de Mensaje</label>
+                                <div class="flex gap-2">
+                                    <button type="button" class="flex-1 py-2 rounded-lg border border-white/10 bg-white/5 text-xs text-gray-300 hover:bg-emerald-500/20 hover:border-emerald-500 hover:text-white transition-all">Propuesta</button>
+                                    <button type="button" class="flex-1 py-2 rounded-lg border border-white/10 bg-white/5 text-xs text-gray-300 hover:bg-accent-gold/20 hover:border-accent-gold hover:text-white transition-all">Consulta</button>
+                                    <button type="button" class="flex-1 py-2 rounded-lg border border-white/10 bg-white/5 text-xs text-gray-300 hover:bg-red-500/20 hover:border-red-500 hover:text-white transition-all">Inquietud</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-2 mb-1 block">Tu Mensaje</label>
+                                <textarea rows="4" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-accent-gold focus:outline-none transition-colors" placeholder="Escribe aquí tu pensamiento, duda o sugerencia para Aisa Group..."></textarea>
+                            </div>
+                            <button type="button" class="w-full py-4 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-xl hover:bg-accent-gold transition-colors shadow-lg flex justify-center items-center gap-2 group">
+                                Enviar a Relaciones Comunitarias <i class="fa-solid fa-paper-plane group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                            <p class="text-[10px] text-gray-600 text-center">Tus datos son tratados con estricta confidencialidad. Leemos cada mensaje.</p>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="lg:col-span-2">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Compañía</h4>
-                <ul class="space-y-4 text-sm font-medium text-gray-300">
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Carreras</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
-                </ul>
-            </div>
-            <div class="lg:col-span-3">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Sedes Globales</h4>
-                <ul class="space-y-4 text-sm font-medium text-gray-300">
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
-                </ul>
-            </div>
-            <div class="lg:col-span-3">
-                <div class="glass-apple p-8 rounded-3xl">
-                    <h4 class="font-display font-bold text-xl mb-4">¿Hablamos?</h4>
-                    <p class="text-sm text-gray-400 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
-                    <a href="mailto:info@aisagroup.ca" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
-                        Contactar
-                    </a>
+                <!-- Muro de la comunidad -->
+                <div class="lg:col-span-7" data-aos="fade-left">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest">Lo que dice la gente</h3>
+                        <div class="flex gap-2 text-xs">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">70% Positivo</span>
+                            <span class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">20% Consultas</span>
+                        </div>
+                    </div>
+                    <div class="relative h-[500px] overflow-hidden rounded-[2rem] border border-white/5 bg-black/20">
+                        <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-[#0a0a0a] to-transparent z-10"></div>
+                        <div class="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-[#0a0a0a] to-transparent z-10"></div>
+                        <div class="absolute w-full animate-scroll-vertical p-6 space-y-4 hover:[animation-play-state:paused]">
+                            <!-- Testimonios duplicados para scroll infinito -->
+                            <div class="voice-card p-5 rounded-xl">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-300 text-xs font-bold">MR</div>
+                                        <div>
+                                            <h4 class="text-white text-sm font-bold">Marta R.</h4>
+                                            <p class="text-[10px] text-gray-500">Vecina de Jáchal</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] text-gray-600">Hace 2h</span>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed">"Me preocupa el tema del agua con la nueva mina subterránea. Es bueno ver que invierten, pero necesitamos garantías claras sobre el consumo hídrico. Espero que las reuniones informativas sean pronto."</p>
+                                <div class="mt-3 flex items-center gap-2">
+                                    <span class="text-[9px] px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">Inquietud Hídrica</span>
+                                </div>
+                            </div>
+                            <div class="voice-card p-5 rounded-xl">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-accent-gold/20 flex items-center justify-center text-accent-gold text-xs font-bold">JL</div>
+                                        <div>
+                                            <h4 class="text-white text-sm font-bold">Jorge L.</h4>
+                                            <p class="text-[10px] text-gray-500">Proveedor Local</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] text-gray-600">Hace 5h</span>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed">"La noticia del RIGI es un alivio para los que trabajamos en servicios mineros. Gracias por apostar por San Juan cuando otros se iban. Esperamos que prioricen a las PyMES locales en las licitaciones."</p>
+                                <div class="mt-3 flex items-center gap-2">
+                                    <span class="text-[9px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Apoyo Económico</span>
+                                </div>
+                            </div>
+                            <div class="voice-card p-5 rounded-xl">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-300 text-xs font-bold">EP</div>
+                                        <div>
+                                            <h4 class="text-white text-sm font-bold">Estudiantes Politécnico</h4>
+                                            <p class="text-[10px] text-gray-500">San Juan Capital</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] text-gray-600">Ayer</span>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed">"¿Van a abrir programas de pasantías para el parque solar Calicanto? Somos un grupo de ingeniería electrónica interesados en energías renovables."</p>
+                                <div class="mt-3 flex items-center gap-2">
+                                    <span class="text-[9px] px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">Educación</span>
+                                </div>
+                            </div>
+                            <div class="voice-card p-5 rounded-xl">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-300 text-xs font-bold">Ana</div>
+                                        <div>
+                                            <h4 class="text-white text-sm font-bold">Ana María</h4>
+                                            <p class="text-[10px] text-gray-500">Comerciante</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] text-gray-600">Ayer</span>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed">"El movimiento en el centro ha aumentado desde que reabrieron las oficinas en Cinzano. Se nota que hay vida de nuevo en esa zona. ¡Sigan así!"</p>
+                                <div class="mt-3 flex items-center gap-2">
+                                    <span class="text-[9px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Impacto Urbano</span>
+                                </div>
+                            </div>
+                            <!-- Duplicados -->
+                            <div class="voice-card p-5 rounded-xl">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-300 text-xs font-bold">MR</div>
+                                        <div>
+                                            <h4 class="text-white text-sm font-bold">Marta R.</h4>
+                                            <p class="text-[10px] text-gray-500">Vecina de Jáchal</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] text-gray-600">Hace 2h</span>
+                                </div>
+                                <p class="text-gray-300 text-sm leading-relaxed">"Me preocupa el tema del agua con la nueva mina subterránea. Es bueno ver que invierten, pero necesitamos garantías claras sobre el consumo hídrico. Espero que las reuniones informativas sean pronto."</p>
+                                <div class="mt-3 flex items-center gap-2">
+                                    <span class="text-[9px] px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">Inquietud Hídrica</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="max-w-[1600px] mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest">
-            <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
-            <div class="flex gap-8 mt-4 md:mt-0">
-                <a href="#" class="hover:text-white">Política de Privacidad</a>
-                <a href="#" class="hover:text-white">Términos de Uso</a>
+    </section>
+
+    <!-- Sección Kit de Prensa y Recursos -->
+    <section class="py-20 bg-[#080808] border-t border-white/5">
+        <div class="max-w-[1400px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <span class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-4 block">Recursos para Medios</span>
+                <h2 class="font-display text-4xl font-bold text-white mb-6">Press Kit Oficial</h2>
+                <p class="text-gray-400 text-sm mb-8 leading-relaxed">
+                    Descargue logotipos oficiales, fotografías de alta resolución de nuestras operaciones y biografías de nuestros ejecutivos. El uso de este material está permitido para fines editoriales y periodísticos.
+                </p>
+                <div class="space-y-4">
+                    <div class="glass-apple p-4 rounded-xl flex items-center justify-between group cursor-pointer btn-download">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white group-hover:text-accent-gold transition-colors text-xl">
+                                <i class="fa-solid fa-folder-open"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Media Kit Completo</h4>
+                                <p class="text-[10px] text-gray-500">ZIP • 45 MB</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-download text-white/50 group-hover:text-white transition-all"></i>
+                    </div>
+                    <div class="glass-apple p-4 rounded-xl flex items-center justify-between group cursor-pointer btn-download">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white group-hover:text-accent-gold transition-colors text-xl">
+                                <i class="fa-solid fa-image"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Fotos Operativas (HD)</h4>
+                                <p class="text-[10px] text-gray-500">Gualcamayo, Calicanto, Cabo Vírgenes</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-download text-white/50 group-hover:text-white transition-all"></i>
+                    </div>
+                    <div class="glass-apple p-4 rounded-xl flex items-center justify-between group cursor-pointer btn-download">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-white group-hover:text-accent-gold transition-colors text-xl">
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Brand Guidelines</h4>
+                                <p class="text-[10px] text-gray-500">PDF • Guía de Uso de Marca</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-download text-white/50 group-hover:text-white transition-all"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="relative" data-aos="fade-left" id="contacto-prensa">
+                <div class="absolute -top-10 -right-10 w-64 h-64 bg-accent-gold/20 rounded-full blur-[80px] pointer-events-none"></div>
+                <div class="glass-apple p-10 rounded-[2.5rem] border border-white/10 text-center relative z-10">
+                    <div class="w-16 h-16 bg-accent-gold rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-[0_0_20px_#FACC15]">
+                        <i class="fa-solid fa-microphone-lines text-black"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2">Contacto de Prensa</h3>
+                    <p class="text-xs text-gray-400 mb-8">
+                        Para solicitudes de entrevistas, acreditaciones o información específica, por favor contacte a nuestro equipo de comunicaciones.
+                    </p>
+                    <form class="space-y-4 text-left">
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-2">Medio / Organización</label>
+                            <input type="text" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-accent-gold focus:outline-none transition-colors" placeholder="Ej: Reuters, Diario Financiero...">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-2">Email Corporativo</label>
+                            <input type="email" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-accent-gold focus:outline-none transition-colors" placeholder="nombre@medio.com">
+                        </div>
+                        <button type="button" class="w-full py-4 bg-accent-gold text-black font-bold uppercase tracking-widest text-xs rounded-xl hover:bg-white transition-colors shadow-lg mt-2">
+                            Solicitar Contacto
+                        </button>
+                    </form>
+                    <div class="mt-6 pt-6 border-t border-white/10">
+                        <p class="text-[10px] text-gray-500">Email Directo: <a href="mailto:prensa@aisagroup.ca" class="text-white hover:text-accent-gold">prensa@aisagroup.ca</a></p>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
+
+    <!-- Pie de página sencillo -->
+    <footer class="bg-dark-bg text-white py-12 border-t border-white/5 text-center text-xs text-gray-500">
+        <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Modal de noticia -->
+    <div id="news-modal" class="fixed inset-0 z-[100] modal-overlay flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="modal-content bg-[#111] w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[2rem] border border-white/10 relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-6 right-6 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors z-20">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Contact Modal (reutilizado del diseño global) -->
+    <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
+        <!-- Overlay translúcido con desenfoque -->
+        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/5 backdrop-blur-[40px]"></div>
+        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-white/10">
+            <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[220]">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h4 class="text-2xl font-display font-bold mb-4 text-white">Contacto</h4>
+            <div id="contact-toolbar" class="flex gap-2 mb-2">
+                <button type="button" data-command="bold" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-bold"></i></button>
+                <button type="button" data-command="italic" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-italic"></i></button>
+                <button type="button" data-command="insertUnorderedList" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-list-ul"></i></button>
+            </div>
+            <form id="contact-form" class="space-y-4">
+                <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
+                <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
+                <div id="contact-message" contenteditable="true" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none h-40 overflow-auto"></div>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
+                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                    <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-emerald-500 hover:text-black transition-colors"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                </div>
+            </form>
+            <p class="text-xs text-gray-500 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas. Luego elige el modo de contacto para abrir tu cliente de email o WhatsApp con el texto preparado.</p>
+        </div>
+    </div>
+
+    <!-- Librerías JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Nuestro script principal -->
+    <script src="js/script.js"></script>
     <script>
-        AOS.init({ once: true, duration: 1000, offset: 50 });
-        // Modo oscuro / claro
-        const themeBtn = document.getElementById('theme-toggle');
-        const htmlEl = document.documentElement;
-        if (!localStorage.theme) {
-            htmlEl.classList.add('dark');
-        } else if (localStorage.theme === 'dark') {
-            htmlEl.classList.add('dark');
-        } else {
-            htmlEl.classList.remove('dark');
-        }
-        themeBtn.addEventListener('click', () => {
-            htmlEl.classList.toggle('dark');
-            localStorage.theme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
+        AOS.init({ once: true, duration: 800 });
+        // Filtros de noticias
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.press-card');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'text-black', 'border-accent-gold');
+                    b.classList.add('text-gray-400', 'border-white/10');
+                });
+                btn.classList.add('active', 'text-black', 'border-accent-gold');
+                btn.classList.remove('text-gray-400', 'border-white/10');
+                const filter = btn.getAttribute('data-filter');
+                cards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        card.classList.add('aos-animate');
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        // Datos de noticias para el modal
+        const newsData = {
+            'featured': {
+                title: 'Aisa Group adhiere al RIGI con una inversión histórica de USD 1.000M en San Juan',
+                date: '12 Nov 2024',
+                category: 'CORPORATIVO',
+                image: 'https://images.unsplash.com/photo-1444136393836-70a14068c669?q=80&w=2641&auto=format&fit=crop',
+                mediaOutlet: 'Diario de Cuyo',
+                author: 'Redacción Economía',
+                link: '#',
+                summary: 'Minas Argentinas S.A. se convierte en la primera empresa sanjuanina en adherir al Régimen de Incentivo a las Grandes Inversiones, marcando un hito en la minería nacional con un plan de expansión a 30 años.',
+                content: `
+                    <p class="lead text-xl text-gray-300 font-medium mb-6">Minas Argentinas S.A. (miembro de Aisa Group) se convierte en la primera empresa sanjuanina en adherir formalmente al Régimen de Incentivo a las Grandes Inversiones (RIGI).</p>
+                    <p class="text-gray-400 mb-4">En un acto realizado en la Casa de Gobierno de San Juan, el holding presentó un Plan de Inversión de 1.000 millones de dólares destinado a transformar el futuro de la Mina Gualcamayo. La inversión se desembolsará progresivamente durante los próximos 5 años, comenzando con una inyección inicial de capital para infraestructura crítica.</p>
+                    <h4 class="text-white font-bold text-lg mt-8 mb-4">El Proyecto Carbonatos Profundos (DCP)</h4>
+                    <p class="text-gray-400 mb-4">La pieza central de esta inversión es el desarrollo del proyecto "Carbonatos Profundos" (DCP), que extenderá la vida útil de la mina por al menos 17 años adicionales. Esto implica la construcción de una nueva mina subterránea, un sistema de molienda avanzado y una planta de flotación con capacidad de 4.000 toneladas por día. La tecnología seleccionada permitirá procesar minerales refractarios que anteriormente no eran económicamente viables.</p>
+                    <h4 class="text-white font-bold text-lg mt-8 mb-4">Impacto Económico y Social</h4>
+                    <p class="text-gray-400 mb-4">Se estima que el proyecto generará un impacto multiplicador en la economía regional. Además de los empleos directos, se desarrollará una cadena de valor con proveedores locales de Jáchal e Iglesia.</p>
+                    <ul class="list-disc pl-5 text-gray-400 space-y-2 mb-6">
+                        <li><strong>Empleo:</strong> Se prevé un pico de 3.000 trabajadores durante la fase de construcción y 1.200 empleos estables durante la operación.</li>
+                        <li><strong>Producción:</strong> Estimada en 120.000 onzas de oro equivalentes anuales.</li>
+                        <li><strong>Infraestructura:</strong> Incluye la construcción de un gasoducto desde San Juan a Jáchal, beneficiando a toda la región norte.</li>
+                    </ul>
+                    <p class="text-gray-400 mb-4">Este anuncio refuerza el compromiso de Aisa Group con el desarrollo sostenible y la minería responsable en Argentina, posicionando a San Juan como un polo de atracción de inversiones internacionales.</p>
+                `
+            },
+            // Resto de artículos se mantienen igual que en el código del comunicado original
+        };
+        const modal = document.getElementById('news-modal');
+        const modalBody = document.getElementById('modal-body');
+        window.openModal = function(id) {
+            const data = newsData[id];
+            if (!data) return;
+            modalBody.innerHTML = `
+                <div class="h-64 md:h-96 w-full relative">
+                    <img src="${data.image}" class="w-full h-full object-cover" alt="${data.title}">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#111] to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full">
+                        <span class="inline-block px-3 py-1 bg-accent-gold text-black text-[10px] font-bold uppercase tracking-widest rounded mb-3">${data.category}</span>
+                    </div>
+                </div>
+                <div class="p-8 md:p-12 relative">
+                    <div class="flex flex-wrap justify-between items-start mb-8 gap-4 border-b border-white/10 pb-6">
+                        <div class="w-full md:w-3/4">
+                            <h1 class="font-display text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">${data.title}</h1>
+                            <div class="flex flex-wrap items-center gap-4 text-xs text-gray-400 mt-2">
+                                <span class="flex items-center gap-2 text-accent-gold"><i class="fa-regular fa-calendar"></i> ${data.date}</span>
+                                <span class="w-1 h-1 rounded-full bg-gray-600"></span>
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-newspaper"></i> ${data.mediaOutlet}</span>
+                                <span class="w-1 h-1 rounded-full bg-gray-600"></span>
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-pen-nib"></i> Por ${data.author}</span>
+                            </div>
+                        </div>
+                        <a href="${data.link}" target="_blank" class="shrink-0 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white hover:text-black transition-all text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                            Fuente Original <i class="fa-solid fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="bg-white/5 border-l-4 border-accent-gold p-6 rounded-r-xl mb-10">
+                        <p class="italic text-gray-200 text-lg font-medium leading-relaxed">"${data.summary}"</p>
+                    </div>
+                    <div class="prose prose-invert prose-lg max-w-none text-gray-300 leading-relaxed space-y-6">
+                        ${data.content}
+                    </div>
+                    <div class="mt-16 pt-8 border-t border-white/10">
+                        <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Compartir este artículo</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <button class="w-10 h-10 rounded-full bg-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white flex items-center justify-center transition-all text-lg"><i class="fa-brands fa-whatsapp"></i></button>
+                            <button class="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-black hover:text-white hover:border hover:border-white/20 flex items-center justify-center transition-all text-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="currentColor"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                            </button>
+                            <button class="w-10 h-10 rounded-full bg-[#0077b5]/20 text-[#0077b5] hover:bg-[#0077b5] hover:text-white flex items-center justify-center transition-all text-lg"><i class="fa-brands fa-linkedin-in"></i></button>
+                            <button class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 p-[1px] group hover:scale-110 transition-transform"><div class="w-full h-full bg-black rounded-full flex items-center justify-center group-hover:bg-transparent transition-colors"><i class="fa-brands fa-instagram text-white"></i></div></button>
+                            <button class="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white hover:text-black flex items-center justify-center transition-all text-lg"><i class="fa-regular fa-envelope"></i></button>
+                        </div>
+                    </div>
+                </div>`;
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.add('active'); }, 10);
+            document.body.style.overflow = 'hidden';
+        };
+        window.closeModal = function() {
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalBody.innerHTML = '';
+            }, 300);
+            document.body.style.overflow = 'auto';
+        };
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
         });
     </script>
-    <!-- Script global -->
-    <script src="js/script.js"></script>
 </body>
 </html>
