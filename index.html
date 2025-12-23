@@ -93,6 +93,9 @@
     <!-- Archivo CSS principal -->
     <link rel="stylesheet" href="css/style.css">
 
+    <!-- Plyr video player (MIT licensed) -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
 </head>
 <body class="bg-gray-50 text-slate-800 dark:bg-dark-bg dark:text-gray-200 antialiased selection:bg-accent-gold selection:text-black">
 
@@ -161,7 +164,8 @@
                 <a href="#divisiones" class="px-10 py-4 bg-accent-gold text-black rounded-full text-sm font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_20px_rgba(250,204,21,0.4)]">
                     Ver Portafolio
                 </a>
-                <a href="https://youtu.be/placeholder" target="_blank" class="px-10 py-4 glass-apple text-white rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white/10 transition-colors flex items-center gap-3">
+                <!-- Botón para abrir el video corporativo en un pop-up. Cuando se hace clic, se muestra un modal con el reproductor de video. -->
+                <a href="#" id="open-video" class="px-10 py-4 glass-apple text-white rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white/10 transition-colors flex items-center gap-3">
                     <i class="fa-solid fa-play"></i> Ver video corporativo
                 </a>
             </div>
@@ -1493,10 +1497,31 @@
         </div>
     </footer>
 
+    <!-- VIDEO MODAL POPUP (hidden by default) -->
+    <div id="video-modal" class="fixed inset-0 flex items-center justify-center hidden z-[200]">
+        <!-- Dark backdrop with blur -->
+        <div id="video-modal-overlay" class="absolute inset-0 bg-black/70 backdrop-blur-[40px]"></div>
+        <!-- Container for the video player with glass effect -->
+        <div class="glass-apple rounded-3xl p-6 md:p-8 relative z-10 max-w-3xl w-[90%]">
+            <!-- Close button -->
+            <button id="close-video" class="absolute top-4 right-4 w-8 h-8 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <!-- Video element: source will be set via HTML; users should upload their video to videos/corporate.mp4 -->
+            <video id="corporate-video" class="w-full aspect-video rounded-xl overflow-hidden" controls>
+                <source src="videos/corporate.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+            <p class="text-xs text-gray-500 mt-3">Sugerencia: sube el archivo del video corporativo a la carpeta <span class="font-bold">videos</span> con el nombre <span class="font-bold">corporate.mp4</span>.</p>
+        </div>
+    </div>
+
     <!-- JS LIBRARIES AND CUSTOM SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- External D3 -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Plyr video library for custom player controls (MIT license) -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <!-- Our script file -->
     <script src="js/script.js"></script>
 </body>
