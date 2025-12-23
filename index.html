@@ -1499,14 +1499,14 @@
 
     <!-- VIDEO MODAL POPUP (hidden by default) -->
     <div id="video-modal" class="fixed inset-0 flex items-center justify-center hidden z-[200]">
-        <!-- Dark backdrop with blur -->
-        <div id="video-modal-overlay" class="absolute inset-0 bg-black/70 backdrop-blur-[40px]"></div>
-        <!-- Container for the video player with glass effect -->
-        <div class="glass-apple rounded-3xl p-6 md:p-8 relative z-10 max-w-3xl w-[90%]">
-            <!-- Close button -->
-            <button id="close-video" class="absolute top-4 right-4 w-8 h-8 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+        <!-- Semi‑transparent backdrop with blur so the page remains visible.  Remove the dark tint to allow the underlying page to show through. -->
+        <div id="video-modal-overlay" class="absolute inset-0 bg-black/0 backdrop-blur-[40px]"></div>
+        <!-- Close button: positioned slightly outside the player so it never sits behind the video.  The glass‑apple class gives it a frosted look. -->
+        <button id="close-video" class="absolute -top-4 -right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[300]">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <!-- Container for the video player with glass effect; overflow-visible to allow the close button to overlap -->
+        <div class="glass-apple rounded-3xl p-6 md:p-8 relative z-[205] max-w-3xl w-[90%] overflow-visible">
             <!-- Video element: source will be set via HTML; users should upload their video to videos/corporate.mp4 -->
             <video id="corporate-video" class="w-full aspect-video rounded-xl overflow-hidden" controls>
                 <source src="videos/corporate.mp4" type="video/mp4">
