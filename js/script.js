@@ -34,7 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendWhatsAppBtn = document.getElementById('send-whatsapp');
     const nameInput = document.getElementById('contact-name');
     const emailInput = document.getElementById('contact-email');
-    const messageInput = document.getElementById('contact-message');
+    // The message area is now a contenteditable div. We'll reference it below.
+    const contactMessage = document.getElementById('contact-message');
+    // Toolbar buttons for rich text editing
+    const toolbarButtons = document.querySelectorAll('#contact-toolbar button');
     // Reemplace este número con el número real de WhatsApp de contacto.
     const whatsappNumber = '+0000000000';
     function openContactModal(event) {
@@ -60,6 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeContactBtn) {
         closeContactBtn.addEventListener('click', closeContactModal);
     }
+    // Asigna eventos a los botones de la barra de herramientas
+    if (toolbarButtons) {
+        toolbarButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const command = btn.getAttribute('data-command');
+                if (command) {
+                    document.execCommand(command, false, null);
+                    if (contactMessage) contactMessage.focus();
+                }
+            });
+        });
+    }
     // Cierra el modal si se hace clic en el overlay
     if (contactModal) {
         contactModal.addEventListener('click', (event) => {
@@ -79,7 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
         sendEmailBtn.addEventListener('click', () => {
             const name = nameInput ? nameInput.value.trim() : '';
             const email = emailInput ? emailInput.value.trim() : '';
-            const message = messageInput ? messageInput.value.trim() : '';
+            // Obtén el texto sin formato del área de mensaje (contenteditable)
+            const message = contactMessage ? contactMessage.innerText.trim() : '';
             const subject = encodeURIComponent('Contacto desde Aisa Group');
             const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\nMensaje:\n${message}`);
             const mailtoLink = `mailto:info@aisagroup.ca?subject=${subject}&body=${body}`;
@@ -92,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sendWhatsAppBtn.addEventListener('click', () => {
             const name = nameInput ? nameInput.value.trim() : '';
             const email = emailInput ? emailInput.value.trim() : '';
-            const message = messageInput ? messageInput.value.trim() : '';
+            const message = contactMessage ? contactMessage.innerText.trim() : '';
             const whatsappText = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\nMensaje:\n${message}`);
             const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${whatsappText}`;
             window.open(whatsappLink, '_blank');
