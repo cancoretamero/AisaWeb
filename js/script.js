@@ -326,3 +326,90 @@ function zoomTo(region) {
 window.zoomIn = zoomIn;
 window.zoomOut = zoomOut;
 window.zoomTo = zoomTo;
+
+// ------------------------------------------------------------
+// Video modal logic
+// ------------------------------------------------------------
+// Este bloque gestiona la apertura y cierre del modal de video corporativo.
+// Utiliza la biblioteca Plyr (MIT) para crear un reproductor moderno
+// con controles personalizados como play/pause, volumen, subtítulos y velocidad.
+document.addEventListener('DOMContentLoaded', () => {
+    const openVideoBtn = document.getElementById('open-video');
+    const videoModal = document.getElementById('video-modal');
+    const closeVideoBtn = document.getElementById('close-video');
+    const videoElement = document.getElementById('corporate-video');
+    let player;
+    // Función para abrir el modal y reproducir el video
+    function openVideoModal(event) {
+        event.preventDefault();
+        if (!videoModal) return;
+        videoModal.classList.remove('hidden');
+        videoModal.classList.add('flex');
+        // Inicializa el reproductor Plyr solo una vez
+        if (!player && window.Plyr) {
+            player = new Plyr(videoElement, {
+                controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'fullscreen'],
+                settings: ['speed', 'captions', 'quality'],
+                speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
+                i18n: {
+                    restart: 'Reiniciar',
+                    rewind: 'Rebobinar',
+                    play: 'Reproducir',
+                    pause: 'Pausar',
+                    fastForward: 'Avanzar',
+                    seek: 'Buscar',
+                    currentTime: 'Tiempo actual',
+                    duration: 'Duración',
+                    volume: 'Volumen',
+                    toggleMute: 'Silenciar',
+                    toggleCaptions: 'Subtítulos',
+                    settings: 'Configuración',
+                    speed: 'Velocidad',
+                    normal: 'Normal',
+                    fullscreen: 'Pantalla completa'
+                }
+            });
+        }
+        // Reproduce el video si el reproductor existe
+        if (player) {
+            player.play();
+        } else if (videoElement) {
+            videoElement.play();
+        }
+        // Evita el scroll en el fondo
+        document.body.classList.add('overflow-hidden');
+    }
+    // Función para cerrar el modal y pausar el video
+    function closeVideoModal() {
+        if (!videoModal) return;
+        videoModal.classList.add('hidden');
+        videoModal.classList.remove('flex');
+        if (player) {
+            player.pause();
+        } else if (videoElement) {
+            videoElement.pause();
+        }
+        document.body.classList.remove('overflow-hidden');
+    }
+    if (openVideoBtn) {
+        openVideoBtn.addEventListener('click', openVideoModal);
+    }
+    if (closeVideoBtn) {
+        closeVideoBtn.addEventListener('click', closeVideoModal);
+    }
+    // Cierra el modal al hacer clic en el fondo oscuro
+    if (videoModal) {
+        videoModal.addEventListener('click', (event) => {
+            // Solo cerrar si se hace clic en el overlay y no en el contenido
+            if (event.target.id === 'video-modal-overlay') {
+                closeVideoModal();
+            }
+        });
+    }
+    // Cierra con tecla ESC
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && videoModal && !videoModal.classList.contains('hidden')) {
+            closeVideoModal();
+        }
+    });
+});
