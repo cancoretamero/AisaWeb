@@ -617,9 +617,64 @@
         </div>
     </section>
 
-    <!-- Pie de página sencillo -->
-    <footer class="bg-dark-bg text-white py-12 border-t border-white/5 text-center text-xs text-gray-500">
-        <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+    <!-- FOOTER -->
+    <!-- Copiamos el mismo footer completo utilizado en index.html para mantener coherencia con la página principal. -->
+    <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5">
+        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+            <!-- Columna 1: Logo y descripción -->
+            <div class="lg:col-span-4">
+                <a href="#" class="inline-block mb-8">
+                    <!-- Logo oficial de Aisa Group -->
+                    <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
+                </a>
+                <p class="text-gray-400 mb-8 max-w-sm">
+                    Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+                </div>
+            </div>
+            <!-- Columna 2: Enlaces de compañía -->
+            <div class="lg:col-span-2">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Compañía</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-300">
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Carreras</a></li>
+                    <li><a href="prensa.html" class="hover:text-accent-gold transition-colors">Prensa</a></li>
+                </ul>
+            </div>
+            <!-- Columna 3: Sedes globales -->
+            <div class="lg:col-span-3">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Sedes Globales</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-300">
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
+                </ul>
+            </div>
+            <!-- Columna 4: Formulario de contacto -->
+            <div class="lg:col-span-3">
+                <div class="glass-apple p-8 rounded-3xl">
+                    <h4 class="font-display font-bold text-xl mb-4">¿Hablamos?</h4>
+                    <p class="text-sm text-gray-400 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
+                    <!-- Botón de contacto que abre el modal de contacto -->
+                    <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
+                        Contactar
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-[1600px] mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest">
+            <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+            <div class="flex gap-8 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white">Política de Privacidad</a>
+                <a href="#" class="hover:text-white">Términos de Uso</a>
+            </div>
+        </div>
     </footer>
 
     <!-- Modal de noticia -->
