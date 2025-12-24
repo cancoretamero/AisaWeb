@@ -171,29 +171,39 @@
 <body class="antialiased selection:bg-accent-green selection:text-black font-sans">
 
     <!-- NAVBAR -->
-    <nav class="fixed top-4 left-0 right-0 z-50">
-        <div class="max-w-[1400px] mx-auto px-2">
-            <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-2xl transition-all duration-300">
-                <a href="index.html" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 bg-accent-green rounded-full flex items-center justify-center shadow-lg text-black font-display font-bold text-xl group-hover:scale-110 transition-transform">A</div>
-                    <div class="flex flex-col">
-                        <span class="font-display font-bold text-lg tracking-tight uppercase text-white leading-none">Aisa</span>
-                        <span class="text-[9px] uppercase tracking-widest text-emerald-400">Sustainability Hub</span>
-                    </div>
-                </a>
-                <div class="hidden lg:flex items-center gap-1">
-                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-300">Inicio</a>
-                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-300">Prensa</a>
-                    <a href="#" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest bg-white/10 text-accent-green border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.2)]">ESG</a>
-                </div>
-                <div class="flex items-center gap-4">
-                    <a href="#reporte" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500 text-black text-[10px] font-bold uppercase tracking-widest hover:bg-white transition-colors shadow-lg hover:shadow-emerald-500/50">
-                        Reporte 2025 <i class="fa-solid fa-download"></i>
+   <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-[1400px] mx-auto px-2">
+        <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-2xl">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center group">
+                <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="h-8 w-auto" />
+            </a>
+            <!-- Menú de escritorio -->
+            <div class="hidden lg:flex items-center gap-1">
+                <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inicio</a>
+                <div class="relative group">
+                    <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 dark:hover:bg-white/10 transition-all">
+                        Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
                     </a>
+                    <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all origin-top-left z-50 hidden group-hover:block">
+                        <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">Quienes Somos</a>
+                        <a href="equipo.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">El Equipo</a>
+                    </div>
                 </div>
+                <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Unidades</a>
+                <a href="sostenibilidad.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold">Sostenibilidad &amp; ESG</a>
+                <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Prensa</a>
+            </div>
+            <!-- Botón de contacto -->
+            <div class="flex items-center gap-4">
+                <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                    Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
+                </a>
+                <button class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- HERO SECTION: DATA DRIVEN -->
     <header class="relative pt-40 pb-20 overflow-hidden min-h-screen flex flex-col justify-center">
