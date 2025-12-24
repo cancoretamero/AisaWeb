@@ -195,15 +195,13 @@
                 <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Prensa</a>
             </div>
             <!-- Botón de contacto -->
-            <div class="flex items-center gap-4">
-                <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg">
-                    Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
-                </a>
-                <button class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
-            </div>
-        </div>
-    </div>
-</nav>
+            <!-- CTA / Contacto -->
+<div class="flex items-center gap-4">
+    <a href="#" id="nav-contact-btn" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg">
+        Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
+    </a>
+    <button class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
+</div>
 
     <!-- HERO SECTION: DATA DRIVEN -->
     <header class="relative pt-40 pb-20 overflow-hidden min-h-screen flex flex-col justify-center">
@@ -1114,5 +1112,35 @@
             }
         });
     </script>
+            <!-- Contact Modal (reutilizado del diseño global) -->
+<div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
+    <!-- Overlay translúcido con desenfoque -->
+    <div id="contact-modal-overlay" class="absolute inset-0 bg-white/5 backdrop-blur-[40px]"></div>
+    <!-- Contenedor del formulario con efecto glass -->
+    <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-white/10">
+        <!-- Botón de cierre -->
+        <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[220]">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h4 class="text-2xl font-display font-bold mb-4 text-white">Contacto</h4>
+        <!-- Barra de herramientas de texto enriquecido -->
+        <div id="contact-toolbar" class="flex gap-2 mb-2">
+            <button type="button" data-command="bold" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-bold"></i></button>
+            <button type="button" data-command="italic" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-italic"></i></button>
+            <button type="button" data-command="insertUnorderedList" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-list-ul"></i></button>
+        </div>
+        <!-- Formulario -->
+        <form id="contact-form" class="space-y-4">
+            <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
+            <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
+            <div id="contact-message" contenteditable="true" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none h-40 overflow-auto"></div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
+                <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-emerald-500 hover:text-black transition-colors"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+            </div>
+        </form>
+        <p class="text-xs text-gray-500 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas. Luego elige el modo de contacto para abrir tu cliente de email o WhatsApp con el texto preparado.</p>
+    </div>
+</div>
 </body>
 </html>
