@@ -15,7 +15,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
-        // Configuración Fusionada: Base del Index + Extras de Unidades
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -25,15 +24,8 @@
                         display: ['"Montserrat"', 'sans-serif'],
                     },
                     colors: {
-                        dark: {
-                            bg: '#050505',
-                            surface: '#0F0F0F',
-                            panel: '#111111'
-                        },
-                        accent: {
-                            gold: '#FACC15',
-                            goldHover: '#EAB308',
-                        }
+                        dark: { bg: '#050505', surface: '#0F0F0F', panel: '#111111' },
+                        accent: { gold: '#FACC15', goldHover: '#EAB308' }
                     },
                     backgroundImage: {
                         'frost-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.01))',
@@ -45,21 +37,25 @@
                         '2xl': '40px',
                     },
                     animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'spin-slow': 'spin 10s linear infinite',
                         'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
                     }
                 }
             }
         }
     </script>
 
-    <link rel="stylesheet" href="css/style.css">
-
     <style>
-        /* --- ESTILOS ESPECÍFICOS DE UNIDADES.HTML --- */
+        body { background-color: #050505; color: #E5E7EB; overflow-x: hidden; }
         
-        /* APPLE GLASS (Base Global) */
+        /* APPLE GLASS (Estilo Global del Navbar) */
         .glass-apple {
             background: rgba(20, 20, 20, 0.7);
             backdrop-filter: blur(20px) saturate(180%);
@@ -68,7 +64,7 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
         }
 
-        /* HUD GLASS EFFECT (Específico para el modal de detalle) */
+        /* HUD GLASS EFFECT (Para el panel de detalle) */
         .hud-glass {
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(20px);
@@ -139,7 +135,13 @@
             color: white;
             border-bottom-color: var(--theme-color);
         }
-
+        
+        /* CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FACC15; }
+        
         /* LIQUID GLASS BUTTON */
         .btn-liquid-glass {
             background: rgba(255, 255, 255, 0.1);
@@ -155,18 +157,12 @@
             transform: scale(1.05);
         }
 
-        /* SCROLLBAR */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #FACC15; }
-
-        /* MODAL UTILS (Para el modal de contacto global) */
+        /* CONTACT MODAL UTILS */
         .modal-overlay-global { opacity: 0; visibility: hidden; transition: all 0.3s ease; }
         .modal-overlay-global.active { opacity: 1; visibility: visible; }
     </style>
 </head>
-<body class="bg-gray-50 text-slate-800 dark:bg-dark-bg dark:text-gray-200 antialiased selection:bg-accent-gold selection:text-black">
+<body class="antialiased selection:bg-accent-gold selection:text-black">
 
     <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg">
         <i class="fa-solid fa-moon dark:hidden"></i>
@@ -198,7 +194,7 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg bg-white text-black hover:bg-accent-gold transition-colors">
                         Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
                     </a>
                     <button class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
@@ -297,35 +293,12 @@
         </div>
     </div>
 
-    <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
-        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/5 backdrop-blur-[40px] modal-overlay-global"></div>
-        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-white/10">
-            <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[220]">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h4 class="text-2xl font-display font-bold mb-4 text-white">Contacto</h4>
-            <div id="contact-toolbar" class="flex gap-2 mb-2">
-                <button type="button" data-command="bold" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-bold"></i></button>
-                <button type="button" data-command="italic" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-italic"></i></button>
-                <button type="button" data-command="insertUnorderedList" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-list-ul"></i></button>
-            </div>
-            <form id="contact-form" class="space-y-4">
-                <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
-                <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
-                <div id="contact-message" contenteditable="true" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none h-40 overflow-auto"></div>
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
-                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
-                    <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-emerald-500 hover:text-black transition-colors"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
-                </div>
-            </form>
-            <p class="text-xs text-gray-500 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas.</p>
-        </div>
-    </div>
-
     <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5 relative z-10">
         <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
             <div class="lg:col-span-4">
-                <a href="#" class="inline-block mb-8"><img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8"></a>
+                <a href="#" class="inline-block mb-8">
+                    <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
+                </a>
                 <p class="text-gray-400 mb-8 max-w-sm">Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.</p>
                 <div class="flex gap-4">
                     <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
@@ -370,47 +343,36 @@
         </div>
     </footer>
 
+    <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
+        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/5 backdrop-blur-[40px] modal-overlay-global"></div>
+        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-white/10">
+            <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[220]">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h4 class="text-2xl font-display font-bold mb-4 text-white">Contacto</h4>
+            <div id="contact-toolbar" class="flex gap-2 mb-2">
+                <button type="button" data-command="bold" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-bold"></i></button>
+                <button type="button" data-command="italic" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-italic"></i></button>
+                <button type="button" data-command="insertUnorderedList" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-list-ul"></i></button>
+            </div>
+            <form id="contact-form" class="space-y-4">
+                <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
+                <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
+                <div id="contact-message" contenteditable="true" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none h-40 overflow-auto"></div>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
+                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                    <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-emerald-500 hover:text-black transition-colors"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                </div>
+            </form>
+            <p class="text-xs text-gray-500 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas. Luego elige el modo de contacto para abrir tu cliente de email o WhatsApp con el texto preparado.</p>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ once: true, duration: 800 });
 
-        // --- THEME TOGGLE LOGIC ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            if (htmlElement.classList.contains('dark')) {
-                localStorage.theme = 'dark';
-            } else {
-                localStorage.theme = 'light';
-            }
-        });
-
-        // --- CONTACT MODAL LOGIC ---
-        const contactModal = document.getElementById('contact-modal');
-        const closeContactBtn = document.getElementById('close-contact');
-        const contactOverlay = document.getElementById('contact-modal-overlay');
-
-        function openContactModal(e) {
-            if(e) e.preventDefault();
-            contactModal.classList.remove('hidden');
-        }
-
-        function closeContactModal() {
-            contactModal.classList.add('hidden');
-        }
-
-        if(closeContactBtn) closeContactBtn.addEventListener('click', closeContactModal);
-        if(contactOverlay) contactOverlay.addEventListener('click', closeContactModal);
-
-        // --- DATA SOURCE & HUD LOGIC ---
+        // --- DATA SOURCE: ACTUALIZADO CON IMÁGENES Y TEXTOS CORRECTOS ---
         const units = [
             {
                 id: 'mineria',
@@ -839,10 +801,10 @@
             contents.forEach((c, i) => {
                 if(i === index) {
                     c.classList.remove('hidden');
-                    c.classList.add('animate-float'); // Subtle animation on switch
+                    c.classList.add('animate-fade-in'); 
                 } else {
                     c.classList.add('hidden');
-                    c.classList.remove('animate-float');
+                    c.classList.remove('animate-fade-in');
                 }
             });
         }
@@ -853,7 +815,10 @@
         }
 
         document.addEventListener('keydown', (e) => {
-            if(e.key === 'Escape') closeHud();
+            if(e.key === 'Escape') {
+                closeHud();
+                closeContactModal();
+            }
         });
 
         // --- THEME TOGGLE LOGIC ---
@@ -875,41 +840,22 @@
             }
         });
 
-        // --- CONTACT MODAL LOGIC (Para el botón de la Navbar) ---
-        // Nota: En esta página no está el HTML del modal de contacto insertado.
-        // Si se requiere funcionalidad completa del botón "Contacto", deberíamos añadir el HTML del modal aquí también.
-        // Por ahora, redirigiremos al footer si no existe el modal, o añadiremos el modal si es necesario.
-        // Dado que pediste "perfecta integración", añadiré el modal oculto aquí para que el botón funcione.
+        // --- CONTACT MODAL LOGIC ---
+        const contactModal = document.getElementById('contact-modal');
+        const closeContactBtn = document.getElementById('close-contact');
+        const contactOverlay = document.getElementById('contact-modal-overlay');
 
         function openContactModal(e) {
             if(e) e.preventDefault();
-            const contactModal = document.getElementById('contact-modal');
-            if(contactModal) contactModal.classList.remove('hidden');
-            else window.location.href = '#contacto'; // Fallback
+            contactModal.classList.remove('hidden');
         }
 
         function closeContactModal() {
-            const contactModal = document.getElementById('contact-modal');
-            if(contactModal) contactModal.classList.add('hidden');
+            contactModal.classList.add('hidden');
         }
-        
+
+        if(closeContactBtn) closeContactBtn.addEventListener('click', closeContactModal);
+        if(contactOverlay) contactOverlay.addEventListener('click', closeContactModal);
     </script>
-
-    <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
-        <div class="absolute inset-0 bg-white/5 backdrop-blur-[40px] modal-overlay-global" onclick="closeContactModal()"></div>
-        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-white/10">
-            <button onclick="closeContactModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[220]">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h4 class="text-2xl font-display font-bold mb-4 text-white">Contacto</h4>
-            <form class="space-y-4">
-                <input type="text" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
-                <input type="email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
-                <textarea class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none h-32" placeholder="Mensaje"></textarea>
-                <button type="button" class="w-full py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold hover:text-black transition-colors">Enviar</button>
-            </form>
-        </div>
-    </div>
-
 </body>
 </html>
