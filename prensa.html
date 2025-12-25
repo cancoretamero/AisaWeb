@@ -5,18 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prensa & Medios | Aisa Group</title>
     
-    <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- ICONOS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- LIBRERÍAS DE ANIMACIÓN -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -36,7 +32,7 @@
                         accent: {
                             gold: '#FACC15',
                             goldHover: '#EAB308',
-                        }
+                        },
                     },
                     backgroundImage: {
                         'frost-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.01))',
@@ -179,48 +175,59 @@
 </head>
 <body class="antialiased selection:bg-accent-gold selection:text-black">
 
-    <!-- NAVBAR -->
-    <nav class="fixed top-4 left-0 right-0 z-50">
+    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg">
+        <i class="fa-solid fa-moon dark:hidden"></i>
+        <i class="fa-solid fa-sun hidden dark:block"></i>
+    </button>
+
+    <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
         <div class="max-w-[1400px] mx-auto px-2">
             <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-2xl">
-                <a href="index.html" class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-accent-gold rounded-full flex items-center justify-center shadow-lg text-black font-display font-bold text-xl">A</div>
-                    <div class="flex flex-col">
-                        <span class="font-display font-bold text-lg tracking-tight uppercase text-white leading-none">Aisa</span>
-                        <span class="text-[9px] uppercase tracking-widest text-gray-400">Press Room</span>
-                    </div>
-                </a>
-                <div class="hidden lg:flex items-center gap-1">
-                    <a href="#" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all">Inicio</a>
-                    <a href="#" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all">Nosotros</a>
-                    <a href="#" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-accent-gold">Prensa</a>
-                </div>
-                <div class="flex items-center gap-4">
-                    <a href="#contacto-prensa" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-[10px] font-bold uppercase tracking-widest hover:bg-accent-gold transition-colors">
-                        Contacto <i class="fa-solid fa-envelope"></i>
+                
+                <a href="index.html" class="flex items-center group">
+                        <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="h-8 w-auto" />
                     </a>
+
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inicio</a>
+                    <div class="relative group">
+                        <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 dark:hover:bg-white/10 transition-all">
+                            Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
+                        </a>
+                        <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all origin-top-left z-50 hidden group-hover:block">
+                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">El Equipo</a>
+                        </div>
+                    </div>
+                    <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Unidades</a>
+      
+                    <a href="sostenibilidad.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Sostenibilidad &amp; ESG</a>
+                    
+                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold">Prensa</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-accent-gold transition-colors text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                        Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
+                    </a>
+                    <button class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- HEADER: NEWS TICKER & HERO -->
     <header class="relative pt-32 pb-20 overflow-hidden">
         <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 bg-gradient-to-b from-accent-gold/5 via-transparent to-dark-bg"></div>
-            <!-- Abstract background -->
             <div class="w-full h-full opacity-20" style="background-image: radial-gradient(#333 1px, transparent 1px); background-size: 30px 30px;"></div>
         </div>
 
         <div class="max-w-[1600px] mx-auto px-6 relative z-10">
             
-            <!-- [UPDATED] Breaking News Ticker 2.0 -->
             <div class="mb-16 relative group max-w-5xl mx-auto" data-aos="fade-down">
-                <!-- Glow Effect behind -->
                 <div class="absolute -inset-0.5 bg-gradient-to-r from-red-600/0 via-red-500/30 to-red-600/0 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
                 
                 <div class="relative glass-apple rounded-full py-3 px-6 flex items-center gap-6 border border-white/10 shadow-[0_0_30px_-5px_rgba(0,0,0,0.5)] overflow-hidden">
-                    <!-- Live Indicator -->
                     <div class="flex items-center gap-3 shrink-0 border-r border-white/10 pr-6 pl-2">
                         <span class="relative flex h-3 w-3">
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
@@ -229,19 +236,16 @@
                         <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/90">Live Feed</span>
                     </div>
                     
-                    <!-- Scrolling Content -->
                     <div class="overflow-hidden whitespace-nowrap mask-linear-fade w-full">
                         <div class="inline-block animate-ticker text-xs font-medium text-gray-300 flex items-center gap-12">
                             <span class="flex items-center gap-2"><i class="fa-solid fa-bolt text-accent-gold"></i> Aisa Group adhiere al RIGI con una inversión histórica de USD 1.000M en San Juan.</span>
                             <span class="flex items-center gap-2"><i class="fa-solid fa-sun text-accent-gold"></i> Comienza la construcción del Parque Solar Calicanto (51 MW) en San Luis.</span>
                             <span class="flex items-center gap-2"><i class="fa-solid fa-globe text-accent-gold"></i> Aisa Group en el Argentina-UK Summit: "Inversión con propósito".</span>
                             <span class="flex items-center gap-2"><i class="fa-solid fa-fish text-accent-gold"></i> Adquisición estratégica de pesquera Cabo Vírgenes completada.</span>
-                            <!-- Duplicado para loop infinito suave -->
                             <span class="flex items-center gap-2"><i class="fa-solid fa-bolt text-accent-gold"></i> Aisa Group adhiere al RIGI con una inversión histórica de USD 1.000M en San Juan.</span>
                         </div>
                     </div>
 
-                    <!-- Operational Status -->
                     <div class="hidden md:flex items-center gap-3 shrink-0 border-l border-white/10 pl-6 text-[10px] text-gray-400 font-mono uppercase">
                         <span>Operaciones</span>
                         <span class="text-emerald-400 flex items-center gap-1.5 font-bold">
@@ -264,9 +268,7 @@
                 </p>
             </div>
 
-            <!-- Featured Story (Hero Card) -->
             <div class="relative group rounded-[2.5rem] overflow-hidden aspect-[21/9] cursor-pointer shadow-2xl border border-white/5" onclick="openModal('featured')" data-aos="zoom-in" data-aos-delay="200">
-                <!-- IMAGEN NUEVA: AERIAL MINING LANDSCAPE -->
                 <img src="https://images.unsplash.com/photo-1444136393836-70a14068c669?q=80&w=2641&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="San Juan Mining Landscape">
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
                 
@@ -284,11 +286,9 @@
         </div>
     </header>
 
-    <!-- NEWS GRID & FILTERS -->
     <section class="py-20 bg-dark-bg border-t border-white/5 relative">
         <div class="max-w-[1600px] mx-auto px-6">
             
-            <!-- Filters -->
             <div class="flex flex-wrap gap-4 mb-12 justify-center md:justify-start" data-aos="fade-up">
                 <button class="filter-btn active px-6 py-2 rounded-full border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all" data-filter="all">Todas</button>
                 <button class="filter-btn px-6 py-2 rounded-full border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-400" data-filter="mineria">Minería</button>
@@ -297,13 +297,10 @@
                 <button class="filter-btn px-6 py-2 rounded-full border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-400" data-filter="esg">ESG & Comunidad</button>
             </div>
 
-            <!-- Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="news-grid">
                 
-                <!-- Card 1: Energía (AMARILLO) -->
                 <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(250, 204, 21, 0.6);" data-category="energia" onclick="openModal(1)" data-aos="fade-up">
                     <div class="h-1/2 overflow-hidden">
-                        <!-- IMAGEN NUEVA: SOLAR FARM PROFESSIONAL -->
                         <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Solar">
                     </div>
                     <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
@@ -323,10 +320,8 @@
                     </div>
                 </article>
 
-                <!-- Card 2: Pesca (CIAN) -->
                 <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(34, 211, 238, 0.6);" data-category="corporate" onclick="openModal(2)" data-aos="fade-up" data-aos-delay="100">
                     <div class="h-1/2 overflow-hidden">
-                        <!-- IMAGEN NUEVA: INDUSTRIAL SHIP AT SEA -->
                         <img src="https://images.unsplash.com/photo-1534951009808-766178b47a4f?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Fishing Vessel">
                     </div>
                     <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
@@ -346,10 +341,8 @@
                     </div>
                 </article>
 
-                <!-- Card 3: ESG (VERDE) -->
                 <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(52, 211, 153, 0.6);" data-category="esg" onclick="openModal(3)" data-aos="fade-up" data-aos-delay="200">
                     <div class="h-1/2 overflow-hidden">
-                        <!-- IMAGEN NUEVA: MODERN INFRASTRUCTURE/COMMUNITY -->
                         <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Community Infrastructure">
                     </div>
                     <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
@@ -369,10 +362,8 @@
                     </div>
                 </article>
 
-                <!-- Card 4: Minería (AMARILLO) -->
                 <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(250, 204, 21, 0.6);" data-category="mineria" onclick="openModal(4)" data-aos="fade-up">
                     <div class="h-1/2 overflow-hidden">
-                        <!-- IMAGEN NUEVA: UNDERGROUND MINING PROFESSIONAL -->
                         <img src="https://images.unsplash.com/photo-1564992236692-63602c83ee19?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Underground Mine">
                     </div>
                     <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
@@ -392,10 +383,8 @@
                     </div>
                 </article>
 
-                <!-- Card 5: Corporativo (LILA) -->
                 <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(167, 139, 250, 0.6);" data-category="corporate" onclick="openModal(5)" data-aos="fade-up" data-aos-delay="100">
                     <div class="h-1/2 overflow-hidden">
-                        <!-- IMAGEN NUEVA: MODERN BUILDING EXTERIOR -->
                         <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Modern Office">
                     </div>
                     <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
@@ -415,10 +404,8 @@
                     </div>
                 </article>
 
-                 <!-- Card 6: Internacional (AZUL) -->
                  <article class="press-card rounded-[2rem] h-[450px] group cursor-pointer" style="--card-hover-color: rgba(96, 165, 250, 0.6);" data-category="corporate" onclick="openModal(6)" data-aos="fade-up" data-aos-delay="200">
                     <div class="h-1/2 overflow-hidden">
-                        <!-- IMAGEN NUEVA: LONDON CITY PROFESSIONAL -->
                         <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="London">
                     </div>
                     <div class="p-8 press-card-content flex flex-col justify-between h-1/2">
@@ -442,9 +429,7 @@
         </div>
     </section>
 
-    <!-- [NUEVA SECCIÓN] VOZ CIUDADANA / COMUNIDAD -->
     <section class="py-24 bg-[#0a0a0a] border-t border-white/5 relative overflow-hidden">
-        <!-- Fondo Abstracto -->
         <div class="absolute inset-0 pointer-events-none opacity-20">
             <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-gold/5 rounded-full blur-[120px]"></div>
             <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px]"></div>
@@ -463,7 +448,6 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 
-                <!-- Columna Izquierda: Formulario de Participación -->
                 <div class="lg:col-span-5" data-aos="fade-right">
                     <div class="glass-apple p-8 rounded-[2rem] border border-white/10 shadow-2xl">
                         <h3 class="text-xl font-display font-bold text-white mb-6">¿Qué tienes en mente?</h3>
@@ -502,7 +486,6 @@
                     </div>
                 </div>
 
-                <!-- Columna Derecha: Muro de la Comunidad (Scrolling Feed) -->
                 <div class="lg:col-span-7" data-aos="fade-left">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest">Lo que dice la gente</h3>
@@ -512,16 +495,12 @@
                         </div>
                     </div>
 
-                    <!-- Scroll Container with Mask -->
                     <div class="relative h-[500px] overflow-hidden rounded-[2rem] border border-white/5 bg-black/20">
-                        <!-- Top/Bottom Fade Masks -->
                         <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-[#0a0a0a] to-transparent z-10"></div>
                         <div class="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-[#0a0a0a] to-transparent z-10"></div>
 
-                        <!-- Scrolling Content Wrapper -->
                         <div class="absolute w-full animate-scroll-vertical p-6 space-y-4 hover:[animation-play-state:paused]">
                             
-                            <!-- Testimonio 1 -->
                             <div class="voice-card p-5 rounded-xl">
                                 <div class="flex justify-between items-start mb-2">
                                     <div class="flex items-center gap-3">
@@ -539,7 +518,6 @@
                                 </div>
                             </div>
 
-                            <!-- Testimonio 2 -->
                             <div class="voice-card p-5 rounded-xl">
                                 <div class="flex justify-between items-start mb-2">
                                     <div class="flex items-center gap-3">
@@ -557,7 +535,6 @@
                                 </div>
                             </div>
 
-                            <!-- Testimonio 3 -->
                             <div class="voice-card p-5 rounded-xl">
                                 <div class="flex justify-between items-start mb-2">
                                     <div class="flex items-center gap-3">
@@ -575,7 +552,6 @@
                                 </div>
                             </div>
 
-                             <!-- Testimonio 4 -->
                              <div class="voice-card p-5 rounded-xl">
                                 <div class="flex justify-between items-start mb-2">
                                     <div class="flex items-center gap-3">
@@ -593,7 +569,6 @@
                                 </div>
                             </div>
 
-                            <!-- Duplicate for Loop -->
                             <div class="voice-card p-5 rounded-xl">
                                 <div class="flex justify-between items-start mb-2">
                                     <div class="flex items-center gap-3">
@@ -619,7 +594,6 @@
         </div>
     </section>
 
-    <!-- PRESS KIT & ASSETS -->
     <section class="py-20 bg-[#080808] border-t border-white/5">
         <div class="max-w-[1400px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             
@@ -673,8 +647,7 @@
             </div>
 
             <div class="relative" data-aos="fade-left">
-                 <!-- Decorative elements -->
-                <div class="absolute -top-10 -right-10 w-64 h-64 bg-accent-gold/20 rounded-full blur-[80px] pointer-events-none"></div>
+                 <div class="absolute -top-10 -right-10 w-64 h-64 bg-accent-gold/20 rounded-full blur-[80px] pointer-events-none"></div>
                 
                 <div class="glass-apple p-10 rounded-[2.5rem] border border-white/10 text-center relative z-10" id="contacto-prensa">
                     <div class="w-16 h-16 bg-accent-gold rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-[0_0_20px_#FACC15]">
@@ -708,34 +681,101 @@
         </div>
     </section>
 
-    <!-- FOOTER SIMPLE -->
-    <footer class="bg-dark-bg text-white py-12 border-t border-white/5 text-center text-xs text-gray-500">
-        <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+    <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5">
+        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+            <div class="lg:col-span-4">
+                <a href="#" class="inline-block mb-8">
+                    <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
+                </a>
+                <p class="text-gray-400 mb-8 max-w-sm">
+                    Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+                </div>
+            </div>
+            <div class="lg:col-span-2">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Compañía</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-300">
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Carreras</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Sedes Globales</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-300">
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3">
+                <div class="glass-apple p-8 rounded-3xl">
+                    <h4 class="font-display font-bold text-xl mb-4">¿Hablamos?</h4>
+                    <p class="text-sm text-gray-400 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
+                    <a href="#" id="footer-contact-btn" onclick="openContactModal(event)" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
+                        Contactar
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-[1600px] mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest">
+            <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+            <div class="flex gap-8 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white">Política de Privacidad</a>
+                <a href="#" class="hover:text-white">Términos de Uso</a>
+            </div>
+        </div>
     </footer>
 
-    <!-- MODAL DE NOTICIA (Oculto por defecto) -->
     <div id="news-modal" class="fixed inset-0 z-[100] modal-overlay flex items-center justify-center p-4 hidden">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal()"></div>
         
         <div class="modal-content bg-[#111] w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[2rem] border border-white/10 relative shadow-2xl">
-            <!-- Close Button -->
             <button onclick="closeModal()" class="absolute top-6 right-6 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors z-20">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <!-- Dynamic Content Container -->
             <div id="modal-body">
-                <!-- Content will be injected via JS -->
-            </div>
+                </div>
         </div>
     </div>
 
-    <!-- SCRIPTS -->
+    <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
+        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/5 backdrop-blur-[40px]"></div>
+        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-white/10">
+            <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[220]">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h4 class="text-2xl font-display font-bold mb-4 text-white">Contacto</h4>
+            <div id="contact-toolbar" class="flex gap-2 mb-2">
+                <button type="button" data-command="bold" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-bold"></i></button>
+                <button type="button" data-command="italic" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-italic"></i></button>
+                <button type="button" data-command="insertUnorderedList" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-list-ul"></i></button>
+            </div>
+            <form id="contact-form" class="space-y-4">
+                <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
+                <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
+                <div id="contact-message" contenteditable="true" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none h-40 overflow-auto"></div>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
+                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                    <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-emerald-500 hover:text-black transition-colors"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                </div>
+            </form>
+            <p class="text-xs text-gray-500 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas. Luego elige el modo de contacto para abrir tu cliente de email o WhatsApp con el texto preparado.</p>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ once: true, duration: 800 });
 
-        // --- FILTER LOGIC ---
+        // --- FILTER LOGIC (Original de Prensa) ---
         const filterBtns = document.querySelectorAll('.filter-btn');
         const cards = document.querySelectorAll('.press-card');
 
@@ -764,7 +804,44 @@
             });
         });
 
-        // --- MOCK DATA FOR MODALS ---
+        // --- THEME TOGGLE LOGIC (Del Index) ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check local storage or system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+        });
+
+        // --- CONTACT MODAL LOGIC (Del Index - Adaptado) ---
+        const contactModal = document.getElementById('contact-modal');
+        const closeContactBtn = document.getElementById('close-contact');
+        const contactOverlay = document.getElementById('contact-modal-overlay');
+
+        function openContactModal(e) {
+            if(e) e.preventDefault();
+            contactModal.classList.remove('hidden');
+        }
+
+        function closeContactModal() {
+            contactModal.classList.add('hidden');
+        }
+
+        if(closeContactBtn) closeContactBtn.addEventListener('click', closeContactModal);
+        if(contactOverlay) contactOverlay.addEventListener('click', closeContactModal);
+
+        // --- MOCK DATA FOR NEWS MODALS (Original de Prensa) ---
         const newsData = {
             'featured': {
                 title: 'Aisa Group adhiere al RIGI con una inversión histórica de USD 1.000M en San Juan',
@@ -884,16 +961,16 @@
             }
         };
 
-        // --- MODAL FUNCTIONS ---
-        const modal = document.getElementById('news-modal');
-        const modalBody = document.getElementById('modal-body');
+        // --- NEWS MODAL FUNCTIONS (Original de Prensa) ---
+        const newsModal = document.getElementById('news-modal');
+        const newsModalBody = document.getElementById('modal-body');
 
         function openModal(id) {
             const data = newsData[id];
             if (!data) return;
 
             // Generate HTML with NEW Structure
-            modalBody.innerHTML = `
+            newsModalBody.innerHTML = `
                 <div class="h-64 md:h-96 w-full relative">
                     <img src="${data.image}" class="w-full h-full object-cover" alt="${data.title}">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#111] to-transparent"></div>
@@ -904,7 +981,6 @@
                 
                 <div class="p-8 md:p-12 relative">
                     
-                    <!-- Header Info -->
                     <div class="flex flex-wrap justify-between items-start mb-8 gap-4 border-b border-white/10 pb-6">
                         <div class="w-full md:w-3/4">
                             <h1 class="font-display text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">${data.title}</h1>
@@ -921,23 +997,20 @@
                         </a>
                     </div>
 
-                    <!-- Summary Box -->
                     <div class="bg-white/5 border-l-4 border-accent-gold p-6 rounded-r-xl mb-10">
                         <p class="italic text-gray-200 text-lg font-medium leading-relaxed">"${data.summary}"</p>
                     </div>
 
-                    <!-- Main Content (Scrollable) -->
                     <div class="prose prose-invert prose-lg max-w-none text-gray-300 leading-relaxed space-y-6">
                         ${data.content}
                     </div>
 
-                    <!-- Footer Share -->
                     <div class="mt-16 pt-8 border-t border-white/10">
                         <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Compartir este artículo</h4>
                         <div class="flex flex-wrap gap-3">
                             <button class="w-10 h-10 rounded-full bg-[#25D366]/20 text-[#25D366] hover:bg-[#25D366] hover:text-white flex items-center justify-center transition-all text-lg"><i class="fa-brands fa-whatsapp"></i></button>
                             <button class="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-black hover:text-white hover:border hover:border-white/20 flex items-center justify-center transition-all text-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="currentColor"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="currentColor"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
                             </button>
                             <button class="w-10 h-10 rounded-full bg-[#0077b5]/20 text-[#0077b5] hover:bg-[#0077b5] hover:text-white flex items-center justify-center transition-all text-lg"><i class="fa-brands fa-linkedin-in"></i></button>
                             <button class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 p-[1px] group hover:scale-110 transition-transform"><div class="w-full h-full bg-black rounded-full flex items-center justify-center group-hover:bg-transparent transition-colors"><i class="fa-brands fa-instagram text-white"></i></div></button>
@@ -948,18 +1021,18 @@
             `;
 
             // Show Modal
-            modal.classList.remove('hidden'); 
+            newsModal.classList.remove('hidden'); 
             setTimeout(() => {
-                modal.classList.add('active');
+                newsModal.classList.add('active');
             }, 10);
             document.body.style.overflow = 'hidden'; 
         }
 
         function closeModal() {
-            modal.classList.remove('active');
+            newsModal.classList.remove('active');
             setTimeout(() => {
-                modal.classList.add('hidden'); 
-                modalBody.innerHTML = '';
+                newsModal.classList.add('hidden'); 
+                newsModalBody.innerHTML = '';
             }, 300);
             document.body.style.overflow = 'auto';
         }
@@ -968,6 +1041,7 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === "Escape") {
                 closeModal();
+                closeContactModal();
             }
         });
     </script>
