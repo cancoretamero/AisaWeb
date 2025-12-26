@@ -199,11 +199,7 @@
                         <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 transition-all text-accent-gold">
                             Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
                         </a>
-                        <div class="mt-2 flex flex-col gap-2 lg:hidden">
-                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">Quienes Somos</a>
-                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">El Equipo</a>
-                        </div>
-                        <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 lg:group-hover:opacity-100 lg:group-hover:scale-100 transition-all origin-top-left z-50 hidden lg:block lg:group-hover:block">
+                        <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all origin-top-left z-50 hidden group-hover:block">
                             <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">Quienes Somos</a>
                             <a href="equipo.html" class="block px-4 py-2 text-[11px] text-accent-gold uppercase tracking-widest hover:text-white transition-colors bg-white/5">El Equipo</a>
                         </div>
@@ -281,7 +277,7 @@
                         <button class="filter-btn px-6 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider text-gray-400 hover:text-white hover:bg-white/5 flex items-center gap-2">
                             Empresa <i class="fa-solid fa-chevron-down text-[8px]"></i>
                         </button>
-                        <div class="absolute top-full left-0 mt-2 w-48 bg-[#111] border border-white/10 rounded-xl overflow-hidden hidden lg:block lg:group-hover:block shadow-2xl">
+                        <div class="absolute top-full left-0 mt-2 w-48 bg-[#111] border border-white/10 rounded-xl overflow-hidden hidden group-hover:block shadow-2xl">
                             <a href="#" onclick="filterTeam('aisa', this)" class="block px-4 py-3 text-xs text-gray-400 hover:bg-white/5 hover:text-accent-orange transition-colors border-b border-white/5">Aisa Group</a>
                             <a href="#" onclick="filterTeam('masa', this)" class="block px-4 py-3 text-xs text-gray-400 hover:bg-white/5 hover:text-accent-orange transition-colors border-b border-white/5">Minas Argentinas</a>
                             <a href="#" onclick="filterTeam('energy', this)" class="block px-4 py-3 text-xs text-gray-400 hover:bg-white/5 hover:text-accent-orange transition-colors border-b border-white/5">Aisa Energy</a>
@@ -570,7 +566,7 @@
                         <span class="text-accent-orange text-[10px] font-bold uppercase tracking-widest mb-1 block">${getCompanyName(member.company)}</span>
                         <h3 class="text-2xl font-bold text-white mb-1 font-display">${member.name}</h3>
                         <p class="text-sm text-gray-400 mb-4">${member.role}</p>
-                        <div class="flex items-center gap-3 opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                        <div class="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
                             <span class="text-[10px] text-white underline decoration-accent-orange underline-offset-4">Ver Perfil Completo</span>
                             <i class="fa-solid fa-arrow-right text-accent-orange text-xs"></i>
                         </div>
@@ -714,32 +710,7 @@
                 const toggleBtn = document.getElementById('nav-toggle');
                 const navMenu = document.getElementById('nav-menu');
 
-                const resetMenuForDesktop = () => {
-                    if (window.innerWidth >= 1024 && navMenu) {
-                        navMenu.classList.add('hidden');
-                        navMenu.classList.remove(
-                            'flex',
-                            'flex-col',
-                            'items-center',
-                            'text-center',
-                            'absolute',
-                            'top-full',
-                            'left-0',
-                            'w-full',
-                            'p-6',
-                            'gap-6',
-                            'glass-apple',
-                            'rounded-3xl',
-                            'backdrop-blur-lg',
-                            'z-50'
-                        );
-                    }
-                };
-
                 if (!toggleBtn || !navMenu) return;
-
-                resetMenuForDesktop();
-                window.addEventListener('resize', resetMenuForDesktop);
 
                 toggleBtn.addEventListener('click', () => {
                     const isHidden = navMenu.classList.contains('hidden');
@@ -749,8 +720,6 @@
                         navMenu.classList.add(
                             'flex',
                             'flex-col',
-                            'items-center',
-                            'text-center',
                             'absolute',
                             'top-full',
                             'left-0',
@@ -758,7 +727,6 @@
                             'p-6',
                             'gap-6',
                             'glass-apple',
-                            'rounded-3xl',
                             'backdrop-blur-lg',
                             'z-50'
                         );
@@ -767,8 +735,6 @@
                         navMenu.classList.remove(
                             'flex',
                             'flex-col',
-                            'items-center',
-                            'text-center',
                             'absolute',
                             'top-full',
                             'left-0',
@@ -776,7 +742,6 @@
                             'p-6',
                             'gap-6',
                             'glass-apple',
-                            'rounded-3xl',
                             'backdrop-blur-lg',
                             'z-50'
                         );

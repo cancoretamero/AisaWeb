@@ -194,11 +194,7 @@
                         <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 dark:hover:bg-white/10 transition-all">
                             Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
                         </a>
-                        <div class="mt-2 flex flex-col gap-2 lg:hidden">
-                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">Quienes Somos</a>
-                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">El Equipo</a>
-                        </div>
-                        <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 lg:group-hover:opacity-100 lg:group-hover:scale-100 transition-all origin-top-left z-50 hidden lg:block lg:group-hover:block">
+                        <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all origin-top-left z-50 hidden group-hover:block">
                             <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">Quienes Somos</a>
                             <a href="equipo.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">El Equipo</a>
                         </div>
@@ -1056,42 +1052,16 @@
                 const toggleBtn = document.getElementById('nav-toggle');
                 const navMenu = document.getElementById('nav-menu');
 
-              
-          
-                const resetMenuForDesktop = () => {
-                    if (window.innerWidth >= 1024 && navMenu) {
-                        navMenu.classList.add('hidden');
-                        navMenu.classList.remove(
-                            'flex',
-                            'flex-col',
-                            'items-center',
-                            'text-center',
-                            'absolute',
-                            'top-full',
-                            'left-0',
-                            'w-full',
-                            'p-6',
-                            'gap-6',
-                            'glass-apple',
-                            'rounded-3xl',
-                            'backdrop-blur-lg',
-                            'z-50'
-                        );
-                    }
-                };
-
-                if (!toggleBtn || !navMenu) return;
-
-                resetMenuForDesktop();
-                window.addEventListener('resize', resetMenuForDesktop);
-
-
                 if (!toggleBtn || !navMenu) return;
 
                 toggleBtn.addEventListener('click', () => {
                     const isHidden = navMenu.classList.contains('hidden');
-'items-center',
-                            'text-center',
+
+                    if (isHidden) {
+                        navMenu.classList.remove('hidden');
+                        navMenu.classList.add(
+                            'flex',
+                            'flex-col',
                             'absolute',
                             'top-full',
                             'left-0',
@@ -1099,7 +1069,21 @@
                             'p-6',
                             'gap-6',
                             'glass-apple',
-                            'rounded-3xl',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    } else {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove(
+                            'flex',
+                            'flex-col',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
                             'backdrop-blur-lg',
                             'z-50'
                         );
