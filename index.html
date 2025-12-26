@@ -1538,53 +1538,60 @@
 
         if(closeContactBtn) closeContactBtn.addEventListener('click', closeContactModal);
         if(contactOverlay) contactOverlay.addEventListener('click', closeContactModal);
-        
-        // --- MOBILE MENU LOGIC ---
-        document.addEventListener('DOMContentLoaded', function () {
-          const toggleBtn = document.getElementById('nav-toggle');
-          const navMenu = document.getElementById('nav-menu');
+</script>
+    <script>
+        // MOBILE MENU INIT
+        (function () {
+            function initMobileMenu() {
+                const toggleBtn = document.getElementById('nav-toggle');
+                const navMenu = document.getElementById('nav-menu');
 
-          if (toggleBtn && navMenu) {
-            toggleBtn.addEventListener('click', () => {
-              // Añade / quita clases para mostrar/ocultar el menú en móviles
-              const isHidden = navMenu.classList.contains('hidden');
+                if (!toggleBtn || !navMenu) return;
 
-              if (isHidden) {
-                // Mostrar menú: overlay con estética glass-apple
-                navMenu.classList.remove('hidden');
-                navMenu.classList.add(
-                  'flex',       // Para que los hijos se dispongan en columna
-                  'flex-col',
-                  'absolute',
-                  'top-full',  // Sitúa el menú justo debajo del nav
-                  'left-0',
-                  'w-full',
-                  'p-6',
-                  'gap-6',
-                  'glass-apple', // Aporta el fondo translúcido de tu diseño
-                  'backdrop-blur-lg',
-                  'z-50'
-                );
-              } else {
-                // Ocultar menú
-                navMenu.classList.add('hidden');
-                navMenu.classList.remove(
-                  'flex',
-                  'flex-col',
-                  'absolute',
-                  'top-full',
-                  'left-0',
-                  'w-full',
-                  'p-6',
-                  'gap-6',
-                  'glass-apple',
-                  'backdrop-blur-lg',
-                  'z-50'
-                );
-              }
-            });
-          }
-        });
+                toggleBtn.addEventListener('click', () => {
+                    const isHidden = navMenu.classList.contains('hidden');
+
+                    if (isHidden) {
+                        navMenu.classList.remove('hidden');
+                        navMenu.classList.add(
+                            'flex',
+                            'flex-col',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    } else {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove(
+                            'flex',
+                            'flex-col',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenu);
+            } else {
+                initMobileMenu();
+            }
+        })();
     </script>
+
 </body>
 </html>

@@ -176,7 +176,7 @@
                     <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="h-8 w-auto" />
                 </a>
                 
-                <div class="hidden lg:flex items-center gap-1">
+                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none">
                     <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inicio</a>
                     <div class="relative group">
                         <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 dark:hover:bg-white/10 transition-all">
@@ -197,7 +197,7 @@
                     <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg bg-white text-black hover:bg-accent-gold transition-colors">
                         Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
                     </a>
-                    <button class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
+                    <button id="nav-toggle" class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
                 </div>
             </div>
         </div>
@@ -856,6 +856,60 @@
 
         if(closeContactBtn) closeContactBtn.addEventListener('click', closeContactModal);
         if(contactOverlay) contactOverlay.addEventListener('click', closeContactModal);
+</script>
+    <script>
+        // MOBILE MENU INIT
+        (function () {
+            function initMobileMenu() {
+                const toggleBtn = document.getElementById('nav-toggle');
+                const navMenu = document.getElementById('nav-menu');
+
+                if (!toggleBtn || !navMenu) return;
+
+                toggleBtn.addEventListener('click', () => {
+                    const isHidden = navMenu.classList.contains('hidden');
+
+                    if (isHidden) {
+                        navMenu.classList.remove('hidden');
+                        navMenu.classList.add(
+                            'flex',
+                            'flex-col',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    } else {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove(
+                            'flex',
+                            'flex-col',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenu);
+            } else {
+                initMobileMenu();
+            }
+        })();
     </script>
+
 </body>
 </html>
