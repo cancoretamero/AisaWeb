@@ -1152,7 +1152,32 @@
                 const toggleBtn = document.getElementById('nav-toggle');
                 const navMenu = document.getElementById('nav-menu');
 
+                const resetMenuForDesktop = () => {
+                    if (window.innerWidth >= 1024 && navMenu) {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove(
+                            'flex',
+                            'flex-col',
+                            'items-center',
+                            'text-center',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'rounded-3xl',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    }
+                };
+
                 if (!toggleBtn || !navMenu) return;
+
+                resetMenuForDesktop();
+                window.addEventListener('resize', resetMenuForDesktop);
 
                 toggleBtn.addEventListener('click', () => {
                     const isHidden = navMenu.classList.contains('hidden');
