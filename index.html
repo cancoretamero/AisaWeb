@@ -349,48 +349,6 @@
                         <h4 class="font-display font-bold text-white text-lg mb-2">Gualcamayo</h4>
                         <p class="text-xs text-gray-400">Mina de Oro y Carbonatos</p>
                     </div>
-                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #06B6D4;">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#06B6D4]/40 transition-colors">03</span>
-                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#06B6D4] group-hover:text-black transition-colors shadow-lg">
-                                <i class="fa-solid fa-fish-fins"></i>
-                            </div>
-                        </div>
-                        <h4 class="font-display font-bold text-white text-lg mb-2">Cabo Vírgenes</h4>
-                        <p class="text-xs text-gray-400">Pesca y Exportación (Chubut)</p>
-                    </div>
-                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #F43F5E;">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#F43F5E]/40 transition-colors">04</span>
-                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#F43F5E] group-hover:text-black transition-colors shadow-lg">
-                                <i class="fa-solid fa-bolt"></i>
-                            </div>
-                        </div>
-                        <h4 class="font-display font-bold text-white text-lg mb-2">Aisa Energy</h4>
-                        <p class="text-xs text-gray-400">Generación Renovable</p>
-                    </div>
-
-                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #FBBF24;">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#FBBF24]/40 transition-colors">05</span>
-                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#FBBF24] group-hover:text-black transition-colors shadow-lg">
-                                <i class="fa-solid fa-solar-panel"></i>
-                            </div>
-                        </div>
-                        <h4 class="font-display font-bold text-white text-lg mb-2">Calicanto Solar</h4>
-                        <p class="text-xs text-gray-400">Parque Fotovoltaico San Luis</p>
-                    </div>
-
-                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #8B5CF6;">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#8B5CF6]/40 transition-colors">06</span>
-                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#8B5CF6] group-hover:text-black transition-colors shadow-lg">
-                                <i class="fa-solid fa-city"></i>
-                            </div>
-                        </div>
-                        <h4 class="font-display font-bold text-white text-lg mb-2">Aisa Real Estate</h4>
-                        <p class="text-xs text-gray-400">Desarrollos Inmobiliarios</p>
-                    </div>
                 </div>
             </div>
 
@@ -1699,50 +1657,52 @@
         if(closeContactBtn) closeContactBtn.addEventListener('click', closeContactModal);
         if(contactOverlay) contactOverlay.addEventListener('click', closeContactModal);
         
-        // --- MOBILE MENU LOGIC ---
-        const toggleBtn = document.getElementById('nav-toggle');
-        const navMenu = document.getElementById('nav-menu');
+        // ----- Mobile menu toggle -----
+        document.addEventListener('DOMContentLoaded', function () {
+          const toggleBtn = document.getElementById('nav-toggle');
+          const navMenu = document.getElementById('nav-menu');
 
-        if (toggleBtn && navMenu) {
+          if (toggleBtn && navMenu) {
             toggleBtn.addEventListener('click', () => {
-            // Añade / quita clases para mostrar/ocultar el menú en móviles
-            const isHidden = navMenu.classList.contains('hidden');
+              // Añade / quita clases para mostrar/ocultar el menú en móviles
+              const isHidden = navMenu.classList.contains('hidden');
 
-            if (isHidden) {
+              if (isHidden) {
                 // Mostrar menú: overlay con estética glass-apple
                 navMenu.classList.remove('hidden');
                 navMenu.classList.add(
-                'flex',       // Para que los hijos se dispongan en columna
-                'flex-col',
-                'absolute',
-                'top-full',  // Sitúa el menú justo debajo del nav
-                'left-0',
-                'w-full',
-                'p-6',
-                'gap-6',
-                'glass-apple', // Aporta el fondo translúcido de tu diseño
-                'backdrop-blur-lg',
-                'z-50'
+                  'flex',       // Para que los hijos se dispongan en columna
+                  'flex-col',
+                  'absolute',
+                  'top-full',  // Sitúa el menú justo debajo del nav
+                  'left-0',
+                  'w-full',
+                  'p-6',
+                  'gap-6',
+                  'glass-apple', // Aporta el fondo translúcido de tu diseño
+                  'backdrop-blur-lg',
+                  'z-50'
                 );
-            } else {
+              } else {
                 // Ocultar menú
                 navMenu.classList.add('hidden');
                 navMenu.classList.remove(
-                'flex',
-                'flex-col',
-                'absolute',
-                'top-full',
-                'left-0',
-                'w-full',
-                'p-6',
-                'gap-6',
-                'glass-apple',
-                'backdrop-blur-lg',
-                'z-50'
+                  'flex',
+                  'flex-col',
+                  'absolute',
+                  'top-full',
+                  'left-0',
+                  'w-full',
+                  'p-6',
+                  'gap-6',
+                  'glass-apple',
+                  'backdrop-blur-lg',
+                  'z-50'
                 );
-            }
+              }
             });
-        }
+          }
+        });
     </script>
 </body>
 </html>
