@@ -15,6 +15,11 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        // Configuración de Tailwind extendida. Aquí se definen fuentes,
+        // colores personalizados, fondos y animaciones. Estos valores son
+        // consumidos por el archivo CSS y no deben duplicarse allí. Si
+        // deseas modificar temas o tonos personalizados, hazlo aquí para
+        // mantener una sola fuente de verdad.  
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -349,6 +354,48 @@
                         <h4 class="font-display font-bold text-white text-lg mb-2">Gualcamayo</h4>
                         <p class="text-xs text-gray-400">Mina de Oro y Carbonatos</p>
                     </div>
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #06B6D4;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#06B6D4]/40 transition-colors">03</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#06B6D4] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-fish-fins"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Cabo Vírgenes</h4>
+                        <p class="text-xs text-gray-400">Pesca y Exportación (Chubut)</p>
+                    </div>
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #F43F5E;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#F43F5E]/40 transition-colors">04</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#F43F5E] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Aisa Energy</h4>
+                        <p class="text-xs text-gray-400">Generación Renovable</p>
+                    </div>
+
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #FBBF24;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#FBBF24]/40 transition-colors">05</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#FBBF24] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-solar-panel"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Calicanto Solar</h4>
+                        <p class="text-xs text-gray-400">Parque Fotovoltaico San Luis</p>
+                    </div>
+
+                    <div class="circuit-card p-8 rounded-[2rem] group cursor-pointer" style="--glow-color: #8B5CF6;">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-white/10 group-hover:text-[#8B5CF6]/40 transition-colors">06</span>
+                            <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl text-white group-hover:bg-[#8B5CF6] group-hover:text-black transition-colors shadow-lg">
+                                <i class="fa-solid fa-city"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-white text-lg mb-2">Aisa Real Estate</h4>
+                        <p class="text-xs text-gray-400">Desarrollos Inmobiliarios</p>
+                    </div>
                 </div>
             </div>
 
@@ -455,7 +502,7 @@
         <div class="scroll-container flex gap-6 px-6 pb-12 snap-x">
             
             <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[500px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center">
-                <img src="https://images.unsplash.com/photo-1643832199429-47848e22ae31?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Gold Mine">
+                <img src="https://images.unsplash.com/photo-1643832199429-47848e22ae31?q=80&w=870&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Gold Mine">
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-8">
                     <div class="w-12 h-12 bg-accent-gold text-black rounded-full flex items-center justify-center text-xl mb-4">
@@ -471,7 +518,7 @@
             </div>
 
             <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[500px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center">
-                <img src="https://plus.unsplash.com/premium_photo-1682148795124-dac95dd91fd4?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Oil Rig">
+                <img src="https://plus.unsplash.com/premium_photo-1682148795124-dac95dd91fd4?q=80&w=687&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Oil Rig">
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-8">
                     <div class="w-12 h-12 bg-white/20 backdrop-blur text-white rounded-full flex items-center justify-center text-xl mb-4">
@@ -1155,171 +1202,6 @@
         </div>
     </section>
 
-    <section id="actualidad" class="py-32 bg-[#050505] relative border-t border-white/5">
-        <div class="max-w-[1600px] mx-auto px-6 relative z-10">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-4 block">Actualidad Corporativa</span>
-                <h2 class="font-display text-5xl md:text-6xl font-bold text-white">Actualidad Corporativa</h2>
-            </div>
-            <div class="scroll-container flex gap-6 px-6 pb-12 snap-x">
-                <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[600px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center" onclick="openNewsModal('esg_panorama')">
-                    <img src="https://images.unsplash.com/photo-1494386346843-e12284507169?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Donación Histórica">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-black mb-3" style="background-color: #10B981;">
-                            <i class="fa-solid fa-hand-holding-dollar"></i>
-                        </div>
-                        <span class="text-accent-gold text-xs font-bold uppercase tracking-widest block mb-1">Panorama Minero</span>
-                        <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-1">Donación histórica: Aisa Group destinará más de US$500 millones</h3>
-                        <p class="text-sm text-gray-400 italic mb-2">Inversión solar y fundación solidaria</p>
-                        <p class="text-xs text-gray-300 leading-relaxed">Juan José Retamero anunció que el 100% de los fondos recuperados se invertirá en parques fotovoltaicos y sus retornos se donarán a proyectos sociales.</p>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Por Redacción Panorama Minero</p>
-                    </div>
-                </div>
-                <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[600px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center" onclick="openNewsModal('esg_infobae')">
-                    <img src="https://images.unsplash.com/photo-1541976844346-f18aeac57b06?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Canalización de fondos">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-black mb-3" style="background-color: #3B82F6;">
-                            <i class="fa-solid fa-handshake-simple"></i>
-                        </div>
-                        <span class="text-accent-gold text-xs font-bold uppercase tracking-widest block mb-1">Infobae</span>
-                        <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-1">Aisa Group canalizará USD 500 millones a obras públicas</h3>
-                        <p class="text-sm text-gray-400 italic mb-2">Fondo social a partir de capital recuperado</p>
-                        <p class="text-xs text-gray-300 leading-relaxed">La compañía planea canalizar más de USD 500 millones en obras públicas, invirtiendo el 100% de los fondos recuperados en parques fotovoltaicos.</p>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Por Redacción Infobae</p>
-                    </div>
-                </div>
-                <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[600px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center" onclick="openNewsModal('esg_mineria')">
-                    <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?q=80&w=685&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Compromiso social">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-black mb-3" style="background-color: #8B5CF6;">
-                            <i class="fa-solid fa-people-group"></i>
-                        </div>
-                        <span class="text-accent-gold text-xs font-bold uppercase tracking-widest block mb-1">Minería &amp; Desarrollo</span>
-                        <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-1">Donará u$s500 millones a obras de bien público</h3>
-                        <p class="text-sm text-gray-400 italic mb-2">Compromiso social sin precedentes</p>
-                        <p class="text-xs text-gray-300 leading-relaxed">El grupo destinará más de US$500 millones a obras públicas; los fondos recuperados se invertirán en parques solares.</p>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Por Redacción Minería &amp; Desarrollo</p>
-                    </div>
-                </div>
-                <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[600px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center" onclick="openNewsModal('esg_sanjuan')">
-                    <img src="https://images.unsplash.com/photo-1523650954327-a525a8fb55ad?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Reinversión progresiva">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-black mb-3" style="background-color: #EF4444;">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                        <span class="text-accent-gold text-xs font-bold uppercase tracking-widest block mb-1">San Juan Produce</span>
-                        <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-1">Aisa Group destinará más de 500 MUSD a obras sociales</h3>
-                        <p class="text-sm text-gray-400 italic mb-2">Modelo de reinversión progresivo</p>
-                        <p class="text-xs text-gray-300 leading-relaxed">El 100% de los fondos recuperados se invertirá en parques solares y su rendimiento se reinvertirá año tras año en obras de bien público.</p>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Por Redacción San Juan Produce</p>
-                    </div>
-                </div>
-                <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[600px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center" onclick="openNewsModal('summit')">
-                    <img src="https://plus.unsplash.com/premium_photo-1663011477759-11149e499542?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Cumbre Argentina-UK">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-black mb-3" style="background-color: #FACC15;">
-                            <i class="fa-solid fa-flag"></i>
-                        </div>
-                        <span class="text-accent-gold text-xs font-bold uppercase tracking-widest block mb-1">Editorial RN</span>
-                        <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-1">Aisa Group brilla en la cumbre Argentina–Reino Unido 2025</h3>
-                        <p class="text-sm text-gray-400 italic mb-2">Puente de inversiones responsables</p>
-                        <p class="text-xs text-gray-300 leading-relaxed">La compañía participó como sponsor estratégico en el Summit 2025, presentando su filosofía de inversiones responsables.</p>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Por Redacción Editorial RN</p>
-                    </div>
-                </div>
-                <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[600px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center" onclick="openNewsModal('fitch')">
-                    <img src="https://plus.unsplash.com/premium_photo-1672423156257-9a2bc5e1f480?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Calificación A+">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-black mb-3" style="background-color: #FBBF24;">
-                            <i class="fa-solid fa-medal"></i>
-                        </div>
-                        <span class="text-accent-gold text-xs font-bold uppercase tracking-widest block mb-1">MiningPress</span>
-                        <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-1">Fitch asigna A+ (arg) a Minas Argentinas</h3>
-                        <p class="text-sm text-gray-400 italic mb-2">Solidez financiera para el futuro</p>
-                        <p class="text-xs text-gray-300 leading-relaxed">FIX/Fitch valoró la robusta base patrimonial y márgenes EBITDA de Minas Argentinas, asegurando flujos positivos para financiar Carbonatos Profundos.</p>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Por Redacción MiningPress</p>
-                    </div>
-                </div>
-                <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[600px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center" onclick="openNewsModal('oficinas')">
-                    <img src="https://images.unsplash.com/photo-1579487785973-74d2ca7abdd5?q=80&w=2576&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Inauguración de oficinas">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-black mb-3" style="background-color: #64748B;">
-                            <i class="fa-solid fa-building"></i>
-                        </div>
-                        <span class="text-accent-gold text-xs font-bold uppercase tracking-widest block mb-1">Aisa News</span>
-                        <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-1">Minas Argentinas inaugura oficinas en San Juan</h3>
-                        <p class="text-sm text-gray-400 italic mb-2">Espacios modernos y sostenibles</p>
-                        <p class="text-xs text-gray-300 leading-relaxed">La operadora abrió oficinas en el histórico edificio Cinzano con espacios de coworking, paneles solares y áreas de innovación.</p>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Por Equipo Aisa News</p>
-                    </div>
-                </div>
-                <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[600px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center" onclick="openNewsModal('ambiental')">
-                    <img src="https://images.unsplash.com/photo-1723133371535-1412bc2e412e?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Aprobación Ambiental">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-black mb-3" style="background-color: #22C55E;">
-                            <i class="fa-solid fa-mountain"></i>
-                        </div>
-                        <span class="text-accent-gold text-xs font-bold uppercase tracking-widest block mb-1">Aisa News</span>
-                        <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-1">Aprobado informe ambiental para Gualcamayo</h3>
-                        <p class="text-sm text-gray-400 italic mb-2">Nueva era para Carbonatos Profundos</p>
-                        <p class="text-xs text-gray-300 leading-relaxed">El séptimo informe de impacto ambiental fue aprobado, abriendo la puerta al desarrollo de Carbonatos Profundos.</p>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Por Equipo Aisa News</p>
-                    </div>
-                </div>
-                <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[600px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center" onclick="openNewsModal('solar')">
-                    <img src="https://images.unsplash.com/photo-1724041875334-0a6397111c7e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Parque Solar">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-black mb-3" style="background-color: #FACC15;">
-                            <i class="fa-solid fa-solar-panel"></i>
-                        </div>
-                        <span class="text-accent-gold text-xs font-bold uppercase tracking-widest block mb-1">Aisa News</span>
-                        <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-1">Parque Solar Calicanto genera 51 MW en San Luis</h3>
-                        <p class="text-sm text-gray-400 italic mb-2">Energía limpia para el futuro</p>
-                        <p class="text-xs text-gray-300 leading-relaxed">Con una capacidad de 51 MW y una generación anual de 110 GWh, Calicanto forma parte del plan de 1,6 mil millones de dólares.</p>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Por Equipo Aisa News</p>
-                    </div>
-                </div>
-                <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[600px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center" onclick="openNewsModal('pesca')">
-                    <img src="https://images.unsplash.com/photo-1728226204573-8b7d382d0199?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Adquisición Cabo Vírgenes">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-black mb-3" style="background-color: #0EA5E9;">
-                            <i class="fa-solid fa-ship"></i>
-                        </div>
-                        <span class="text-accent-gold text-xs font-bold uppercase tracking-widest block mb-1">Aisa News</span>
-                        <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-1">Aisa Group adquiere Cabo Vírgenes S.A.</h3>
-                        <p class="text-sm text-gray-400 italic mb-2">Diversificación y empleo</p>
-                        <p class="text-xs text-gray-300 leading-relaxed">La compra de la flota pesquera y las plantas de procesamiento de Cabo Vírgenes consolida la diversificación productiva de Aisa Group.</p>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Por Equipo Aisa News</p>
-                    </div>
-                </div>
-                <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[600px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center" onclick="openNewsModal('rigi')">
-                    <img src="https://images.unsplash.com/photo-1607778413290-6bc9b4cf30f1?q=80&w=872&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Plan RIGI">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-black mb-3" style="background-color: #F97316;">
-                            <i class="fa-solid fa-industry"></i>
-                        </div>
-                        <span class="text-accent-gold text-xs font-bold uppercase tracking-widest block mb-1">Aisa News</span>
-                        <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-1">Plan RIGI: Aisa invertirá U$S 1.000 M en minería y energía</h3>
-                        <p class="text-sm text-gray-400 italic mb-2">Visión de crecimiento integral</p>
-                        <p class="text-xs text-gray-300 leading-relaxed">El grupo destinará 1 000 millones de dólares a desarrollar Carbonatos Profundos, nuevos parques solares y una planta de cal industrial.</p>
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Por Equipo Aisa News</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5">
         <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
             <div class="lg:col-span-4">
@@ -1418,7 +1300,7 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div id="modal-body">
-                </div>
+            </div>
         </div>
     </div>
 
@@ -1657,7 +1539,7 @@
         if(closeContactBtn) closeContactBtn.addEventListener('click', closeContactModal);
         if(contactOverlay) contactOverlay.addEventListener('click', closeContactModal);
         
-        // ----- Mobile menu toggle -----
+        // --- MOBILE MENU LOGIC ---
         document.addEventListener('DOMContentLoaded', function () {
           const toggleBtn = document.getElementById('nav-toggle');
           const navMenu = document.getElementById('nav-menu');
