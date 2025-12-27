@@ -821,12 +821,11 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5">
+    </section>    <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5">
         <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
             <div class="lg:col-span-4">
                 <a href="#" class="inline-block mb-8">
+                    <!-- Logo image replacing text in footer -->
                     <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
                 </a>
                 <p class="text-gray-400 mb-8 max-w-sm">
@@ -843,7 +842,7 @@
                 <ul class="space-y-4 text-sm font-medium text-gray-300">
                     <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
                     <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Carreras</a></li>
+                    <li><a href="carreras.html" class="hover:text-accent-gold transition-colors">Carreras</a></li>
                     <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
                 </ul>
             </div>
@@ -860,7 +859,8 @@
                 <div class="glass-apple p-8 rounded-3xl">
                     <h4 class="font-display font-bold text-xl mb-4">¿Hablamos?</h4>
                     <p class="text-sm text-gray-400 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
-                    <a href="#" id="footer-contact-btn" onclick="openContactModal(event)" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
+                    <!-- Updated footer contact button: trigger the contact modal instead of direct mailto -->
+                    <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
                         Contactar
                     </a>
                 </div>
