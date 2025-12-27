@@ -34,8 +34,8 @@
                             surface: '#0F0F0F',
                         },
                         accent: {
-                            gold: '#FACC15',
-                            goldHover: '#EAB308',
+                            gold: '#3B82F6',
+                            goldHover: '#2563EB',
                         },
                     },
                     backgroundImage: {
@@ -107,7 +107,7 @@
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #FACC15;
+            background: #3B82F6;
         }
     </style>
 </head>
@@ -160,7 +160,7 @@
             <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-gold/10 rounded-full blur-[150px] animate-pulse-slow"></div>
         </div>
         <div class="max-w-[1400px] mx-auto px-6 relative z-20 w-full text-center">
-            <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-accent-gold/30 bg-accent-gold/5 backdrop-blur-md mb-10 animate-float shadow-[0_0_20px_rgba(250,204,21,0.2)]">
+            <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-accent-gold/30 bg-accent-gold/5 backdrop-blur-md mb-10 animate-float shadow-[0_0_20px_rgba(59,130,246,0.2)]">
                 <span class="w-2 h-2 rounded-full bg-accent-gold animate-ping"></span>
                 <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-accent-gold">Carreras en Aisa</span>
             </div>
@@ -249,7 +249,7 @@
                 <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-white/10 -translate-y-1/2 rounded-full"></div>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
                     <div class="text-center group" data-aos="fade-up" data-aos-delay="0">
-                        <div class="w-16 h-16 mx-auto bg-black border-2 border-accent-gold rounded-full flex items-center justify-center text-white text-xl font-bold mb-6 group-hover:bg-accent-gold group-hover:scale-110 transition-all duration-500 shadow-[0_0_20px_rgba(250,204,21,0.3)]">1</div>
+                        <div class="w-16 h-16 mx-auto bg-black border-2 border-accent-gold rounded-full flex items-center justify-center text-white text-xl font-bold mb-6 group-hover:bg-accent-gold group-hover:scale-110 transition-all duration-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]">1</div>
                         <h4 class="text-white font-bold mb-2">Aplicación</h4>
                         <p class="text-xs text-gray-500 px-4">Envía tu CV y cuéntanos tu historia a través de nuestro portal.</p>
                     </div>
@@ -264,7 +264,7 @@
                         <p class="text-xs text-gray-500 px-4">Evaluación técnica o entrevista con el equipo de liderazgo.</p>
                     </div>
                     <div class="text-center group" data-aos="fade-up" data-aos-delay="300">
-                        <div class="w-16 h-16 mx-auto bg-black border-2 border-accent-gold rounded-full flex items-center justify-center text-white text-xl font-bold mb-6 group-hover:bg-accent-gold group-hover:text-black group-hover:scale-110 transition-all duration-500 shadow-[0_0_20px_rgba(250,204,21,0.3)]">4</div>
+                        <div class="w-16 h-16 mx-auto bg-black border-2 border-accent-gold rounded-full flex items-center justify-center text-white text-xl font-bold mb-6 group-hover:bg-accent-gold group-hover:text-black group-hover:scale-110 transition-all duration-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]">4</div>
                         <h4 class="text-white font-bold mb-2">Oferta</h4>
                         <p class="text-xs text-gray-500 px-4">¡Bienvenido a bordo! Comienza tu onboarding.</p>
                     </div>
@@ -384,7 +384,7 @@
                     <p class="text-gray-400 max-w-xl mx-auto mb-10 text-lg">
                         Siempre estamos buscando talento excepcional. Déjanos tu CV y te contactaremos cuando surja una oportunidad que se ajuste a tu perfil.
                     </p>
-                    <button onclick="openApplyModal('Candidatura Espontánea', 'Aisa Group')" class="px-12 py-5 bg-white text-black rounded-full font-bold uppercase tracking-widest text-xs hover:bg-accent-gold hover:text-black transition-all shadow-[0_0_40px_rgba(250,204,21,0.3)] transform hover:-translate-y-1">
+                    <button onclick="openApplyModal('Candidatura Espontánea', 'Aisa Group')" class="px-12 py-5 bg-white text-black rounded-full font-bold uppercase tracking-widest text-xs hover:bg-accent-gold hover:text-black transition-all shadow-[0_0_40px_rgba(59,130,246,0.3)] transform hover:-translate-y-1">
                         Subir CV Espontáneo
                     </button>
                 </div>
@@ -426,7 +426,7 @@
                 </button>
             </div>
             <div class="flex gap-1 p-1 bg-black">
-                <div id="progress-1" class="h-1 flex-1 bg-accent-gold rounded-full transition-all shadow-[0_0_10px_#FACC15]"></div>
+                <div id="progress-1" class="h-1 flex-1 bg-accent-gold rounded-full transition-all shadow-[0_0_10px_#3B82F6]"></div>
                 <div id="progress-2" class="h-1 flex-1 bg-white/10 rounded-full transition-all"></div>
                 <div id="progress-3" class="h-1 flex-1 bg-white/10 rounded-full transition-all"></div>
             </div>
@@ -598,11 +598,11 @@
         particlesJS("particles-js", {
             "particles": {
                 "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#FACC15" },
+                "color": { "value": "#3B82F6" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.5, "random": true },
                 "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#FACC15", "opacity": 0.2, "width": 1 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#3B82F6", "opacity": 0.2, "width": 1 },
                 "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
             },
             "interactivity": {
@@ -685,10 +685,10 @@
                 const bar = document.getElementById(`progress-${n}`);
                 if(n <= stepNumber) {
                     bar.classList.remove('bg-white/10');
-                    bar.classList.add('bg-accent-gold', 'shadow-[0_0_10px_#FACC15]');
+                    bar.classList.add('bg-accent-gold', 'shadow-[0_0_10px_#3B82F6]');
                 } else {
                     bar.classList.add('bg-white/10');
-                    bar.classList.remove('bg-accent-gold', 'shadow-[0_0_10px_#FACC15]');
+                    bar.classList.remove('bg-accent-gold', 'shadow-[0_0_10px_#3B82F6]');
                 }
             });
         }
