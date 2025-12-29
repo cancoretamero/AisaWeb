@@ -1,0 +1,150 @@
+/* console/console.css */
+/* Liquid Command Center — AISA Console */
+
+:root { color-scheme: dark; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #000;
+  color: #E5E7EB;
+  overflow: hidden; /* important: console is full-screen app */
+}
+
+/* Fondo animado ambiente */
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* IMPORTANT: Without this, the orbs become huge squares (your screenshot) */
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: blob 20s infinite alternate;
+}
+
+/* Liquid glass */
+.glass-panel-pro {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle shine */
+.glass-panel-pro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.02), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+/* Inputs */
+.liquid-input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+.liquid-input:focus {
+  border-color: #FACC15;
+  background: rgba(0, 0, 0, 0.6);
+  outline: none;
+  box-shadow: 0 0 15px rgba(250, 204, 21, 0.15), inset 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* Canvas grid */
+.canvas-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  box-shadow: inset 0 0 150px rgba(0,0,0,0.8);
+}
+
+/* Editable block */
+.editable-block {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid transparent;
+  border-radius: 12px;
+}
+.editable-block:hover {
+  transform: scale(1.005);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border-color: rgba(250, 204, 21, 0.3);
+  z-index: 5;
+}
+.editable-block.selected {
+  border-color: #FACC15;
+  box-shadow: 0 0 0 1px #FACC15, 0 20px 50px rgba(0,0,0,0.5);
+  z-index: 10;
+  background: rgba(250, 204, 21, 0.02);
+}
+
+/* Selected label */
+.block-label {
+  position: absolute;
+  top: -28px;
+  right: 10px;
+  background: linear-gradient(135deg, #FACC15, #EAB308);
+  color: black;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: none;
+  box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);
+  animation: fadeIn 0.2s ease;
+}
+.editable-block.selected .block-label { display: inline-flex; gap: 6px; align-items: center; }
+
+.text-glow { text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+.text-glow-gold { text-shadow: 0 0 20px rgba(250, 204, 21, 0.4); }
+
+/* Toggle (iOS style) */
+.toggle-checkbox:checked { right: 0; border-color: #FACC15; }
+.toggle-checkbox:checked + .toggle-label { background-color: #FACC15; }
+
+/* Keyframes (keep here so it works even if Tailwind jit doesn’t emit them) */
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
