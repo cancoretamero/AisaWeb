@@ -1,0 +1,966 @@
+<!-- console/index.html -->
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Admin console should never be indexed -->
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="googlebot" content="noindex, nofollow, noarchive" />
+
+  <!-- UX / theming -->
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Aisa Group — Liquid Command Center (Admin Console)" />
+
+  <title>Aisa Group | Liquid Command Center</title>
+
+  <!-- Fonts (match public site: Montserrat + Poppins) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Icons (match public site: Font Awesome 6.4) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind config (Console theme — Liquid Command Center) -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Poppins"', 'sans-serif'],
+            display: ['"Montserrat"', 'sans-serif'],
+          },
+          colors: {
+            dark: {
+              bg: '#000000', /* Pitch black for contrast */
+              glass: 'rgba(20, 20, 20, 0.6)',
+            },
+            accent: {
+              gold: '#FACC15',
+              goldGlow: 'rgba(250, 204, 21, 0.5)',
+              green: '#10B981',
+              blue: '#3B82F6',
+              purple: '#8B5CF6',
+              red: '#EF4444',
+            },
+          },
+          animation: {
+            blob: 'blob 10s infinite',
+            float: 'float 6s ease-in-out infinite',
+            'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Console CSS (Liquid glass, canvas grid, widgets, scrollbars, etc.) -->
+  <link rel="stylesheet" href="./console.css" />
+
+  <!-- Optional: lightweight favicon (use your existing SVG if desired) -->
+  <link rel="icon" type="image/svg+xml" href="../images/aisa-logo.svg" />
+</head>
+
+<body
+  class="flex h-screen font-sans antialiased selection:bg-accent-gold selection:text-black text-sm bg-black text-gray-200 overflow-hidden"
+  id="app"
+  data-app="aisa-console"
+  data-app-version="0.1.0"
+>
+  <!-- No-JS fallback -->
+  <noscript>
+    <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-black p-8">
+      <div class="max-w-xl w-full rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center">
+        <h1 class="font-display text-2xl font-bold text-white mb-2">JavaScript requerido</h1>
+        <p class="text-gray-400">
+          La Console de Aisa Group requiere JavaScript para funcionar (editor visual, guardado, publicación).
+          Actívalo en tu navegador e inténtalo de nuevo.
+        </p>
+      </div>
+    </div>
+  </noscript>
+
+  <!-- Accessibility: Skip link -->
+  <a
+    href="#main"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:rounded-full focus:bg-accent-gold focus:text-black focus:font-bold"
+  >
+    Saltar al contenido principal
+  </a>
+
+  <!-- Ambient Background (purely decorative) -->
+  <div class="ambient-glow" aria-hidden="true">
+    <div
+      class="orb w-[500px] h-[500px] bg-accent-gold top-[-100px] left-[-100px]"
+      style="animation-delay: 0s;"
+    ></div>
+    <div
+      class="orb w-[600px] h-[600px] bg-accent-blue bottom-[-150px] right-[-100px]"
+      style="animation-delay: -5s;"
+    ></div>
+    <div
+      class="orb w-[300px] h-[300px] bg-accent-purple top-[40%] left-[40%]"
+      style="animation-delay: -10s;"
+    ></div>
+  </div>
+
+  <!-- Global live region for app status (used by app.js) -->
+  <div class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="sr-status"></div>
+
+  <!-- 1) SIDEBAR -->
+  <aside
+    class="w-72 glass-panel-pro border-r-0 m-4 rounded-[2rem] flex flex-col z-50 transition-all duration-500 shadow-2xl relative"
+    id="mainSidebar"
+    aria-label="Barra lateral principal"
+  >
+    <!-- Logo / Brand -->
+    <div class="h-24 flex flex-col justify-center px-8 border-b border-white/5 relative overflow-hidden group cursor-pointer"
+         id="brandArea"
+         role="button"
+         tabindex="0"
+         aria-label="Ir al Dashboard"
+         data-action="nav"
+         data-target-view="dashboard">
+      <div class="absolute inset-0 bg-gradient-to-r from-accent-gold/0 via-accent-gold/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+
+      <div class="flex items-center gap-4 relative z-10">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-gold to-yellow-700 flex items-center justify-center text-black font-extrabold font-display text-2xl shadow-[0_0_20px_rgba(250,204,21,0.4)]">
+          A
+        </div>
+        <div>
+          <span class="font-display font-bold text-xl tracking-wide text-white block leading-none">AISA</span>
+          <span class="text-xs text-accent-gold font-medium tracking-[0.2em] uppercase">Console</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-8 scroll-smooth" aria-label="Navegación">
+      <!-- Group: Overview -->
+      <div>
+        <p class="px-4 text-[10px] font-extrabold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+          <span class="w-1 h-1 rounded-full bg-gray-500"></span> Overview
+        </p>
+        <div class="space-y-1">
+          <a
+            href="#"
+            id="nav-dashboard"
+            class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-black bg-accent-gold shadow-[0_0_15px_rgba(250,204,21,0.3)] transition-all transform hover:scale-[1.02]"
+            data-action="switch-view"
+            data-view="dashboard"
+            aria-current="page"
+          >
+            <i class="fa-solid fa-chart-pie w-5 text-center"></i>
+            <span>Dashboard</span>
+            <div class="ml-auto w-2 h-2 rounded-full bg-black animate-pulse" aria-hidden="true"></div>
+          </a>
+
+          <a
+            href="#"
+            id="nav-notifications"
+            class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+            data-action="open-notifications"
+          >
+            <i class="fa-solid fa-bell w-5 text-center"></i>
+            <span>Notificaciones</span>
+            <span
+              id="nav-notifications-count"
+              class="ml-auto bg-white/10 text-white text-[10px] font-bold px-2 py-0.5 rounded-full border border-white/5"
+              aria-label="Notificaciones pendientes"
+            >
+              0
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Group: Engine -->
+      <div>
+        <p class="px-4 text-[10px] font-extrabold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+          <span class="w-1 h-1 rounded-full bg-gray-500"></span> Engine
+        </p>
+        <div class="space-y-1">
+          <a
+            href="#"
+            id="nav-editor"
+            class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+            data-action="switch-view"
+            data-view="editor"
+          >
+            <i class="fa-solid fa-layer-group w-5 text-center group-hover:text-accent-blue"></i>
+            <span>Páginas</span>
+          </a>
+
+          <a
+            href="#"
+            id="nav-blog"
+            class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+            data-action="switch-view"
+            data-view="blog"
+          >
+            <i class="fa-solid fa-feather-pointed w-5 text-center group-hover:text-accent-purple"></i>
+            <span>Blog &amp; Prensa</span>
+          </a>
+
+          <a
+            href="#"
+            id="nav-media"
+            class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+            data-action="switch-view"
+            data-view="media"
+          >
+            <i class="fa-solid fa-photo-film w-5 text-center group-hover:text-accent-green"></i>
+            <span>Media Assets</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Group: Intelligence -->
+      <div>
+        <p class="px-4 text-[10px] font-extrabold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+          <span class="w-1 h-1 rounded-full bg-gray-500"></span> Intelligence
+        </p>
+        <div class="space-y-1">
+          <a
+            href="#"
+            id="nav-ai"
+            class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+            data-action="open-ai"
+          >
+            <i class="fa-solid fa-wand-magic-sparkles w-5 text-center text-indigo-400"></i>
+            <span>AI Assistant</span>
+          </a>
+
+          <a
+            href="#"
+            id="nav-liveops"
+            class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+            data-action="switch-view"
+            data-view="liveops"
+          >
+            <i class="fa-solid fa-server w-5 text-center"></i>
+            <span>Live Data Ops</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Group: System -->
+      <div>
+        <p class="px-4 text-[10px] font-extrabold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+          <span class="w-1 h-1 rounded-full bg-gray-500"></span> System
+        </p>
+        <div class="space-y-1">
+          <a
+            href="#"
+            id="nav-settings"
+            class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+            data-action="open-settings"
+          >
+            <i class="fa-solid fa-gear w-5 text-center"></i>
+            <span>Configuración</span>
+          </a>
+
+          <a
+            href="#"
+            id="nav-audit"
+            class="group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+            data-action="switch-view"
+            data-view="audit"
+          >
+            <i class="fa-solid fa-shield-halved w-5 text-center"></i>
+            <span>Auditoría</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- User / Session -->
+    <div class="p-4 border-t border-white/5 bg-black/20">
+      <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 cursor-pointer transition-all group" id="userMenu" role="button" tabindex="0" aria-label="Menú de usuario">
+        <div class="relative">
+          <img
+            src="https://ui-avatars.com/api/?name=Admin+User&background=111&color=fff"
+            alt="Avatar de usuario"
+            class="w-10 h-10 rounded-full border border-white/20 group-hover:border-accent-gold transition-colors"
+            id="userAvatar"
+          />
+          <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-black" aria-hidden="true"></div>
+        </div>
+
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-bold text-white truncate group-hover:text-accent-gold transition-colors" id="userName">
+            Admin User
+          </p>
+          <p class="text-[10px] text-gray-500 truncate uppercase tracking-wider" id="userRole">
+            Super Admin
+          </p>
+        </div>
+
+        <i class="fa-solid fa-ellipsis-vertical text-gray-500 group-hover:text-white transition-colors" aria-hidden="true"></i>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 2) MAIN CONTENT -->
+  <main class="flex-1 flex flex-col h-screen overflow-hidden relative py-4 pr-4 pl-0" id="main" tabindex="-1">
+    <div class="flex-1 glass-panel-pro rounded-[2rem] flex flex-col overflow-hidden relative shadow-2xl" id="mainShell">
+      <!-- TOPBAR -->
+      <header class="h-20 border-b border-white/5 flex items-center justify-between px-8 z-40 bg-white/[0.01]" role="banner">
+        <!-- Left: breadcrumbs + back -->
+        <div class="flex items-center gap-4">
+          <button
+            type="button"
+            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 cursor-pointer hover:bg-white/10 hover:text-white transition-all"
+            id="btnBack"
+            aria-label="Volver"
+            data-action="back"
+          >
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+          </button>
+
+          <div id="topbar-context" class="flex items-center gap-2 text-sm text-gray-400">
+            <span class="hover:text-white cursor-pointer transition-colors" data-action="switch-view" data-view="dashboard">Console</span>
+            <i class="fa-solid fa-chevron-right text-[10px] opacity-50" aria-hidden="true"></i>
+            <span class="text-white font-bold tracking-wide text-glow" id="breadcrumbCurrent">Dashboard</span>
+          </div>
+
+          <!-- Page status pill (only visible in editor mode) -->
+          <div class="hidden lg:flex items-center gap-2 ml-4" id="pageStatusPill" aria-label="Estado de página">
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-gray-500">Página</span>
+            <span class="text-[10px] font-bold px-2 py-1 rounded-full border border-white/10 bg-white/5 text-gray-300" id="pageSlugPill">—</span>
+            <span class="text-[10px] font-bold px-2 py-1 rounded-full border border-white/10 bg-white/5 text-gray-300" id="pageStatePill">draft</span>
+            <span class="text-[10px] font-mono text-gray-500" id="pageUpdatedAt">—</span>
+          </div>
+        </div>
+
+        <!-- Right: global actions -->
+        <div class="flex items-center gap-6">
+          <!-- Universal Search (⌘K) -->
+          <div class="relative hidden lg:block group">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-accent-gold transition-colors" aria-hidden="true"></i>
+            <input
+              id="globalSearch"
+              type="text"
+              placeholder="Buscar páginas, métricas..."
+              class="liquid-input rounded-full py-2.5 pl-10 pr-16 text-xs w-72 group-focus-within:w-96 transition-all duration-500"
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="Búsqueda global"
+            />
+            <div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1" aria-hidden="true">
+              <span class="text-[10px] bg-white/10 px-1.5 rounded text-gray-400">⌘</span>
+              <span class="text-[10px] bg-white/10 px-1.5 rounded text-gray-400">K</span>
+            </div>
+          </div>
+
+          <div class="h-8 w-[1px] bg-white/10" aria-hidden="true"></div>
+
+          <!-- CMS connection indicator -->
+          <button
+            type="button"
+            class="flex items-center gap-3 cursor-pointer group"
+            id="cmsHealth"
+            aria-label="Estado de conexión"
+            data-action="open-health"
+          >
+            <div class="relative w-3 h-3">
+              <div class="absolute inset-0 bg-emerald-500 rounded-full animate-ping opacity-75" id="cmsPing"></div>
+              <div class="relative w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_10px_#10B981]" id="cmsDot"></div>
+            </div>
+            <span class="text-xs font-bold text-gray-400 group-hover:text-white transition-colors uppercase tracking-wider" id="cmsLabel">
+              Connected
+            </span>
+          </button>
+
+          <!-- Save draft -->
+          <button
+            type="button"
+            class="relative overflow-hidden px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all"
+            id="btnSave"
+            data-action="save"
+            aria-label="Guardar cambios"
+          >
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Guardar
+            </span>
+          </button>
+
+          <!-- Publish -->
+          <button
+            type="button"
+            class="relative overflow-hidden px-6 py-2.5 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] group"
+            id="btnPublish"
+            data-action="publish"
+            aria-label="Publicar cambios"
+          >
+            <span class="relative z-10 flex items-center gap-2">
+              <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Publicar
+            </span>
+            <div class="absolute inset-0 bg-accent-gold transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" aria-hidden="true"></div>
+          </button>
+        </div>
+      </header>
+
+      <!-- VIEWPORT -->
+      <div class="flex-1 relative overflow-hidden" id="viewport">
+        <!-- VIEW: DASHBOARD -->
+        <section
+          id="view-dashboard"
+          class="absolute inset-0 overflow-y-auto p-8 transition-all duration-500 opacity-100 z-10"
+          aria-label="Vista Dashboard"
+          data-view="dashboard"
+        >
+          <div class="max-w-[1600px] mx-auto space-y-8">
+            <!-- Header -->
+            <div class="flex justify-between items-end animate-fade-in-up">
+              <div>
+                <h1 class="font-display text-4xl font-bold text-white mb-2 text-glow">Overview Ejecutivo</h1>
+                <p class="text-gray-400 flex items-center gap-2">
+                  <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                  <span id="dashboardRangeLabel">Últimos 30 días</span>
+                  <span class="w-1 h-1 rounded-full bg-gray-500" aria-hidden="true"></span>
+                  <span class="text-gray-300">Tiempo real</span>
+                </p>
+              </div>
+
+              <div class="flex gap-2">
+                <button class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-bold border border-white/5 transition-all" id="btnExport">
+                  Exportar Reporte
+                </button>
+                <button class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-bold border border-white/5 transition-all" id="btnRefresh" aria-label="Refrescar">
+                  <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- KPI GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="dashboardKpis">
+              <!-- KPI cards (kept as starter, will be replaced/populated by JS later) -->
+              <div class="glass-panel-pro p-6 rounded-[1.5rem] group hover:bg-white/[0.02] transition-all animate-fade-in-up" style="animation-delay: 0.1s;">
+                <div class="flex justify-between mb-4">
+                  <div class="w-10 h-10 rounded-full bg-accent-blue/20 flex items-center justify-center text-accent-blue group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-full h-fit flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> +12%
+                  </span>
+                </div>
+                <h3 class="text-3xl font-display font-bold text-white mb-1" data-metric="traffic">—</h3>
+                <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-4">Visitas Globales</p>
+                <div class="h-12 w-full" aria-hidden="true">
+                  <svg viewBox="0 0 100 25" class="w-full h-full overflow-visible">
+                    <defs>
+                      <linearGradient id="gradBlue" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.5"/>
+                        <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,25 L0,15 Q10,5 20,10 T40,15 T60,5 T80,12 L100,2 V25 Z" fill="url(#gradBlue)" />
+                    <path d="M0,15 Q10,5 20,10 T40,15 T60,5 T80,12 L100,2" fill="none" stroke="#3B82F6" stroke-width="2" />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="glass-panel-pro p-6 rounded-[1.5rem] group hover:bg-white/[0.02] transition-all animate-fade-in-up" style="animation-delay: 0.2s;">
+                <div class="flex items-center justify-between mb-2">
+                  <div>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Salud Gualcamayo</p>
+                    <h3 class="text-2xl font-display font-bold text-white mt-1" data-metric="gualcamayoHealth">—</h3>
+                  </div>
+                  <div class="relative w-16 h-16" aria-hidden="true">
+                    <svg class="w-full h-full transform -rotate-90">
+                      <circle cx="32" cy="32" r="28" stroke="rgba(255,255,255,0.1)" stroke-width="4" fill="none"/>
+                      <circle cx="32" cy="32" r="28" stroke="#10B981" stroke-width="4" fill="none" stroke-dasharray="175" stroke-dashoffset="10" stroke-linecap="round" class="drop-shadow-[0_0_5px_#10B981]"/>
+                    </svg>
+                    <i class="fa-solid fa-heart-pulse absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-emerald-500 text-xs animate-pulse" aria-hidden="true"></i>
+                  </div>
+                </div>
+                <p class="text-[10px] text-gray-400 mt-2">Todos los sensores operativos y reportando normalmente.</p>
+              </div>
+
+              <div class="glass-panel-pro p-6 rounded-[1.5rem] group hover:bg-white/[0.02] transition-all animate-fade-in-up" style="animation-delay: 0.3s;">
+                <div class="flex justify-between mb-4">
+                  <div class="w-10 h-10 rounded-full bg-accent-gold/20 flex items-center justify-center text-accent-gold group-hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                  </div>
+                  <span class="text-xs font-bold text-gray-400 bg-white/5 px-2 py-1 rounded-full h-fit">Calicanto</span>
+                </div>
+                <h3 class="text-3xl font-display font-bold text-white mb-1" data-metric="energyMw">— <span class="text-lg text-gray-500">MW</span></h3>
+                <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-3">Generación Real</p>
+                <div class="w-full h-1.5 bg-gray-700 rounded-full overflow-hidden" aria-hidden="true">
+                  <div class="h-full bg-accent-gold w-[82%] relative">
+                    <div class="absolute right-0 top-0 bottom-0 w-2 bg-white blur-[2px]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="glass-panel-pro p-6 rounded-[1.5rem] bg-gradient-to-br from-accent-purple/10 to-transparent border-accent-purple/30 group animate-fade-in-up" style="animation-delay: 0.4s;">
+                <div class="flex justify-between items-start mb-4">
+                  <h3 class="text-lg font-bold text-white">Tareas Pendientes</h3>
+                  <span class="bg-accent-purple text-white text-xs font-bold px-2 py-0.5 rounded-full" id="tasksCount">0</span>
+                </div>
+                <ul class="space-y-3" id="tasksList">
+                  <li class="text-xs text-gray-500 italic">Sin tareas por ahora.</li>
+                </ul>
+                <button class="mt-4 w-full py-2 rounded-lg bg-accent-purple/20 text-accent-purple text-xs font-bold hover:bg-accent-purple hover:text-white transition-colors" data-action="open-tasks">
+                  Ir al Gestor
+                </button>
+              </div>
+            </div>
+
+            <!-- Activity + AI split -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-in-up" style="animation-delay: 0.5s;">
+              <!-- Activity table -->
+              <div class="lg:col-span-2 glass-panel-pro rounded-[2rem] overflow-hidden flex flex-col h-[400px]">
+                <div class="px-6 py-4 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
+                  <h3 class="font-bold text-white text-sm uppercase tracking-wide flex items-center gap-2">
+                    <i class="fa-solid fa-list-ul" aria-hidden="true"></i> Actividad de Equipo
+                  </h3>
+                  <div class="flex gap-2" aria-hidden="true">
+                    <span class="w-3 h-3 rounded-full bg-red-500/50"></span>
+                    <span class="w-3 h-3 rounded-full bg-yellow-500/50"></span>
+                    <span class="w-3 h-3 rounded-full bg-green-500/50"></span>
+                  </div>
+                </div>
+                <div class="flex-1 overflow-auto">
+                  <table class="w-full text-left text-sm text-gray-400">
+                    <thead class="bg-white/5 text-[10px] uppercase text-gray-500 sticky top-0 backdrop-blur-md">
+                      <tr>
+                        <th class="px-6 py-3 font-bold">Usuario</th>
+                        <th class="px-6 py-3 font-bold">Evento</th>
+                        <th class="px-6 py-3 font-bold">Contexto</th>
+                        <th class="px-6 py-3 font-bold">Tiempo</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5" id="activityBody">
+                      <tr class="hover:bg-white/5 transition-colors">
+                        <td class="px-6 py-4 text-xs text-gray-500 italic" colspan="4">Cargando actividad…</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- AI Assistant -->
+              <div class="glass-panel-pro rounded-[2rem] p-6 relative overflow-hidden group" id="aiPanel">
+                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/10 to-transparent opacity-50" aria-hidden="true"></div>
+                <div class="relative z-10 flex flex-col h-full">
+                  <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-500 flex items-center justify-center shadow-[0_0_15px_#6366f1]">
+                      <i class="fa-solid fa-wand-magic-sparkles text-white animate-pulse" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-bold text-white text-lg">Aisa Intelligence</h3>
+                  </div>
+
+                  <div class="flex-1 space-y-4" id="aiSuggestions">
+                    <div class="bg-black/40 rounded-xl p-3 border border-white/5">
+                      <p class="text-xs text-gray-300 italic">Conecta el CMS para habilitar recomendaciones en tiempo real.</p>
+                    </div>
+                  </div>
+
+                  <div class="mt-auto pt-4 relative">
+                    <label class="sr-only" for="aiInput">Pregúntale algo a Aisa AI</label>
+                    <input
+                      id="aiInput"
+                      type="text"
+                      placeholder="Pregúntale algo a Aisa AI..."
+                      class="w-full bg-black/50 border border-white/10 rounded-full py-2 px-4 text-xs text-white focus:border-indigo-500 focus:outline-none transition-colors"
+                      autocomplete="off"
+                    />
+                    <button
+                      type="button"
+                      class="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center text-white text-[10px]"
+                      id="aiSend"
+                      aria-label="Enviar pregunta"
+                    >
+                      <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- VIEW: EDITOR -->
+        <section
+          id="view-editor"
+          class="absolute inset-0 flex opacity-0 pointer-events-none transition-all duration-500 translate-y-4 z-20"
+          aria-label="Vista Editor Visual"
+          data-view="editor"
+        >
+          <!-- Left: Component / Block Library -->
+          <aside class="w-72 glass-panel-pro m-4 rounded-[2rem] flex flex-col z-20 shadow-2xl" aria-label="Librería de bloques">
+            <div class="p-5 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
+              <h3 class="font-bold text-white text-xs uppercase tracking-widest flex items-center gap-2">
+                <i class="fa-solid fa-cubes" aria-hidden="true"></i> Librería
+              </h3>
+              <button class="text-gray-400 hover:text-white" id="btnLibraryFilters" aria-label="Filtros de bloques">
+                <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <!-- Page picker (driven by app.js from CMS) -->
+            <div class="p-4 border-b border-white/5">
+              <label class="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest mb-2 block" for="pageSelect">
+                Página activa
+              </label>
+              <div class="relative">
+                <i class="fa-solid fa-file-lines absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs" aria-hidden="true"></i>
+                <select
+                  id="pageSelect"
+                  class="w-full bg-black/30 border border-white/10 rounded-lg py-2 pl-8 pr-2 text-xs text-white focus:border-accent-gold focus:outline-none"
+                  aria-label="Seleccionar página"
+                >
+                  <option value="">Cargando…</option>
+                </select>
+              </div>
+
+              <div class="flex gap-2 mt-3">
+                <button class="flex-1 px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-[10px] font-bold uppercase tracking-widest border border-white/5 transition-all" id="btnNewPage">
+                  Nueva
+                </button>
+                <button class="flex-1 px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-[10px] font-bold uppercase tracking-widest border border-white/5 transition-all" id="btnDuplicatePage">
+                  Duplicar
+                </button>
+              </div>
+            </div>
+
+            <!-- Search blocks -->
+            <div class="p-4 pb-0">
+              <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs" aria-hidden="true"></i>
+                <input
+                  type="text"
+                  placeholder="Filtrar bloques..."
+                  class="w-full bg-black/30 border border-white/10 rounded-lg py-2 pl-8 pr-2 text-xs text-white focus:border-accent-gold focus:outline-none"
+                  id="blockFilter"
+                  aria-label="Filtrar bloques"
+                />
+              </div>
+            </div>
+
+            <!-- Block library list (populated by app.js) -->
+            <div class="flex-1 overflow-y-auto p-4 space-y-6" id="blockLibrary">
+              <!-- Filled by JS (registry). Starter skeleton: -->
+              <div class="space-y-3">
+                <p class="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest pl-1">Estructural</p>
+                <div class="grid grid-cols-2 gap-2" id="blockLibraryStructural">
+                  <!-- JS will populate -->
+                  <div class="p-3 bg-white/5 rounded-xl border border-white/5 text-center text-gray-500 text-[10px]">
+                    Cargando…
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <p class="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest pl-1">Data Widgets</p>
+                <div class="flex flex-col gap-2" id="blockLibraryWidgets">
+                  <div class="p-3 bg-white/5 rounded-xl border border-white/5 text-center text-gray-500 text-[10px]">
+                    Cargando…
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Center: Canvas -->
+          <section class="flex-1 flex flex-col relative my-4 rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl bg-[#0a0a0a]" aria-label="Canvas">
+            <!-- Canvas toolbar -->
+            <div class="h-14 bg-dark-bg/80 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-6 z-10">
+              <div class="flex items-center gap-2 bg-white/5 p-1 rounded-lg" role="group" aria-label="Breakpoints">
+                <button class="w-8 h-8 rounded hover:bg-white/10 text-white bg-white/10 shadow transition-colors" id="bpDesktop" aria-label="Vista escritorio">
+                  <i class="fa-solid fa-desktop text-xs" aria-hidden="true"></i>
+                </button>
+                <button class="w-8 h-8 rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors" id="bpTablet" aria-label="Vista tablet">
+                  <i class="fa-solid fa-tablet-screen-button text-xs" aria-hidden="true"></i>
+                </button>
+                <button class="w-8 h-8 rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors" id="bpMobile" aria-label="Vista móvil">
+                  <i class="fa-solid fa-mobile-screen-button text-xs" aria-hidden="true"></i>
+                </button>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <span class="text-xs text-gray-500 font-mono" id="canvasResolution">1100 x Auto</span>
+                <div class="h-4 w-[1px] bg-white/10" aria-hidden="true"></div>
+                <span class="text-xs text-gray-500 font-mono" id="canvasZoom">100%</span>
+              </div>
+
+              <div class="flex gap-2" role="group" aria-label="Historial">
+                <button class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5" id="btnUndo" title="Undo">
+                  <i class="fa-solid fa-rotate-left text-xs" aria-hidden="true"></i>
+                </button>
+                <button class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5" id="btnRedo" title="Redo">
+                  <i class="fa-solid fa-rotate-right text-xs" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Canvas scroll area -->
+            <div class="flex-1 overflow-y-auto overflow-x-hidden canvas-grid relative p-12 flex justify-center" id="canvasScroll" aria-label="Área de edición">
+              <!-- Page container -->
+              <div class="w-full max-w-[1100px] bg-black min-h-[1200px] shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-white/5 relative rounded-[1.5rem]" id="canvasPage">
+                <!-- JS will render the current page layout here -->
+                <div class="p-10 text-center text-gray-500 text-sm" id="canvasEmpty">
+                  Selecciona una página para empezar a editar.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Right: Properties -->
+          <aside class="w-80 glass-panel-pro m-4 rounded-[2rem] flex flex-col z-20 shadow-2xl relative overflow-hidden" id="properties-panel" aria-label="Panel de propiedades">
+            <!-- Empty state -->
+            <div id="prop-empty" class="flex-1 flex flex-col items-center justify-center text-gray-500 p-8 text-center">
+              <div class="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-4 animate-pulse" aria-hidden="true">
+                <i class="fa-regular fa-hand-pointer text-3xl opacity-50" aria-hidden="true"></i>
+              </div>
+              <h4 class="text-white font-bold mb-2">Editor Inactivo</h4>
+              <p class="text-xs text-gray-400">
+                Selecciona un bloque en el canvas para ajustar sus parámetros visuales y de contenido.
+              </p>
+            </div>
+
+            <!-- Active state (JS populates fields based on selected block schema) -->
+            <div id="prop-active" class="hidden flex-col h-full bg-black/20">
+              <div class="p-5 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
+                <h3 class="font-bold text-white text-xs uppercase tracking-widest">Ajustes</h3>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-accent-green animate-pulse" aria-hidden="true"></span>
+                  <span class="text-[10px] bg-white/10 text-white px-2 py-0.5 rounded font-mono" id="prop-type-badge">—</span>
+                </div>
+              </div>
+
+              <div class="flex-1 overflow-y-auto p-5 space-y-8 scroll-smooth" id="propBody">
+                <!-- JS injects groups/controls here -->
+                <div class="text-xs text-gray-500 italic">Cargando propiedades…</div>
+              </div>
+
+              <div class="p-5 border-t border-white/5 flex gap-3 bg-black/40 backdrop-blur-md">
+                <button class="flex-1 py-3 rounded-xl bg-white/5 text-[10px] font-bold uppercase tracking-wider hover:bg-white/10 border border-white/5 transition-colors" id="btnRevertBlock">
+                  Revertir
+                </button>
+                <button class="flex-1 py-3 rounded-xl bg-gradient-to-r from-accent-gold to-yellow-600 text-black text-[10px] font-bold uppercase tracking-wider hover:shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all transform hover:-translate-y-1" id="btnApplyBlock">
+                  Aplicar Cambios
+                </button>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <!-- VIEW: Blog/Prensa (placeholder) -->
+        <section
+          id="view-blog"
+          class="absolute inset-0 overflow-y-auto p-8 opacity-0 pointer-events-none transition-all duration-500 translate-y-4 z-20"
+          aria-label="Vista Blog y Prensa"
+          data-view="blog"
+        >
+          <div class="max-w-[1400px] mx-auto">
+            <h1 class="font-display text-4xl font-bold text-white mb-2">Blog &amp; Prensa</h1>
+            <p class="text-gray-400">Esta vista se conectará al CMS para crear/editar entradas y noticias.</p>
+          </div>
+        </section>
+
+        <!-- VIEW: Media (placeholder) -->
+        <section
+          id="view-media"
+          class="absolute inset-0 overflow-y-auto p-8 opacity-0 pointer-events-none transition-all duration-500 translate-y-4 z-20"
+          aria-label="Vista Media Assets"
+          data-view="media"
+        >
+          <div class="max-w-[1400px] mx-auto">
+            <h1 class="font-display text-4xl font-bold text-white mb-2">Media Assets</h1>
+            <p class="text-gray-400">Gestión de imágenes/videos/SVG con tags, compresión y alt text.</p>
+          </div>
+        </section>
+
+        <!-- VIEW: LiveOps (placeholder) -->
+        <section
+          id="view-liveops"
+          class="absolute inset-0 overflow-y-auto p-8 opacity-0 pointer-events-none transition-all duration-500 translate-y-4 z-20"
+          aria-label="Vista Live Data Ops"
+          data-view="liveops"
+        >
+          <div class="max-w-[1400px] mx-auto">
+            <h1 class="font-display text-4xl font-bold text-white mb-2">Live Data Ops</h1>
+            <p class="text-gray-400">Catálogo de métricas, fuentes, dashboards y alertas.</p>
+          </div>
+        </section>
+
+        <!-- VIEW: Audit (placeholder) -->
+        <section
+          id="view-audit"
+          class="absolute inset-0 overflow-y-auto p-8 opacity-0 pointer-events-none transition-all duration-500 translate-y-4 z-20"
+          aria-label="Vista Auditoría"
+          data-view="audit"
+        >
+          <div class="max-w-[1400px] mx-auto">
+            <h1 class="font-display text-4xl font-bold text-white mb-2">Auditoría</h1>
+            <p class="text-gray-400">Historial de cambios, revisiones, rollback y logs de acceso.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast container (app.js will append toasts here) -->
+  <div
+    id="toast-root"
+    class="fixed bottom-6 right-6 z-[9998] flex flex-col gap-3 pointer-events-none"
+    aria-label="Notificaciones"
+  ></div>
+
+  <!-- MODAL: Auth (Login) -->
+  <div id="modal-auth" class="fixed inset-0 z-[9999] hidden" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-md" data-action="close-modal" data-target="modal-auth" aria-hidden="true"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-6">
+      <div class="glass-panel-pro w-full max-w-md rounded-[2rem] p-8">
+        <div class="flex items-center justify-between mb-6">
+          <h2 id="authTitle" class="font-display text-2xl font-bold text-white">Iniciar sesión</h2>
+          <button class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-colors" data-action="close-modal" data-target="modal-auth" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <p class="text-gray-400 text-sm mb-6">
+          Accede a la Console para editar páginas, gestionar contenido y publicar cambios.
+        </p>
+
+        <form id="authForm" class="space-y-4" autocomplete="on">
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 block" for="authEmail">Email / Usuario</label>
+            <input id="authEmail" name="identifier" type="text" class="w-full liquid-input rounded-xl p-3 text-sm" required />
+          </div>
+
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2 block" for="authPassword">Contraseña</label>
+            <input id="authPassword" name="password" type="password" class="w-full liquid-input rounded-xl p-3 text-sm" required />
+          </div>
+
+          <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-accent-gold to-yellow-600 text-black text-xs font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all">
+            Entrar
+          </button>
+
+          <p class="text-[10px] text-gray-500 leading-relaxed">
+            Este panel es privado. Toda actividad queda registrada en auditoría.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Publish confirmation -->
+  <div id="modal-publish" class="fixed inset-0 z-[9999] hidden" role="dialog" aria-modal="true" aria-labelledby="publishTitle">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-md" data-action="close-modal" data-target="modal-publish" aria-hidden="true"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-6">
+      <div class="glass-panel-pro w-full max-w-lg rounded-[2rem] p-8">
+        <div class="flex items-center justify-between mb-6">
+          <h2 id="publishTitle" class="font-display text-2xl font-bold text-white">Publicar cambios</h2>
+          <button class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-colors" data-action="close-modal" data-target="modal-publish" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="bg-black/40 rounded-xl p-4 border border-white/10 mb-6">
+          <p class="text-gray-300 text-sm">
+            Esto publicará el contenido en <span class="font-bold text-white">producción</span> y disparará el build/deploy.
+          </p>
+          <p class="text-gray-500 text-xs mt-2">
+            Página: <span class="text-white font-mono" id="publishSlug">—</span> · Estado: <span class="text-white font-mono" id="publishState">draft</span>
+          </p>
+        </div>
+
+        <div class="flex gap-3">
+          <button class="flex-1 py-3 rounded-xl bg-white/5 text-white text-xs font-bold uppercase tracking-widest hover:bg-white/10 border border-white/10 transition-colors" data-action="close-modal" data-target="modal-publish">
+            Cancelar
+          </button>
+          <button class="flex-1 py-3 rounded-xl bg-gradient-to-r from-accent-gold to-yellow-600 text-black text-xs font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all" id="btnConfirmPublish">
+            Confirmar
+          </button>
+        </div>
+
+        <p class="text-[10px] text-gray-500 mt-4">
+          Consejo: usa “Guardar” antes de publicar para asegurar consistencia del layout y los assets.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Templates for dynamic rendering (cloned by app.js) -->
+  <template id="tpl-page-option">
+    <option value=""></option>
+  </template>
+
+  <template id="tpl-activity-row">
+    <tr class="hover:bg-white/5 transition-colors group cursor-pointer">
+      <td class="px-6 py-3 flex items-center gap-3">
+        <img class="w-6 h-6 rounded-full grayscale group-hover:grayscale-0 transition-all" alt="Avatar" />
+        <span class="text-white font-medium"></span>
+      </td>
+      <td class="px-6 py-3"></td>
+      <td class="px-6 py-3"></td>
+      <td class="px-6 py-3 font-mono text-xs"></td>
+    </tr>
+  </template>
+
+  <template id="tpl-block-tile">
+    <div
+      class="p-3 bg-white/5 rounded-xl border border-white/5 hover:border-accent-gold/50 cursor-grab active:cursor-grabbing flex flex-col items-center gap-2 group transition-all hover:bg-white/10"
+      draggable="true"
+    >
+      <i class="fa-solid text-xl text-gray-500 group-hover:text-accent-gold transition-colors" aria-hidden="true"></i>
+      <span class="text-[10px] text-gray-300 font-medium"></span>
+    </div>
+  </template>
+
+  <template id="tpl-block-widget-row">
+    <div
+      class="p-3 bg-white/5 rounded-xl border border-white/5 hover:border-white/20 cursor-grab active:cursor-grabbing flex items-center gap-3 group transition-all"
+      draggable="true"
+    >
+      <div class="w-8 h-8 rounded bg-white/10 flex items-center justify-center">
+        <i class="fa-solid text-white/80" aria-hidden="true"></i>
+      </div>
+      <div class="flex-1">
+        <span class="text-xs text-white font-bold block"></span>
+        <span class="text-[10px] text-gray-500"></span>
+      </div>
+      <i class="fa-solid fa-grip-vertical text-gray-600" aria-hidden="true"></i>
+    </div>
+  </template>
+
+  <!-- App logic -->
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
