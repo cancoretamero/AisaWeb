@@ -87,8 +87,8 @@
   <!-- Console CSS (Liquid glass, canvas grid, widgets, scrollbars, etc.) -->
   <link rel="stylesheet" href="./console.css" />
 
-  <!-- Optional: lightweight favicon (use your existing SVG if desired) -->
-  <link rel="icon" type="image/svg+xml" href="../images/aisa-logo.svg" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/images/aisa-logo.svg" />
 </head>
 
 <body
@@ -118,7 +118,7 @@
     Saltar al contenido principal
   </a>
 
-  <!-- Ambient Background (purely decorative) -->
+  <!-- Ambient Background (decorative) -->
   <div class="ambient-glow" aria-hidden="true">
     <div
       class="orb w-[500px] h-[500px] bg-accent-gold top-[-100px] left-[-100px]"
@@ -134,7 +134,7 @@
     ></div>
   </div>
 
-  <!-- Global live region for app status (used by app.js) -->
+  <!-- Global live region for app status -->
   <div class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="sr-status"></div>
 
   <!-- 1) SIDEBAR -->
@@ -143,24 +143,28 @@
     id="mainSidebar"
     aria-label="Barra lateral principal"
   >
-    <!-- Logo / Brand -->
-    <div class="h-24 flex flex-col justify-center px-8 border-b border-white/5 relative overflow-hidden group cursor-pointer"
-         id="brandArea"
-         role="button"
-         tabindex="0"
-         aria-label="Ir al Dashboard"
-         data-action="nav"
-         data-target-view="dashboard">
+    <!-- BRAND AREA (replaced with Aisa logo) -->
+    <div
+      class="h-24 flex items-center px-8 border-b border-white/5 relative overflow-hidden group cursor-pointer"
+      id="brandArea"
+      role="button"
+      tabindex="0"
+      aria-label="Ir al Dashboard"
+      data-action="nav"
+      data-target-view="dashboard"
+    >
+      <!-- subtle sweep -->
       <div class="absolute inset-0 bg-gradient-to-r from-accent-gold/0 via-accent-gold/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
 
-      <div class="flex items-center gap-4 relative z-10">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-gold to-yellow-700 flex items-center justify-center text-black font-extrabold font-display text-2xl shadow-[0_0_20px_rgba(250,204,21,0.4)]">
-          A
-        </div>
-        <div>
-          <span class="font-display font-bold text-xl tracking-wide text-white block leading-none">AISA</span>
-          <span class="text-xs text-accent-gold font-medium tracking-[0.2em] uppercase">Console</span>
-        </div>
+      <!-- LOGO -->
+      <div class="relative z-10 w-full flex items-center">
+        <img
+          src="/images/aisa-logo.svg"
+          alt="Aisa Group"
+          class="h-9 w-auto select-none drop-shadow-[0_0_20px_rgba(250,204,21,0.20)]"
+          draggable="false"
+          decoding="async"
+        />
       </div>
     </div>
 
@@ -441,7 +445,6 @@
           data-view="dashboard"
         >
           <div class="max-w-[1600px] mx-auto space-y-8">
-            <!-- Header -->
             <div class="flex justify-between items-end animate-fade-in-up">
               <div>
                 <h1 class="font-display text-4xl font-bold text-white mb-2 text-glow">Overview Ejecutivo</h1>
@@ -463,9 +466,7 @@
               </div>
             </div>
 
-            <!-- KPI GRID -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="dashboardKpis">
-              <!-- KPI cards (kept as starter, will be replaced/populated by JS later) -->
               <div class="glass-panel-pro p-6 rounded-[1.5rem] group hover:bg-white/[0.02] transition-all animate-fade-in-up" style="animation-delay: 0.1s;">
                 <div class="flex justify-between mb-4">
                   <div class="w-10 h-10 rounded-full bg-accent-blue/20 flex items-center justify-center text-accent-blue group-hover:scale-110 transition-transform">
@@ -538,9 +539,7 @@
               </div>
             </div>
 
-            <!-- Activity + AI split -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-in-up" style="animation-delay: 0.5s;">
-              <!-- Activity table -->
               <div class="lg:col-span-2 glass-panel-pro rounded-[2rem] overflow-hidden flex flex-col h-[400px]">
                 <div class="px-6 py-4 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
                   <h3 class="font-bold text-white text-sm uppercase tracking-wide flex items-center gap-2">
@@ -571,7 +570,6 @@
                 </div>
               </div>
 
-              <!-- AI Assistant -->
               <div class="glass-panel-pro rounded-[2rem] p-6 relative overflow-hidden group" id="aiPanel">
                 <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/10 to-transparent opacity-50" aria-hidden="true"></div>
                 <div class="relative z-10 flex flex-col h-full">
@@ -620,7 +618,6 @@
           aria-label="Vista Editor Visual"
           data-view="editor"
         >
-          <!-- Left: Component / Block Library -->
           <aside class="w-72 glass-panel-pro m-4 rounded-[2rem] flex flex-col z-20 shadow-2xl" aria-label="Librería de bloques">
             <div class="p-5 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
               <h3 class="font-bold text-white text-xs uppercase tracking-widest flex items-center gap-2">
@@ -631,7 +628,6 @@
               </button>
             </div>
 
-            <!-- Page picker (driven by app.js from CMS) -->
             <div class="p-4 border-b border-white/5">
               <label class="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest mb-2 block" for="pageSelect">
                 Página activa
@@ -657,7 +653,6 @@
               </div>
             </div>
 
-            <!-- Search blocks -->
             <div class="p-4 pb-0">
               <div class="relative">
                 <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs" aria-hidden="true"></i>
@@ -671,13 +666,10 @@
               </div>
             </div>
 
-            <!-- Block library list (populated by app.js) -->
             <div class="flex-1 overflow-y-auto p-4 space-y-6" id="blockLibrary">
-              <!-- Filled by JS (registry). Starter skeleton: -->
               <div class="space-y-3">
                 <p class="text-[10px] font-extrabold text-gray-500 uppercase tracking-widest pl-1">Estructural</p>
                 <div class="grid grid-cols-2 gap-2" id="blockLibraryStructural">
-                  <!-- JS will populate -->
                   <div class="p-3 bg-white/5 rounded-xl border border-white/5 text-center text-gray-500 text-[10px]">
                     Cargando…
                   </div>
@@ -695,9 +687,7 @@
             </div>
           </aside>
 
-          <!-- Center: Canvas -->
           <section class="flex-1 flex flex-col relative my-4 rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl bg-[#0a0a0a]" aria-label="Canvas">
-            <!-- Canvas toolbar -->
             <div class="h-14 bg-dark-bg/80 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-6 z-10">
               <div class="flex items-center gap-2 bg-white/5 p-1 rounded-lg" role="group" aria-label="Breakpoints">
                 <button class="w-8 h-8 rounded hover:bg-white/10 text-white bg-white/10 shadow transition-colors" id="bpDesktop" aria-label="Vista escritorio">
@@ -727,11 +717,8 @@
               </div>
             </div>
 
-            <!-- Canvas scroll area -->
             <div class="flex-1 overflow-y-auto overflow-x-hidden canvas-grid relative p-12 flex justify-center" id="canvasScroll" aria-label="Área de edición">
-              <!-- Page container -->
               <div class="w-full max-w-[1100px] bg-black min-h-[1200px] shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-white/5 relative rounded-[1.5rem]" id="canvasPage">
-                <!-- JS will render the current page layout here -->
                 <div class="p-10 text-center text-gray-500 text-sm" id="canvasEmpty">
                   Selecciona una página para empezar a editar.
                 </div>
@@ -739,9 +726,7 @@
             </div>
           </section>
 
-          <!-- Right: Properties -->
           <aside class="w-80 glass-panel-pro m-4 rounded-[2rem] flex flex-col z-20 shadow-2xl relative overflow-hidden" id="properties-panel" aria-label="Panel de propiedades">
-            <!-- Empty state -->
             <div id="prop-empty" class="flex-1 flex flex-col items-center justify-center text-gray-500 p-8 text-center">
               <div class="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-4 animate-pulse" aria-hidden="true">
                 <i class="fa-regular fa-hand-pointer text-3xl opacity-50" aria-hidden="true"></i>
@@ -752,7 +737,6 @@
               </p>
             </div>
 
-            <!-- Active state (JS populates fields based on selected block schema) -->
             <div id="prop-active" class="hidden flex-col h-full bg-black/20">
               <div class="p-5 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
                 <h3 class="font-bold text-white text-xs uppercase tracking-widest">Ajustes</h3>
@@ -763,7 +747,6 @@
               </div>
 
               <div class="flex-1 overflow-y-auto p-5 space-y-8 scroll-smooth" id="propBody">
-                <!-- JS injects groups/controls here -->
                 <div class="text-xs text-gray-500 italic">Cargando propiedades…</div>
               </div>
 
@@ -779,7 +762,6 @@
           </aside>
         </section>
 
-        <!-- VIEW: Blog/Prensa (placeholder) -->
         <section
           id="view-blog"
           class="absolute inset-0 overflow-y-auto p-8 opacity-0 pointer-events-none transition-all duration-500 translate-y-4 z-20"
@@ -792,7 +774,6 @@
           </div>
         </section>
 
-        <!-- VIEW: Media (placeholder) -->
         <section
           id="view-media"
           class="absolute inset-0 overflow-y-auto p-8 opacity-0 pointer-events-none transition-all duration-500 translate-y-4 z-20"
@@ -805,7 +786,6 @@
           </div>
         </section>
 
-        <!-- VIEW: LiveOps (placeholder) -->
         <section
           id="view-liveops"
           class="absolute inset-0 overflow-y-auto p-8 opacity-0 pointer-events-none transition-all duration-500 translate-y-4 z-20"
@@ -818,7 +798,6 @@
           </div>
         </section>
 
-        <!-- VIEW: Audit (placeholder) -->
         <section
           id="view-audit"
           class="absolute inset-0 overflow-y-auto p-8 opacity-0 pointer-events-none transition-all duration-500 translate-y-4 z-20"
@@ -834,7 +813,7 @@
     </div>
   </main>
 
-  <!-- Toast container (app.js will append toasts here) -->
+  <!-- Toast container -->
   <div
     id="toast-root"
     class="fixed bottom-6 right-6 z-[9998] flex flex-col gap-3 pointer-events-none"
@@ -917,7 +896,7 @@
     </div>
   </div>
 
-  <!-- Templates for dynamic rendering (cloned by app.js) -->
+  <!-- Templates -->
   <template id="tpl-page-option">
     <option value=""></option>
   </template>
