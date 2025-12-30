@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Aisa Group website + Liquid Command Center console",
   "scripts": {
-    "build": "echo \"AisaWeb: no build step (static site)\" && exit 0"
+    "build": "node scripts/build.mjs"
   },
   "engines": {
     "node": ">=18"
