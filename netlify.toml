@@ -1,5 +1,10 @@
 # netlify.toml
 # AISA Console routing + basic hardened headers (scoped to /console only)
+# + Build pipeline: publish from /dist
+
+[build]
+  command = "npm run build"
+  publish = "dist"
 
 [functions]
   directory = "netlify/functions"
