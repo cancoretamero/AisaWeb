@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2025-12-30T00:00:00.000Z",
+  "pages": {
+    "index": {
+      "hero": {
+        "bgImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=3870&auto=format&fit=crop",
+        "tagline": "Liderando la transición",
+        "titleHtml": "De la tierra <br>\n<span class=\"font-light italic opacity-90 text-accent-gold\">al futuro.</span>",
+        "descHtml": "Un holding familiar transformando la minería tradicional en energía renovable y desarrollo sostenible. Inversiones estratégicas en <strong>San Juan, San Luis</strong> y mercados globales."
+      }
+    },
+    "sostenibilidad": {
+      "hero": {
+        "bgImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=3870&auto=format&fit=crop",
+        "tagline": null,
+        "titleHtml": "Futuro <br>\n<span class=\"text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 neon-text\">Regenerativo.</span>",
+        "descHtml": "Integramos la eficiencia industrial de <strong>Gualcamayo</strong> con la energía limpia de <strong>Calicanto</strong> y la recuperación patrimonial de <strong>Chelsea</strong>. Medimos nuestro éxito no solo en onzas, sino en vidas transformadas."
+      }
+    }
+  }
+}
