@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toolbarButtons = document.querySelectorAll('#contact-toolbar button');
     // Reemplace este número con el número real de WhatsApp de contacto.
     const whatsappNumber = '+0000000000';
+
     function openContactModal(event) {
         if (event) event.preventDefault();
         if (!contactModal) return;
@@ -47,22 +48,26 @@ document.addEventListener('DOMContentLoaded', () => {
         contactModal.classList.add('flex');
         document.body.classList.add('overflow-hidden');
     }
+
     function closeContactModal() {
         if (!contactModal) return;
         contactModal.classList.add('hidden');
         contactModal.classList.remove('flex');
         document.body.classList.remove('overflow-hidden');
     }
+
     // Asigna eventos a los botones de apertura
     openContactButtons.forEach(btn => {
         if (btn) {
             btn.addEventListener('click', openContactModal);
         }
     });
+
     // Asigna evento al botón de cierre
     if (closeContactBtn) {
         closeContactBtn.addEventListener('click', closeContactModal);
     }
+
     // Asigna eventos a los botones de la barra de herramientas
     if (toolbarButtons) {
         toolbarButtons.forEach(btn => {
@@ -76,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
     // Cierra el modal si se hace clic en el overlay
     if (contactModal) {
         contactModal.addEventListener('click', (event) => {
@@ -84,12 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
     // Cierra con la tecla ESC
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && contactModal && !contactModal.classList.contains('hidden')) {
             closeContactModal();
         }
     });
+
     // Construye un mailto y abre el cliente de correo
     if (sendEmailBtn) {
         sendEmailBtn.addEventListener('click', () => {
@@ -104,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             closeContactModal();
         });
     }
+
     // Construye un enlace a WhatsApp con el mensaje precompletado
     if (sendWhatsAppBtn) {
         sendWhatsAppBtn.addEventListener('click', () => {
@@ -121,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Modo oscuro y tema
 const themeBtn = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
+
 // Determina el tema inicial según localStorage o valor por defecto
 if (!localStorage.theme) {
     htmlElement.classList.add('dark');
@@ -129,6 +139,7 @@ if (!localStorage.theme) {
 } else {
     htmlElement.classList.remove('dark');
 }
+
 // Maneja el click en el botón para alternar el tema
 if (themeBtn) {
     themeBtn.addEventListener('click', () => {
@@ -140,6 +151,7 @@ if (themeBtn) {
 // Efecto parallax en el fondo del héroe
 const heroBg = document.getElementById('hero-bg');
 const navbar = document.getElementById('navbar');
+
 window.addEventListener('scroll', () => {
     const scroll = window.scrollY;
     if (scroll < window.innerHeight && heroBg) {
@@ -187,6 +199,7 @@ const svg = d3.select('#map-viewport')
     .attr('preserveAspectRatio', 'xMidYMid slice')
     .style('width', '100%')
     .style('height', '100%');
+
 const g = svg.append('g');
 
 // Gradiente para líneas de conexión (neón)
@@ -197,6 +210,7 @@ const gradient = defs.append('linearGradient')
     .attr('y1', '0%')
     .attr('x2', '100%')
     .attr('y2', '0%');
+
 gradient.append('stop').attr('offset', '0%').attr('stop-color', 'rgba(250, 204, 21, 0.1)');
 gradient.append('stop').attr('offset', '50%').attr('stop-color', 'rgba(250, 204, 21, 1)');
 gradient.append('stop').attr('offset', '100%').attr('stop-color', 'rgba(250, 204, 21, 0.1)');
@@ -205,6 +219,7 @@ gradient.append('stop').attr('offset', '100%').attr('stop-color', 'rgba(250, 204
 const projection = d3.geoMercator()
     .scale(150)
     .translate([width / 2, height / 1.5]);
+
 const pathGenerator = d3.geoPath().projection(projection);
 
 // Configuración de zoom con límites
@@ -213,16 +228,20 @@ const zoomBehaviour = d3.zoom()
     .on('zoom', (event) => {
         const transform = event.transform;
         g.attr('transform', transform);
+
         // Ajusta tamaño de las etiquetas de pines cuando se hace zoom
         g.selectAll('.pin-group').attr('transform', d => {
             const [x, y] = projection(d.coords);
             return `translate(${x},${y}) scale(${1 / transform.k})`;
         });
+
         // Ajusta grosor de las líneas
         g.selectAll('.mesh-line').style('stroke-width', 1.5 / transform.k);
+
         // Elimina tooltips existentes durante el zoom
         d3.selectAll('.map-tooltip-container').remove();
     });
+
 svg.call(zoomBehaviour);
 
 // Carga los datos geográficos del mundo y dibuja el mapa
@@ -243,6 +262,7 @@ d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
         .on('mouseout', function() {
             d3.select(this).attr('fill', '#1a1a1a');
         });
+
     // Define conexiones entre hubs para la animación de líneas
     const hubs = [
         { source: 'Mendoza, AR', target: 'Shanghai, CN' },
@@ -253,11 +273,13 @@ d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
         { source: 'Mendoza, AR', target: 'Buenos Aires, AR' },
         { source: 'Madrid (Palencia), ES', target: 'Londres, UK' }
     ];
+
     // Helper para obtener coordenadas de un sitio por nombre
     function getCoords(name) {
         const loc = locations.find(l => l.name === name);
         return loc ? loc.coords : [0, 0];
     }
+
     // Dibuja líneas de conexión con curvas
     g.selectAll('.mesh-line')
         .data(hubs)
@@ -279,6 +301,7 @@ d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
         .style('stroke-dasharray', '4,4')
         .style('filter', 'drop-shadow(0 0 3px #FACC15)')
         .style('pointer-events', 'none');
+
     // Agrupa los pines
     const pinGroups = g.selectAll('.pin-group')
         .data(locations)
@@ -286,6 +309,7 @@ d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
         .append('g')
         .attr('class', 'pin-group')
         .attr('transform', d => `translate(${projection(d.coords)})`);
+
     // Añade círculos de pulsación
     pinGroups.append('circle')
         .attr('r', 8)
@@ -297,6 +321,7 @@ d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
         .attr('to', 12)
         .attr('dur', '1.5s')
         .attr('repeatCount', 'indefinite');
+
     pinGroups.append('circle')
         .attr('r', 8)
         .attr('fill', d => colorMap[d.type])
@@ -306,6 +331,7 @@ d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
         .attr('values', '0.8;0;0.8')
         .attr('dur', '1.5s')
         .attr('repeatCount', 'indefinite');
+
     // Círculo central (pin visible)
     pinGroups.append('circle')
         .attr('r', 4)
@@ -317,11 +343,13 @@ d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
         .on('mouseover', function(event, d) {
             // Elimina cualquier tooltip existente
             d3.select('.map-tooltip-container').remove();
+
             // Crea tooltip y ubícalo en el body para evitar overflow
             const tooltip = d3.select('body').append('div')
                 .attr('class', 'map-tooltip-container map-tooltip-visible')
                 .style('left', `${event.pageX}px`)
                 .style('top', `${event.pageY - 20}px`);
+
             tooltip.html(`
                 <div class="flex items-center gap-3 mb-3 border-b border-white/10 pb-3">
                     <div class="w-10 h-10 rounded-lg flex items-center justify-center text-black font-bold text-lg" style="background-color: ${colorMap[d.type]}">
@@ -343,15 +371,18 @@ d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
                     <a href="#" class="text-white hover:text-[${colorMap[d.type]}]"><i class="fa-solid fa-globe"></i></a>
                 </div>
             `);
+
             // Reposicionamiento inteligente dentro del viewport
             const tooltipNode = tooltip.node();
             const tooltipRect = tooltipNode.getBoundingClientRect();
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
+
             let left = event.pageX;
             let top = event.pageY - 20;
             let transformX = -50;
             let transformY = -100;
+
             // Bordes laterales
             if (event.clientX + (tooltipRect.width / 2) > viewportWidth) {
                 transformX = -100;
@@ -360,6 +391,7 @@ d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
                 transformX = 0;
                 left = event.pageX + 10;
             }
+
             // Bordes superior e inferior
             if (event.clientY - tooltipRect.height < 20) {
                 transformY = 0;
@@ -369,11 +401,13 @@ d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
                 transformY = -100;
                 top = event.pageY - 20;
             }
+
             tooltip.style('transform', `translate(${transformX}%, ${transformY}%)`);
         })
         .on('mouseout', function() {
             // Los tooltips se cierran al hacer clic fuera (ver body click)
         });
+
     // Click en el body cierra tooltips si no se hace click en un pin o tooltip
     d3.select('body').on('click', function(event) {
         if (event.target.tagName !== 'circle' && !event.target.closest('.map-tooltip-container')) {
@@ -386,6 +420,7 @@ d3.json('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/w
 function zoomIn() {
     svg.transition().duration(500).call(zoomBehaviour.scaleBy, 1.5);
 }
+
 function zoomOut() {
     svg.transition().duration(500).call(zoomBehaviour.scaleBy, 0.75);
 }
@@ -394,8 +429,10 @@ function zoomOut() {
 function zoomTo(region) {
     // Elimina estado activo en todos los botones
     document.querySelectorAll('#global button').forEach(b => b.classList.remove('text-accent-gold', 'border-accent-gold'));
+
     // Variables de traslación y escala
     let x, y, k;
+
     if (region === 'global') {
         x = width / 2;
         y = height / 1.5;
@@ -419,6 +456,7 @@ function zoomTo(region) {
         const coords = projection([-0.12, 51.5]);
         x = coords[0]; y = coords[1]; k = 6;
     }
+
     svg.transition().duration(1500).call(
         zoomBehaviour.transform,
         d3.zoomIdentity.translate(width / 2, height / 2).scale(k).translate(-x, -y)
@@ -442,12 +480,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeVideoBtn = document.getElementById('close-video');
     const videoElement = document.getElementById('corporate-video');
     let player;
+
     // Función para abrir el modal y reproducir el video
     function openVideoModal(event) {
         event.preventDefault();
         if (!videoModal) return;
         videoModal.classList.remove('hidden');
         videoModal.classList.add('flex');
+
         // Inicializa el reproductor Plyr solo una vez
         if (!player && window.Plyr) {
             player = new Plyr(videoElement, {
@@ -473,33 +513,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+
         // Reproduce el video si el reproductor existe
         if (player) {
             player.play();
         } else if (videoElement) {
             videoElement.play();
         }
+
         // Evita el scroll en el fondo
         document.body.classList.add('overflow-hidden');
     }
+
     // Función para cerrar el modal y pausar el video
     function closeVideoModal() {
         if (!videoModal) return;
         videoModal.classList.add('hidden');
         videoModal.classList.remove('flex');
+
         if (player) {
             player.pause();
         } else if (videoElement) {
             videoElement.pause();
         }
+
         document.body.classList.remove('overflow-hidden');
     }
+
     if (openVideoBtn) {
         openVideoBtn.addEventListener('click', openVideoModal);
     }
     if (closeVideoBtn) {
         closeVideoBtn.addEventListener('click', closeVideoModal);
     }
+
     // Cierra el modal al hacer clic en el fondo oscuro
     if (videoModal) {
         videoModal.addEventListener('click', (event) => {
@@ -509,10 +556,105 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
     // Cierra con tecla ESC
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && videoModal && !videoModal.classList.contains('hidden')) {
             closeVideoModal();
         }
     });
+});
+
+
+// ------------------------------------------------------------
+// Content Engine (FREE) — data/content.json
+// ------------------------------------------------------------
+// Objetivo: habilitar contenido editable sin CMS de pago.
+// Este bloque lee /data/content.json y aplica cambios al Hero
+// de la página actual (index/sostenibilidad por ahora).
+//
+// Si no existe content.json o no hay datos para la página, no hace nada.
+document.addEventListener('DOMContentLoaded', () => {
+    function getPageSlug() {
+        const p = window.location.pathname || '/';
+
+        // Netlify / root
+        if (p === '/' || p === '') return 'index';
+        if (p.endsWith('/')) return 'index';
+
+        const last = p.split('/').filter(Boolean).pop();
+        if (!last) return 'index';
+
+        if (last.toLowerCase() === 'index.html') return 'index';
+        if (last.toLowerCase().endsWith('.html')) return last.slice(0, -5);
+
+        return last;
+    }
+
+    function applyHero(heroData) {
+        if (!heroData) return;
+
+        // Root: prefer #hero (index), else first <header> (sostenibilidad, equipo, prensa, etc.)
+        const heroRoot = document.getElementById('hero') || document.querySelector('header');
+        if (!heroRoot) return;
+
+        // Background image:
+        // - index: #hero-bg img
+        // - others: first <header> img
+        const bgImg = document.querySelector('#hero-bg img') || heroRoot.querySelector('img');
+        if (bgImg && heroData.bgImage) {
+            bgImg.src = heroData.bgImage;
+        }
+
+        // Title
+        const h1 = heroRoot.querySelector('h1');
+        if (h1 && heroData.titleHtml) {
+            h1.innerHTML = heroData.titleHtml;
+        }
+
+        // Description (first paragraph inside hero/header)
+        const p = heroRoot.querySelector('p');
+        if (p && heroData.descHtml) {
+            p.innerHTML = heroData.descHtml;
+        }
+
+        // Tagline pill (only if page has the pill; index does)
+        // If tagline is null/empty -> hide pill
+        if (heroData.tagline !== undefined) {
+            const pill = heroRoot.querySelector('.inline-flex');
+            if (pill) {
+                if (heroData.tagline && String(heroData.tagline).trim().length > 0) {
+                    pill.style.display = '';
+                    const spans = pill.querySelectorAll('span');
+                    if (spans && spans.length) {
+                        spans[spans.length - 1].textContent = heroData.tagline;
+                    }
+                } else {
+                    pill.style.display = 'none';
+                }
+            }
+        }
+    }
+
+    async function run() {
+        const slug = getPageSlug();
+
+        try {
+            const res = await fetch('/data/content.json', { cache: 'no-store' });
+            if (!res.ok) return;
+
+            const json = await res.json();
+            const heroData = json && json.pages && json.pages[slug] && json.pages[slug].hero;
+
+            if (heroData) {
+                applyHero(heroData);
+            }
+        } catch (e) {
+            // Silencioso: no rompemos la web si el JSON no está disponible
+            // (ideal para desarrollo o si hay un deploy parcial)
+            // console.warn('[AISA Content Engine] No se pudo cargar content.json', e);
+        }
+    }
+
+    run();
 });
