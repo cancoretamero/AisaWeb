@@ -1,11 +1,10 @@
 // scripts/build.mjs
 // AISA Build Pipeline (fase 1: copia segura a /dist)
+// + Inyección automática del theme toggle (dark/light) en todas las páginas públicas (.html)
 //
-// Objetivo ahora: NO cambiar tu web pública.
-// Este script solo genera /dist replicando el sitio actual.
-//
-// Objetivo próximo: usar este mismo script para inyectar contenido editable
-// (p.ej. data/content.json) en los HTML al publicar.
+// Objetivo: NO tocar tu web página por página.
+// Este script genera /dist replicando el sitio actual e inyectando, al build time,
+// los assets y el script necesarios para el botón de modo claro/oscuro.
 //
 // Requisitos: Node >= 18 (ya lo indicas en package.json)
 
@@ -54,6 +53,87 @@ const EXT_ALLOWLIST = new Set([
   ".webmanifest"
 ]);
 
+// ------------------------------------------------------------
+// Theme toggle injection (public pages only)
+// ------------------------------------------------------------
+const THEME_MARKER = "AISA_THEME_TOGGLE_INJECTED";
+
+function normalizePath(p) {
+  return p.split(path.sep).join("/");
+}
+
+function isConsoleHtml(srcPath) {
+  const n = normalizePath(srcPath);
+  return n.includes("/console/") && n.toLowerCase().endsWith(".html");
+}
+
+function stripHtmlDarkClass(html) {
+  return html.replace(
+    /<html\b([^>]*?)class=(['"])([^'"]*)(\2)([^>]*)>/i,
+    (match, pre, q, cls, _q2, post) => {
+      const cleaned = cls
+        .split(/\s+/)
+        .filter((c) => c && c !== "dark")
+        .join(" ");
+      return `<html${pre}class=${q}${cleaned}${q}${post}>`;
+    }
+  );
+}
+
+function injectThemeToggle(html, srcPath) {
+  // Por seguridad, NO inyectamos en /console (admin) por defecto.
+  // Si también lo quieres en la consola, elimina este guard.
+  if (isConsoleHtml(srcPath)) {
+    return html;
+  }
+
+  // Idempotente: evita doble inyección
+  if (
+    html.includes(THEME_MARKER) ||
+    html.includes("/js/theme-toggle.js") ||
+    html.includes("/css/theme-toggle.css")
+  ) {
+    return stripHtmlDarkClass(html);
+  }
+
+  let out = stripHtmlDarkClass(html);
+
+  // Script ultra temprano para evitar “flash” de tema incorrecto
+  const earlyInit = `
+<script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var stored = null;
+      try { stored = localStorage.getItem('theme'); } catch (e) {}
+      var prefersDark = false;
+      try { prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; } catch (e) {}
+      if (stored === 'dark' || (!stored && prefersDark)) {
+        html.classList.add('dark');
+      } else {
+        html.classList.remove('dark');
+      }
+    } catch (e) {}
+  })();
+</script>
+`.trim();
+
+  const headInject = `
+<!-- ${THEME_MARKER} -->
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/css/theme-toggle.css">
+<script src="/js/theme-toggle.js" defer></script>
+`.trim();
+
+  // 1) Early init justo después de <head ...>
+  out = out.replace(/<head\b([^>]*)>/i, (m, attrs) => `<head${attrs}>\n${earlyInit}\n`);
+
+  // 2) Assets + lógica defer justo antes de </head>
+  out = out.replace(/<\/head>/i, `\n${headInject}\n</head>`);
+
+  return out;
+}
+
 async function exists(p) {
   try {
     await fs.access(p);
@@ -69,6 +149,18 @@ async function ensureDir(dir) {
 
 async function copyFile(src, dst) {
   await ensureDir(path.dirname(dst));
+
+  const ext = path.extname(src).toLowerCase();
+
+  // HTML se procesa (inyección del toggle)
+  if (ext === ".html") {
+    const raw = await fs.readFile(src, "utf8");
+    const transformed = injectThemeToggle(raw, src);
+    await fs.writeFile(dst, transformed, "utf8");
+    return;
+  }
+
+  // El resto se copia byte-a-byte
   await fs.copyFile(src, dst);
 }
 
@@ -85,7 +177,7 @@ async function copyDir(srcDir, dstDir) {
     } else if (ent.isFile()) {
       await copyFile(src, dst);
     }
-    // Symlinks/others: no se esperan en este repo; ignoramos por seguridad
+    // Symlinks/otros: no se esperan; ignoramos por seguridad
   }
 }
 
