@@ -1,12 +1,11 @@
 // console/app.js
 // AISA Liquid Command Center — Console MVP (sin CMS todavía)
 // - Navegación de vistas (Dashboard / Editor / etc.)
-// - Editor demo: páginas + layout + selección + propiedades
-// - Guardar (local demo)
-// - Publicar (REAL): llama a /.netlify/functions/deploy
+// - Editor: páginas + layout + selección + propiedades
+// - Guardar (AHORA: local + commit de /data/content.json vía Netlify Function)
+// - Publicar (REAL): commit (si hay cambios) + llama a /.netlify/functions/deploy
 //
-// Nota: esto es “compacto” a propósito. Cuando conectemos Strapi,
-// las funciones save/publish pasarán a persistir en CMS.
+// Importante: NO elimina funcionalidades. Amplía el app existente con persistencia.
 
 (() => {
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -14,13 +13,34 @@
 
   const ENDPOINT_DEPLOY = "/.netlify/functions/deploy";
 
+  // Persistencia FREE (GitHub) ya disponible en tu repo:
+  // netlify/functions/content.js (POST { content: {...} })
+  const ENDPOINT_CONTENT = "/.netlify/functions/content";
+  const CONTENT_URL = "/data/content.json";
+
+  // Si activas AISA_CONSOLE_TOKEN en Netlify, la consola enviará este token
+  // (lo pedirá con el modal-auth cuando reciba 403).
+  const TOKEN_STORAGE_KEY = "aisa.console.token";
+
+  // Resolver del modal de token
+  let tokenResolver = null;
+
   const state = {
     view: "dashboard",
     pages: [],
     activePageId: null,
     layout: [],
     selectedBlockId: null,
+
+    // dirty: hay cambios en la vista actual (layout) que no están persistidos
     dirty: false,
+
+    // needsCommit: el contenido en memoria todavía NO está comiteado a /data/content.json
+    needsCommit: false,
+
+    // Content loaded from /data/content.json
+    contentJson: null,
+    contentLoaded: false,
   };
 
   // ---------------------------
@@ -35,11 +55,46 @@
       "'": "&#039;",
     }[c]));
 
-  const nowHuman = () => new Date().toLocaleString();
-
   function setSrStatus(msg) {
     const el = $("#sr-status");
     if (el) el.textContent = msg;
+  }
+
+  // ---------------------------
+  // Status indicator (topbar) — reutiliza cmsLabel/cmsDot/cmsPing
+  // ---------------------------
+  function setIndicator(labelText, mode = "warn") {
+    const label = $("#cmsLabel");
+    const dot = $("#cmsDot");
+    const ping = $("#cmsPing");
+
+    if (label) label.textContent = labelText;
+
+    if (!dot || !ping) return;
+
+    if (mode === "ok") {
+      dot.className = "relative w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_10px_#10B981]";
+      ping.className = "absolute inset-0 bg-emerald-500 rounded-full animate-ping opacity-40";
+      return;
+    }
+
+    if (mode === "error") {
+      dot.className = "relative w-3 h-3 bg-red-500 rounded-full shadow-[0_0_10px_#EF4444]";
+      ping.className = "absolute inset-0 bg-red-500 rounded-full animate-ping opacity-40";
+      return;
+    }
+
+    // warn
+    dot.className = "relative w-3 h-3 bg-yellow-400 rounded-full shadow-[0_0_10px_#FACC15]";
+    ping.className = "absolute inset-0 bg-yellow-400 rounded-full animate-ping opacity-40";
+  }
+
+  function getStoredToken() {
+    return sessionStorage.getItem(TOKEN_STORAGE_KEY) || "";
+  }
+
+  function setStoredToken(token) {
+    if (token) sessionStorage.setItem(TOKEN_STORAGE_KEY, token);
   }
 
   // ---------------------------
@@ -81,7 +136,6 @@
 
     el.querySelector("button").addEventListener("click", () => el.remove());
     root.appendChild(el);
-
     setTimeout(() => el.remove(), ms);
   }
 
@@ -101,7 +155,63 @@
   }
 
   function closeAllModals() {
+    // Si hay un token prompt pendiente, se cancela
+    if (tokenResolver) {
+      tokenResolver("");
+      tokenResolver = null;
+    }
     ["modal-auth", "modal-publish"].forEach(closeModal);
+  }
+
+  // Reutilizamos modal-auth para pedir token si hay AISA_CONSOLE_TOKEN configurado
+  function requestConsoleToken() {
+    return new Promise((resolve) => {
+      tokenResolver = resolve;
+
+      // Ajusta copy del modal para “Token”
+      const title = $("#authTitle");
+      if (title) title.textContent = "Autorización de consola";
+
+      // Oculta el campo email si existe (opcional)
+      const email = $("#authEmail");
+      if (email && email.parentElement) {
+        email.parentElement.style.display = "none";
+      }
+
+      const pass = $("#authPassword");
+      if (pass) {
+        pass.value = "";
+        pass.placeholder = "Token de consola";
+      }
+
+      openModal("modal-auth");
+      if (pass) pass.focus();
+    });
+  }
+
+  function wireAuthModal() {
+    const form = $("#authForm");
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const pass = $("#authPassword");
+      const token = pass ? String(pass.value || "").trim() : "";
+      if (!token) {
+        toast({ title: "Token", message: "Introduce el token para continuar.", tone: "warn" });
+        return;
+      }
+
+      setStoredToken(token);
+      closeModal("modal-auth");
+
+      toast({ title: "Token OK", message: "Token guardado para esta sesión." });
+
+      if (tokenResolver) {
+        tokenResolver(token);
+        tokenResolver = null;
+      }
+    });
   }
 
   // ---------------------------
@@ -110,7 +220,6 @@
   function showView(viewName) {
     state.view = viewName;
 
-    // Toggle view sections
     const views = $$("[data-view]");
     views.forEach((v) => {
       const active = v.dataset.view === viewName;
@@ -121,7 +230,6 @@
       v.classList.toggle("translate-y-4", !active);
     });
 
-    // Update nav active styles
     const navLinks = $$('[data-action="switch-view"]');
     navLinks.forEach((a) => {
       const isActive = a.dataset.view === viewName;
@@ -131,7 +239,6 @@
         a.className =
           "group flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium text-black bg-accent-gold shadow-[0_0_15px_rgba(250,204,21,0.3)] transition-all transform scale-[1.02]";
 
-        // add pulse dot if not exists
         if (!a.querySelector(".animate-pulse")) {
           const dot = document.createElement("div");
           dot.className = "ml-auto w-2 h-2 rounded-full bg-black animate-pulse";
@@ -146,7 +253,6 @@
       }
     });
 
-    // Breadcrumb current label
     const crumb = $("#breadcrumbCurrent");
     if (crumb) {
       const map = {
@@ -160,13 +266,12 @@
       crumb.textContent = map[viewName] || viewName;
     }
 
-    // Page status pill only in editor
     const pill = $("#pageStatusPill");
     if (pill) pill.classList.toggle("hidden", viewName !== "editor");
   }
 
   // ---------------------------
-  // DEMO content model (hasta conectar CMS)
+  // DEMO content model base (seguimos conservando cards/metrics etc.)
   // ---------------------------
   function demoPages() {
     const iso = new Date().toISOString();
@@ -271,6 +376,56 @@
   };
 
   // ---------------------------
+  // Content.json <-> editor mapping (por ahora: HERO)
+  // ---------------------------
+  function applyContentToPages(content) {
+    if (!content || typeof content !== "object" || !content.pages) return;
+
+    state.pages.forEach((page) => {
+      const hero = content.pages?.[page.slug]?.hero;
+      if (!hero) return;
+
+      const heroBlock = (page.layout || []).find((b) => b.type === "hero");
+      if (!heroBlock) return;
+
+      if (hero.bgImage) heroBlock.props.bgImage = hero.bgImage;
+      heroBlock.props.subtitle = hero.tagline ?? ""; // null -> ""
+      if (hero.titleHtml) heroBlock.props.title = hero.titleHtml;
+      if (hero.descHtml) heroBlock.props.desc = hero.descHtml;
+
+      // No tocamos métricas ni el resto de layout
+    });
+  }
+
+  function buildContentFromPages(baseContent) {
+    const out = baseContent && typeof baseContent === "object"
+      ? JSON.parse(JSON.stringify(baseContent))
+      : { schemaVersion: 1, pages: {} };
+
+    if (typeof out.schemaVersion !== "number") out.schemaVersion = 1;
+    if (!out.pages || typeof out.pages !== "object") out.pages = {};
+
+    // Actualiza heroes desde el estado actual
+    state.pages.forEach((page) => {
+      const heroBlock = (page.layout || []).find((b) => b.type === "hero");
+      if (!heroBlock) return;
+
+      out.pages[page.slug] = out.pages[page.slug] || {};
+      const tagline = String(heroBlock.props?.subtitle || "").trim();
+
+      out.pages[page.slug].hero = {
+        bgImage: heroBlock.props?.bgImage || "",
+        tagline: tagline.length ? tagline : null,
+        titleHtml: heroBlock.props?.title || "",
+        descHtml: heroBlock.props?.desc || "",
+      };
+    });
+
+    out.updatedAt = new Date().toISOString();
+    return out;
+  }
+
+  // ---------------------------
   // UI binding: Page pills
   // ---------------------------
   function setPagePills(page) {
@@ -298,6 +453,7 @@
     state.layout = page ? JSON.parse(JSON.stringify(page.layout || [])) : [];
     state.selectedBlockId = null;
     state.dirty = false;
+    // no tocamos needsCommit aquí; es global y se limpia tras guardar
 
     setPagePills(page);
     renderCanvas();
@@ -354,15 +510,19 @@
         );
 
         const bg = block.props?.bgImage || "";
+        const subtitle = String(block.props?.subtitle || "").trim();
+
         wrapper.innerHTML = `
           <div class="block-label"><i class="fa-solid fa-pen-nib mr-1"></i> HERO</div>
           <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image:url('${bg}')"></div>
           <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
 
           <div class="relative z-10">
-            <span class="text-accent-gold text-xs font-bold uppercase tracking-[0.2em] mb-6 block">
-              ${block.props?.subtitle || ""}
-            </span>
+            ${subtitle ? `
+              <span class="text-accent-gold text-xs font-bold uppercase tracking-[0.2em] mb-6 block">
+                ${escapeHtml(subtitle)}
+              </span>` : ""
+            }
             <h1 class="font-display text-5xl md:text-7xl font-bold text-white mb-8 text-glow leading-tight">
               ${block.props?.title || ""}
             </h1>
@@ -452,7 +612,6 @@
       return;
     }
 
-    // Group title
     const groupLabel = document.createElement("div");
     groupLabel.className = "space-y-4";
     groupLabel.innerHTML = `
@@ -494,8 +653,9 @@
           field.type === "textarea" ? input.value.replace(/\n/g, "<br>") : input.value;
 
         state.dirty = true;
+        state.needsCommit = true;
+
         renderCanvas();
-        // maintain selection UI without re-click
         renderProperties();
       });
 
@@ -592,6 +752,8 @@
       });
 
       state.dirty = true;
+      state.needsCommit = true;
+
       renderCanvas();
       toast({ title: "Bloque añadido", message: def.label });
       setSrStatus(`Bloque añadido: ${def.label}`);
@@ -619,22 +781,92 @@
   }
 
   // ---------------------------
-  // Save / Publish
+  // Save / Publish — ahora persiste a repo
   // ---------------------------
-  function saveDraftLocal() {
+  function saveDraftLocal({ quiet = false } = {}) {
     const page = getActivePage();
     if (!page) {
-      toast({ title: "Sin página", message: "Selecciona una página antes de guardar.", tone: "warn" });
-      return;
+      if (!quiet) toast({ title: "Sin página", message: "Selecciona una página antes de guardar.", tone: "warn" });
+      return false;
     }
 
     page.layout = JSON.parse(JSON.stringify(state.layout));
     page.updatedAt = new Date().toISOString();
+
+    // Localmente ya no está “dirty”, pero sigue habiendo “needsCommit” hasta que commitea.
     state.dirty = false;
+    state.needsCommit = true;
 
     setPagePills(page);
-    toast({ title: "Guardado", message: "Borrador actualizado (modo demo)." });
-    setSrStatus("Borrador guardado.");
+
+    if (!quiet) {
+      toast({ title: "Guardado", message: "Cambios preparados para commit." });
+      setSrStatus("Cambios preparados para commit.");
+    }
+    return true;
+  }
+
+  async function postContentJson(content, token) {
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers["x-aisa-console-token"] = token;
+
+    const res = await fetch(ENDPOINT_CONTENT, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ content }),
+    });
+
+    const data = await res.json().catch(() => ({}));
+    return { res, data };
+  }
+
+  async function commitContentJson() {
+    // Construimos JSON desde páginas (solo HERO por ahora)
+    const payload = buildContentFromPages(state.contentJson);
+
+    let token = getStoredToken();
+    let { res, data } = await postContentJson(payload, token);
+
+    // Si hay token requerido, pedimos token y reintentamos una vez
+    if (res.status === 403) {
+      toast({ title: "Auth", message: "Token requerido para guardar.", tone: "warn" });
+      token = await requestConsoleToken();
+      if (!token) throw new Error("Token no proporcionado");
+      setStoredToken(token);
+      ({ res, data } = await postContentJson(payload, token));
+    }
+
+    if (!res.ok || !data.ok) {
+      throw new Error(data?.detail || data?.error || `Save failed (${res.status})`);
+    }
+
+    // Éxito
+    state.contentJson = payload;
+    state.contentLoaded = true;
+    state.needsCommit = false;
+
+    setIndicator(data.changed ? "SAVED" : "NO CHANGES", "ok");
+    toast({
+      title: "Contenido",
+      message: data.changed ? "Commit realizado (data/content.json)" : "No había cambios.",
+    });
+
+    return true;
+  }
+
+  async function saveDraftAndCommit() {
+    const ok = saveDraftLocal({ quiet: true });
+    if (!ok) return false;
+
+    try {
+      setIndicator("SAVING…", "warn");
+      await commitContentJson();
+      return true;
+    } catch (e) {
+      setIndicator("SAVE ERROR", "error");
+      toast({ title: "Error guardando", message: e.message || String(e), tone: "error", ms: 4500 });
+      return false;
+    }
   }
 
   async function triggerDeploy() {
@@ -661,11 +893,6 @@
     const page = getActivePage();
     if (!page) return;
 
-    // If there are local changes, force save first (demo safety)
-    if (state.dirty) {
-      saveDraftLocal();
-    }
-
     const btn = $("#btnConfirmPublish");
     const oldText = btn?.textContent || "Confirmar";
 
@@ -675,10 +902,14 @@
         btn.textContent = "Publicando…";
       }
 
-      // 1) Trigger deploy
+      // Si hay cambios locales o pendientes de commit, guardamos+commit antes del deploy
+      if (state.dirty || state.needsCommit) {
+        const ok = await saveDraftAndCommit();
+        if (!ok) throw new Error("No se pudo guardar/commit. Publicación cancelada.");
+      }
+
       await triggerDeploy();
 
-      // 2) Mark published (demo)
       page.status = "published";
       page.updatedAt = new Date().toISOString();
       setPagePills(page);
@@ -734,7 +965,6 @@
       `;
     }
 
-    // Activity table
     const tbody = $("#activityBody");
     if (tbody) {
       tbody.innerHTML = `
@@ -773,7 +1003,10 @@
   // Event wiring
   // ---------------------------
   function wireTopbarButtons() {
-    $("#btnSave")?.addEventListener("click", saveDraftLocal);
+    $("#btnSave")?.addEventListener("click", async () => {
+      await saveDraftAndCommit();
+    });
+
     $("#btnPublish")?.addEventListener("click", openPublishModal);
     $("#btnConfirmPublish")?.addEventListener("click", confirmPublish);
 
@@ -792,13 +1025,27 @@
       select.appendChild(opt);
     });
 
-    // default first
     if (state.pages[0]) {
       select.value = state.pages[0].id;
       setActivePage(select.value);
     }
 
-    select.addEventListener("change", () => setActivePage(select.value));
+    select.addEventListener("change", async () => {
+      // Guardrail: evitar perder cambios
+      if (state.dirty || state.needsCommit) {
+        const ok = window.confirm("Tienes cambios sin guardar. ¿Quieres descartarlos y cambiar de página?");
+        if (!ok) {
+          // restaurar selección anterior
+          select.value = state.activePageId || "";
+          return;
+        }
+        state.dirty = false;
+        // si descartas, también descartas commit pendiente
+        state.needsCommit = false;
+      }
+
+      setActivePage(select.value);
+    });
   }
 
   function wireGlobalDelegation() {
@@ -822,6 +1069,13 @@
 
       if (action === "close-modal") {
         e.preventDefault();
+
+        // si cierran auth mientras esperamos token, cancelamos
+        if (el.dataset.target === "modal-auth" && tokenResolver) {
+          tokenResolver("");
+          tokenResolver = null;
+        }
+
         closeModal(el.dataset.target);
         return;
       }
@@ -840,7 +1094,11 @@
 
       if (action === "open-health") {
         e.preventDefault();
-        toast({ title: "Sistema", message: "Console en modo DEMO (CMS aún no conectado).", tone: "warn" });
+        const msg =
+          state.contentLoaded
+            ? "Content Engine: activo. Guardar hace commit en GitHub."
+            : "Content Engine: no disponible (content.json no cargó).";
+        toast({ title: "Sistema", message: msg, tone: state.contentLoaded ? "info" : "warn" });
         return;
       }
 
@@ -856,8 +1114,7 @@
       }
     });
 
-    // Modal overlay click closes (has data-action close-modal already), and ESC closes all
-    document.addEventListener("keydown", (e) => {
+    document.addEventListener("keydown", async (e) => {
       if (e.key === "Escape") closeAllModals();
 
       // Cmd/Ctrl+K: focus search
@@ -866,10 +1123,10 @@
         $("#globalSearch")?.focus();
       }
 
-      // Cmd/Ctrl+S: save
+      // Cmd/Ctrl+S: guardar+commit
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "s") {
         e.preventDefault();
-        saveDraftLocal();
+        await saveDraftAndCommit();
       }
 
       // Cmd/Ctrl+Enter: publish
@@ -879,7 +1136,6 @@
       }
     });
 
-    // Sidebar brandArea keyboard
     $("#brandArea")?.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -889,25 +1145,39 @@
   }
 
   // ---------------------------
-  // CMS indicator (DEMO)
+  // Content load
   // ---------------------------
-  function setCmsIndicatorDemo() {
-    const label = $("#cmsLabel");
-    const dot = $("#cmsDot");
-    const ping = $("#cmsPing");
-
-    if (label) label.textContent = "DEMO";
-    if (dot) dot.className = "relative w-3 h-3 bg-yellow-400 rounded-full shadow-[0_0_10px_#FACC15]";
-    if (ping) ping.className = "absolute inset-0 bg-yellow-400 rounded-full animate-ping opacity-40";
+  async function loadContentJson() {
+    try {
+      const res = await fetch(CONTENT_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      if (!json || typeof json !== "object") throw new Error("Invalid JSON");
+      state.contentJson = json;
+      state.contentLoaded = true;
+      setIndicator("CONTENT OK", "ok");
+      return json;
+    } catch {
+      state.contentLoaded = false;
+      setIndicator("DEMO", "warn");
+      return null;
+    }
   }
 
   // ---------------------------
   // Init
   // ---------------------------
-  function init() {
-    setCmsIndicatorDemo();
+  async function init() {
+    wireAuthModal();
 
+    setIndicator("LOADING…", "warn");
     state.pages = demoPages();
+
+    // Intenta hidratar heroes desde /data/content.json
+    const content = await loadContentJson();
+    if (content) {
+      applyContentToPages(content);
+    }
 
     showView("dashboard");
     seedDashboard();
@@ -918,7 +1188,11 @@
     wireCanvasSelection();
     wireGlobalDelegation();
 
-    toast({ title: "Console lista", message: "Publicar ya llama a Netlify Deploy.", tone: "info" });
+    toast({
+      title: "Console lista",
+      message: "Guardar comitea data/content.json. Publicar dispara deploy.",
+      tone: "info",
+    });
     setSrStatus("Console lista.");
   }
 
@@ -928,3 +1202,4 @@
     init();
   }
 })();
+
