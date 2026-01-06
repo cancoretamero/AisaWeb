@@ -60,6 +60,17 @@
     if (el) el.textContent = msg;
   }
 
+  /**
+   * En algunos entornos el target puede ser un TextNode (nodeType===3).
+   * Esta función normaliza el target para poder usar closest() sin romper.
+   */
+  function getActionElementFromEvent(e) {
+    const raw = e?.target;
+    const node = raw && raw.nodeType === 1 ? raw : raw?.parentElement; // 1 = ELEMENT_NODE
+    if (!node || typeof node.closest !== "function") return null;
+    return node.closest("[data-action]");
+  }
+
   // ---------------------------
   // Status indicator (topbar) — reutiliza cmsLabel/cmsDot/cmsPing
   // ---------------------------
@@ -1049,15 +1060,19 @@
   }
 
   function wireGlobalDelegation() {
+    // IMPORTANTE:
+    // Usamos CAPTURA (3er parámetro true) para que el handler funcione
+    // incluso si algún componente/interacción hace stopPropagation() en bubble.
     document.addEventListener("click", (e) => {
-      const el = e.target.closest("[data-action]");
+      const el = getActionElementFromEvent(e);
       if (!el) return;
 
       const action = el.dataset.action;
 
       if (action === "switch-view") {
         e.preventDefault();
-        showView(el.dataset.view);
+        const view = el.dataset.view || "dashboard";
+        showView(view);
         return;
       }
 
@@ -1108,11 +1123,18 @@
         return;
       }
 
+      // Botón “Ir al Gestor” (Dashboard)
+      if (action === "open-tasks") {
+        e.preventDefault();
+        toast({ title: "Tareas", message: "Gestor de tareas: en construcción.", tone: "info" });
+        return;
+      }
+
       if (action === "back") {
         e.preventDefault();
         showView("dashboard");
       }
-    });
+    }, true); // <- CAPTURE
 
     document.addEventListener("keydown", async (e) => {
       if (e.key === "Escape") closeAllModals();
@@ -1202,4 +1224,3 @@
     init();
   }
 })();
-
