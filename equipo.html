@@ -24,17 +24,19 @@
                         display: ['"Montserrat"', 'sans-serif'],
                     },
                     colors: {
+                        light: {
+                            bg: '#F8FAFC',
+                            surface: '#FFFFFF',
+                            text: '#0F172A',
+                            subtext: '#475569'
+                        },
                         dark: {
-                            bg: '#020202',
-                            surface: '#0A0A0A',
-                            card: '#121212',
+                            bg: '#050505',
+                            surface: '#0F0F0F',
                         },
                         accent: {
-                            gold: '#FACC15', // Gold standard for nav
-                            orange: '#F97316',     /* Primary for this page content */
-                            orangeGlow: '#FB923C',
-                            orangeDark: '#C2410C',
-                            gray: '#9CA3AF'
+                            gold: '#D97706',
+                            goldBright: '#FACC15',
                         }
                     },
                     backgroundImage: {
@@ -78,11 +80,17 @@
 
         /* --- NAV GLASS --- */
         .glass-apple {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+        .dark .glass-apple {
+            background: rgba(20, 20, 20, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            color: white;
         }
 
         /* --- GLASSMORPHISM (Page Specific) --- */
@@ -178,44 +186,38 @@
         .modal-overlay-global.active { opacity: 1; visibility: visible; }
     </style>
 </head>
-<body class="antialiased font-sans">
-
-    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg">
-        <i class="fa-solid fa-moon dark:hidden"></i>
-        <i class="fa-solid fa-sun hidden dark:block"></i>
-    </button>
-
-    <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
+<body class="bg-slate-50 text-slate-900 dark:bg-dark-bg dark:text-slate-600 dark:text-gray-200 transition-colors duration-300 antialiased font-sans">
+<nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
         <div class="max-w-[1400px] mx-auto px-2">
             <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-2xl">
                 <a href="index.html" class="flex items-center group">
                     <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="h-8 w-auto" />
                 </a>
                 
-                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none">
-                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-300">Inicio</a>
+                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none text-slate-600 dark:text-slate-600 dark:text-gray-300">
+                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-slate-600 dark:text-gray-300">Inicio</a>
                     
                     <div class="relative group">
-                        <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 transition-all text-accent-gold">
+                        <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 transition-all text-accent-gold dark:text-accent-goldBright">
                             Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
                         </a>
                         <div class="mt-2 flex flex-col gap-2 lg:hidden">
-                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">Quienes Somos</a>
-                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">El Equipo</a>
+                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-600 dark:text-gray-300/90 hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-600 dark:text-gray-300/90 hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">El Equipo</a>
                         </div>
                         <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 lg:group-hover:opacity-100 lg:group-hover:scale-100 transition-all origin-top-left z-50 hidden lg:block lg:group-hover:block">
-                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">Quienes Somos</a>
-                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-accent-gold uppercase tracking-widest hover:text-white transition-colors bg-white/5">El Equipo</a>
+                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-slate-600 dark:text-gray-200 uppercase tracking-widest hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-accent-gold dark:text-accent-goldBright uppercase tracking-widest hover:text-white transition-colors bg-white/40 dark:bg-white/10">El Equipo</a>
                         </div>
                     </div>
                     
-                    <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-300">Unidades</a>
-                    <a href="sostenibilidad.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-300">Sostenibilidad &amp; ESG</a>
-                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-300">Prensa</a>
+                    <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-slate-600 dark:text-gray-300">Unidades</a>
+                    <a href="sostenibilidad.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-slate-600 dark:text-gray-300">Sostenibilidad &amp; ESG</a>
+                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-slate-600 dark:text-gray-300">Prensa</a>
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-accent-gold transition-colors text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors text-[10px] font-bold uppercase tracking-widest shadow-lg">
                         Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
                     </a>
                     <button id="nav-toggle" class="lg:hidden text-xl text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
@@ -244,11 +246,11 @@
                 <span class="text-transparent bg-clip-text bg-orange-gradient drop-shadow-[0_0_30px_rgba(249,115,22,0.3)]">IMPULSA EL CAMBIO</span>
             </h1>
 
-            <p class="text-xl text-gray-400 font-light max-w-3xl mx-auto leading-relaxed mb-12" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-xl text-slate-600 dark:text-gray-400 font-light max-w-3xl mx-auto leading-relaxed mb-12" data-aos="fade-up" data-aos-delay="100">
                 Un equipo interdisciplinario de expertos unidos por la pasión, la excelencia y la visión de transformar industrias complejas en motores de desarrollo sostenible.
             </p>
 
-            <div class="flex flex-wrap justify-center gap-8 md:gap-16 border-t border-white/5 pt-8 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16 border-t border-gray-100 dark:border-white/5 pt-8 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
                 <div class="text-center">
                     <span class="block text-3xl font-display font-bold text-white mb-1">1200+</span>
                     <span class="text-[10px] uppercase tracking-widest text-accent-orange">Colaboradores</span>
@@ -269,35 +271,35 @@
         </div>
     </header>
 
-    <section class="py-20 bg-dark-bg border-t border-white/5 relative min-h-screen">
+    <section class="py-20 bg-dark-bg border-t border-gray-100 dark:border-white/5 relative min-h-screen">
         <div class="max-w-[1600px] mx-auto px-6 relative z-10">
             
             <div class="glass-panel p-6 rounded-3xl mb-16 flex flex-col xl:flex-row justify-between items-center gap-6 sticky top-28 z-40 transition-all duration-300" id="filter-bar">
                 
                 <div class="flex flex-wrap gap-2 justify-center xl:justify-start w-full xl:w-auto">
-                    <button class="filter-btn active px-6 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider text-gray-400 hover:text-white hover:bg-white/5" onclick="filterTeam('all', this)">Todos</button>
+                    <button class="filter-btn active px-6 py-2 rounded-full border border-gray-100 dark:border-white/10 text-xs uppercase tracking-wider text-slate-600 dark:text-gray-400 hover:text-white hover:bg-white/40 dark:bg-white/10" onclick="filterTeam('all', this)">Todos</button>
                     
                     <div class="relative group">
-                        <button class="filter-btn px-6 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider text-gray-400 hover:text-white hover:bg-white/5 flex items-center gap-2">
+                        <button class="filter-btn px-6 py-2 rounded-full border border-gray-100 dark:border-white/10 text-xs uppercase tracking-wider text-slate-600 dark:text-gray-400 hover:text-white hover:bg-white/40 dark:bg-white/10 flex items-center gap-2">
                             Empresa <i class="fa-solid fa-chevron-down text-[8px]"></i>
                         </button>
-                        <div class="absolute top-full left-0 mt-2 w-48 bg-[#111] border border-white/10 rounded-xl overflow-hidden hidden lg:block lg:group-hover:block shadow-2xl">
-                            <a href="#" onclick="filterTeam('aisa', this)" class="block px-4 py-3 text-xs text-gray-400 hover:bg-white/5 hover:text-accent-orange transition-colors border-b border-white/5">Aisa Group</a>
-                            <a href="#" onclick="filterTeam('masa', this)" class="block px-4 py-3 text-xs text-gray-400 hover:bg-white/5 hover:text-accent-orange transition-colors border-b border-white/5">Minas Argentinas</a>
-                            <a href="#" onclick="filterTeam('energy', this)" class="block px-4 py-3 text-xs text-gray-400 hover:bg-white/5 hover:text-accent-orange transition-colors border-b border-white/5">Aisa Energy</a>
-                            <a href="#" onclick="filterTeam('cabo', this)" class="block px-4 py-3 text-xs text-gray-400 hover:bg-white/5 hover:text-accent-orange transition-colors border-b border-white/5">Cabo Vírgenes</a>
-                            <a href="#" onclick="filterTeam('chelsea', this)" class="block px-4 py-3 text-xs text-gray-400 hover:bg-white/5 hover:text-accent-orange transition-colors">Chelsea Estates</a>
+                        <div class="absolute top-full left-0 mt-2 w-48 bg-[#111] border border-gray-100 dark:border-white/10 rounded-xl overflow-hidden hidden lg:block lg:group-hover:block shadow-2xl">
+                            <a href="#" onclick="filterTeam('aisa', this)" class="block px-4 py-3 text-xs text-slate-600 dark:text-gray-400 hover:bg-white/40 dark:bg-white/10 hover:text-accent-orange transition-colors border-b border-gray-100 dark:border-white/5">Aisa Group</a>
+                            <a href="#" onclick="filterTeam('masa', this)" class="block px-4 py-3 text-xs text-slate-600 dark:text-gray-400 hover:bg-white/40 dark:bg-white/10 hover:text-accent-orange transition-colors border-b border-gray-100 dark:border-white/5">Minas Argentinas</a>
+                            <a href="#" onclick="filterTeam('energy', this)" class="block px-4 py-3 text-xs text-slate-600 dark:text-gray-400 hover:bg-white/40 dark:bg-white/10 hover:text-accent-orange transition-colors border-b border-gray-100 dark:border-white/5">Aisa Energy</a>
+                            <a href="#" onclick="filterTeam('cabo', this)" class="block px-4 py-3 text-xs text-slate-600 dark:text-gray-400 hover:bg-white/40 dark:bg-white/10 hover:text-accent-orange transition-colors border-b border-gray-100 dark:border-white/5">Cabo Vírgenes</a>
+                            <a href="#" onclick="filterTeam('chelsea', this)" class="block px-4 py-3 text-xs text-slate-600 dark:text-gray-400 hover:bg-white/40 dark:bg-white/10 hover:text-accent-orange transition-colors">Chelsea Estates</a>
                         </div>
                     </div>
 
-                    <button class="filter-btn px-6 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider text-gray-400 hover:text-white hover:bg-white/5" onclick="filterTeam('leadership', this)">Liderazgo</button>
-                    <button class="filter-btn px-6 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider text-gray-400 hover:text-white hover:bg-white/5" onclick="filterTeam('operations', this)">Operaciones</button>
-                    <button class="filter-btn px-6 py-2 rounded-full border border-white/10 text-xs uppercase tracking-wider text-gray-400 hover:text-white hover:bg-white/5" onclick="filterTeam('finance', this)">Finanzas</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-100 dark:border-white/10 text-xs uppercase tracking-wider text-slate-600 dark:text-gray-400 hover:text-white hover:bg-white/40 dark:bg-white/10" onclick="filterTeam('leadership', this)">Liderazgo</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-100 dark:border-white/10 text-xs uppercase tracking-wider text-slate-600 dark:text-gray-400 hover:text-white hover:bg-white/40 dark:bg-white/10" onclick="filterTeam('operations', this)">Operaciones</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-100 dark:border-white/10 text-xs uppercase tracking-wider text-slate-600 dark:text-gray-400 hover:text-white hover:bg-white/40 dark:bg-white/10" onclick="filterTeam('finance', this)">Finanzas</button>
                 </div>
 
                 <div class="relative w-full xl:w-80">
-                    <input type="text" id="team-search" placeholder="Buscar por nombre o cargo..." class="w-full bg-white/5 border border-white/10 rounded-full px-5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accent-orange focus:ring-1 focus:ring-accent-orange transition-all pl-10">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                    <input type="text" id="team-search" placeholder="Buscar por nombre o cargo..." class="w-full bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/10 rounded-full px-5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accent-orange focus:ring-1 focus:ring-accent-orange transition-all pl-10">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 dark:text-gray-400"></i>
                 </div>
             </div>
 
@@ -305,17 +307,17 @@
                 </div>
 
             <div id="empty-state" class="hidden text-center py-20">
-                <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600 text-3xl">
+                <div class="w-20 h-20 bg-white/40 dark:bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600 text-3xl">
                     <i class="fa-solid fa-user-slash"></i>
                 </div>
                 <h3 class="text-xl font-bold text-white mb-2">No se encontraron resultados</h3>
-                <p class="text-gray-500 text-sm">Intenta ajustar los filtros o la búsqueda.</p>
+                <p class="text-slate-500 dark:text-gray-400 text-sm">Intenta ajustar los filtros o la búsqueda.</p>
             </div>
 
         </div>
     </section>
 
-    <section class="py-24 bg-dark-bg border-t border-white/5 relative overflow-hidden">
+    <section class="py-24 bg-dark-bg border-t border-gray-100 dark:border-white/5 relative overflow-hidden">
         <div class="max-w-[1200px] mx-auto px-6">
             <div class="glass-panel p-12 md:p-20 rounded-[3rem] relative overflow-hidden text-center group border border-accent-orange/20">
                 <div class="absolute -top-24 -left-24 w-80 h-80 bg-accent-orange/10 rounded-full blur-[100px] group-hover:bg-accent-orange/20 transition-colors duration-700"></div>
@@ -324,7 +326,7 @@
                 <div class="relative z-10">
                     <span class="text-accent-orange font-bold tracking-[0.3em] text-xs uppercase mb-6 block">Carreras</span>
                     <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6">¿Quieres construir el futuro con nosotros?</h2>
-                    <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
+                    <p class="text-slate-600 dark:text-gray-400 text-lg max-w-2xl mx-auto mb-10">
                         Buscamos mentes inquietas, apasionadas por la innovación y el impacto sostenible. Si compartes nuestra visión, hay un lugar para ti en Aisa Group.
                     </p>
                     <div class="flex flex-col sm:flex-row justify-center gap-6">
@@ -343,7 +345,7 @@
     <div id="member-modal" class="fixed inset-0 z-[200] flex items-center justify-center hidden">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeMemberModal()"></div>
         
-        <div id="member-modal-content" class="relative bg-[#111] w-full max-w-5xl h-[90vh] md:h-auto md:max-h-[90vh] overflow-y-auto rounded-[2rem] border border-white/10 shadow-2xl flex flex-col md:flex-row scale-95 opacity-0 transition-all duration-300">
+        <div id="member-modal-content" class="relative bg-[#111] w-full max-w-5xl h-[90vh] md:h-auto md:max-h-[90vh] overflow-y-auto rounded-[2rem] border border-gray-100 dark:border-white/10 shadow-2xl flex flex-col md:flex-row scale-95 opacity-0 transition-all duration-300">
             <button onclick="closeMemberModal()" class="absolute top-6 right-6 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors z-50">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -356,107 +358,111 @@
             <div class="w-full md:w-7/12 p-8 md:p-12 flex flex-col justify-center">
                 <span id="modal-company" class="text-accent-orange text-xs font-bold uppercase tracking-widest mb-2 border border-accent-orange/30 px-3 py-1 rounded-full w-fit">Company</span>
                 <h2 id="modal-name" class="font-display text-4xl md:text-5xl font-bold text-white mb-2">Name</h2>
-                <p id="modal-role" class="text-gray-400 text-lg mb-8 font-light italic">Role</p>
+                <p id="modal-role" class="text-slate-600 dark:text-gray-400 text-lg mb-8 font-light italic">Role</p>
 
                 <div class="space-y-6">
                     <div>
                         <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-3 flex items-center gap-2"><i class="fa-solid fa-user text-accent-orange"></i> Biografía</h4>
-                        <p id="modal-bio" class="text-gray-400 text-sm leading-relaxed text-justify">Bio text...</p>
+                        <p id="modal-bio" class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed text-justify">Bio text...</p>
                     </div>
                     
                     <div class="grid grid-cols-2 gap-6">
                         <div>
                             <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-3 flex items-center gap-2"><i class="fa-solid fa-star text-accent-orange"></i> Expertise</h4>
-                            <ul id="modal-skills" class="text-gray-400 text-xs space-y-1">
+                            <ul id="modal-skills" class="text-slate-600 dark:text-gray-400 text-xs space-y-1">
                                 </ul>
                         </div>
                         <div>
                             <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-3 flex items-center gap-2"><i class="fa-solid fa-link text-accent-orange"></i> Conectar</h4>
                             <div class="flex gap-3">
-                                <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-accent-orange hover:text-black transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
-                                <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-accent-orange hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/40 dark:bg-white/10 flex items-center justify-center text-white hover:bg-accent-orange hover:text-black transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-white/40 dark:bg-white/10 flex items-center justify-center text-white hover:bg-accent-orange hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>    <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5">
-        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
-            <div class="lg:col-span-4">
-                <a href="#" class="inline-block mb-8">
-                    <!-- Logo image replacing text in footer -->
-                    <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
-                </a>
-                <p class="text-gray-400 mb-8 max-w-sm">
-                    Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+    </div>    <footer id="contacto" class="bg-slate-50 dark:bg-dark-bg pt-32 pb-12">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <div class="glass-apple rounded-[3rem] p-12 shadow-xl border border-white dark:border-gray-100 dark:border-white/10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+                    <div class="lg:col-span-4">
+                        <a href="#" class="inline-block mb-8">
+                            <!-- Logo image replacing text in footer -->
+                            <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
+                        </a>
+                        <p class="text-slate-600 dark:text-slate-600 dark:text-gray-300 mb-8 max-w-sm">
+                            Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-600 dark:text-gray-400 mb-8">Compañía</h4>
+                        <ul class="space-y-4 text-sm font-medium text-slate-600 dark:text-slate-600 dark:text-gray-300">
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Sobre Nosotros</a></li>
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Nuestro Equipo</a></li>
+                            <li><a href="carreras.html" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Carreras</a></li>
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Prensa</a></li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-600 dark:text-gray-400 mb-8">Sedes Globales</h4>
+                        <ul class="space-y-4 text-sm font-medium text-slate-600 dark:text-slate-600 dark:text-gray-300">
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <div class="glass-apple p-8 rounded-3xl">
+                            <h4 class="font-display font-bold text-xl mb-4 text-slate-900 dark:text-white">¿Hablamos?</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-600 dark:text-gray-300 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
+                            <!-- Updated footer contact button: trigger the contact modal instead of direct mailto -->
+                            <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold dark:bg-accent-goldBright text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
+                                Contactar
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="lg:col-span-2">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Compañía</h4>
-                <ul class="space-y-4 text-sm font-medium text-gray-300">
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
-                    <li><a href="carreras.html" class="hover:text-accent-gold transition-colors">Carreras</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
-                </ul>
-            </div>
-            <div class="lg:col-span-3">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Sedes Globales</h4>
-                <ul class="space-y-4 text-sm font-medium text-gray-300">
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
-                </ul>
-            </div>
-            <div class="lg:col-span-3">
-                <div class="glass-apple p-8 rounded-3xl">
-                    <h4 class="font-display font-bold text-xl mb-4">¿Hablamos?</h4>
-                    <p class="text-sm text-gray-400 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
-                    <!-- Updated footer contact button: trigger the contact modal instead of direct mailto -->
-                    <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
-                        Contactar
-                    </a>
+                <div class="pt-8 border-t border-slate-200 dark:border-gray-100 dark:border-gray-100 dark:border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-600 dark:text-gray-400 uppercase tracking-widest">
+                    <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+                    <div class="flex gap-8 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-slate-900 dark:hover:text-white">Política de Privacidad</a>
+                        <a href="#" class="hover:text-slate-900 dark:hover:text-white">Términos de Uso</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="max-w-[1600px] mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest">
-            <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
-            <div class="flex gap-8 mt-4 md:mt-0">
-                <a href="#" class="hover:text-white">Política de Privacidad</a>
-                <a href="#" class="hover:text-white">Términos de Uso</a>
             </div>
         </div>
     </footer>
 
     <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
-        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/5 backdrop-blur-[40px] modal-overlay-global"></div>
-        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-white/10">
+        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/40 dark:bg-white/10 backdrop-blur-[40px] modal-overlay-global"></div>
+        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-gray-100 dark:border-white/10">
             <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[220]">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <h4 class="text-2xl font-display font-bold mb-4 text-white">Contacto</h4>
             <div id="contact-toolbar" class="flex gap-2 mb-2">
-                <button type="button" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-bold"></i></button>
-                <button type="button" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-italic"></i></button>
-                <button type="button" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-list-ul"></i></button>
+                <button type="button" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors"><i class="fa-solid fa-bold"></i></button>
+                <button type="button" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors"><i class="fa-solid fa-italic"></i></button>
+                <button type="button" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors"><i class="fa-solid fa-list-ul"></i></button>
             </div>
             <form id="contact-form" class="space-y-4">
                 <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
                 <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
                 <div id="contact-message" contenteditable="true" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none h-40 overflow-auto"></div>
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
-                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
                     <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-emerald-500 hover:text-black transition-colors"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
                 </div>
             </form>
-            <p class="text-xs text-gray-500 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas.</p>
+            <p class="text-xs text-slate-500 dark:text-gray-400 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas.</p>
         </div>
     </div>
 
@@ -562,14 +568,14 @@
 
             data.forEach(member => {
                 const card = document.createElement('div');
-                card.className = 'team-card group rounded-3xl h-[400px] border border-white/10 cursor-pointer';
+                card.className = 'team-card group rounded-3xl h-[400px] border border-gray-100 dark:border-white/10 cursor-pointer';
                 card.onclick = () => openMemberModal(member.id);
                 card.innerHTML = `
                     <img src="${member.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" alt="${member.name}">
                     <div class="card-info bg-gradient-to-t from-black via-black/80 to-transparent">
                         <span class="text-accent-orange text-[10px] font-bold uppercase tracking-widest mb-1 block">${getCompanyName(member.company)}</span>
                         <h3 class="text-2xl font-bold text-white mb-1 font-display">${member.name}</h3>
-                        <p class="text-sm text-gray-400 mb-4">${member.role}</p>
+                        <p class="text-sm text-slate-600 dark:text-gray-400 mb-4">${member.role}</p>
                         <div class="flex items-center gap-3 opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
                             <span class="text-[10px] text-white underline decoration-accent-orange underline-offset-4">Ver Perfil Completo</span>
                             <i class="fa-solid fa-arrow-right text-accent-orange text-xs"></i>
@@ -672,23 +678,6 @@
         renderTeam(teamMembers);
 
         // --- THEME TOGGLE LOGIC ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            if (htmlElement.classList.contains('dark')) {
-                localStorage.theme = 'dark';
-            } else {
-                localStorage.theme = 'light';
-            }
-        });
 
         // --- CONTACT MODAL LOGIC (Global) ---
         const contactModal = document.getElementById('contact-modal');
@@ -792,5 +781,36 @@
         })();
     </script>
 
+
+    <!-- THEME TOGGLE BUTTON -->
+    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold dark:text-accent-goldBright hover:scale-110 transition-transform cursor-pointer shadow-lg">
+        <i class="fa-solid fa-moon dark:hidden"></i>
+        <i class="fa-solid fa-sun hidden dark:block"></i>
+    </button>
+
+    <script>
+        // Lógica de Modo Oscuro / Claro
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // 1. Verificar preferencia al cargar
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        // 2. Acción del botón
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                if (htmlElement.classList.contains('dark')) {
+                    localStorage.theme = 'dark';
+                } else {
+                    localStorage.theme = 'light';
+                }
+            });
+        }
+    </script>
 </body>
 </html>

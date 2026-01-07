@@ -24,21 +24,19 @@
                         display: ['"Montserrat"', 'sans-serif'],
                     },
                     colors: {
+                        light: {
+                            bg: '#F8FAFC',
+                            surface: '#FFFFFF',
+                            text: '#0F172A',
+                            subtext: '#475569'
+                        },
                         dark: {
-                            bg: '#000000',
-                            surface: '#050505',
-                            card: '#0A0A0A',
+                            bg: '#050505',
+                            surface: '#0F0F0F',
                         },
                         accent: {
-                            gold: '#FFD700', // Coincide visualmente con #FACC15 pero manteniendo el tono premium de esta página
-                            goldGlow: '#FDB931',
-                            emerald: '#10B981',
-                            emeraldGlow: '#34D399',
-                            purple: '#8B5CF6',
-                            purpleGlow: '#A78BFA',
-                            blue: '#3B82F6',
-                            blueGlow: '#60A5FA',
-                            orange: '#F97316'
+                            gold: '#D97706',
+                            goldBright: '#FACC15',
                         }
                     },
                     backgroundImage: {
@@ -132,11 +130,17 @@
 
         /* Apple Glass Style (Para el Navbar Maestro) */
         .glass-apple {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+        .dark .glass-apple {
+            background: rgba(20, 20, 20, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            color: white;
         }
 
         .glass-card {
@@ -286,14 +290,8 @@
         .modal-overlay-global.active { opacity: 1; visibility: visible; }
     </style>
 </head>
-<body class="antialiased selection:bg-accent-gold selection:text-black">
-
-    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
-        <i class="fa-solid fa-moon dark:hidden"></i>
-        <i class="fa-solid fa-sun hidden dark:block"></i>
-    </button>
-
-    <div id="cursor" class="hidden md:block"></div>
+<body class="bg-slate-50 text-slate-900 dark:bg-dark-bg dark:text-slate-600 dark:text-gray-200 transition-colors duration-300 antialiased selection:bg-accent-gold dark:bg-accent-goldBright selection:text-black">
+<div id="cursor" class="hidden md:block"></div>
 
     <div id="particles-container"></div>
     <div class="noise-overlay"></div>
@@ -306,28 +304,28 @@
                     <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="h-8 w-auto" />
                 </a>
 
-                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none">
-                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-300" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Inicio</a>
+                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none text-slate-600 dark:text-slate-600 dark:text-gray-300">
+                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-slate-600 dark:text-gray-300" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Inicio</a>
                     <div class="relative group">
-                        <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 transition-all text-accent-gold" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                        <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 transition-all text-accent-gold dark:text-accent-goldBright" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
                             Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
                         </a>
                         <div class="mt-2 flex flex-col gap-2 lg:hidden">
-                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">Quienes Somos</a>
-                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">El Equipo</a>
+                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-600 dark:text-gray-300/90 hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-600 dark:text-gray-300/90 hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">El Equipo</a>
                         </div>
                         <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 lg:group-hover:opacity-100 lg:group-hover:scale-100 transition-all origin-top-left z-50 hidden lg:block lg:group-hover:block">
-                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-accent-gold uppercase tracking-widest hover:text-white transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Quienes Somos</a>
-                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">El Equipo</a>
+                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-accent-gold dark:text-accent-goldBright uppercase tracking-widest hover:text-white transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Quienes Somos</a>
+                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-slate-600 dark:text-gray-200 uppercase tracking-widest hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">El Equipo</a>
                         </div>
                     </div>
-                    <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-300" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Unidades</a>
-                    <a href="sostenibilidad.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-300" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Sostenibilidad &amp; ESG</a>
-                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-gray-300" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Prensa</a>
+                    <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-slate-600 dark:text-gray-300" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Unidades</a>
+                    <a href="sostenibilidad.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-slate-600 dark:text-gray-300" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Sostenibilidad &amp; ESG</a>
+                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 transition-all text-slate-600 dark:text-gray-300" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Prensa</a>
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard bg-white text-black hover:bg-accent-gold text-[10px] font-bold uppercase tracking-widest shadow-lg transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard bg-white text-black hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright text-[10px] font-bold uppercase tracking-widest shadow-lg transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
                         Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
                     </a>
                     <button id="nav-toggle" class="lg:hidden text-xl text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
@@ -345,9 +343,9 @@
 
         <div class="relative z-30 max-w-[1600px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right" data-aos-duration="1200">
-                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-accent-gold/30 bg-accent-gold/10 backdrop-blur-md mb-8">
-                    <span class="w-2 h-2 rounded-full bg-accent-gold animate-ping"></span>
-                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-accent-gold">Grupo Familiar de Inversión</span>
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-accent-gold dark:border-accent-goldBright/30 bg-accent-gold dark:bg-accent-goldBright/10 backdrop-blur-md mb-8">
+                    <span class="w-2 h-2 rounded-full bg-accent-gold dark:bg-accent-goldBright animate-ping"></span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-accent-gold dark:text-accent-goldBright">Grupo Familiar de Inversión</span>
                 </div>
 
                 <h1 class="font-display text-6xl md:text-8xl font-black text-white mb-8 leading-[0.9] tracking-tighter">
@@ -355,12 +353,12 @@
                     <span class="text-transparent bg-clip-text bg-gold-gradient drop-shadow-[0_0_30px_rgba(255,215,0,0.3)]">EL PRESENTE</span>
                 </h1>
 
-                <p class="text-xl text-gray-300 font-light max-w-xl leading-relaxed mb-12 border-l-2 border-accent-gold pl-6">
+                <p class="text-xl text-slate-600 dark:text-gray-300 font-light max-w-xl leading-relaxed mb-12 border-l-2 border-accent-gold dark:border-accent-goldBright pl-6">
                     Combinamos la solidez de la tradición con la agilidad de un holding moderno. Invertimos con convicción en proyectos que <strong class="text-white">trascienden generaciones</strong> y redefinen industrias.
                 </p>
 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#historia" class="px-8 py-4 bg-accent-gold text-black rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_30px_rgba(250,204,21,0.4)] flex items-center gap-2" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <a href="#historia" class="px-8 py-4 bg-accent-gold dark:bg-accent-goldBright text-black rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_30px_rgba(250,204,21,0.4)] flex items-center gap-2" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
                         <i class="fa-solid fa-play"></i> Ver Historia
                     </a>
                     <a href="#orbital" class="px-8 py-4 glass-panel text-white rounded-full font-bold uppercase tracking-widest hover:bg-white/10 transition-colors flex items-center gap-2" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
@@ -370,44 +368,44 @@
             </div>
 
             <div class="grid grid-cols-2 gap-4" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
-                <div class="glass-card p-8 rounded-3xl bg-gradient-to-br from-white/5 to-transparent hover:border-accent-gold" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
-                    <i class="fa-solid fa-earth-americas text-4xl text-accent-gold mb-4 animate-float"></i>
+                <div class="glass-card p-8 rounded-3xl bg-gradient-to-br from-white/5 to-transparent hover:border-accent-gold dark:border-accent-goldBright" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <i class="fa-solid fa-earth-americas text-4xl text-accent-gold dark:text-accent-goldBright mb-4 animate-float"></i>
                     <h3 class="text-4xl font-display font-bold text-white mb-1">Global</h3>
-                    <p class="text-xs text-gray-400 uppercase tracking-widest">Presencia Operativa</p>
+                    <p class="text-xs text-slate-600 dark:text-gray-400 uppercase tracking-widest">Presencia Operativa</p>
                 </div>
                 <div class="glass-card p-8 rounded-3xl bg-gradient-to-br from-white/5 to-transparent mt-12 hover:border-accent-emerald" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
                     <i class="fa-solid fa-chart-line text-4xl text-accent-emerald mb-4 animate-float" style="animation-delay: 1s;"></i>
                     <h3 class="text-4xl font-display font-bold text-white mb-1">$1.6B</h3>
-                    <p class="text-xs text-gray-400 uppercase tracking-widest">Pipeline de Inversión</p>
+                    <p class="text-xs text-slate-600 dark:text-gray-400 uppercase tracking-widest">Pipeline de Inversión</p>
                 </div>
                 <div class="glass-card p-8 rounded-3xl bg-gradient-to-br from-white/5 to-transparent hover:border-accent-purple" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
                     <i class="fa-solid fa-users-rays text-4xl text-accent-purple mb-4 animate-float" style="animation-delay: 2s;"></i>
                     <h3 class="text-4xl font-display font-bold text-white mb-1">1000+</h3>
-                    <p class="text-xs text-gray-400 uppercase tracking-widest">Empleos Generados</p>
+                    <p class="text-xs text-slate-600 dark:text-gray-400 uppercase tracking-widest">Empleos Generados</p>
                 </div>
                 <div class="glass-card p-8 rounded-3xl bg-gradient-to-br from-white/5 to-transparent mt-12 hover:border-accent-blue" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
                     <i class="fa-regular fa-clock text-4xl text-accent-blue mb-4 animate-float" style="animation-delay: 3s;"></i>
                     <h3 class="text-4xl font-display font-bold text-white mb-1">20+</h3>
-                    <p class="text-xs text-gray-400 uppercase tracking-widest">Años de Trayectoria</p>
+                    <p class="text-xs text-slate-600 dark:text-gray-400 uppercase tracking-widest">Años de Trayectoria</p>
                 </div>
             </div>
         </div>
 
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 animate-bounce">
             <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1">
-                <div class="w-1 h-3 bg-accent-gold rounded-full animate-ping"></div>
+                <div class="w-1 h-3 bg-accent-gold dark:bg-accent-goldBright rounded-full animate-ping"></div>
             </div>
         </div>
     </header>
 
-    <section id="orbital" class="py-32 bg-[#050505] relative overflow-hidden">
+    <section id="orbital" class="py-32 bg-slate-50 dark:bg-[#050505] relative overflow-hidden">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.1),transparent_70%)]"></div>
         
         <div class="max-w-[1600px] mx-auto px-6 relative z-10">
             <div class="text-center mb-24" data-aos="fade-up">
                 <span class="text-accent-purple font-bold tracking-[0.3em] text-xs uppercase mb-4 block">Nuestro Núcleo</span>
                 <h2 class="font-display text-5xl md:text-7xl font-bold text-white mb-6">Estrategia <span class="text-transparent bg-clip-text bg-purple-gradient">Orbital</span></h2>
-                <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                <p class="text-slate-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
                     Un sistema gravitacional donde el Propósito es el centro que irradia capital, cultura y visión a todas las unidades operativas.
                 </p>
             </div>
@@ -431,32 +429,32 @@
                                     <i class="fa-solid fa-mountain text-3xl text-accent-emerald"></i>
                                 </div>
                                 <div class="info-card">
-                                    <div class="flex items-center gap-3 mb-3 border-b border-white/10 pb-2">
+                                    <div class="flex items-center gap-3 mb-3 border-b border-gray-100 dark:border-white/10 pb-2">
                                         <div class="w-8 h-8 rounded bg-accent-emerald/20 flex items-center justify-center text-accent-emerald"><i class="fa-regular fa-gem"></i></div>
                                         <div>
                                             <h4 class="text-accent-emerald font-bold text-sm uppercase">Minería Regenerativa</h4>
-                                            <p class="text-[10px] text-gray-400">San Juan, Argentina</p>
+                                            <p class="text-[10px] text-slate-600 dark:text-gray-400">San Juan, Argentina</p>
                                         </div>
                                     </div>
-                                    <p class="text-xs text-gray-300 leading-relaxed">Extracción responsable en Gualcamayo mediante el proyecto Carbonatos Profundos.</p>
+                                    <p class="text-xs text-slate-600 dark:text-gray-300 leading-relaxed">Extracción responsable en Gualcamayo mediante el proyecto Carbonatos Profundos.</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="planet-wrapper" style="top: 100%; left: 50%;">
                             <div class="counter-rotate animate-counter-spin">
-                                <div class="planet-node border-accent-gold shadow-[0_0_40px_rgba(255,215,0,0.3)] bg-black" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
-                                    <i class="fa-solid fa-bolt text-3xl text-accent-gold"></i>
+                                <div class="planet-node border-accent-gold dark:border-accent-goldBright shadow-[0_0_40px_rgba(255,215,0,0.3)] bg-black" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                                    <i class="fa-solid fa-bolt text-3xl text-accent-gold dark:text-accent-goldBright"></i>
                                 </div>
                                 <div class="info-card">
-                                    <div class="flex items-center gap-3 mb-3 border-b border-white/10 pb-2">
-                                        <div class="w-8 h-8 rounded bg-accent-gold/20 flex items-center justify-center text-accent-gold"><i class="fa-solid fa-solar-panel"></i></div>
+                                    <div class="flex items-center gap-3 mb-3 border-b border-gray-100 dark:border-white/10 pb-2">
+                                        <div class="w-8 h-8 rounded bg-accent-gold dark:bg-accent-goldBright/20 flex items-center justify-center text-accent-gold dark:text-accent-goldBright"><i class="fa-solid fa-solar-panel"></i></div>
                                         <div>
-                                            <h4 class="text-accent-gold font-bold text-sm uppercase">Energía Limpia</h4>
-                                            <p class="text-[10px] text-gray-400">San Luis, Argentina</p>
+                                            <h4 class="text-accent-gold dark:text-accent-goldBright font-bold text-sm uppercase">Energía Limpia</h4>
+                                            <p class="text-[10px] text-slate-600 dark:text-gray-400">San Luis, Argentina</p>
                                         </div>
                                     </div>
-                                    <p class="text-xs text-gray-300 leading-relaxed">Liderando la transición energética con Calicanto Solar (51 MW) y plan RIGI de 1000 MW.</p>
+                                    <p class="text-xs text-slate-600 dark:text-gray-300 leading-relaxed">Liderando la transición energética con Calicanto Solar (51 MW) y plan RIGI de 1000 MW.</p>
                                 </div>
                             </div>
                         </div>
@@ -471,14 +469,14 @@
                                     <i class="fa-solid fa-fish text-2xl text-accent-blue"></i>
                                 </div>
                                 <div class="info-card">
-                                    <div class="flex items-center gap-3 mb-3 border-b border-white/10 pb-2">
+                                    <div class="flex items-center gap-3 mb-3 border-b border-gray-100 dark:border-white/10 pb-2">
                                         <div class="w-8 h-8 rounded bg-accent-blue/20 flex items-center justify-center text-accent-blue"><i class="fa-solid fa-water"></i></div>
                                         <div>
                                             <h4 class="text-accent-blue font-bold text-sm uppercase">Pesca Sostenible</h4>
-                                            <p class="text-[10px] text-gray-400">Chubut & España</p>
+                                            <p class="text-[10px] text-slate-600 dark:text-gray-400">Chubut & España</p>
                                         </div>
                                     </div>
-                                    <p class="text-xs text-gray-300 leading-relaxed">Operaciones pesqueras de altura a través de Cabo Vírgenes, garantizando calidad de exportación.</p>
+                                    <p class="text-xs text-slate-600 dark:text-gray-300 leading-relaxed">Operaciones pesqueras de altura a través de Cabo Vírgenes, garantizando calidad de exportación.</p>
                                 </div>
                             </div>
                         </div>
@@ -489,14 +487,14 @@
                                     <i class="fa-solid fa-city text-2xl text-accent-purple"></i>
                                 </div>
                                 <div class="info-card">
-                                    <div class="flex items-center gap-3 mb-3 border-b border-white/10 pb-2">
+                                    <div class="flex items-center gap-3 mb-3 border-b border-gray-100 dark:border-white/10 pb-2">
                                         <div class="w-8 h-8 rounded bg-accent-purple/20 flex items-center justify-center text-accent-purple"><i class="fa-solid fa-building-columns"></i></div>
                                         <div>
                                             <h4 class="text-accent-purple font-bold text-sm uppercase">Real Estate</h4>
-                                            <p class="text-[10px] text-gray-400">San Juan Capital</p>
+                                            <p class="text-[10px] text-slate-600 dark:text-gray-400">San Juan Capital</p>
                                         </div>
                                     </div>
-                                    <p class="text-xs text-gray-300 leading-relaxed">Recuperación patrimonial del predio histórico Cinzano. Desarrollo urbano y cultural.</p>
+                                    <p class="text-xs text-slate-600 dark:text-gray-300 leading-relaxed">Recuperación patrimonial del predio histórico Cinzano. Desarrollo urbano y cultural.</p>
                                 </div>
                             </div>
                         </div>
@@ -507,14 +505,14 @@
                                     <i class="fa-solid fa-ship text-2xl text-accent-orange"></i>
                                 </div>
                                 <div class="info-card">
-                                    <div class="flex items-center gap-3 mb-3 border-b border-white/10 pb-2">
+                                    <div class="flex items-center gap-3 mb-3 border-b border-gray-100 dark:border-white/10 pb-2">
                                         <div class="w-8 h-8 rounded bg-accent-orange/20 flex items-center justify-center text-accent-orange"><i class="fa-solid fa-earth-asia"></i></div>
                                         <div>
                                             <h4 class="text-accent-orange font-bold text-sm uppercase">Global Trading</h4>
-                                            <p class="text-[10px] text-gray-400">Mercados Globales</p>
+                                            <p class="text-[10px] text-slate-600 dark:text-gray-400">Mercados Globales</p>
                                         </div>
                                     </div>
-                                    <p class="text-xs text-gray-300 leading-relaxed">Comercialización estratégica de commodities: soja, aceites, carnes y vinos.</p>
+                                    <p class="text-xs text-slate-600 dark:text-gray-300 leading-relaxed">Comercialización estratégica de commodities: soja, aceites, carnes y vinos.</p>
                                 </div>
                             </div>
                         </div>
@@ -531,29 +529,29 @@
             <div class="cine-overlay"></div>
             <div class="cine-content grid grid-cols-1 md:grid-cols-2 gap-16 items-center" data-aos="fade-up">
                 <div>
-                    <span class="text-9xl font-display font-black text-white/10 absolute -top-20 -left-10 z-0">2000s</span>
+                    <span class="text-9xl font-display font-black text-gray-100 dark:text-white/10 absolute -top-20 -left-10 z-0">2000s</span>
                     <h2 class="text-5xl font-bold text-white mb-6 relative z-10">Un Comienzo Audaz</h2>
-                    <div class="w-20 h-1 bg-accent-gold mb-8 relative z-10"></div>
-                    <p class="text-lg text-gray-300 leading-relaxed relative z-10 border-l-2 border-accent-gold pl-6">
+                    <div class="w-20 h-1 bg-accent-gold dark:bg-accent-goldBright mb-8 relative z-10"></div>
+                    <p class="text-lg text-slate-600 dark:text-gray-300 leading-relaxed relative z-10 border-l-2 border-accent-gold dark:border-accent-goldBright pl-6">
                         Nuestra historia comienza hace más de dos décadas. Nuestro objetivo era introducir vino embotellado con origen en Castilla-La Mancha (España) en el mercado chino, un hito que en aquel entonces era poco común en el comercio entre ambos países. Se lograron cerrar contratos para la exportación de millones de botellas, marcando el inicio de lo que sería un gran éxito familiar.
                     </p>
                 </div>
-                <div class="glass-panel p-8 rounded-3xl border border-white/10 transform hover:scale-105 transition-transform duration-500">
+                <div class="glass-panel p-8 rounded-3xl border border-gray-100 dark:border-white/10 transform hover:scale-105 transition-transform duration-500">
                     <div class="flex items-center gap-4 mb-6">
-                        <div class="w-14 h-14 bg-accent-gold rounded-full flex items-center justify-center text-black text-2xl"><i class="fa-solid fa-wine-glass"></i></div>
+                        <div class="w-14 h-14 bg-accent-gold dark:bg-accent-goldBright rounded-full flex items-center justify-center text-black text-2xl"><i class="fa-solid fa-wine-glass"></i></div>
                         <div>
                             <h4 class="text-white font-bold text-xl">Castilla-La Mancha</h4>
-                            <p class="text-xs text-gray-400 uppercase tracking-widest">El Origen</p>
+                            <p class="text-xs text-slate-600 dark:text-gray-400 uppercase tracking-widest">El Origen</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white/5 p-4 rounded-xl text-center">
-                            <span class="block text-2xl font-bold text-accent-gold mb-1">China</span>
-                            <span class="text-[10px] text-gray-400 uppercase">Mercado Objetivo</span>
+                        <div class="bg-white/40 dark:bg-white/10 p-4 rounded-xl text-center">
+                            <span class="block text-2xl font-bold text-accent-gold dark:text-accent-goldBright mb-1">China</span>
+                            <span class="text-[10px] text-slate-600 dark:text-gray-400 uppercase">Mercado Objetivo</span>
                         </div>
-                        <div class="bg-white/5 p-4 rounded-xl text-center">
+                        <div class="bg-white/40 dark:bg-white/10 p-4 rounded-xl text-center">
                             <span class="block text-2xl font-bold text-white mb-1">Millones</span>
-                            <span class="text-[10px] text-gray-400 uppercase">Botellas Exportadas</span>
+                            <span class="text-[10px] text-slate-600 dark:text-gray-400 uppercase">Botellas Exportadas</span>
                         </div>
                     </div>
                 </div>
@@ -564,61 +562,61 @@
             <div class="cine-bg"><img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2070&auto=format&fit=crop" alt="Logistica"></div>
             <div class="cine-overlay"></div>
             <div class="cine-content grid grid-cols-1 md:grid-cols-2 gap-16 items-center" data-aos="fade-up">
-                <div class="order-2 md:order-1 glass-panel p-8 rounded-3xl border border-white/10">
+                <div class="order-2 md:order-1 glass-panel p-8 rounded-3xl border border-gray-100 dark:border-white/10">
                     <h4 class="text-white font-bold text-lg mb-6 flex items-center"><i class="fa-solid fa-plane-departure mr-3 text-accent-blue"></i> Destinos Clave</h4>
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white/5 p-3 rounded-xl border border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors cursor-pointer group">
+                        <div class="bg-white/40 dark:bg-white/10 p-3 rounded-xl border border-gray-100 dark:border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors cursor-pointer group">
                             <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20">
                                 <img src="https://flagcdn.com/w160/es.png" class="w-full h-full object-cover" alt="España">
                             </div>
                             <div>
                                 <span class="block text-xs font-bold text-white group-hover:text-accent-blue transition-colors">España</span>
-                                <span class="text-[9px] text-gray-500 uppercase">Origen</span>
+                                <span class="text-[9px] text-slate-500 dark:text-gray-400 uppercase">Origen</span>
                             </div>
                         </div>
-                        <div class="bg-white/5 p-3 rounded-xl border border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors cursor-pointer group">
+                        <div class="bg-white/40 dark:bg-white/10 p-3 rounded-xl border border-gray-100 dark:border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors cursor-pointer group">
                             <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20">
                                 <img src="https://flagcdn.com/w160/hu.png" class="w-full h-full object-cover" alt="Hungría">
                             </div>
                             <div>
                                 <span class="block text-xs font-bold text-white group-hover:text-accent-blue transition-colors">Hungría</span>
-                                <span class="text-[9px] text-gray-500 uppercase">Vino Tokaj</span>
+                                <span class="text-[9px] text-slate-500 dark:text-gray-400 uppercase">Vino Tokaj</span>
                             </div>
                         </div>
-                        <div class="bg-white/5 p-3 rounded-xl border border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors cursor-pointer group">
+                        <div class="bg-white/40 dark:bg-white/10 p-3 rounded-xl border border-gray-100 dark:border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors cursor-pointer group">
                             <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20">
                                 <img src="https://flagcdn.com/w160/it.png" class="w-full h-full object-cover" alt="Italia">
                             </div>
                             <div>
                                 <span class="block text-xs font-bold text-white group-hover:text-accent-blue transition-colors">Italia</span>
-                                <span class="text-[9px] text-gray-500 uppercase">Import</span>
+                                <span class="text-[9px] text-slate-500 dark:text-gray-400 uppercase">Import</span>
                             </div>
                         </div>
-                        <div class="bg-white/5 p-3 rounded-xl border border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors cursor-pointer group">
+                        <div class="bg-white/40 dark:bg-white/10 p-3 rounded-xl border border-gray-100 dark:border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors cursor-pointer group">
                             <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20">
                                 <img src="https://flagcdn.com/w160/ar.png" class="w-full h-full object-cover" alt="Argentina">
                             </div>
                             <div>
                                 <span class="block text-xs font-bold text-white group-hover:text-accent-blue transition-colors">Argentina</span>
-                                <span class="text-[9px] text-gray-500 uppercase">Malbec</span>
+                                <span class="text-[9px] text-slate-500 dark:text-gray-400 uppercase">Malbec</span>
                             </div>
                         </div>
-                        <div class="bg-white/5 p-3 rounded-xl border border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors cursor-pointer group col-span-2 md:col-span-1">
+                        <div class="bg-white/40 dark:bg-white/10 p-3 rounded-xl border border-gray-100 dark:border-white/10 flex items-center gap-3 hover:bg-white/10 transition-colors cursor-pointer group col-span-2 md:col-span-1">
                             <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20">
                                 <img src="https://flagcdn.com/w160/cl.png" class="w-full h-full object-cover" alt="Chile">
                             </div>
                             <div>
                                 <span class="block text-xs font-bold text-white group-hover:text-accent-blue transition-colors">Chile</span>
-                                <span class="text-[9px] text-gray-500 uppercase">Vinos</span>
+                                <span class="text-[9px] text-slate-500 dark:text-gray-400 uppercase">Vinos</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="order-1 md:order-2 text-right">
-                    <span class="text-9xl font-display font-black text-white/10 absolute -top-20 -right-10 z-0">2015</span>
+                    <span class="text-9xl font-display font-black text-gray-100 dark:text-white/10 absolute -top-20 -right-10 z-0">2015</span>
                     <h2 class="text-5xl font-bold text-white mb-6 relative z-10">Conexión Global</h2>
                     <div class="w-20 h-1 bg-accent-blue ml-auto mb-8 relative z-10"></div>
-                    <p class="text-lg text-gray-300 leading-relaxed relative z-10 border-r-2 border-accent-blue pr-6">
+                    <p class="text-lg text-slate-600 dark:text-gray-300 leading-relaxed relative z-10 border-r-2 border-accent-blue pr-6">
                         En 2015 la familia se embarcó en un proyecto de distribución de vinos de múltiples orígenes a nivel global, creando una red logística compleja y eficiente. Nos consolidamos como un actor clave en el mercado de Europa Central, destacándonos como el mayor importador de vino en esta región.
                     </p>
                 </div>
@@ -630,10 +628,10 @@
             <div class="cine-overlay"></div>
             <div class="cine-content grid grid-cols-1 md:grid-cols-2 gap-16 items-center" data-aos="fade-up">
                 <div>
-                    <span class="text-8xl font-display font-black text-white/10 absolute -top-20 -left-10 z-0">2016-22</span>
+                    <span class="text-8xl font-display font-black text-gray-100 dark:text-white/10 absolute -top-20 -left-10 z-0">2016-22</span>
                     <h2 class="text-5xl font-bold text-white mb-6 relative z-10">Hitos Comerciales</h2>
                     <div class="w-20 h-1 bg-accent-orange mb-8 relative z-10"></div>
-                    <div class="space-y-6 text-lg text-gray-300 leading-relaxed relative z-10">
+                    <div class="space-y-6 text-lg text-slate-600 dark:text-gray-300 leading-relaxed relative z-10">
                         <p class="border-l-2 border-accent-orange pl-6">
                             En 2016, impulsamos la comercialización de soja de origen Argentino en India, aprovechando ventajas estratégicas del tratado Mercosur-India.
                         </p>
@@ -646,22 +644,22 @@
                     <div class="glass-panel p-6 rounded-2xl text-center transform hover:-translate-y-2 transition-transform group cursor-pointer hover:border-accent-orange">
                         <i class="fa-solid fa-leaf text-3xl text-accent-orange mb-3 group-hover:rotate-12 transition-transform duration-300"></i>
                         <h4 class="text-white font-bold mb-1">Soja</h4>
-                        <p class="text-xs text-gray-400">Argentina -> India</p>
+                        <p class="text-xs text-slate-600 dark:text-gray-400">Argentina -> India</p>
                     </div>
                     <div class="glass-panel p-6 rounded-2xl text-center transform hover:-translate-y-2 transition-transform delay-100 group cursor-pointer hover:border-accent-orange">
                         <i class="fa-solid fa-wine-bottle text-3xl text-accent-orange mb-3 group-hover:scale-110 transition-transform duration-300"></i>
                         <h4 class="text-white font-bold mb-1">100M Litros</h4>
-                        <p class="text-xs text-gray-400">Vino a China</p>
+                        <p class="text-xs text-slate-600 dark:text-gray-400">Vino a China</p>
                     </div>
                     <div class="glass-panel p-6 rounded-2xl text-center transform hover:-translate-y-2 transition-transform delay-200 group cursor-pointer hover:border-accent-orange">
                         <i class="fa-solid fa-glass-water text-3xl text-accent-orange mb-3 group-hover:translate-x-1 transition-transform duration-300"></i>
                         <h4 class="text-white font-bold mb-1">7.000 Tn</h4>
-                        <p class="text-xs text-gray-400">Mosto a USA</p>
+                        <p class="text-xs text-slate-600 dark:text-gray-400">Mosto a USA</p>
                     </div>
                     <div class="glass-panel p-6 rounded-2xl text-center transform hover:-translate-y-2 transition-transform delay-300 group cursor-pointer hover:border-accent-orange">
                         <i class="fa-solid fa-percent text-3xl text-accent-orange mb-3 group-hover:spin-slow transition-transform duration-300"></i>
                         <h4 class="text-white font-bold mb-1">30% Share</h4>
-                        <p class="text-xs text-gray-400">Rep. Checa</p>
+                        <p class="text-xs text-slate-600 dark:text-gray-400">Rep. Checa</p>
                     </div>
                 </div>
             </div>
@@ -673,11 +671,11 @@
             <div class="cine-content text-center max-w-4xl mx-auto" data-aos="zoom-in">
                 <span class="inline-block px-4 py-1 rounded-full bg-white/10 text-white font-bold text-sm mb-4 border border-white/20">2022</span>
                 <h2 class="text-5xl md:text-6xl font-display font-bold text-white mb-8">Diversificación Estratégica</h2>
-                <p class="text-xl text-gray-300 leading-relaxed mb-12">
+                <p class="text-xl text-slate-600 dark:text-gray-300 leading-relaxed mb-12">
                     En 2022, decidimos emprender una nueva etapa. Sin abandonar el negocio del vino, diversificamos nuestro enfoque hacia otros sectores, incluyendo la industria de la carne de vacuno, mariscos, granos y aceites vegetales, con operaciones de distribución a nivel mundial.
                 </p>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <button onclick="changeBg2022('beef')" class="px-6 py-3 rounded-xl bg-black/50 border border-white/20 text-white backdrop-blur-md hover:bg-accent-gold hover:text-black transition-colors transform hover:scale-105 active:scale-95"><i class="fa-solid fa-cow mr-2"></i> Carne Vacuna</button>
+                    <button onclick="changeBg2022('beef')" class="px-6 py-3 rounded-xl bg-black/50 border border-white/20 text-white backdrop-blur-md hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-colors transform hover:scale-105 active:scale-95"><i class="fa-solid fa-cow mr-2"></i> Carne Vacuna</button>
                     <button onclick="changeBg2022('seafood')" class="px-6 py-3 rounded-xl bg-black/50 border border-white/20 text-white backdrop-blur-md hover:bg-accent-blue hover:text-black transition-colors transform hover:scale-105 active:scale-95"><i class="fa-solid fa-shrimp mr-2"></i> Mariscos</button>
                     <button onclick="changeBg2022('grains')" class="px-6 py-3 rounded-xl bg-black/50 border border-white/20 text-white backdrop-blur-md hover:bg-accent-orange hover:text-black transition-colors transform hover:scale-105 active:scale-95"><i class="fa-solid fa-wheat-awn mr-2"></i> Granos</button>
                     <button onclick="changeBg2022('oil')" class="px-6 py-3 rounded-xl bg-black/50 border border-white/20 text-white backdrop-blur-md hover:bg-accent-emerald hover:text-black transition-colors transform hover:scale-105 active:scale-95"><i class="fa-solid fa-bottle-droplet mr-2"></i> Aceites</button>
@@ -690,13 +688,13 @@
             <div class="cine-overlay"></div>
             <div class="cine-content grid grid-cols-1 md:grid-cols-2 gap-16 items-center" data-aos="fade-up">
                 <div>
-                    <span class="text-9xl font-display font-black text-white/10 absolute -top-20 -left-10 z-0">2023</span>
+                    <span class="text-9xl font-display font-black text-gray-100 dark:text-white/10 absolute -top-20 -left-10 z-0">2023</span>
                     <h2 class="text-5xl font-bold text-white mb-6 relative z-10">Nuevo Capítulo: Minería</h2>
                     <div class="w-20 h-1 bg-accent-emerald mb-8 relative z-10"></div>
-                    <p class="text-lg text-gray-300 leading-relaxed relative z-10 border-l-2 border-accent-emerald pl-6">
+                    <p class="text-lg text-slate-600 dark:text-gray-300 leading-relaxed relative z-10 border-l-2 border-accent-emerald pl-6">
                         El año 2023 marcó un nuevo capítulo para el grupo en la industria minera con la adquisición del 100% de las acciones de <strong class="text-accent-emerald">Minas Argentinas S.A. (Gualcamayo)</strong>, en San Juan, Argentina.
                     </p>
-                    <p class="text-lg text-gray-300 leading-relaxed mt-4 relative z-10 border-l-2 border-accent-emerald pl-6">
+                    <p class="text-lg text-slate-600 dark:text-gray-300 leading-relaxed mt-4 relative z-10 border-l-2 border-accent-emerald pl-6">
                         Hoy en día, esta empresa no solo mantiene la producción de oro, sino que también está invirtiendo en exploración para la expansión del proyecto <em>Carbonatos Profundos</em> y el desarrollo de nuevos targets hasta ahora inexplorados en Gualcamayo.
                     </p>
                 </div>
@@ -705,7 +703,7 @@
                     <div class="relative z-10">
                         <img src="https://images.unsplash.com/photo-1600363503477-a8d1d6d57dfc?q=80&w=1644&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-48 object-cover rounded-xl mb-6 shadow-lg grayscale group-hover:grayscale-0 transition-all duration-500" alt="Gold">
                         <h4 class="text-white font-bold text-2xl mb-2">Gualcamayo</h4>
-                        <p class="text-sm text-gray-400">San Juan, Argentina</p>
+                        <p class="text-sm text-slate-600 dark:text-gray-400">San Juan, Argentina</p>
                     </div>
                 </div>
             </div>
@@ -716,24 +714,24 @@
             <div class="cine-overlay"></div>
             <div class="cine-content grid grid-cols-1 md:grid-cols-2 gap-16 items-center" data-aos="fade-up">
                 <div class="order-2 md:order-1 space-y-6">
-                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-accent-gold transform hover:scale-105 transition-transform duration-300 group">
-                        <h4 class="text-accent-gold font-bold text-xl mb-2 group-hover:text-white transition-colors"><i class="fa-solid fa-solar-panel mr-2 group-hover:animate-pulse"></i> Energía Renovable</h4>
-                        <p class="text-sm text-gray-400 leading-relaxed">
+                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-accent-gold dark:border-accent-goldBright transform hover:scale-105 transition-transform duration-300 group">
+                        <h4 class="text-accent-gold dark:text-accent-goldBright font-bold text-xl mb-2 group-hover:text-white transition-colors"><i class="fa-solid fa-solar-panel mr-2 group-hover:animate-pulse"></i> Energía Renovable</h4>
+                        <p class="text-sm text-slate-600 dark:text-gray-400 leading-relaxed">
                             En 2024, se han iniciado importantes proyectos de energía renovable en Argentina, incluyendo la adquisición de terrenos para la construcción de varios parques fotovoltaicos con una capacidad total de 800 MW. <strong>Calicanto Solar</strong>, ya ha comenzado su fase de construcción en San Luis, Argentina, con una capacidad de 23 MW, teniendo ya el terreno alineado y procediendo a la instalación de los componentes para final de año.
                         </p>
                     </div>
                     <div class="glass-panel p-6 rounded-2xl border-l-4 border-accent-purple transform hover:scale-105 transition-transform duration-300 group">
                         <h4 class="text-accent-purple font-bold text-xl mb-2 group-hover:text-white transition-colors"><i class="fa-solid fa-building-columns mr-2 group-hover:animate-bounce"></i> Legado Urbano</h4>
-                        <p class="text-sm text-gray-400 leading-relaxed">
+                        <p class="text-sm text-slate-600 dark:text-gray-400 leading-relaxed">
                             Además, se adquirió en Agosto del 2024 el predio de <strong>Cinzano</strong>, en la ciudad de San Juan, donde se construirán viviendas, oficinas, un museo, restaurantes y un centro comercial, contribuyendo al desarrollo urbano y turístico de la región.
                         </p>
                     </div>
                 </div>
                 <div class="order-1 md:order-2 text-right">
-                    <span class="text-9xl font-display font-black text-white/10 absolute -top-20 -right-10 z-0">2024</span>
+                    <span class="text-9xl font-display font-black text-gray-100 dark:text-white/10 absolute -top-20 -right-10 z-0">2024</span>
                     <h2 class="text-5xl font-bold text-white mb-6 relative z-10">Futuro Sostenible</h2>
                     <div class="w-20 h-1 bg-white ml-auto mb-8 relative z-10"></div>
-                    <p class="text-lg text-gray-300 leading-relaxed relative z-10 border-r-2 border-white pr-6">
+                    <p class="text-lg text-slate-600 dark:text-gray-300 leading-relaxed relative z-10 border-r-2 border-white pr-6">
                         El presente es de construcción. Energía limpia y regeneración urbana marcan el ritmo de nuestro 2024.
                     </p>
                 </div>
@@ -741,14 +739,14 @@
         </div>
     </section>
 
-    <section id="estructura" class="py-32 bg-dark-bg border-t border-white/10 relative overflow-hidden">
+    <section id="estructura" class="py-32 bg-dark-bg border-t border-gray-100 dark:border-white/10 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-accent-purple/10 via-black to-black pointer-events-none"></div>
         
         <div class="max-w-[1600px] mx-auto px-6 relative z-10">
             <div class="text-center mb-20">
-                <span class="text-accent-gold font-bold tracking-[0.3em] text-xs uppercase mb-4 block">Estructura Sólida</span>
+                <span class="text-accent-gold dark:text-accent-goldBright font-bold tracking-[0.3em] text-xs uppercase mb-4 block">Estructura Sólida</span>
                 <h2 class="font-display text-5xl md:text-6xl font-bold text-white mb-6">Gobernanza</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">La base para una gestión coherente y consistente que permea desde la familia hasta las operaciones.</p>
+                <p class="text-slate-600 dark:text-gray-400 max-w-2xl mx-auto">La base para una gestión coherente y consistente que permea desde la familia hasta las operaciones.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[350px]">
@@ -757,12 +755,12 @@
                     <div class="absolute inset-0 bg-gradient-to-r from-accent-gold/10 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="relative z-10 h-full flex flex-col justify-between">
                         <div class="flex justify-between items-start">
-                            <div class="p-4 bg-accent-gold/20 rounded-2xl text-accent-gold text-3xl"><i class="fa-solid fa-users-line"></i></div>
-                            <span class="px-3 py-1 rounded-full border border-white/20 text-[10px] uppercase font-bold text-gray-300">Estratégico</span>
+                            <div class="p-4 bg-accent-gold dark:bg-accent-goldBright/20 rounded-2xl text-accent-gold dark:text-accent-goldBright text-3xl"><i class="fa-solid fa-users-line"></i></div>
+                            <span class="px-3 py-1 rounded-full border border-white/20 text-[10px] uppercase font-bold text-slate-600 dark:text-gray-300">Estratégico</span>
                         </div>
                         <div>
                             <h3 class="text-3xl font-display font-bold text-white mb-2">Consejo Familiar</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-4">Protección del legado y visión a largo plazo. Decisiones con "Founder's Mentality" que aseguran la continuidad de los valores.</p>
+                            <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed mb-4">Protección del legado y visión a largo plazo. Decisiones con "Founder's Mentality" que aseguran la continuidad de los valores.</p>
                             <div class="flex gap-2">
                                 <span class="text-xs bg-white/10 px-3 py-1 rounded-lg">Juanjo Retamero</span>
                                 <span class="text-xs bg-white/10 px-3 py-1 rounded-lg">Pablo Retamero</span>
@@ -778,7 +776,7 @@
                         <div class="p-3 bg-accent-purple/20 w-fit rounded-xl text-accent-purple text-2xl"><i class="fa-solid fa-heart"></i></div>
                         <div>
                             <h3 class="text-2xl font-display font-bold text-white mb-2">Fundación</h3>
-                            <p class="text-xs text-gray-400 leading-relaxed">Brazo social y filantrópico. Agente de cambio sistémico en las comunidades.</p>
+                            <p class="text-xs text-slate-600 dark:text-gray-400 leading-relaxed">Brazo social y filantrópico. Agente de cambio sistémico en las comunidades.</p>
                         </div>
                     </div>
                 </div>
@@ -789,7 +787,7 @@
                         <div class="p-3 bg-accent-blue/20 w-fit rounded-xl text-accent-blue text-2xl"><i class="fa-solid fa-building-shield"></i></div>
                         <div>
                             <h3 class="text-2xl font-display font-bold text-white mb-2">Corporate</h3>
-                            <p class="text-xs text-gray-400 leading-relaxed">Alineación estratégica, HR, Finanzas y Business Intelligence.</p>
+                            <p class="text-xs text-slate-600 dark:text-gray-400 leading-relaxed">Alineación estratégica, HR, Finanzas y Business Intelligence.</p>
                         </div>
                     </div>
                 </div>
@@ -798,11 +796,11 @@
                     <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
                     <div class="relative z-10 max-w-xl">
                         <h3 class="text-3xl font-display font-bold text-white mb-4">The Aisa Way of Doing Business</h3>
-                        <p class="text-gray-400">Nuestra metodología única: Tomamos oportunidades intuitivas, les aportamos visión y valores, inyectamos capital y aseguramos tracción y cumplimiento.</p>
+                        <p class="text-slate-600 dark:text-gray-400">Nuestra metodología única: Tomamos oportunidades intuitivas, les aportamos visión y valores, inyectamos capital y aseguramos tracción y cumplimiento.</p>
                     </div>
                     <div class="relative z-10 hidden lg:flex gap-8">
                         <div class="text-center group-hover:-translate-y-2 transition-transform duration-500">
-                            <div class="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center text-2xl mb-2 mx-auto bg-black"><i class="fa-regular fa-lightbulb text-accent-gold"></i></div>
+                            <div class="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center text-2xl mb-2 mx-auto bg-black"><i class="fa-regular fa-lightbulb text-accent-gold dark:text-accent-goldBright"></i></div>
                             <span class="text-xs font-bold uppercase">Intuición</span>
                         </div>
                         <div class="w-8 h-px bg-white/20 self-center"></div>
@@ -820,78 +818,82 @@
 
             </div>
         </div>
-    </section>    <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5">
-        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
-            <div class="lg:col-span-4">
-                <a href="#" class="inline-block mb-8">
-                    <!-- Logo image replacing text in footer -->
-                    <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
-                </a>
-                <p class="text-gray-400 mb-8 max-w-sm">
-                    Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+    </section>    <footer id="contacto" class="bg-slate-50 dark:bg-dark-bg pt-32 pb-12">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <div class="glass-apple rounded-[3rem] p-12 shadow-xl border border-white dark:border-gray-100 dark:border-white/10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+                    <div class="lg:col-span-4">
+                        <a href="#" class="inline-block mb-8">
+                            <!-- Logo image replacing text in footer -->
+                            <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
+                        </a>
+                        <p class="text-slate-600 dark:text-slate-600 dark:text-gray-300 mb-8 max-w-sm">
+                            Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-600 dark:text-gray-400 mb-8">Compañía</h4>
+                        <ul class="space-y-4 text-sm font-medium text-slate-600 dark:text-slate-600 dark:text-gray-300">
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Sobre Nosotros</a></li>
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Nuestro Equipo</a></li>
+                            <li><a href="carreras.html" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Carreras</a></li>
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Prensa</a></li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-600 dark:text-gray-400 mb-8">Sedes Globales</h4>
+                        <ul class="space-y-4 text-sm font-medium text-slate-600 dark:text-slate-600 dark:text-gray-300">
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <div class="glass-apple p-8 rounded-3xl">
+                            <h4 class="font-display font-bold text-xl mb-4 text-slate-900 dark:text-white">¿Hablamos?</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-600 dark:text-gray-300 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
+                            <!-- Updated footer contact button: trigger the contact modal instead of direct mailto -->
+                            <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold dark:bg-accent-goldBright text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
+                                Contactar
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="lg:col-span-2">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Compañía</h4>
-                <ul class="space-y-4 text-sm font-medium text-gray-300">
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
-                    <li><a href="carreras.html" class="hover:text-accent-gold transition-colors">Carreras</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
-                </ul>
-            </div>
-            <div class="lg:col-span-3">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Sedes Globales</h4>
-                <ul class="space-y-4 text-sm font-medium text-gray-300">
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
-                </ul>
-            </div>
-            <div class="lg:col-span-3">
-                <div class="glass-apple p-8 rounded-3xl">
-                    <h4 class="font-display font-bold text-xl mb-4">¿Hablamos?</h4>
-                    <p class="text-sm text-gray-400 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
-                    <!-- Updated footer contact button: trigger the contact modal instead of direct mailto -->
-                    <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
-                        Contactar
-                    </a>
+                <div class="pt-8 border-t border-slate-200 dark:border-gray-100 dark:border-gray-100 dark:border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-600 dark:text-gray-400 uppercase tracking-widest">
+                    <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+                    <div class="flex gap-8 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-slate-900 dark:hover:text-white">Política de Privacidad</a>
+                        <a href="#" class="hover:text-slate-900 dark:hover:text-white">Términos de Uso</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="max-w-[1600px] mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest">
-            <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
-            <div class="flex gap-8 mt-4 md:mt-0">
-                <a href="#" class="hover:text-white">Política de Privacidad</a>
-                <a href="#" class="hover:text-white">Términos de Uso</a>
             </div>
         </div>
     </footer>
 
     <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
-        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/5 backdrop-blur-[40px] modal-overlay-global" onclick="closeContactModal()"></div>
-        <div class="glass-panel p-6 md:p-8 rounded-3xl relative z-[215] max-w-lg w-[90%] border border-white/10">
-            <button onclick="closeContactModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-xl text-white hover:bg-white/20 transition-colors z-[220]" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/40 dark:bg-white/10 backdrop-blur-[40px] modal-overlay-global" onclick="closeContactModal()"></div>
+        <div class="glass-panel p-6 md:p-8 rounded-3xl relative z-[215] max-w-lg w-[90%] border border-gray-100 dark:border-white/10">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/40 dark:bg-white/10 flex items-center justify-center text-xl text-white hover:bg-white/20 transition-colors z-[220]" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <h4 class="text-2xl font-display font-bold mb-4 text-white">Contacto</h4>
             <div id="contact-toolbar" class="flex gap-2 mb-2">
-                <button type="button" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-accent-gold hover:text-black transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-bold"></i></button>
-                <button type="button" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-accent-gold hover:text-black transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-italic"></i></button>
-                <button type="button" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-accent-gold hover:text-black transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-list-ul"></i></button>
+                <button type="button" class="w-8 h-8 rounded-full bg-white/40 dark:bg-white/10 flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-bold"></i></button>
+                <button type="button" class="w-8 h-8 rounded-full bg-white/40 dark:bg-white/10 flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-italic"></i></button>
+                <button type="button" class="w-8 h-8 rounded-full bg-white/40 dark:bg-white/10 flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-list-ul"></i></button>
             </div>
             <form class="space-y-4">
-                <input type="text" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none border border-white/5" placeholder="Nombre" required>
-                <input type="email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none border border-white/5" placeholder="Email" required>
-                <div class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none border border-white/5 h-32 overflow-y-auto" contenteditable="true"></div>
+                <input type="text" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none border border-gray-100 dark:border-white/5" placeholder="Nombre" required>
+                <input type="email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none border border-gray-100 dark:border-white/5" placeholder="Email" required>
+                <div class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none border border-gray-100 dark:border-white/5 h-32 overflow-y-auto" contenteditable="true"></div>
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
-                    <button type="button" class="flex-1 py-3 rounded-full bg-white text-black flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs hover:bg-accent-gold transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                    <button type="button" class="flex-1 py-3 rounded-full bg-white text-black flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
                     <button type="button" class="flex-1 py-3 rounded-full bg-white/10 border border-white/20 flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-emerald hover:border-transparent transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
                 </div>
             </form>
@@ -978,23 +980,6 @@
         }
 
         // --- THEME TOGGLE LOGIC ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            if (htmlElement.classList.contains('dark')) {
-                localStorage.theme = 'dark';
-            } else {
-                localStorage.theme = 'light';
-            }
-        });
 
         // --- CONTACT MODAL LOGIC ---
         const contactModal = document.getElementById('contact-modal');
@@ -1105,5 +1090,36 @@
         })();
     </script>
 
+
+    <!-- THEME TOGGLE BUTTON -->
+    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold dark:text-accent-goldBright hover:scale-110 transition-transform cursor-pointer shadow-lg">
+        <i class="fa-solid fa-moon dark:hidden"></i>
+        <i class="fa-solid fa-sun hidden dark:block"></i>
+    </button>
+
+    <script>
+        // Lógica de Modo Oscuro / Claro
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // 1. Verificar preferencia al cargar
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        // 2. Acción del botón
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                if (htmlElement.classList.contains('dark')) {
+                    localStorage.theme = 'dark';
+                } else {
+                    localStorage.theme = 'light';
+                }
+            });
+        }
+    </script>
 </body>
 </html>

@@ -29,14 +29,20 @@
                         display: ['"Montserrat"', 'sans-serif'],
                     },
                     colors: {
+                        light: {
+                            bg: '#F8FAFC',
+                            surface: '#FFFFFF',
+                            text: '#0F172A',
+                            subtext: '#475569'
+                        },
                         dark: {
                             bg: '#050505',
                             surface: '#0F0F0F',
                         },
                         accent: {
-                            gold: '#3B82F6',
-                            goldHover: '#2563EB',
-                        },
+                            gold: '#D97706',
+                            goldBright: '#FACC15',
+                        }
                     },
                     backgroundImage: {
                         'frost-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.01))',
@@ -70,11 +76,17 @@
         }
         /* Glassmorphism utility classes */
         .glass-apple {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+        .dark .glass-apple {
             background: rgba(20, 20, 20, 0.65);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            color: white;
         }
         .glass-panel {
             background: rgba(10, 15, 25, 0.7);
@@ -111,7 +123,7 @@
         }
     </style>
 </head>
-<body class="antialiased font-sans">
+<body class="bg-slate-50 text-slate-900 dark:bg-dark-bg dark:text-slate-600 dark:text-gray-200 transition-colors duration-300 antialiased font-sans">
 
     <!-- NAVBAR (copiado de las otras páginas del sitio) -->
     <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
@@ -120,31 +132,31 @@
                 <a href="index.html" class="flex items-center group">
                     <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="h-8 w-auto" />
                 </a>
-                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none">
+                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none text-slate-600 dark:text-slate-600 dark:text-gray-300">
                     <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inicio</a>
                     <div class="relative group">
                         <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 dark:hover:bg-white/10 transition-all">Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i></a>
                         <div class="mt-2 flex flex-col gap-2 lg:hidden">
-                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">Quienes Somos</a>
-                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">El Equipo</a>
+                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-600 dark:text-gray-300/90 hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-600 dark:text-gray-300/90 hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">El Equipo</a>
                         </div>
                         <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 lg:group-hover:opacity-100 lg:group-hover:scale-100 transition-all origin-top-left z-50 hidden lg:block lg:group-hover:block">
-                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">Quienes Somos</a>
-                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">El Equipo</a>
+                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-slate-600 dark:text-gray-200 uppercase tracking-widest hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-slate-600 dark:text-gray-200 uppercase tracking-widest hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">El Equipo</a>
                         </div>
                     </div>
                     <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Unidades</a>
                     <a href="sostenibilidad.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Sostenibilidad &amp; ESG</a>
                     <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Prensa</a>
-                    <a href="carreras.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold">Carreras</a>
+                    <a href="carreras.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold dark:text-accent-goldBright">Carreras</a>
                 </div>
                 <div class="flex items-center gap-4">
                     <!-- Botón de contacto (abre modal) -->
-                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-accent-gold transition-colors text-[10px] font-bold uppercase tracking-widest shadow-lg">
+                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors text-[10px] font-bold uppercase tracking-widest shadow-lg">
                         Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
                     </a>
                     <!-- Botón de menú hamburguesa para móviles -->
-                    <button id="nav-toggle" class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
+                    <button id="nav-toggle" class="lg:hidden text-xl text-slate-900 dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
                 </div>
             </div>
         </div>
@@ -156,91 +168,91 @@
             <!-- Fondo y partículas -->
             <div id="particles-js"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#000000] z-10 pointer-events-none"></div>
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-gold/10 rounded-full blur-[150px] animate-pulse-slow"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-gold/10 rounded-full blur-[150px] animate-pulse-slow"></div>
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-gold dark:bg-accent-goldBright/10 rounded-full blur-[150px] animate-pulse-slow"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-gold dark:bg-accent-goldBright/10 rounded-full blur-[150px] animate-pulse-slow"></div>
         </div>
         <div class="max-w-[1400px] mx-auto px-6 relative z-20 w-full text-center">
-            <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-accent-gold/30 bg-accent-gold/5 backdrop-blur-md mb-10 animate-float shadow-[0_0_20px_rgba(59,130,246,0.2)]">
-                <span class="w-2 h-2 rounded-full bg-accent-gold animate-ping"></span>
-                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-accent-gold">Carreras en Aisa</span>
+            <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-accent-gold dark:border-accent-goldBright/30 bg-accent-gold dark:bg-accent-goldBright/5 backdrop-blur-md mb-10 animate-float shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                <span class="w-2 h-2 rounded-full bg-accent-gold dark:bg-accent-goldBright animate-ping"></span>
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-accent-gold dark:text-accent-goldBright">Carreras en Aisa</span>
             </div>
             <h1 class="font-display text-6xl md:text-8xl lg:text-9xl font-black text-white mb-8 leading-[0.9] tracking-tighter" data-aos="zoom-in">
                 CONSTRUYE <br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-gold to-white">EL LEGADO</span>
             </h1>
-            <p class="text-xl text-gray-400 font-light max-w-3xl mx-auto leading-relaxed mb-16" data-aos="fade-up" data-aos-delay="200">
+            <p class="text-xl text-slate-600 dark:text-gray-400 font-light max-w-3xl mx-auto leading-relaxed mb-16" data-aos="fade-up" data-aos-delay="200">
                 En Aisa Group, no solo ofrecemos empleos, ofrecemos misiones. Únete a un ecosistema donde la minería responsable, la energía renovable y el desarrollo urbano convergen para transformar el mundo.
             </p>
             <!-- Estadísticas / beneficios destacados -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto" data-aos="fade-up" data-aos-delay="400">
                 <div class="glass-card p-8 rounded-3xl text-center group cursor-default">
-                    <div class="w-16 h-16 mx-auto bg-accent-gold/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 border border-accent-gold/20">
-                        <i class="fa-solid fa-rocket text-3xl text-accent-gold"></i>
+                    <div class="w-16 h-16 mx-auto bg-accent-gold dark:bg-accent-goldBright/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 border border-accent-gold dark:border-accent-goldBright/20">
+                        <i class="fa-solid fa-rocket text-3xl text-accent-gold dark:text-accent-goldBright"></i>
                     </div>
-                    <h3 class="text-white font-bold text-2xl mb-1 group-hover:text-accent-gold transition-colors">Crecimiento</h3>
-                    <p class="text-xs text-gray-500 uppercase tracking-widest">Carreras globales sin límites</p>
+                    <h3 class="text-white font-bold text-2xl mb-1 group-hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Crecimiento</h3>
+                    <p class="text-xs text-slate-500 dark:text-gray-400 uppercase tracking-widest">Carreras globales sin límites</p>
                 </div>
                 <div class="glass-card p-8 rounded-3xl text-center group cursor-default">
-                    <div class="w-16 h-16 mx-auto bg-accent-gold/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 border border-accent-gold/20">
-                        <i class="fa-solid fa-hand-holding-heart text-3xl text-accent-gold"></i>
+                    <div class="w-16 h-16 mx-auto bg-accent-gold dark:bg-accent-goldBright/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 border border-accent-gold dark:border-accent-goldBright/20">
+                        <i class="fa-solid fa-hand-holding-heart text-3xl text-accent-gold dark:text-accent-goldBright"></i>
                     </div>
-                    <h3 class="text-white font-bold text-2xl mb-1 group-hover:text-accent-gold transition-colors">Impacto</h3>
-                    <p class="text-xs text-gray-500 uppercase tracking-widest">Trabajo con propósito real</p>
+                    <h3 class="text-white font-bold text-2xl mb-1 group-hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Impacto</h3>
+                    <p class="text-xs text-slate-500 dark:text-gray-400 uppercase tracking-widest">Trabajo con propósito real</p>
                 </div>
                 <div class="glass-card p-8 rounded-3xl text-center group cursor-default">
-                    <div class="w-16 h-16 mx-auto bg-accent-gold/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 border border-accent-gold/20">
-                        <i class="fa-solid fa-laptop-code text-3xl text-accent-gold"></i>
+                    <div class="w-16 h-16 mx-auto bg-accent-gold dark:bg-accent-goldBright/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 border border-accent-gold dark:border-accent-goldBright/20">
+                        <i class="fa-solid fa-laptop-code text-3xl text-accent-gold dark:text-accent-goldBright"></i>
                     </div>
-                    <h3 class="text-white font-bold text-2xl mb-1 group-hover:text-accent-gold transition-colors">Innovación</h3>
-                    <p class="text-xs text-gray-500 uppercase tracking-widest">Tecnología de vanguardia</p>
+                    <h3 class="text-white font-bold text-2xl mb-1 group-hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Innovación</h3>
+                    <p class="text-xs text-slate-500 dark:text-gray-400 uppercase tracking-widest">Tecnología de vanguardia</p>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- BENEFICIOS -->
-    <section class="py-24 bg-dark-bg border-t border-white/5 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-1/2 h-full bg-accent-gold/5 blur-[100px] pointer-events-none"></div>
+    <section class="py-24 bg-dark-bg border-t border-gray-100 dark:border-white/5 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-accent-gold dark:bg-accent-goldBright/5 blur-[100px] pointer-events-none"></div>
         <div class="max-w-[1600px] mx-auto px-6 relative z-10">
             <div class="text-center mb-20" data-aos="fade-up">
-                <span class="text-accent-gold font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Beneficios</span>
+                <span class="text-accent-gold dark:text-accent-goldBright font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Beneficios</span>
                 <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Más que un salario</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="glass-panel p-8 rounded-[2rem] group cursor-pointer hover:bg-accent-gold/5 transition-all duration-300" data-aos="fade-up" data-tilt>
-                    <div class="mb-6 flex items-center justify-center w-16 h-16 mx-auto bg-accent-gold/10 rounded-full border border-accent-gold/20 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-heart-pulse text-3xl text-accent-gold"></i>
+                <div class="glass-panel p-8 rounded-[2rem] group cursor-pointer hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright/5 transition-all duration-300" data-aos="fade-up" data-tilt>
+                    <div class="mb-6 flex items-center justify-center w-16 h-16 mx-auto bg-accent-gold dark:bg-accent-goldBright/10 rounded-full border border-accent-gold dark:border-accent-goldBright/20 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-heart-pulse text-3xl text-accent-gold dark:text-accent-goldBright"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-accent-gold transition-colors">Bienestar Integral</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed">Seguro médico premium para ti y tu familia, programas de salud mental y gimnasio corporativo.</p>
+                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Bienestar Integral</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 leading-relaxed">Seguro médico premium para ti y tu familia, programas de salud mental y gimnasio corporativo.</p>
                 </div>
-                <div class="glass-panel p-8 rounded-[2rem] group cursor-pointer hover:bg-accent-gold/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="100" data-tilt>
-                    <div class="mb-6 flex items-center justify-center w-16 h-16 mx-auto bg-accent-gold/10 rounded-full border border-accent-gold/20 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-plane-departure text-3xl text-accent-gold"></i>
+                <div class="glass-panel p-8 rounded-[2rem] group cursor-pointer hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="100" data-tilt>
+                    <div class="mb-6 flex items-center justify-center w-16 h-16 mx-auto bg-accent-gold dark:bg-accent-goldBright/10 rounded-full border border-accent-gold dark:border-accent-goldBright/20 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-plane-departure text-3xl text-accent-gold dark:text-accent-goldBright"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-accent-gold transition-colors">Movilidad Global</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed">Oportunidades de reubicación y proyectos internacionales en nuestras sedes globales.</p>
+                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Movilidad Global</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 leading-relaxed">Oportunidades de reubicación y proyectos internacionales en nuestras sedes globales.</p>
                 </div>
-                <div class="glass-panel p-8 rounded-[2rem] group cursor-pointer hover:bg-accent-gold/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="200" data-tilt>
-                    <div class="mb-6 flex items-center justify-center w-16 h-16 mx-auto bg-accent-gold/10 rounded-full border border-accent-gold/20 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-graduation-cap text-3xl text-accent-gold"></i>
+                <div class="glass-panel p-8 rounded-[2rem] group cursor-pointer hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="200" data-tilt>
+                    <div class="mb-6 flex items-center justify-center w-16 h-16 mx-auto bg-accent-gold dark:bg-accent-goldBright/10 rounded-full border border-accent-gold dark:border-accent-goldBright/20 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-graduation-cap text-3xl text-accent-gold dark:text-accent-goldBright"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-accent-gold transition-colors">Aprendizaje</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed">Presupuesto anual para formación, acceso a plataformas de e-learning y programas de mentoría.</p>
+                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Aprendizaje</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 leading-relaxed">Presupuesto anual para formación, acceso a plataformas de e-learning y programas de mentoría.</p>
                 </div>
-                <div class="glass-panel p-8 rounded-[2rem] group cursor-pointer hover:bg-accent-gold/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="300" data-tilt>
-                    <div class="mb-6 flex items-center justify-center w-16 h-16 mx-auto bg-accent-gold/10 rounded-full border border-accent-gold/20 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-clock text-3xl text-accent-gold"></i>
+                <div class="glass-panel p-8 rounded-[2rem] group cursor-pointer hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="300" data-tilt>
+                    <div class="mb-6 flex items-center justify-center w-16 h-16 mx-auto bg-accent-gold dark:bg-accent-goldBright/10 rounded-full border border-accent-gold dark:border-accent-goldBright/20 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-clock text-3xl text-accent-gold dark:text-accent-goldBright"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-accent-gold transition-colors">Flexibilidad</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed">Modelos de trabajo híbrido y remoto, horarios flexibles y viernes cortos en verano.</p>
+                    <h4 class="text-xl font-bold text-white mb-3 group-hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Flexibilidad</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 leading-relaxed">Modelos de trabajo híbrido y remoto, horarios flexibles y viernes cortos en verano.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- PROCESO DE CONTRATACIÓN -->
-    <section class="py-24 bg-[#050505] border-t border-white/5 relative">
+    <section class="py-24 bg-slate-50 dark:bg-[#050505] border-t border-gray-100 dark:border-white/5 relative">
         <div class="max-w-[1200px] mx-auto px-6">
             <div class="text-center mb-20" data-aos="fade-up">
                 <h2 class="font-display text-4xl font-bold text-white">Tu viaje hacia Aisa</h2>
@@ -249,24 +261,24 @@
                 <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-white/10 -translate-y-1/2 rounded-full"></div>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
                     <div class="text-center group" data-aos="fade-up" data-aos-delay="0">
-                        <div class="w-16 h-16 mx-auto bg-black border-2 border-accent-gold rounded-full flex items-center justify-center text-white text-xl font-bold mb-6 group-hover:bg-accent-gold group-hover:scale-110 transition-all duration-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]">1</div>
+                        <div class="w-16 h-16 mx-auto bg-black border-2 border-accent-gold dark:border-accent-goldBright rounded-full flex items-center justify-center text-white text-xl font-bold mb-6 group-hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright group-hover:scale-110 transition-all duration-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]">1</div>
                         <h4 class="text-white font-bold mb-2">Aplicación</h4>
-                        <p class="text-xs text-gray-500 px-4">Envía tu CV y cuéntanos tu historia a través de nuestro portal.</p>
+                        <p class="text-xs text-slate-500 dark:text-gray-400 px-4">Envía tu CV y cuéntanos tu historia a través de nuestro portal.</p>
                     </div>
                     <div class="text-center group" data-aos="fade-up" data-aos-delay="100">
                         <div class="w-16 h-16 mx-auto bg-black border-2 border-white/20 rounded-full flex items-center justify-center text-white text-xl font-bold mb-6 group-hover:border-white group-hover:scale-110 transition-all duration-500">2</div>
                         <h4 class="text-white font-bold mb-2">Conexión</h4>
-                        <p class="text-xs text-gray-500 px-4">Entrevista inicial con Talent Acquisition para conocernos mejor.</p>
+                        <p class="text-xs text-slate-500 dark:text-gray-400 px-4">Entrevista inicial con Talent Acquisition para conocernos mejor.</p>
                     </div>
                     <div class="text-center group" data-aos="fade-up" data-aos-delay="200">
                         <div class="w-16 h-16 mx-auto bg-black border-2 border-white/20 rounded-full flex items-center justify-center text-white text-xl font-bold mb-6 group-hover:border-white group-hover:scale-110 transition-all duration-500">3</div>
                         <h4 class="text-white font-bold mb-2">Desafío</h4>
-                        <p class="text-xs text-gray-500 px-4">Evaluación técnica o entrevista con el equipo de liderazgo.</p>
+                        <p class="text-xs text-slate-500 dark:text-gray-400 px-4">Evaluación técnica o entrevista con el equipo de liderazgo.</p>
                     </div>
                     <div class="text-center group" data-aos="fade-up" data-aos-delay="300">
-                        <div class="w-16 h-16 mx-auto bg-black border-2 border-accent-gold rounded-full flex items-center justify-center text-white text-xl font-bold mb-6 group-hover:bg-accent-gold group-hover:text-black group-hover:scale-110 transition-all duration-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]">4</div>
+                        <div class="w-16 h-16 mx-auto bg-black border-2 border-accent-gold dark:border-accent-goldBright rounded-full flex items-center justify-center text-white text-xl font-bold mb-6 group-hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright group-hover:text-black group-hover:scale-110 transition-all duration-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]">4</div>
                         <h4 class="text-white font-bold mb-2">Oferta</h4>
-                        <p class="text-xs text-gray-500 px-4">¡Bienvenido a bordo! Comienza tu onboarding.</p>
+                        <p class="text-xs text-slate-500 dark:text-gray-400 px-4">¡Bienvenido a bordo! Comienza tu onboarding.</p>
                     </div>
                 </div>
             </div>
@@ -274,26 +286,26 @@
     </section>
 
     <!-- VACANTES / TABLA DE TRABAJOS -->
-    <section id="vacantes" class="py-24 bg-dark-bg border-t border-white/5 relative min-h-screen">
+    <section id="vacantes" class="py-24 bg-dark-bg border-t border-gray-100 dark:border-white/5 relative min-h-screen">
         <div class="absolute inset-0 bg-radial-glow pointer-events-none"></div>
         <div class="max-w-[1600px] mx-auto px-6 relative z-10">
-            <div class="glass-panel p-8 rounded-[2rem] mb-12 sticky top-28 z-40 backdrop-blur-xl border border-accent-gold/20">
+            <div class="glass-panel p-8 rounded-[2rem] mb-12 sticky top-28 z-40 backdrop-blur-xl border border-accent-gold dark:border-accent-goldBright/20">
                 <div class="flex flex-col xl:flex-row justify-between items-center gap-6">
                     <div>
                         <h2 class="font-display text-3xl font-bold text-white mb-2">Vacantes disponibles</h2>
-                        <p class="text-gray-400 text-xs uppercase tracking-widest">Encuentra tu próximo desafío</p>
+                        <p class="text-slate-600 dark:text-gray-400 text-xs uppercase tracking-widest">Encuentra tu próximo desafío</p>
                     </div>
                     <div class="flex flex-col md:flex-row gap-4 w-full xl:w-auto">
                         <div class="relative w-full md:w-80">
-                            <input type="text" id="job-search" placeholder="Buscar cargo, área..." class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accent-gold focus:ring-1 focus:ring-accent-gold transition-all pl-10">
-                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                            <input type="text" id="job-search" placeholder="Buscar cargo, área..." class="w-full bg-black/50 border border-gray-100 dark:border-white/10 rounded-xl px-5 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accent-gold dark:focus:border-accent-goldBright dark:border-accent-goldBright focus:ring-1 focus:ring-accent-gold transition-all pl-10">
+                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 dark:text-gray-400"></i>
                         </div>
                         <!-- Botones de filtro -->
                         <div class="flex gap-2 overflow-x-auto pb-2 md:pb-0">
-                            <button class="px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-accent-gold text-black shadow-lg transition-all filter-btn active whitespace-nowrap" data-filter="all" onclick="filterJobs('all', this)">Todos</button>
-                            <button class="px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-black/50 text-gray-400 border border-white/10 hover:text-white hover:border-white/30 transition-all filter-btn whitespace-nowrap" data-filter="mineria" onclick="filterJobs('mineria', this)">Minería</button>
-                            <button class="px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-black/50 text-gray-400 border border-white/10 hover:text-white hover:border-white/30 transition-all filter-btn whitespace-nowrap" data-filter="energia" onclick="filterJobs('energia', this)">Energía</button>
-                            <button class="px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-black/50 text-gray-400 border border-white/10 hover:text-white hover:border-white/30 transition-all filter-btn whitespace-nowrap" data-filter="corporate" onclick="filterJobs('corporate', this)">Corporate</button>
+                            <button class="px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-accent-gold dark:bg-accent-goldBright text-black shadow-lg transition-all filter-btn active whitespace-nowrap" data-filter="all" onclick="filterJobs('all', this)">Todos</button>
+                            <button class="px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-black/50 text-slate-600 dark:text-gray-400 border border-gray-100 dark:border-white/10 hover:text-white hover:border-white/30 transition-all filter-btn whitespace-nowrap" data-filter="mineria" onclick="filterJobs('mineria', this)">Minería</button>
+                            <button class="px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-black/50 text-slate-600 dark:text-gray-400 border border-gray-100 dark:border-white/10 hover:text-white hover:border-white/30 transition-all filter-btn whitespace-nowrap" data-filter="energia" onclick="filterJobs('energia', this)">Energía</button>
+                            <button class="px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-widest bg-black/50 text-slate-600 dark:text-gray-400 border border-gray-100 dark:border-white/10 hover:text-white hover:border-white/30 transition-all filter-btn whitespace-nowrap" data-filter="corporate" onclick="filterJobs('corporate', this)">Corporate</button>
                         </div>
                     </div>
                 </div>
@@ -301,71 +313,71 @@
             <!-- Tarjetas de vacantes -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="job-grid">
                 <!-- Plantilla de tarjeta de trabajo -->
-                <div class="job-card glass-card p-8 rounded-3xl group hover:bg-white/5 transition-all cursor-default" data-category="mineria" data-title="ingeniero minas senior">
+                <div class="job-card glass-card p-8 rounded-3xl group hover:bg-white/40 dark:bg-white/10 transition-all cursor-default" data-category="mineria" data-title="ingeniero minas senior">
                     <div class="flex justify-between items-start mb-6">
-                        <div class="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold text-xl border border-accent-gold/20 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 rounded-xl bg-accent-gold dark:bg-accent-goldBright/10 flex items-center justify-center text-accent-gold dark:text-accent-goldBright text-xl border border-accent-gold dark:border-accent-goldBright/20 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-mountain"></i>
                         </div>
-                        <span class="px-3 py-1 rounded-full border border-white/10 text-[10px] text-gray-300 uppercase tracking-widest bg-white/5">San Juan</span>
+                        <span class="px-3 py-1 rounded-full border border-gray-100 dark:border-white/10 text-[10px] text-slate-600 dark:text-gray-300 uppercase tracking-widest bg-white/40 dark:bg-white/10">San Juan</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent-gold transition-colors">Ingeniero de Minas Senior</h3>
-                    <p class="text-sm text-gray-400 mb-6 line-clamp-2">Liderar la planificación y ejecución de operaciones en el proyecto Carbonatos Profundos, asegurando estándares de seguridad.</p>
+                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Ingeniero de Minas Senior</h3>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mb-6 line-clamp-2">Liderar la planificación y ejecución de operaciones en el proyecto Carbonatos Profundos, asegurando estándares de seguridad.</p>
                     <div class="flex flex-wrap gap-2 mb-8">
-                        <span class="text-[10px] bg-white/5 border border-white/5 px-2 py-1 rounded text-gray-400">Tiempo Completo</span>
-                        <span class="text-[10px] bg-white/5 border border-white/5 px-2 py-1 rounded text-gray-400">Presencial</span>
+                        <span class="text-[10px] bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/5 px-2 py-1 rounded text-slate-600 dark:text-gray-400">Tiempo Completo</span>
+                        <span class="text-[10px] bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/5 px-2 py-1 rounded text-slate-600 dark:text-gray-400">Presencial</span>
                     </div>
-                    <button onclick="openApplyModal('Ingeniero de Minas Senior', 'Minas Argentinas')" class="w-full py-4 rounded-xl bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-accent-gold hover:text-black transition-all flex items-center justify-center gap-2 shadow-lg transform group-hover:-translate-y-1">
+                    <button onclick="openApplyModal('Ingeniero de Minas Senior', 'Minas Argentinas')" class="w-full py-4 rounded-xl bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all flex items-center justify-center gap-2 shadow-lg transform group-hover:-translate-y-1">
                         Aplicar Ahora <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
-                <div class="job-card glass-card p-8 rounded-3xl group hover:bg-white/5 transition-all cursor-default" data-category="energia" data-title="gerente proyecto solar">
+                <div class="job-card glass-card p-8 rounded-3xl group hover:bg-white/40 dark:bg-white/10 transition-all cursor-default" data-category="energia" data-title="gerente proyecto solar">
                     <div class="flex justify-between items-start mb-6">
-                        <div class="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold text-xl border border-accent-gold/20 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 rounded-xl bg-accent-gold dark:bg-accent-goldBright/10 flex items-center justify-center text-accent-gold dark:text-accent-goldBright text-xl border border-accent-gold dark:border-accent-goldBright/20 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-bolt"></i>
                         </div>
-                        <span class="px-3 py-1 rounded-full border border-white/10 text-[10px] text-gray-300 uppercase tracking-widest bg-white/5">San Luis</span>
+                        <span class="px-3 py-1 rounded-full border border-gray-100 dark:border-white/10 text-[10px] text-slate-600 dark:text-gray-300 uppercase tracking-widest bg-white/40 dark:bg-white/10">San Luis</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent-gold transition-colors">Gerente de Proyecto Solar</h3>
-                    <p class="text-sm text-gray-400 mb-6 line-clamp-2">Responsable integral de la construcción y puesta en marcha del Parque Solar Calicanto, coordinando contratistas.</p>
+                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Gerente de Proyecto Solar</h3>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mb-6 line-clamp-2">Responsable integral de la construcción y puesta en marcha del Parque Solar Calicanto, coordinando contratistas.</p>
                     <div class="flex flex-wrap gap-2 mb-8">
-                        <span class="text-[10px] bg-white/5 border border-white/5 px-2 py-1 rounded text-gray-400">Tiempo Completo</span>
-                        <span class="text-[10px] bg-white/5 border border-white/5 px-2 py-1 rounded text-gray-400">Híbrido</span>
+                        <span class="text-[10px] bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/5 px-2 py-1 rounded text-slate-600 dark:text-gray-400">Tiempo Completo</span>
+                        <span class="text-[10px] bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/5 px-2 py-1 rounded text-slate-600 dark:text-gray-400">Híbrido</span>
                     </div>
-                    <button onclick="openApplyModal('Gerente de Proyecto Solar', 'Aisa Energy')" class="w-full py-4 rounded-xl bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-accent-gold hover:text-black transition-all flex items-center justify-center gap-2 shadow-lg transform group-hover:-translate-y-1">
+                    <button onclick="openApplyModal('Gerente de Proyecto Solar', 'Aisa Energy')" class="w-full py-4 rounded-xl bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all flex items-center justify-center gap-2 shadow-lg transform group-hover:-translate-y-1">
                         Aplicar Ahora <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
-                <div class="job-card glass-card p-8 rounded-3xl group hover:bg-white/5 transition-all cursor-default" data-category="corporate" data-title="analista financiero">
+                <div class="job-card glass-card p-8 rounded-3xl group hover:bg-white/40 dark:bg-white/10 transition-all cursor-default" data-category="corporate" data-title="analista financiero">
                     <div class="flex justify-between items-start mb-6">
-                        <div class="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold text-xl border border-accent-gold/20 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 rounded-xl bg-accent-gold dark:bg-accent-goldBright/10 flex items-center justify-center text-accent-gold dark:text-accent-goldBright text-xl border border-accent-gold dark:border-accent-goldBright/20 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-chart-pie"></i>
                         </div>
-                        <span class="px-3 py-1 rounded-full border border-white/10 text-[10px] text-gray-300 uppercase tracking-widest bg-white/5">Remoto</span>
+                        <span class="px-3 py-1 rounded-full border border-gray-100 dark:border-white/10 text-[10px] text-slate-600 dark:text-gray-300 uppercase tracking-widest bg-white/40 dark:bg-white/10">Remoto</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent-gold transition-colors">Analista Financiero Sr.</h3>
-                    <p class="text-sm text-gray-400 mb-6 line-clamp-2">Análisis de inversiones, modelado financiero y soporte en decisiones estratégicas de M&A para el holding.</p>
+                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Analista Financiero Sr.</h3>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mb-6 line-clamp-2">Análisis de inversiones, modelado financiero y soporte en decisiones estratégicas de M&A para el holding.</p>
                     <div class="flex flex-wrap gap-2 mb-8">
-                        <span class="text-[10px] bg-white/5 border border-white/5 px-2 py-1 rounded text-gray-400">Full Time</span>
-                        <span class="text-[10px] bg-white/5 border border-white/5 px-2 py-1 rounded text-gray-400">Remoto Global</span>
+                        <span class="text-[10px] bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/5 px-2 py-1 rounded text-slate-600 dark:text-gray-400">Full Time</span>
+                        <span class="text-[10px] bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/5 px-2 py-1 rounded text-slate-600 dark:text-gray-400">Remoto Global</span>
                     </div>
-                    <button onclick="openApplyModal('Analista Financiero Sr.', 'Aisa Corporate')" class="w-full py-4 rounded-xl bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-accent-gold hover:text-black transition-all flex items-center justify-center gap-2 shadow-lg transform group-hover:-translate-y-1">
+                    <button onclick="openApplyModal('Analista Financiero Sr.', 'Aisa Corporate')" class="w-full py-4 rounded-xl bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all flex items-center justify-center gap-2 shadow-lg transform group-hover:-translate-y-1">
                         Aplicar Ahora <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
-                <div class="job-card glass-card p-8 rounded-3xl group hover:bg-white/5 transition-all cursor-default" data-category="corporate" data-title="desarrollador full stack">
+                <div class="job-card glass-card p-8 rounded-3xl group hover:bg-white/40 dark:bg-white/10 transition-all cursor-default" data-category="corporate" data-title="desarrollador full stack">
                     <div class="flex justify-between items-start mb-6">
-                        <div class="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold text-xl border border-accent-gold/20 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 rounded-xl bg-accent-gold dark:bg-accent-goldBright/10 flex items-center justify-center text-accent-gold dark:text-accent-goldBright text-xl border border-accent-gold dark:border-accent-goldBright/20 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-laptop-code"></i>
                         </div>
-                        <span class="px-3 py-1 rounded-full border border-white/10 text-[10px] text-gray-300 uppercase tracking-widest bg-white/5">Buenos Aires</span>
+                        <span class="px-3 py-1 rounded-full border border-gray-100 dark:border-white/10 text-[10px] text-slate-600 dark:text-gray-300 uppercase tracking-widest bg-white/40 dark:bg-white/10">Buenos Aires</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent-gold transition-colors">Desarrollador Full Stack</h3>
-                    <p class="text-sm text-gray-400 mb-6 line-clamp-2">Desarrollo de plataformas internas de gestión y dashboards de BI para el seguimiento de operaciones.</p>
+                    <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Desarrollador Full Stack</h3>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mb-6 line-clamp-2">Desarrollo de plataformas internas de gestión y dashboards de BI para el seguimiento de operaciones.</p>
                     <div class="flex flex-wrap gap-2 mb-8">
-                        <span class="text-[10px] bg-white/5 border border-white/5 px-2 py-1 rounded text-gray-400">Full Time</span>
-                        <span class="text-[10px] bg-white/5 border border-white/5 px-2 py-1 rounded text-gray-400">Híbrido</span>
+                        <span class="text-[10px] bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/5 px-2 py-1 rounded text-slate-600 dark:text-gray-400">Full Time</span>
+                        <span class="text-[10px] bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/5 px-2 py-1 rounded text-slate-600 dark:text-gray-400">Híbrido</span>
                     </div>
-                    <button onclick="openApplyModal('Desarrollador Full Stack', 'Aisa Tech')" class="w-full py-4 rounded-xl bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-accent-gold hover:text-black transition-all flex items-center justify-center gap-2 shadow-lg transform group-hover:-translate-y-1">
+                    <button onclick="openApplyModal('Desarrollador Full Stack', 'Aisa Tech')" class="w-full py-4 rounded-xl bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all flex items-center justify-center gap-2 shadow-lg transform group-hover:-translate-y-1">
                         Aplicar Ahora <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
@@ -374,17 +386,17 @@
     </section>
 
     <!-- CANDIDATURA ESPONTÁNEA -->
-    <section class="py-20 bg-dark-bg border-t border-white/5">
+    <section class="py-20 bg-dark-bg border-t border-gray-100 dark:border-white/5">
         <div class="max-w-[1200px] mx-auto px-6">
-            <div class="glass-panel p-12 rounded-[3rem] text-center relative overflow-hidden border border-accent-gold/20 group">
-                <div class="absolute top-0 right-0 w-96 h-96 bg-accent-gold/10 rounded-full blur-[100px] group-hover:bg-accent-gold/20 transition-colors duration-700"></div>
+            <div class="glass-panel p-12 rounded-[3rem] text-center relative overflow-hidden border border-accent-gold dark:border-accent-goldBright/20 group">
+                <div class="absolute top-0 right-0 w-96 h-96 bg-accent-gold dark:bg-accent-goldBright/10 rounded-full blur-[100px] group-hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright/20 transition-colors duration-700"></div>
                 <div class="relative z-10">
-                    <span class="text-accent-gold font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Talento sin límites</span>
+                    <span class="text-accent-gold dark:text-accent-goldBright font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Talento sin límites</span>
                     <h3 class="text-4xl font-display font-bold text-white mb-4">¿No encontraste tu rol ideal?</h3>
-                    <p class="text-gray-400 max-w-xl mx-auto mb-10 text-lg">
+                    <p class="text-slate-600 dark:text-gray-400 max-w-xl mx-auto mb-10 text-lg">
                         Siempre estamos buscando talento excepcional. Déjanos tu CV y te contactaremos cuando surja una oportunidad que se ajuste a tu perfil.
                     </p>
-                    <button onclick="openApplyModal('Candidatura Espontánea', 'Aisa Group')" class="px-12 py-5 bg-white text-black rounded-full font-bold uppercase tracking-widest text-xs hover:bg-accent-gold hover:text-black transition-all shadow-[0_0_40px_rgba(59,130,246,0.3)] transform hover:-translate-y-1">
+                    <button onclick="openApplyModal('Candidatura Espontánea', 'Aisa Group')" class="px-12 py-5 bg-white text-black rounded-full font-bold uppercase tracking-widest text-xs hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all shadow-[0_0_40px_rgba(59,130,246,0.3)] transform hover:-translate-y-1">
                         Subir CV Espontáneo
                     </button>
                 </div>
@@ -393,21 +405,21 @@
     </section>
 
     <!-- GALERÍA DE CULTURA -->
-    <div class="py-12 bg-black border-t border-white/5 overflow-hidden">
+    <div class="py-12 bg-black border-t border-gray-100 dark:border-white/5 overflow-hidden">
         <div class="flex whitespace-nowrap animate-scroll">
             <div class="flex gap-8 mx-4">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-white/10" alt="Team">
-                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-white/10" alt="Meeting">
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-white/10" alt="Office">
-                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-white/10" alt="Work">
-                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-white/10" alt="Community">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-gray-100 dark:border-white/10" alt="Team">
+                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-gray-100 dark:border-white/10" alt="Meeting">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-gray-100 dark:border-white/10" alt="Office">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-gray-100 dark:border-white/10" alt="Work">
+                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-gray-100 dark:border-white/10" alt="Community">
             </div>
             <div class="flex gap-8 mx-4">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-white/10" alt="Team">
-                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-white/10" alt="Meeting">
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-white/10" alt="Office">
-                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-white/10" alt="Work">
-                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-white/10" alt="Community">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-gray-100 dark:border-white/10" alt="Team">
+                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-gray-100 dark:border-white/10" alt="Meeting">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-gray-100 dark:border-white/10" alt="Office">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-gray-100 dark:border-white/10" alt="Work">
+                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=600&auto=format&fit=crop" class="h-64 rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 border border-gray-100 dark:border-white/10" alt="Community">
             </div>
         </div>
     </div>
@@ -415,18 +427,18 @@
     <!-- MODAL DE SOLICITUD DE EMPLEO -->
     <div id="apply-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-xl transition-opacity" onclick="closeApplyModal()"></div>
-        <div id="apply-content" class="relative bg-[#0F1115] w-full max-w-2xl rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden scale-95 opacity-0 transition-all duration-300">
-            <div class="p-8 border-b border-white/5 bg-white/5 flex justify-between items-center">
+        <div id="apply-content" class="relative bg-[#0F1115] w-full max-w-2xl rounded-[2rem] border border-gray-100 dark:border-white/10 shadow-2xl overflow-hidden scale-95 opacity-0 transition-all duration-300">
+            <div class="p-8 border-b border-gray-100 dark:border-white/5 bg-white/40 dark:bg-white/10 flex justify-between items-center">
                 <div>
-                    <span id="modal-job-company" class="text-accent-gold text-[10px] font-bold uppercase tracking-widest block mb-1">Empresa</span>
+                    <span id="modal-job-company" class="text-accent-gold dark:text-accent-goldBright text-[10px] font-bold uppercase tracking-widest block mb-1">Empresa</span>
                     <h3 id="modal-job-title" class="text-2xl font-bold text-white">Título del Trabajo</h3>
                 </div>
-                <button onclick="closeApplyModal()" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors">
+                <button onclick="closeApplyModal()" class="w-10 h-10 rounded-full bg-white/40 dark:bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             <div class="flex gap-1 p-1 bg-black">
-                <div id="progress-1" class="h-1 flex-1 bg-accent-gold rounded-full transition-all shadow-[0_0_10px_#3B82F6]"></div>
+                <div id="progress-1" class="h-1 flex-1 bg-accent-gold dark:bg-accent-goldBright rounded-full transition-all shadow-[0_0_10px_#3B82F6]"></div>
                 <div id="progress-2" class="h-1 flex-1 bg-white/10 rounded-full transition-all"></div>
                 <div id="progress-3" class="h-1 flex-1 bg-white/10 rounded-full transition-all"></div>
             </div>
@@ -435,57 +447,57 @@
                     <div id="step-1" class="space-y-6">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="text-xs text-gray-500 uppercase font-bold block mb-2">Nombre</label>
-                                <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold focus:outline-none transition-colors">
+                                <label class="text-xs text-slate-500 dark:text-gray-400 uppercase font-bold block mb-2">Nombre</label>
+                                <input type="text" required class="w-full bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold dark:focus:border-accent-goldBright dark:border-accent-goldBright focus:outline-none transition-colors">
                             </div>
                             <div>
-                                <label class="text-xs text-gray-500 uppercase font-bold block mb-2">Apellido</label>
-                                <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold focus:outline-none transition-colors">
+                                <label class="text-xs text-slate-500 dark:text-gray-400 uppercase font-bold block mb-2">Apellido</label>
+                                <input type="text" required class="w-full bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold dark:focus:border-accent-goldBright dark:border-accent-goldBright focus:outline-none transition-colors">
                             </div>
                         </div>
                         <div>
-                            <label class="text-xs text-gray-500 uppercase font-bold block mb-2">Email</label>
-                            <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold focus:outline-none transition-colors">
+                            <label class="text-xs text-slate-500 dark:text-gray-400 uppercase font-bold block mb-2">Email</label>
+                            <input type="email" required class="w-full bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold dark:focus:border-accent-goldBright dark:border-accent-goldBright focus:outline-none transition-colors">
                         </div>
                         <div>
-                            <label class="text-xs text-gray-500 uppercase font-bold block mb-2">Teléfono</label>
-                            <input type="tel" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold focus:outline-none transition-colors">
+                            <label class="text-xs text-slate-500 dark:text-gray-400 uppercase font-bold block mb-2">Teléfono</label>
+                            <input type="tel" required class="w-full bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold dark:focus:border-accent-goldBright dark:border-accent-goldBright focus:outline-none transition-colors">
                         </div>
                         <div class="flex justify-end pt-4">
-                            <button type="button" onclick="nextStep(2)" class="px-8 py-3 bg-accent-gold text-black rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-accent-gold transition-colors shadow-lg">Siguiente</button>
+                            <button type="button" onclick="nextStep(2)" class="px-8 py-3 bg-accent-gold dark:bg-accent-goldBright text-black rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors shadow-lg">Siguiente</button>
                         </div>
                     </div>
                     <div id="step-2" class="hidden space-y-6">
-                        <label class="text-xs text-gray-500 uppercase font-bold block mb-2">Sube tu CV</label>
-                        <div class="drop-zone w-full h-48 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/5 transition-all relative group">
+                        <label class="text-xs text-slate-500 dark:text-gray-400 uppercase font-bold block mb-2">Sube tu CV</label>
+                        <div class="drop-zone w-full h-48 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/40 dark:bg-white/10 transition-all relative group">
                             <input type="file" id="cv-upload" class="absolute inset-0 opacity-0 cursor-pointer z-10" onchange="handleFileSelect(this)">
-                            <div class="w-16 h-16 bg-accent-gold/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-cloud-arrow-up text-3xl text-accent-gold"></i>
+                            <div class="w-16 h-16 bg-accent-gold dark:bg-accent-goldBright/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-cloud-arrow-up text-3xl text-accent-gold dark:text-accent-goldBright"></i>
                             </div>
                             <p class="text-white font-bold text-sm mb-1" id="file-label">Arrastra tu archivo aquí o haz clic</p>
-                            <p class="text-xs text-gray-500">PDF, DOCX (Max 5MB)</p>
+                            <p class="text-xs text-slate-500 dark:text-gray-400">PDF, DOCX (Max 5MB)</p>
                         </div>
                         <div>
-                            <label class="text-xs text-gray-500 uppercase font-bold block mb-2">LinkedIn URL</label>
-                            <input type="url" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold focus:outline-none transition-colors" placeholder="https://linkedin.com/in/...">
+                            <label class="text-xs text-slate-500 dark:text-gray-400 uppercase font-bold block mb-2">LinkedIn URL</label>
+                            <input type="url" class="w-full bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold dark:focus:border-accent-goldBright dark:border-accent-goldBright focus:outline-none transition-colors" placeholder="https://linkedin.com/in/...">
                         </div>
                         <div class="flex justify-between pt-4">
-                            <button type="button" onclick="prevStep(1)" class="text-gray-400 text-xs font-bold uppercase hover:text-white transition-colors">Atrás</button>
-                            <button type="button" onclick="nextStep(3)" class="px-8 py-3 bg-accent-gold text-black rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-accent-gold transition-colors shadow-lg">Siguiente</button>
+                            <button type="button" onclick="prevStep(1)" class="text-slate-600 dark:text-gray-400 text-xs font-bold uppercase hover:text-white transition-colors">Atrás</button>
+                            <button type="button" onclick="nextStep(3)" class="px-8 py-3 bg-accent-gold dark:bg-accent-goldBright text-black rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors shadow-lg">Siguiente</button>
                         </div>
                     </div>
                     <div id="step-3" class="hidden space-y-6">
                         <div>
-                            <label class="text-xs text-gray-500 uppercase font-bold block mb-2">¿Por qué quieres unirte a Aisa Group?</label>
-                            <textarea rows="4" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold focus:outline-none transition-colors placeholder-gray-600" placeholder="Cuéntanos brevemente sobre ti..."></textarea>
+                            <label class="text-xs text-slate-500 dark:text-gray-400 uppercase font-bold block mb-2">¿Por qué quieres unirte a Aisa Group?</label>
+                            <textarea rows="4" class="w-full bg-white/40 dark:bg-white/10 border border-gray-100 dark:border-white/10 rounded-xl px-4 py-3 text-white focus:border-accent-gold dark:focus:border-accent-goldBright dark:border-accent-goldBright focus:outline-none transition-colors placeholder-gray-600" placeholder="Cuéntanos brevemente sobre ti..."></textarea>
                         </div>
-                        <div class="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/5">
-                            <input type="checkbox" id="terms" required class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-accent-gold focus:ring-accent-gold">
-                            <label for="terms" class="text-xs text-gray-400">He leído y acepto la política de privacidad.</label>
+                        <div class="flex items-center gap-3 bg-white/40 dark:bg-white/10 p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                            <input type="checkbox" id="terms" required class="w-4 h-4 rounded border-gray-600 bg-gray-700 text-accent-gold dark:text-accent-goldBright focus:ring-accent-gold">
+                            <label for="terms" class="text-xs text-slate-600 dark:text-gray-400">He leído y acepto la política de privacidad.</label>
                         </div>
                         <div class="flex justify-between pt-4">
-                            <button type="button" onclick="prevStep(2)" class="text-gray-400 text-xs font-bold uppercase hover:text-white transition-colors">Atrás</button>
-                            <button type="submit" class="px-10 py-3 bg-white text-black rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-accent-gold hover:text-black transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]">Enviar Aplicación</button>
+                            <button type="button" onclick="prevStep(2)" class="text-slate-600 dark:text-gray-400 text-xs font-bold uppercase hover:text-white transition-colors">Atrás</button>
+                            <button type="submit" class="px-10 py-3 bg-white text-black rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]">Enviar Aplicación</button>
                         </div>
                     </div>
                 </form>
@@ -494,8 +506,8 @@
     </div>
 
     <!-- NOTIFICACIÓN DE ÉXITO -->
-    <div id="success-toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-accent-gold text-black px-8 py-4 rounded-full shadow-2xl flex items-center gap-4 transform translate-y-32 opacity-0 transition-all duration-500 z-[250] border border-white/20 backdrop-blur-md">
-        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-accent-gold">
+    <div id="success-toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-accent-gold dark:bg-accent-goldBright text-black px-8 py-4 rounded-full shadow-2xl flex items-center gap-4 transform translate-y-32 opacity-0 transition-all duration-500 z-[250] border border-white/20 backdrop-blur-md">
+        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-accent-gold dark:text-accent-goldBright">
             <i class="fa-solid fa-check text-lg"></i>
         </div>
         <div>
@@ -504,83 +516,87 @@
         </div>
     </div>
 
-    <!-- FOOTER (adaptado del sitio) -->    <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5">
-        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
-            <div class="lg:col-span-4">
-                <a href="#" class="inline-block mb-8">
-                    <!-- Logo image replacing text in footer -->
-                    <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
-                </a>
-                <p class="text-gray-400 mb-8 max-w-sm">
-                    Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+    <!-- FOOTER (adaptado del sitio) -->    <footer id="contacto" class="bg-slate-50 dark:bg-dark-bg pt-32 pb-12">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <div class="glass-apple rounded-[3rem] p-12 shadow-xl border border-white dark:border-gray-100 dark:border-white/10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+                    <div class="lg:col-span-4">
+                        <a href="#" class="inline-block mb-8">
+                            <!-- Logo image replacing text in footer -->
+                            <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
+                        </a>
+                        <p class="text-slate-600 dark:text-slate-600 dark:text-gray-300 mb-8 max-w-sm">
+                            Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-600 dark:text-gray-400 mb-8">Compañía</h4>
+                        <ul class="space-y-4 text-sm font-medium text-slate-600 dark:text-slate-600 dark:text-gray-300">
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Sobre Nosotros</a></li>
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Nuestro Equipo</a></li>
+                            <li><a href="carreras.html" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Carreras</a></li>
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Prensa</a></li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-600 dark:text-gray-400 mb-8">Sedes Globales</h4>
+                        <ul class="space-y-4 text-sm font-medium text-slate-600 dark:text-slate-600 dark:text-gray-300">
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <div class="glass-apple p-8 rounded-3xl">
+                            <h4 class="font-display font-bold text-xl mb-4 text-slate-900 dark:text-white">¿Hablamos?</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-600 dark:text-gray-300 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
+                            <!-- Updated footer contact button: trigger the contact modal instead of direct mailto -->
+                            <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold dark:bg-accent-goldBright text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
+                                Contactar
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="lg:col-span-2">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Compañía</h4>
-                <ul class="space-y-4 text-sm font-medium text-gray-300">
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
-                    <li><a href="carreras.html" class="hover:text-accent-gold transition-colors">Carreras</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
-                </ul>
-            </div>
-            <div class="lg:col-span-3">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Sedes Globales</h4>
-                <ul class="space-y-4 text-sm font-medium text-gray-300">
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
-                </ul>
-            </div>
-            <div class="lg:col-span-3">
-                <div class="glass-apple p-8 rounded-3xl">
-                    <h4 class="font-display font-bold text-xl mb-4">¿Hablamos?</h4>
-                    <p class="text-sm text-gray-400 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
-                    <!-- Updated footer contact button: trigger the contact modal instead of direct mailto -->
-                    <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
-                        Contactar
-                    </a>
+                <div class="pt-8 border-t border-slate-200 dark:border-gray-100 dark:border-gray-100 dark:border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-600 dark:text-gray-400 uppercase tracking-widest">
+                    <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+                    <div class="flex gap-8 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-slate-900 dark:hover:text-white">Política de Privacidad</a>
+                        <a href="#" class="hover:text-slate-900 dark:hover:text-white">Términos de Uso</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="max-w-[1600px] mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest">
-            <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
-            <div class="flex gap-8 mt-4 md:mt-0">
-                <a href="#" class="hover:text-white">Política de Privacidad</a>
-                <a href="#" class="hover:text-white">Términos de Uso</a>
             </div>
         </div>
     </footer>
 
     <!-- MODAL DE CONTACTO (reutilizado) -->
     <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
-        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/5 backdrop-blur-[40px]"></div>
-        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-white/10">
+        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/40 dark:bg-white/10 backdrop-blur-[40px]"></div>
+        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-gray-100 dark:border-white/10">
             <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[220]">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <h4 class="text-2xl font-display font-bold mb-4 text-white">Contacto</h4>
             <div id="contact-toolbar" class="flex gap-2 mb-2">
-                <button type="button" data-command="bold" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-bold"></i></button>
-                <button type="button" data-command="italic" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-italic"></i></button>
-                <button type="button" data-command="insertUnorderedList" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-list-ul"></i></button>
+                <button type="button" data-command="bold" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors"><i class="fa-solid fa-bold"></i></button>
+                <button type="button" data-command="italic" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors"><i class="fa-solid fa-italic"></i></button>
+                <button type="button" data-command="insertUnorderedList" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors"><i class="fa-solid fa-list-ul"></i></button>
             </div>
             <form id="contact-form" class="space-y-4">
                 <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
                 <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
                 <div id="contact-message" contenteditable="true" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none h-40 overflow-auto"></div>
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
-                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
                     <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-emerald-500 hover:text-black transition-colors"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
                 </div>
             </form>
-            <p class="text-xs text-gray-500 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas. Luego elige el modo de contacto para abrir tu cliente de email o WhatsApp con el texto preparado.</p>
+            <p class="text-xs text-slate-500 dark:text-gray-400 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas. Luego elige el modo de contacto para abrir tu cliente de email o WhatsApp con el texto preparado.</p>
         </div>
     </div>
 
@@ -628,11 +644,11 @@
             currentFilter = category;
             if(btn) {
                 document.querySelectorAll('.filter-btn').forEach(b => {
-                    b.classList.remove('bg-accent-gold', 'text-black', 'shadow-lg');
-                    b.classList.add('bg-black/50', 'text-gray-400', 'border-white/10');
+                    b.classList.remove('bg-accent-gold dark:bg-accent-goldBright', 'text-black', 'shadow-lg');
+                    b.classList.add('bg-black/50', 'text-slate-600 dark:text-gray-400', 'border-gray-100 dark:border-white/10');
                 });
-                btn.classList.remove('bg-black/50', 'text-gray-400', 'border-white/10');
-                btn.classList.add('bg-accent-gold', 'text-black', 'shadow-lg');
+                btn.classList.remove('bg-black/50', 'text-slate-600 dark:text-gray-400', 'border-gray-100 dark:border-white/10');
+                btn.classList.add('bg-accent-gold dark:bg-accent-goldBright', 'text-black', 'shadow-lg');
             }
             applyFilters();
         }
@@ -685,10 +701,10 @@
                 const bar = document.getElementById(`progress-${n}`);
                 if(n <= stepNumber) {
                     bar.classList.remove('bg-white/10');
-                    bar.classList.add('bg-accent-gold', 'shadow-[0_0_10px_#3B82F6]');
+                    bar.classList.add('bg-accent-gold dark:bg-accent-goldBright', 'shadow-[0_0_10px_#3B82F6]');
                 } else {
                     bar.classList.add('bg-white/10');
-                    bar.classList.remove('bg-accent-gold', 'shadow-[0_0_10px_#3B82F6]');
+                    bar.classList.remove('bg-accent-gold dark:bg-accent-goldBright', 'shadow-[0_0_10px_#3B82F6]');
                 }
             });
         }
@@ -698,7 +714,7 @@
             const label = document.getElementById('file-label');
             if(input.files && input.files[0]) {
                 label.innerText = input.files[0].name;
-                label.classList.add('text-accent-gold');
+                label.classList.add('text-accent-gold dark:text-accent-goldBright');
             }
         }
         function handleApplicationSubmit(e) {
@@ -808,6 +824,37 @@
             htmlElement.classList.add('dark');
         } else {
             htmlElement.classList.remove('dark');
+        }
+    </script>
+
+    <!-- THEME TOGGLE BUTTON -->
+    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold dark:text-accent-goldBright hover:scale-110 transition-transform cursor-pointer shadow-lg">
+        <i class="fa-solid fa-moon dark:hidden"></i>
+        <i class="fa-solid fa-sun hidden dark:block"></i>
+    </button>
+
+    <script>
+        // Lógica de Modo Oscuro / Claro
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // 1. Verificar preferencia al cargar
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        // 2. Acción del botón
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                if (htmlElement.classList.contains('dark')) {
+                    localStorage.theme = 'dark';
+                } else {
+                    localStorage.theme = 'light';
+                }
+            });
         }
     </script>
 </body>

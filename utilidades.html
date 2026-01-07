@@ -25,14 +25,19 @@
                         display: ['"Montserrat"', 'sans-serif'],
                     },
                     colors: {
+                        light: {
+                            bg: '#F8FAFC',
+                            surface: '#FFFFFF',
+                            text: '#0F172A',
+                            subtext: '#475569'
+                        },
                         dark: {
                             bg: '#050505',
                             surface: '#0F0F0F',
-                            panel: '#111111'
                         },
                         accent: {
-                            gold: '#FACC15',
-                            goldHover: '#EAB308',
+                            gold: '#D97706',
+                            goldBright: '#FACC15',
                         }
                     },
                     backgroundImage: {
@@ -61,11 +66,17 @@
         
         /* APPLE GLASS (Base Global) */
         .glass-apple {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+        .dark .glass-apple {
+            background: rgba(20, 20, 20, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            color: white;
         }
 
         /* HUD GLASS EFFECT (Específico para el modal de detalle) */
@@ -166,36 +177,30 @@
         .modal-overlay-global.active { opacity: 1; visibility: visible; }
     </style>
 </head>
-<body class="bg-gray-50 text-slate-800 dark:bg-dark-bg dark:text-gray-200 antialiased selection:bg-accent-gold selection:text-black">
-
-    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg">
-        <i class="fa-solid fa-moon dark:hidden"></i>
-        <i class="fa-solid fa-sun hidden dark:block"></i>
-    </button>
-
-    <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
+<body class="bg-slate-50 text-slate-900 dark:bg-dark-bg dark:text-slate-600 dark:text-gray-200 transition-colors duration-300 antialiased selection:bg-accent-gold dark:bg-accent-goldBright selection:text-black">
+<nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
         <div class="max-w-[1400px] mx-auto px-2">
             <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-2xl">
                 <a href="index.html" class="flex items-center group">
                     <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="h-8 w-auto" />
                 </a>
                 
-                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none">
+                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none text-slate-600 dark:text-slate-600 dark:text-gray-300">
                     <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Inicio</a>
                     <div class="relative group">
                         <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-white/10 dark:hover:bg-white/10 transition-all">
                             Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
                         </a>
                         <div class="mt-2 flex flex-col gap-2 lg:hidden">
-                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">Quienes Somos</a>
-                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-300/90 hover:text-accent-gold transition-colors">El Equipo</a>
+                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-600 dark:text-gray-300/90 hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-600 dark:text-slate-600 dark:text-gray-300/90 hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">El Equipo</a>
                         </div>
                         <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 lg:group-hover:opacity-100 lg:group-hover:scale-100 transition-all origin-top-left z-50 hidden lg:block lg:group-hover:block">
-                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">Quienes Somos</a>
-                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-gray-200 uppercase tracking-widest hover:text-accent-gold transition-colors">El Equipo</a>
+                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-slate-600 dark:text-gray-200 uppercase tracking-widest hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-slate-600 dark:text-gray-200 uppercase tracking-widest hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">El Equipo</a>
                         </div>
                     </div>
-                    <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold">Unidades</a>
+                    <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold dark:text-accent-goldBright">Unidades</a>
                     
                     <a href="sostenibilidad.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Sostenibilidad &amp; ESG</a>
                     <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/10 dark:hover:bg-white/10 transition-all">Prensa</a>
@@ -205,7 +210,7 @@
                     <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg">
                         Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
                     </a>
-                    <button id="nav-toggle" class="lg:hidden text-xl dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
+                    <button id="nav-toggle" class="lg:hidden text-xl text-slate-900 dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
                 </div>
             </div>
         </div>
@@ -218,18 +223,18 @@
         </div>
         
         <div class="relative z-10 text-center max-w-4xl px-6" data-aos="zoom-in">
-            <div class="inline-flex items-center gap-3 px-4 py-2 rounded border border-white/10 bg-black/40 mb-8 backdrop-blur-md">
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded border border-gray-100 dark:border-white/10 bg-black/40 mb-8 backdrop-blur-md">
                 <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-gold opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-gold"></span>
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-gold dark:bg-accent-goldBright opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-gold dark:bg-accent-goldBright"></span>
                 </span>
-                <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-gray-400">System Status: Operational</span>
+                <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-600 dark:text-gray-400">System Status: Operational</span>
             </div>
             
             <h1 class="font-display text-5xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-tight">
                 ECOSISTEMA <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-gold to-white">ESTRATÉGICO</span>
             </h1>
-            <p class="text-gray-400 text-sm md:text-base font-light max-w-2xl mx-auto uppercase tracking-widest">
+            <p class="text-slate-600 dark:text-gray-400 text-sm md:text-base font-light max-w-2xl mx-auto uppercase tracking-widest">
                 Seleccione una unidad para acceder al dashboard de operaciones
             </p>
         </div>
@@ -242,14 +247,14 @@
 
     <div id="hud-overlay" class="hud-overlay">
         
-        <div class="sticky top-0 z-[105] bg-[#050505]/90 backdrop-blur-xl border-b border-white/10 px-8 py-4 flex items-center justify-between">
+        <div class="sticky top-0 z-[105] bg-slate-50 dark:bg-[#050505]/90 backdrop-blur-xl border-b border-gray-100 dark:border-white/10 px-8 py-4 flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl font-bold" id="hud-icon-box">
                     <i class="fa-solid fa-layer-group"></i>
                 </div>
                 <div>
                     <h2 class="font-display font-bold text-xl text-white uppercase tracking-wider" id="hud-title">Unit Name</h2>
-                    <p class="text-[10px] text-gray-400 uppercase tracking-[0.2em]" id="hud-subtitle">Subtitle</p>
+                    <p class="text-[10px] text-slate-600 dark:text-gray-400 uppercase tracking-[0.2em]" id="hud-subtitle">Subtitle</p>
                 </div>
             </div>
             
@@ -285,11 +290,11 @@
 
                 <div class="lg:col-span-4 space-y-8">
                     <div class="hud-glass p-8 rounded-2xl sticky top-32">
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8 border-b border-white/10 pb-4">Métricas Clave</h4>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 mb-8 border-b border-gray-100 dark:border-white/10 pb-4">Métricas Clave</h4>
                         <div class="space-y-8" id="hud-metrics">
                             </div>
                         
-                        <div class="mt-12 pt-8 border-t border-white/10">
+                        <div class="mt-12 pt-8 border-t border-gray-100 dark:border-white/10">
                             <button class="w-full py-4 bg-white text-black font-bold uppercase tracking-widest text-xs rounded hover:opacity-90 transition-opacity" onclick="openContactModal(event)">
                                 Contactar División
                             </button>
@@ -302,78 +307,82 @@
     </div>
 
     <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
-        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/5 backdrop-blur-[40px] modal-overlay-global"></div>
-        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-white/10">
+        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/40 dark:bg-white/10 backdrop-blur-[40px] modal-overlay-global"></div>
+        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-gray-100 dark:border-white/10">
             <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[220]">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <h4 class="text-2xl font-display font-bold mb-4 text-white">Contacto</h4>
             <div id="contact-toolbar" class="flex gap-2 mb-2">
-                <button type="button" data-command="bold" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-bold"></i></button>
-                <button type="button" data-command="italic" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-italic"></i></button>
-                <button type="button" data-command="insertUnorderedList" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold transition-colors"><i class="fa-solid fa-list-ul"></i></button>
+                <button type="button" data-command="bold" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors"><i class="fa-solid fa-bold"></i></button>
+                <button type="button" data-command="italic" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors"><i class="fa-solid fa-italic"></i></button>
+                <button type="button" data-command="insertUnorderedList" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright transition-colors"><i class="fa-solid fa-list-ul"></i></button>
             </div>
             <form id="contact-form" class="space-y-4">
                 <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
                 <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
                 <div id="contact-message" contenteditable="true" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none h-40 overflow-auto"></div>
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
-                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
                     <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-emerald-500 hover:text-black transition-colors"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
                 </div>
             </form>
-            <p class="text-xs text-gray-500 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas.</p>
+            <p class="text-xs text-slate-500 dark:text-gray-400 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas.</p>
         </div>
-    </div>    <footer id="contacto" class="bg-dark-bg text-white pt-32 pb-12 border-t border-white/5">
-        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
-            <div class="lg:col-span-4">
-                <a href="#" class="inline-block mb-8">
-                    <!-- Logo image replacing text in footer -->
-                    <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
-                </a>
-                <p class="text-gray-400 mb-8 max-w-sm">
-                    Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
-                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+    </div>    <footer id="contacto" class="bg-slate-50 dark:bg-dark-bg pt-32 pb-12">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <div class="glass-apple rounded-[3rem] p-12 shadow-xl border border-white dark:border-gray-100 dark:border-white/10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+                    <div class="lg:col-span-4">
+                        <a href="#" class="inline-block mb-8">
+                            <!-- Logo image replacing text in footer -->
+                            <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8">
+                        </a>
+                        <p class="text-slate-600 dark:text-slate-600 dark:text-gray-300 mb-8 max-w-sm">
+                            Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center text-slate-700 dark:text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-600 dark:text-gray-400 mb-8">Compañía</h4>
+                        <ul class="space-y-4 text-sm font-medium text-slate-600 dark:text-slate-600 dark:text-gray-300">
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Sobre Nosotros</a></li>
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Nuestro Equipo</a></li>
+                            <li><a href="carreras.html" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Carreras</a></li>
+                            <li><a href="#" class="hover:text-accent-gold dark:hover:text-accent-goldBright dark:text-accent-goldBright transition-colors">Prensa</a></li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-600 dark:text-gray-400 mb-8">Sedes Globales</h4>
+                        <ul class="space-y-4 text-sm font-medium text-slate-600 dark:text-slate-600 dark:text-gray-300">
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <div class="glass-apple p-8 rounded-3xl">
+                            <h4 class="font-display font-bold text-xl mb-4 text-slate-900 dark:text-white">¿Hablamos?</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-600 dark:text-gray-300 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
+                            <!-- Updated footer contact button: trigger the contact modal instead of direct mailto -->
+                            <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold dark:bg-accent-goldBright text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
+                                Contactar
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="lg:col-span-2">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Compañía</h4>
-                <ul class="space-y-4 text-sm font-medium text-gray-300">
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
-                    <li><a href="carreras.html" class="hover:text-accent-gold transition-colors">Carreras</a></li>
-                    <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
-                </ul>
-            </div>
-            <div class="lg:col-span-3">
-                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">Sedes Globales</h4>
-                <ul class="space-y-4 text-sm font-medium text-gray-300">
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
-                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
-                </ul>
-            </div>
-            <div class="lg:col-span-3">
-                <div class="glass-apple p-8 rounded-3xl">
-                    <h4 class="font-display font-bold text-xl mb-4">¿Hablamos?</h4>
-                    <p class="text-sm text-gray-400 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
-                    <!-- Updated footer contact button: trigger the contact modal instead of direct mailto -->
-                    <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-colors">
-                        Contactar
-                    </a>
+                <div class="pt-8 border-t border-slate-200 dark:border-gray-100 dark:border-gray-100 dark:border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-600 dark:text-gray-400 uppercase tracking-widest">
+                    <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+                    <div class="flex gap-8 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-slate-900 dark:hover:text-white">Política de Privacidad</a>
+                        <a href="#" class="hover:text-slate-900 dark:hover:text-white">Términos de Uso</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="max-w-[1600px] mx-auto px-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 uppercase tracking-widest">
-            <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
-            <div class="flex gap-8 mt-4 md:mt-0">
-                <a href="#" class="hover:text-white">Política de Privacidad</a>
-                <a href="#" class="hover:text-white">Términos de Uso</a>
             </div>
         </div>
     </footer>
@@ -383,23 +392,6 @@
         AOS.init({ once: true, duration: 800 });
 
         // --- THEME TOGGLE LOGIC ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            if (htmlElement.classList.contains('dark')) {
-                localStorage.theme = 'dark';
-            } else {
-                localStorage.theme = 'light';
-            }
-        });
 
         // --- CONTACT MODAL LOGIC ---
         const contactModal = document.getElementById('contact-modal');
@@ -437,7 +429,7 @@
                 tabs: ['Operación', 'Potencial', 'Destacados', 'Galería'],
                 content: {
                     'Operación': `
-                        <div class="space-y-6 text-gray-300">
+                        <div class="space-y-6 text-slate-600 dark:text-gray-300">
                             <h3 class="text-2xl font-bold text-white mb-4">Adquisición y Transformación</h3>
                             <p>En septiembre de 2023, Aisa Group adquirió el 100% de Minas Argentinas SA, operador de la mina Gualcamayo en Jáchal, San Juan. La operación, que iniciaba su cierre, fue sometida a una profunda reestructuración y saneamiento financiero, permitiendo el reinicio inmediato de la exploración.</p>
                             
@@ -453,18 +445,18 @@
                         </div>
                     `,
                     'Potencial': `
-                        <div class="space-y-6 text-gray-300">
+                        <div class="space-y-6 text-slate-600 dark:text-gray-300">
                             <h3 class="text-2xl font-bold text-white mb-4">Proyecto Carbonatos Profundos</h3>
                             <p>Mientras la producción actual se centra en la recuperación secundaria de pilas (con <strong>343 mil onzas GEO recuperables certificadas</strong>), el futuro de la mina es subterráneo.</p>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                                <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+                                <div class="bg-white/40 dark:bg-white/10 p-6 rounded-xl border border-gray-100 dark:border-white/10">
                                     <div class="text-3xl font-bold text-white mb-1">> 5M</div>
-                                    <div class="text-xs uppercase tracking-widest text-gray-500">Onzas de Recursos</div>
+                                    <div class="text-xs uppercase tracking-widest text-slate-500 dark:text-gray-400">Onzas de Recursos</div>
                                 </div>
-                                <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+                                <div class="bg-white/40 dark:bg-white/10 p-6 rounded-xl border border-gray-100 dark:border-white/10">
                                     <div class="text-3xl font-bold text-white mb-1">~ 3M</div>
-                                    <div class="text-xs uppercase tracking-widest text-gray-500">Onzas de Reservas</div>
+                                    <div class="text-xs uppercase tracking-widest text-slate-500 dark:text-gray-400">Onzas de Reservas</div>
                                 </div>
                             </div>
 
@@ -474,32 +466,32 @@
                     `,
                     'Destacados': `
                         <div class="grid grid-cols-1 gap-4">
-                            <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                            <div class="flex items-start gap-4 p-4 bg-white/40 dark:bg-white/10 rounded-xl border border-gray-100 dark:border-white/10">
                                 <i class="fa-solid fa-check text-[#FACC15] mt-1"></i>
                                 <div>
                                     <h4 class="font-bold text-white">Recuperación Secundaria</h4>
-                                    <p class="text-sm text-gray-400">Reservas 2024: 343k onzas GEO (Certificación JORC).</p>
+                                    <p class="text-sm text-slate-600 dark:text-gray-400">Reservas 2024: 343k onzas GEO (Certificación JORC).</p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                            <div class="flex items-start gap-4 p-4 bg-white/40 dark:bg-white/10 rounded-xl border border-gray-100 dark:border-white/10">
                                 <i class="fa-solid fa-check text-[#FACC15] mt-1"></i>
                                 <div>
                                     <h4 class="font-bold text-white">Recursos Masivos</h4>
-                                    <p class="text-sm text-gray-400">Carbonatos Profundos: 5M GEO recursos; >3M GEO reservas (NI 43-101).</p>
+                                    <p class="text-sm text-slate-600 dark:text-gray-400">Carbonatos Profundos: 5M GEO recursos; >3M GEO reservas (NI 43-101).</p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                            <div class="flex items-start gap-4 p-4 bg-white/40 dark:bg-white/10 rounded-xl border border-gray-100 dark:border-white/10">
                                 <i class="fa-solid fa-check text-[#FACC15] mt-1"></i>
                                 <div>
                                     <h4 class="font-bold text-white">Infraestructura</h4>
-                                    <p class="text-sm text-gray-400">Instalaciones plenamente desarrolladas y operativas.</p>
+                                    <p class="text-sm text-slate-600 dark:text-gray-400">Instalaciones plenamente desarrolladas y operativas.</p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                            <div class="flex items-start gap-4 p-4 bg-white/40 dark:bg-white/10 rounded-xl border border-gray-100 dark:border-white/10">
                                 <i class="fa-solid fa-check text-[#FACC15] mt-1"></i>
                                 <div>
                                     <h4 class="font-bold text-white">Ingeniería y Seguridad</h4>
-                                    <p class="text-sm text-gray-400">Planes avanzados con estudios metalúrgicos y ambientales en colaboración con consultoras internacionales.</p>
+                                    <p class="text-sm text-slate-600 dark:text-gray-400">Planes avanzados con estudios metalúrgicos y ambientales en colaboración con consultoras internacionales.</p>
                                 </div>
                             </div>
                         </div>
@@ -530,21 +522,21 @@
                 tabs: ['Calicanto', 'Visión Futura'],
                 content: {
                     'Calicanto': `
-                         <div class="space-y-6 text-gray-300">
+                         <div class="space-y-6 text-slate-600 dark:text-gray-300">
                             <p class="text-lg"><strong>Calicanto</strong> es la unidad dedicada a energías renovables de Aisa Group. Actualmente, ejecutamos un proyecto insignia en la provincia de San Luis:</p>
                             <div class="bg-[#10B981]/10 p-6 rounded-xl border border-[#10B981]/30 my-6">
                                 <h3 class="text-2xl font-bold text-white mb-2">Parque Fotovoltaico San Luis</h3>
                                 <div class="grid grid-cols-2 gap-4 mt-4">
                                     <div>
-                                        <div class="text-xs text-gray-400 uppercase">Estado</div>
+                                        <div class="text-xs text-slate-600 dark:text-gray-400 uppercase">Estado</div>
                                         <div class="text-white font-bold">En Construcción</div>
                                     </div>
                                     <div>
-                                        <div class="text-xs text-gray-400 uppercase">Potencia</div>
+                                        <div class="text-xs text-slate-600 dark:text-gray-400 uppercase">Potencia</div>
                                         <div class="text-white font-bold">51 MW</div>
                                     </div>
                                     <div class="col-span-2">
-                                        <div class="text-xs text-gray-400 uppercase">Inversión</div>
+                                        <div class="text-xs text-slate-600 dark:text-gray-400 uppercase">Inversión</div>
                                         <div class="text-white font-bold">~ USD 35 Millones</div>
                                     </div>
                                 </div>
@@ -552,7 +544,7 @@
                         </div>
                     `,
                     'Visión Futura': `
-                        <div class="space-y-6 text-gray-300">
+                        <div class="space-y-6 text-slate-600 dark:text-gray-300">
                             <h3 class="text-2xl font-bold text-white mb-4">Expansión RIGI</h3>
                             <p>Estamos estudiando la adhesión al Régimen de Incentivo a las Grandes Inversiones (RIGI) para desarrollar un <strong>Parque Solar en Gualcamayo</strong> con una capacidad proyectada de <strong>800 a 1000 MW</strong>.</p>
                             <p>El objetivo transversal del grupo es reinvertir sistemáticamente los beneficios generados por las distintas unidades de negocio en proyectos de energía renovable, cerrando el ciclo de sostenibilidad corporativa.</p>
@@ -577,18 +569,18 @@
                 tabs: ['Visión General', 'Infraestructura', 'Flota'],
                 content: {
                     'Visión General': `
-                         <div class="space-y-6 text-gray-300">
+                         <div class="space-y-6 text-slate-600 dark:text-gray-300">
                             <p>Argentina es un actor clave global en el langostino salvaje. Aisa Group invierte estratégicamente en el sector desde 2022, colaborando con pesqueras en la Patagonia.</p>
                             <p class="text-lg text-white font-bold">Hito 2025: Adquisición de Cabo Vírgenes</p>
                             <p>En enero de 2025, concretamos la compra del grupo pesquero Cabo Vírgenes, una firma con 15 años de trayectoria en pesca, procesado y comercialización. Esto nos posiciona en la cadena global de mariscos premium.</p>
                             <div class="flex gap-4 mt-4">
-                                <div class="px-4 py-2 bg-white/5 rounded border border-white/10">Base: Chubut (Arg)</div>
-                                <div class="px-4 py-2 bg-white/5 rounded border border-white/10">Base: Palencia (Esp)</div>
+                                <div class="px-4 py-2 bg-white/40 dark:bg-white/10 rounded border border-gray-100 dark:border-white/10">Base: Chubut (Arg)</div>
+                                <div class="px-4 py-2 bg-white/40 dark:bg-white/10 rounded border border-gray-100 dark:border-white/10">Base: Palencia (Esp)</div>
                             </div>
                         </div>
                     `,
                     'Infraestructura': `
-                        <div class="space-y-6 text-gray-300">
+                        <div class="space-y-6 text-slate-600 dark:text-gray-300">
                             <h3 class="text-2xl font-bold text-white">Planta Argentina</h3>
                             <p>Ubicada en Chubut, cuenta con más de <strong>10.000 m²</strong> de instalaciones modernas. Su capacidad de congelación alcanza las 60 toneladas/día, permitiendo una producción anual superior a las 10.000 toneladas con los más altos estándares de frescura y calidad.</p>
                             <h3 class="text-2xl font-bold text-white mt-8">Hub Europa (Palencia)</h3>
@@ -596,7 +588,7 @@
                         </div>
                     `,
                     'Flota': `
-                         <div class="space-y-6 text-gray-300">
+                         <div class="space-y-6 text-slate-600 dark:text-gray-300">
                             <p>Operamos con una flota mixta de barcos propios y de terceros con abastecimiento exclusivo, garantizando el cumplimiento de la reglamentación internacional para la pesca de langostino austral.</p>
                             <ul class="list-disc pl-5 space-y-2">
                                 <li>Barcos Fresqueros</li>
@@ -627,10 +619,10 @@
                 tabs: ['Negocio'],
                 content: {
                     'Negocio': `
-                        <div class="space-y-6 text-gray-300">
+                        <div class="space-y-6 text-slate-600 dark:text-gray-300">
                             <p class="text-lg leading-relaxed">En 2022 realizamos nuestra primera inversión estratégica en el sector de carne vacuna en Argentina, reconocido mundialmente por su calidad.</p>
                             <p>Hoy, nuestras exportaciones superan las <strong>25.000 toneladas anuales</strong>, llegando a mesas en más de 12 países.</p>
-                            <div class="p-6 bg-white/5 rounded-xl border-l-4 border-red-500">
+                            <div class="p-6 bg-white/40 dark:bg-white/10 rounded-xl border-l-4 border-red-500">
                                 <h4 class="font-bold text-white mb-2">Modelo de Alianzas</h4>
                                 <p>No operamos solos. Colaboramos estrechamente con varios de los principales frigoríficos del país. Esto nos permite asegurar un suministro constante, mantener estándares de calidad premium y expandir nuestra red global de distribución de manera ágil.</p>
                             </div>
@@ -655,7 +647,7 @@
                 tabs: ['Trayectoria', 'Mercados'],
                 content: {
                     'Trayectoria': `
-                        <div class="space-y-6 text-gray-300">
+                        <div class="space-y-6 text-slate-600 dark:text-gray-300">
                             <p>Desde 2015, nos hemos posicionado como un distribuidor de referencia en commodities agrícolas.</p>
                             <ul class="space-y-4 mt-4">
                                 <li class="flex gap-3">
@@ -674,7 +666,7 @@
                         </div>
                     `,
                     'Mercados': `
-                        <div class="space-y-6 text-gray-300">
+                        <div class="space-y-6 text-slate-600 dark:text-gray-300">
                             <h3 class="text-2xl font-bold text-white">Foco en China y Medio Oriente</h3>
                             <p>Desde 2019, colaboramos intensamente con importadores de vino en China, exportando aproximadamente <strong>20 millones de litros al año</strong>, principalmente de origen español y argentino.</p>
                             <p>Nuestra red se extiende a América del Norte, Europa, Emiratos Árabes Unidos y Turquía, consolidándonos como un socio estratégico confiable en la seguridad alimentaria global.</p>
@@ -699,32 +691,32 @@
                 tabs: ['El Proyecto', 'Componentes'],
                 content: {
                     'El Proyecto': `
-                        <div class="space-y-6 text-gray-300">
+                        <div class="space-y-6 text-slate-600 dark:text-gray-300">
                             <p class="text-lg">En 2024 adquirimos un terreno de más de 6 hectáreas en la mejor zona residencial y comercial de la capital de San Juan: la <strong>Antigua Cinzano</strong>. Se trata de un desarrollo sin antecedentes en la región que recupera un ícono histórico.</p>
-                            <div class="p-6 bg-white/5 rounded-xl border border-white/10 mt-6">
+                            <div class="p-6 bg-white/40 dark:bg-white/10 rounded-xl border border-gray-100 dark:border-white/10 mt-6">
                                 <h4 class="font-bold text-purple-400 mb-2">Diseño de Clase Mundial</h4>
                                 <p class="text-sm">La arquitectura está a cargo de los mejores arquitectos locales en colaboración con un prestigioso estudio europeo, con el objetivo de dotar al complejo de un estilo único que destaque por su funcionalidad y buen gusto.</p>
                             </div>
                         </div>
                     `,
                     'Componentes': `
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
-                            <div class="p-4 bg-white/5 rounded-lg hover:bg-purple-500/20 transition-colors">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-600 dark:text-gray-300">
+                            <div class="p-4 bg-white/40 dark:bg-white/10 rounded-lg hover:bg-purple-500/20 transition-colors">
                                 <i class="fa-solid fa-house mb-2 text-purple-400"></i>
                                 <h4 class="font-bold text-white">Vivienda Premium</h4>
                                 <p class="text-sm">160–200 unidades residenciales.</p>
                             </div>
-                            <div class="p-4 bg-white/5 rounded-lg hover:bg-purple-500/20 transition-colors">
+                            <div class="p-4 bg-white/40 dark:bg-white/10 rounded-lg hover:bg-purple-500/20 transition-colors">
                                 <i class="fa-solid fa-store mb-2 text-purple-400"></i>
                                 <h4 class="font-bold text-white">Centro Comercial</h4>
                                 <p class="text-sm">Más de 70 locales comerciales.</p>
                             </div>
-                            <div class="p-4 bg-white/5 rounded-lg hover:bg-purple-500/20 transition-colors">
+                            <div class="p-4 bg-white/40 dark:bg-white/10 rounded-lg hover:bg-purple-500/20 transition-colors">
                                 <i class="fa-solid fa-utensils mb-2 text-purple-400"></i>
                                 <h4 class="font-bold text-white">Gastronomía & Cultura</h4>
                                 <p class="text-sm">Polo gastronómico para revalorizar el patrimonio histórico y un Museo.</p>
                             </div>
-                            <div class="p-4 bg-white/5 rounded-lg hover:bg-purple-500/20 transition-colors">
+                            <div class="p-4 bg-white/40 dark:bg-white/10 rounded-lg hover:bg-purple-500/20 transition-colors">
                                 <i class="fa-solid fa-hotel mb-2 text-purple-400"></i>
                                 <h4 class="font-bold text-white">Hotel & Negocios</h4>
                                 <p class="text-sm">Sector de oficinas y hotelería.</p>
@@ -750,18 +742,18 @@
                         <div class="w-14 h-14 rounded-2xl bg-black/40 backdrop-blur border border-white/20 flex items-center justify-center text-2xl" style="color: ${unit.color}">
                             <i class="fa-solid ${unit.icon}"></i>
                         </div>
-                        <div class="px-3 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] uppercase font-bold tracking-wider text-white">
+                        <div class="px-3 py-1 rounded-full bg-black/60 border border-gray-100 dark:border-white/10 text-[10px] uppercase font-bold tracking-wider text-white">
                             ${unit.status}
                         </div>
                     </div>
                     <div>
                         <h3 class="text-3xl font-display font-bold text-white mb-1 group-hover:translate-x-2 transition-transform duration-300">${unit.title}</h3>
-                        <p class="text-xs text-gray-300 uppercase tracking-widest mb-6 border-l-2 pl-3" style="border-color: ${unit.color}">${unit.subtitle}</p>
-                        <div class="grid grid-cols-3 gap-2 border-t border-white/10 pt-4">
+                        <p class="text-xs text-slate-600 dark:text-gray-300 uppercase tracking-widest mb-6 border-l-2 pl-3" style="border-color: ${unit.color}">${unit.subtitle}</p>
+                        <div class="grid grid-cols-3 gap-2 border-t border-gray-100 dark:border-white/10 pt-4">
                             ${unit.metrics.map(m => `
                                 <div>
                                     <div class="text-lg font-bold text-white">${m.value}</div>
-                                    <div class="text-[9px] text-gray-500 uppercase">${m.label.split(' ')[0]}</div>
+                                    <div class="text-[9px] text-slate-500 dark:text-gray-400 uppercase">${m.label.split(' ')[0]}</div>
                                 </div>
                             `).slice(0,3).join('')}
                         </div>
@@ -796,8 +788,8 @@
             metricsContainer.innerHTML = unit.metrics.map(m => `
                 <div class="relative">
                     <div class="flex justify-between items-end mb-2">
-                        <span class="text-sm text-gray-400 uppercase tracking-wider">${m.label}</span>
-                        <span class="text-2xl font-bold text-white" style="color:${unit.color}">${m.value} <span class="text-sm text-gray-500">${m.unit}</span></span>
+                        <span class="text-sm text-slate-600 dark:text-gray-400 uppercase tracking-wider">${m.label}</span>
+                        <span class="text-2xl font-bold text-white" style="color:${unit.color}">${m.value} <span class="text-sm text-slate-500 dark:text-gray-400">${m.unit}</span></span>
                     </div>
                     <div class="h-1 w-full bg-gray-800 rounded-full overflow-hidden">
                         <div class="h-full rounded-full w-full animate-pulse-fast" style="background-color: ${unit.color}; width: ${Math.random() * 40 + 60}%"></div>
@@ -865,23 +857,6 @@
         });
 
         // --- THEME TOGGLE LOGIC ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            if (htmlElement.classList.contains('dark')) {
-                localStorage.theme = 'dark';
-            } else {
-                localStorage.theme = 'light';
-            }
-        });
 
         // --- CONTACT MODAL LOGIC (Para el botón de la Navbar) ---
         // Nota: En esta página no está el HTML del modal de contacto insertado.
@@ -903,8 +878,8 @@
 </script>
 
     <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
-        <div class="absolute inset-0 bg-white/5 backdrop-blur-[40px] modal-overlay-global" onclick="closeContactModal()"></div>
-        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-white/10">
+        <div class="absolute inset-0 bg-white/40 dark:bg-white/10 backdrop-blur-[40px] modal-overlay-global" onclick="closeContactModal()"></div>
+        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/10 backdrop-blur-[40px] border border-gray-100 dark:border-white/10">
             <button onclick="closeContactModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-white hover:bg-white/10 transition-colors z-[220]">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -913,7 +888,7 @@
                 <input type="text" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
                 <input type="email" class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
                 <textarea class="w-full p-3 rounded-xl bg-white/10 backdrop-blur placeholder-gray-400 text-white focus:ring-2 focus:ring-accent-gold focus:outline-none h-32" placeholder="Mensaje"></textarea>
-                <button type="button" class="w-full py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold hover:text-black transition-colors">Enviar</button>
+                <button type="button" class="w-full py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-white hover:bg-accent-gold dark:hover:bg-accent-goldBright dark:bg-accent-goldBright hover:text-black transition-colors">Enviar</button>
             </form>
         </div>
     </div>
@@ -1003,5 +978,36 @@
         })();
     </script>
 
+
+    <!-- THEME TOGGLE BUTTON -->
+    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold dark:text-accent-goldBright hover:scale-110 transition-transform cursor-pointer shadow-lg">
+        <i class="fa-solid fa-moon dark:hidden"></i>
+        <i class="fa-solid fa-sun hidden dark:block"></i>
+    </button>
+
+    <script>
+        // Lógica de Modo Oscuro / Claro
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // 1. Verificar preferencia al cargar
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        // 2. Acción del botón
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                if (htmlElement.classList.contains('dark')) {
+                    localStorage.theme = 'dark';
+                } else {
+                    localStorage.theme = 'light';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
