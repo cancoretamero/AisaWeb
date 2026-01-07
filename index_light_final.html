@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aisa Group | Global Investment Holdings</title>
+
+    <!-- FUENTES: Montserrat (Titulares/UI) & Poppins (Cuerpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- LIBRERÍAS DE ANIMACIÓN -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
+    <!-- TAILWIND CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Poppins"', 'sans-serif'],
+                        display: ['"Montserrat"', 'sans-serif'],
+                    },
+                    colors: {
+                        light: {
+                            bg: '#F8FAFC',
+                            surface: '#FFFFFF',
+                            text: '#0F172A',
+                            subtext: '#475569'
+                        },
+                        dark: {
+                            bg: '#050505',
+                            surface: '#0F0F0F',
+                        },
+                        accent: {
+                            gold: '#D97706',
+                            goldBright: '#FACC15',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'flow': 'flowAnimation 3s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        flowAnimation: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '100%': { backgroundPosition: '100% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilo base para glassmorphism (modo claro) */
+        .glass-apple {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .dark .glass-apple {
+            background: rgba(20, 20, 20, 0.65);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        .btn-hoverboard {
+            background: #FACC15;
+            color: #000;
+            transition: all 0.3s ease;
+        }
+        .btn-hoverboard:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(250, 204, 21, 0.5);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+        .marquee-track {
+            animation: scroll 40s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .text-shadow-sm {
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-dark-bg dark:text-gray-200 antialiased selection:bg-accent-goldBright selection:text-black overflow-x-hidden transition-colors duration-300">
+
+    <!-- THEME TOGGLE BUTTON -->
+    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold dark:text-accent-goldBright hover:scale-110 transition-transform cursor-pointer shadow-lg">
+        <i class="fa-solid fa-moon dark:hidden"></i>
+        <i class="fa-solid fa-sun hidden dark:block"></i>
+    </button>
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-[1400px] mx-auto px-2">
+            <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-lg">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2">
+                    <div class="font-display font-extrabold text-2xl tracking-tighter text-slate-900 dark:text-white transition-colors">
+                        AISA<span class="text-accent-goldBright">.</span>
+                    </div>
+                </a>
+                <!-- Menu Desktop -->
+                <div id="nav-menu" class="hidden lg:flex items-center gap-1">
+                    <a href="#" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold dark:text-accent-goldBright">Inicio</a>
+                    <div class="relative group">
+                        <a href="#" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-slate-600 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-white/10 flex items-center gap-1 transition-all">
+                            Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
+                        </a>
+                        <!-- Dropdown -->
+                        <div class="absolute left-0 mt-2 w-48 glass-apple bg-white/90 dark:bg-black/90 rounded-xl py-2 opacity-0 scale-95 pointer-events-none lg:group-hover:opacity-100 lg:group-hover:scale-100 lg:group-hover:pointer-events-auto transition-all origin-top-left shadow-xl">
+                            <a href="#" class="block px-4 py-2 text-[11px] text-slate-600 dark:text-gray-300 uppercase tracking-widest hover:text-accent-gold dark:hover:text-accent-goldBright hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">Quienes Somos</a>
+                            <a href="#" class="block px-4 py-2 text-[11px] text-slate-600 dark:text-gray-300 uppercase tracking-widest hover:text-accent-gold dark:hover:text-accent-goldBright hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">El Equipo</a>
+                        </div>
+                    </div>
+                    <a href="#" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-slate-600 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-white/10 transition-all">Unidades</a>
+                    <a href="#" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-slate-600 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-white/10 transition-all">Sostenibilidad &amp; ESG</a>
+                    <a href="#" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-slate-600 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-white/10 transition-all">Prensa</a>
+                </div>
+                <!-- CTA -->
+                <div class="flex items-center gap-4">
+                    <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-md">
+                        Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
+                    </a>
+                    <button id="nav-toggle" class="lg:hidden text-xl text-slate-800 dark:text-white px-2"><i class="fa-solid fa-bars-staggered"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header id="hero" class="relative h-screen w-full overflow-hidden flex items-center justify-center">
+        <div class="absolute inset-0 w-full h-[120%] -top-[10%] z-0 pointer-events-none">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=3870&auto=format&fit=crop" class="w-full h-full object-cover" alt="Gualcamayo Mountains">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-transparent to-slate-50 dark:to-dark-bg z-10 transition-colors duration-300"></div>
+        <div class="relative z-20 text-center px-6 max-w-6xl mx-auto mt-20">
+            <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full glass-apple mb-8 border border-white/60 dark:border-white/10 bg-white/40 dark:bg-black/30 backdrop-blur-md shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-accent-goldBright animate-pulse"></span>
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-800 dark:text-white">Liderando la transición</span>
+            </div>
+            <h1 class="font-display text-5xl md:text-7xl lg:text-9xl font-bold leading-[0.9] text-white mb-6 tracking-tight drop-shadow-lg text-shadow-sm">
+                De la tierra <br>
+                <span class="font-light italic opacity-90 text-accent-goldBright">al futuro.</span>
+            </h1>
+            <p class="text-white text-lg md:text-xl font-light max-w-2xl mx-auto mb-12 leading-relaxed drop-shadow-md text-shadow-sm">
+                Un holding familiar transformando la minería tradicional en energía renovable y desarrollo sostenible. Inversiones estratégicas en <strong>San Juan, San Luis</strong> y mercados globales.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                <a href="#divisiones" class="px-10 py-4 bg-accent-goldBright text-black rounded-full text-sm font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-lg hover:shadow-yellow-400/50">Ver Portafolio</a>
+                <button id="open-video" class="px-10 py-4 glass-apple text-slate-900 dark:text-white rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white dark:hover:bg-white/10 transition-colors flex items-center gap-3 shadow-lg">
+                    <i class="fa-solid fa-play text-accent-gold dark:text-accent-goldBright"></i> Ver video
+                </button>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce text-slate-400">
+            <i class="fa-solid fa-chevron-down text-xl"></i>
+        </div>
+    </header>
+
+    <!-- STATS SECTION -->
+    <section id="stats" class="py-24 relative z-20 -mt-20">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-accent-gold dark:text-accent-goldBright text-xs font-bold uppercase tracking-widest mb-4 block">Nosotros</span>
+                <h2 class="font-display text-4xl md:text-6xl font-bold text-slate-900 dark:text-white transition-colors">Nuestras Cifras</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+                <div class="glass-apple p-8 rounded-[2rem] hover:scale-[1.02] transition-transform duration-300 group" data-aos="fade-up" data-aos-delay="0">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 bg-white/40 dark:bg-white/10 rounded-2xl flex items-center justify-center text-xl text-accent-gold dark:text-accent-goldBright group-hover:bg-accent-goldBright group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-accent-gold dark:text-accent-goldBright uppercase tracking-widest bg-yellow-50/50 dark:bg-yellow-500/10 border border-yellow-200/50 dark:border-yellow-500/20 px-2 py-1 rounded">Pipeline</span>
+                    </div>
+                    <h3 class="font-display text-5xl font-bold text-slate-900 dark:text-white mb-2">$1.6B</h3>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 font-medium">Inversión Proyectada</p>
+                </div>
+                <div class="glass-apple p-8 rounded-[2rem] hover:scale-[1.02] transition-transform duration-300 group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 bg-white/40 dark:bg-white/10 rounded-2xl flex items-center justify-center text-xl text-accent-gold dark:text-accent-goldBright group-hover:bg-accent-goldBright group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-display text-5xl font-bold text-slate-900 dark:text-white mb-2">10+</h3>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 font-medium">Años de Trayectoria</p>
+                </div>
+                <div class="glass-apple p-8 rounded-[2rem] hover:scale-[1.02] transition-transform duration-300 group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 bg-white/40 dark:bg-white/10 rounded-2xl flex items-center justify-center text-xl text-accent-gold dark:text-accent-goldBright group-hover:bg-accent-goldBright group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-display text-5xl font-bold text-slate-900 dark:text-white mb-2">7</h3>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 font-medium">Sedes Globales</p>
+                </div>
+                <div class="glass-apple p-8 rounded-[2rem] hover:scale-[1.02] transition-transform duration-300 group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 bg-white/40 dark:bg-white/10 rounded-2xl flex items-center justify-center text-xl text-accent-gold dark:text-accent-goldBright group-hover:bg-accent-goldBright group-hover:text-black transition-colors">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-display text-4xl font-bold text-slate-900 dark:text-white mb-2">51 MW</h3>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 font-medium">Energía Limpia (Fase 1)</p>
+                </div>
+            </div>
+            <div class="relative overflow-hidden w-full pb-12" data-aos="fade-in">
+                <div class="text-center mb-12">
+                    <span class="text-accent-gold dark:text-accent-goldBright text-xs font-bold uppercase tracking-widest block mb-2">Nosotros</span>
+                    <h3 class="font-display text-3xl md:text-4xl font-bold text-slate-800 dark:text-white transition-colors">Estructura Corporativa</h3>
+                </div>
+                <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-50 dark:from-dark-bg to-transparent z-10 pointer-events-none transition-colors duration-300"></div>
+                <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-50 dark:from-dark-bg to-transparent z-10 pointer-events-none transition-colors duration-300"></div>
+                <div class="flex marquee-track gap-6 w-max px-6 hover:[animation-play-state:paused]">
+                    <!-- Repeat 5 cards as needed; sample cards below. -->
+                    <div class="bg-white dark:bg-dark-surface p-8 rounded-[2rem] shadow-lg border border-gray-100 dark:border-white/5 group min-w-[300px] hover:shadow-xl transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-gray-100 dark:text-white/10 group-hover:text-yellow-100 dark:group-hover:text-yellow-500/20 transition-colors">01</span>
+                            <div class="w-12 h-12 bg-gray-50 dark:bg-white/5 rounded-full flex items-center justify-center text-xl text-slate-600 dark:text-white group-hover:bg-[#FACC15] group-hover:text-black transition-colors">
+                                <i class="fa-regular fa-gem"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-slate-800 dark:text-white text-lg mb-2">Minas Argentinas</h4>
+                        <p class="text-xs text-slate-500 dark:text-gray-400">Operadora Minera San Juan</p>
+                    </div>
+                    <div class="bg-white dark:bg-dark-surface p-8 rounded-[2rem] shadow-lg border border-gray-100 dark:border-white/5 group min-w-[300px] hover:shadow-xl transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-gray-100 dark:text-white/10 group-hover:text-emerald-100 dark:group-hover:text-emerald-500/20 transition-colors">02</span>
+                            <div class="w-12 h-12 bg-gray-50 dark:bg-white/5 rounded-full flex items-center justify-center text-xl text-slate-600 dark:text-white group-hover:bg-[#10B981] group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-mountain"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-slate-800 dark:text-white text-lg mb-2">Gualcamayo</h4>
+                        <p class="text-xs text-slate-500 dark:text-gray-400">Mina de Oro y Carbonatos</p>
+                    </div>
+                    <div class="bg-white dark:bg-dark-surface p-8 rounded-[2rem] shadow-lg border border-gray-100 dark:border-white/5 group min-w-[300px] hover:shadow-xl transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-gray-100 dark:text-white/10 group-hover:text-cyan-100 dark:group-hover:text-cyan-500/20 transition-colors">03</span>
+                            <div class="w-12 h-12 bg-gray-50 dark:bg-white/5 rounded-full flex items-center justify-center text-xl text-slate-600 dark:text-white group-hover:bg-[#06B6D4] group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-fish-fins"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-slate-800 dark:text-white text-lg mb-2">Cabo Vírgenes</h4>
+                        <p class="text-xs text-slate-500 dark:text-gray-400">Pesca y Exportación</p>
+                    </div>
+                    <div class="bg-white dark:bg-dark-surface p-8 rounded-[2rem] shadow-lg border border-gray-100 dark:border-white/5 group min-w-[300px] hover:shadow-xl transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-gray-100 dark:text-white/10 group-hover:text-rose-100 dark:group-hover:text-rose-500/20 transition-colors">04</span>
+                            <div class="w-12 h-12 bg-gray-50 dark:bg-white/5 rounded-full flex items-center justify-center text-xl text-slate-600 dark:text-white group-hover:bg-[#F43F5E] group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-slate-800 dark:text-white text-lg mb-2">Aisa Energy</h4>
+                        <p class="text-xs text-slate-500 dark:text-gray-400">Generación Renovable</p>
+                    </div>
+                    <div class="bg-white dark:bg-dark-surface p-8 rounded-[2rem] shadow-lg border border-gray-100 dark:border-white/5 group min-w-[300px] hover:shadow-xl transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-4xl font-bold text-gray-100 dark:text-white/10 group-hover:text-amber-100 dark:group-hover:text-amber-500/20 transition-colors">05</span>
+                            <div class="w-12 h-12 bg-gray-50 dark:bg-white/5 rounded-full flex items-center justify-center text-xl text-slate-600 dark:text-white group-hover:bg-[#FBBF24] group-hover:text-black transition-colors">
+                                <i class="fa-solid fa-solar-panel"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display font-bold text-slate-800 dark:text-white text-lg mb-2">Calicanto Solar</h4>
+                        <p class="text-xs text-slate-500 dark:text-gray-400">Parque Fotovoltaico</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION & VISION SECTION -->
+    <section class="py-32 bg-white dark:bg-dark-bg relative overflow-hidden transition-colors duration-300">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-slate-100 via-white to-white dark:from-dark-bg dark:via-dark-bg dark:to-dark-bg pointer-events-none transition-colors duration-300"></div>
+        <div class="max-w-[1600px] mx-auto px-6 relative z-10">
+            <div class="text-center mb-24" data-aos="fade-up">
+                <span class="text-accent-gold dark:text-accent-goldBright text-xs font-bold uppercase tracking-widest mb-4 block">Filosofía Corporativa</span>
+                <h2 class="font-display text-5xl md:text-6xl font-bold text-slate-900 dark:text-white transition-colors">Nuestra posición en el mundo</h2>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-24">
+                <div class="bg-slate-50 dark:bg-dark-surface border border-slate-100 dark:border-white/5 p-10 rounded-[3rem] relative overflow-hidden group shadow-xl transition-colors" data-aos="fade-right">
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-yellow-100 dark:bg-yellow-500/10 rounded-full blur-3xl group-hover:bg-yellow-200 dark:group-hover:bg-yellow-500/20 transition-colors duration-500 opacity-50"></div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-yellow-100 dark:bg-yellow-500/20 flex items-center justify-center text-accent-gold dark:text-accent-goldBright text-2xl">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <h3 class="text-2xl font-display font-bold text-slate-800 dark:text-white">Misión</h3>
+                    </div>
+                    <h4 class="text-xl md:text-2xl font-medium text-slate-700 dark:text-gray-200 mb-6 leading-relaxed">
+                        “Transformar el presente para potenciar el futuro, a partir de la recuperación del valor de la excelencia.”
+                    </h4>
+                    <p class="text-sm text-slate-500 dark:text-gray-400 leading-relaxed border-l-2 border-accent-gold dark:border-accent-goldBright pl-6">
+                        ...como faro de nuestra inspiración, motor de nuestra innovación y garantía de nuestro compromiso.
+                    </p>
+                </div>
+                <div class="bg-slate-50 dark:bg-dark-surface border border-slate-100 dark:border-white/5 p-10 rounded-[3rem] relative overflow-hidden group shadow-xl transition-colors" data-aos="fade-left">
+                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-100 dark:bg-purple-500/10 rounded-full blur-3xl group-hover:bg-purple-200 dark:group-hover:bg-purple-500/20 transition-colors duration-500 opacity-50"></div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 text-2xl">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 class="text-2xl font-display font-bold text-slate-800 dark:text-white">Visión 2030</h3>
+                    </div>
+                    <h4 class="text-xl md:text-2xl font-medium text-slate-700 dark:text-gray-200 mb-4 leading-relaxed">
+                        “Construir algo único.”
+                    </h4>
+                    <p class="text-sm text-slate-500 dark:text-gray-400 leading-relaxed">
+                        Ser reconocido globalmente como un grupo empresarial confiable y transformador, que impulsa desarrollo productivo con excelencia.
+                    </p>
+                </div>
+            </div>
+            <div data-aos="fade-up">
+                <h3 class="text-center text-2xl font-display font-bold text-slate-800 dark:text-white mb-12 transition-colors">Nuestros Principios</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    <div class="bg-white dark:bg-dark-surface p-6 rounded-[2rem] text-center group shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-white/5">
+                        <div class="w-16 h-16 mx-auto rounded-full bg-yellow-50 dark:bg-white/5 flex items-center justify-center text-2xl mb-4 text-accent-gold dark:text-accent-goldBright">
+                            <i class="fa-regular fa-star animate-pulse-slow"></i>
+                        </div>
+                        <h4 class="text-slate-800 dark:text-white font-bold mb-2">Excelencia</h4>
+                        <div class="h-0.5 w-8 bg-accent-gold dark:bg-accent-goldBright mx-auto opacity-50"></div>
+                    </div>
+                    <div class="bg-white dark:bg-dark-surface p-6 rounded-[2rem] text-center group shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-white/5">
+                        <div class="w-16 h-16 mx-auto rounded-full bg-blue-50 dark:bg-white/5 flex items-center justify-center text-2xl mb-4 text-blue-500 dark:text-blue-400">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h4 class="text-slate-800 dark:text-white font-bold mb-2">Innovación</h4>
+                        <p class="text-[10px] text-slate-400 dark:text-gray-500 uppercase tracking-widest">Con Propósito</p>
+                    </div>
+                    <div class="bg-white dark:bg-dark-surface p-6 rounded-[2rem] text-center group shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-white/5">
+                        <div class="w-16 h-16 mx-auto rounded-full bg-emerald-50 dark:bg-white/5 flex items-center justify-center text-2xl mb-4 text-emerald-500 dark:text-emerald-400">
+                            <i class="fa-solid fa-users-viewfinder"></i>
+                        </div>
+                        <h4 class="text-slate-800 dark:text-white font-bold mb-2">Progreso</h4>
+                        <p class="text-[10px] text-slate-400 dark:text-gray-500 uppercase tracking-widest">Colectivo</p>
+                    </div>
+                    <div class="bg-white dark:bg-dark-surface p-6 rounded-[2rem] text-center group shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-white/5">
+                        <div class="w-16 h-16 mx-auto rounded-full bg-purple-50 dark:bg-white/5 flex items center justify-center text-2xl mb-4 text-purple-500 dark:text-purple-400">
+                            <i class="fa-solid fa-binoculars"></i>
+                        </div>
+                        <h4 class="text-slate-800 dark:text-white font-bold mb-2">Visión</h4>
+                        <p class="text-[10px] text-slate-400 dark:text-gray-500 uppercase tracking-widest">De Futuro</p>
+                    </div>
+                    <div class="bg-white dark:bg-dark-surface p-6 rounded-[2rem] text-center group shadow-md hover:shadow-lg transition-all border border-slate-100 dark:border-white/5">
+                        <div class="w-16 h-16 mx-auto rounded-full bg-rose-50 dark:bg-white/5 flex items-center justify-center text-2xl mb-4 text-rose-500 dark:text-rose-400">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+                        <h4 class="text-slate-800 dark:text-white font-bold mb-2">Compromiso</h4>
+                        <p class="text-[10px] text-slate-400 dark:text-gray-500 uppercase tracking-widest">Real</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AREAS DE INVERSION -->
+    <section id="divisiones" class="py-24 bg-slate-50 dark:bg-dark-bg transition-colors duration-300">
+        <div class="max-w-[1800px] mx-auto px-6 mb-12 flex flex-col md:flex-row justify-between items-end">
+            <div>
+                <span class="text-accent-gold dark:text-accent-goldBright text-xs font-bold uppercase tracking-widest mb-4 block">Nuestro Ecosistema</span>
+                <h2 class="font-display text-5xl md:text-6xl font-bold text-slate-900 dark:text-white transition-colors">Áreas de Inversión</h2>
+            </div>
+            <div class="hidden md:flex gap-2">
+                <span class="text-xs text-slate-500 dark:text-gray-400 uppercase tracking-widest self-center mr-4">Desliza para explorar <i class="fa-solid fa-arrow-right ml-2"></i></span>
+            </div>
+        </div>
+        <div class="scroll-container flex gap-6 px-6 pb-12 snap-x overflow-x-auto">
+            <!-- Area 1 -->
+            <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[500px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center shadow-xl">
+                <img src="https://images.unsplash.com/photo-1643832199429-47848e22ae31?q=80&w=870&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Gold Mine">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-8">
+                    <div class="w-12 h-12 bg-accent-goldBright text-black rounded-full flex items-center justify-center text-xl mb-4">
+                        <i class="fa-regular fa-gem"></i>
+                    </div>
+                    <h3 class="font-display text-3xl text-white font-bold mb-2">Minería</h3>
+                    <p class="text-gray-200 text-sm mb-4">Extracción de Oro y Plata</p>
+                    <ul class="text-xs text-gray-300 space-y-1">
+                        <li>• Mina Gualcamayo</li>
+                        <li>• Exploración Avanzada</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Area 2 -->
+            <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[500px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center shadow-xl">
+                <img src="https://plus.unsplash.com/premium_photo-1682148795124-dac95dd91fd4?q=80&w=687&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Oil">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-8">
+                    <div class="w-12 h-12 bg-white/20 backdrop-blur text-white rounded-full flex items-center justify-center text-xl mb-4 border border-white/30">
+                        <i class="fa-solid fa-fire-flame-curved"></i>
+                    </div>
+                    <h3 class="font-display text-3xl text-white font-bold mb-2">Oil & Gas</h3>
+                    <p class="text-gray-200 text-sm mb-4">Exploración & Producción</p>
+                </div>
+            </div>
+            <!-- Area 3 -->
+            <div class="scroll-item min-w-[300px] md:min-w-[400px] h-[500px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center shadow-xl">
+                <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Solar">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 p-8">
+                    <div class="w-12 h-12 bg-white/20 backdrop-blur text-white rounded-full flex items-center justify-center text-xl mb-4 border border-white/30">
+                        <i class="fa-solid fa-sun"></i>
+                    </div>
+                    <h3 class="font-display text-3xl text-white font-bold mb-2">Energía Solar</h3>
+                    <p class="text-gray-200 text-sm mb-4">Parques Fotovoltaicos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEEP DIVE SECTION -->
+    <section id="gualcamayo" class="py-32 bg-white dark:bg-dark-bg relative overflow-hidden border-t border-gray-200 dark:border-white/5 transition-colors duration-300">
+        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div class="relative order-2 lg:order-1" data-aos="fade-right">
+                <div class="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl group">
+                    <img src="https://images.unsplash.com/photo-1579547621706-1a9c79d5c9f1?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-all duration-1000" alt="Gualcamayo Mine">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                    <div class="absolute bottom-8 right-8 bg-white/90 dark:bg-black/90 backdrop-blur-md p-6 rounded-2xl max-w-xs transform translate-y-4 group-hover:translate-y-0 transition-transform shadow-lg">
+                        <p class="text-accent-gold dark:text-accent-goldBright text-xs font-bold uppercase mb-2">Vida Útil Extendida</p>
+                        <p class="text-slate-800 dark:text-white text-sm font-medium">El proyecto de Carbonatos Profundos redefine el horizonte productivo de la mina.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2" data-aos="fade-left">
+                <span class="text-accent-gold dark:text-accent-goldBright text-xs font-bold uppercase tracking-widest mb-6 block">Proyecto Estratégico</span>
+                <h2 class="font-display text-5xl md:text-7xl font-bold text-slate-900 dark:text-white mb-8 leading-tight transition-colors">
+                    El Renacer de <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-gold to-yellow-400">Gualcamayo.</span>
+                </h2>
+                <p class="text-slate-600 dark:text-gray-300 text-lg leading-relaxed mb-8">
+                    Minas Argentinas lidera una nueva era técnica con el desarrollo del proyecto de <strong>Carbonatos Profundos</strong>. Mediante tecnologías de lixiviación de vanguardia, desbloqueamos recursos minerales previamente inaccesibles.
+                </p>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-default border border-transparent hover:border-slate-100 dark:hover:border-white/10">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-500/20 flex items-center justify-center text-accent-gold dark:text-accent-goldBright shrink-0">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-slate-900 dark:text-white font-bold mb-1">Innovación Extractiva</h4>
+                            <p class="text-sm text-slate-500 dark:text-gray-400">Nuevos métodos metalúrgicos para minerales complejos.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-default border border-transparent hover:border-slate-100 dark:hover:border-white/10">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-500/20 flex items-center justify-center text-accent-gold dark:text-accent-goldBright shrink-0">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-slate-900 dark:text-white font-bold mb-1">Impacto Local</h4>
+                            <p class="text-sm text-slate-500 dark:text-gray-400">Mantenimiento de 1000+ puestos de trabajo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12">
+                    <a href="#" class="text-slate-900 dark:text-white text-sm font-bold uppercase tracking-widest border-b-2 border-accent-gold pb-2 hover:text-accent-gold transition-colors">Ver Detalles Técnicos <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESG IMPACT SECTION -->
+    <section class="py-32 bg-slate-50 dark:bg-dark-bg relative overflow-hidden transition-colors duration-300">
+        <div class="max-w-[1600px] mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-accent-gold dark:text-accent-goldBright text-xs font-bold uppercase tracking-widest mb-4 block">Monitor de Impacto ESG</span>
+                <h2 class="font-display text-5xl md:text-6xl font-bold text-slate-900 dark:text-white transition-colors">Impacto Real y Medible</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 h-auto">
+                <div class="lg:col-span-1 bg-white dark:bg-dark-surface border border-gray-100 dark:border-white/5 rounded-[2rem] p-6 flex flex-col items-center justify-center shadow-lg group transition-colors">
+                    <h3 class="text-slate-800 dark:text-white font-bold text-lg mb-4">Reducción CO2</h3>
+                    <div class="relative w-32 h-32">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="64" cy="64" r="56" stroke="#E2E8F0" class="dark:stroke-white/10" stroke-width="8" fill="none"></circle>
+                            <circle cx="64" cy="64" r="56" stroke="#10B981" stroke-width="8" fill="none" stroke-dasharray="351" stroke-dashoffset="100"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">75%</span>
+                            <span class="text-[10px] text-slate-400 dark:text-gray-500">Objetivo 2030</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-1 bg-gradient-to-br from-blue-50 to-white dark:from-blue-900/20 dark:to-dark-surface border border-blue-100 dark:border-blue-500/20 rounded-[2rem] p-6 shadow-lg transition-colors">
+                    <div class="flex flex-col h-full justify-between">
+                        <div class="p-3 bg-blue-100 dark:bg-blue-500/20 rounded-xl w-max"><i class="fa-solid fa-droplet text-blue-500 dark:text-blue-400 text-2xl"></i></div>
+                        <div>
+                            <h3 class="text-3xl font-display font-bold text-slate-900 dark:text-white">85%</h3>
+                            <p class="text-sm text-blue-600 dark:text-blue-300">Recirculación de Agua</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 bg-white dark:bg-dark-surface border border-gray-100 dark:border-white/5 rounded-[2rem] p-8 shadow-lg relative overflow-hidden group transition-colors">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-50 dark:bg-indigo-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-3xl opacity-70"></div>
+                    <div class="flex justify-between items-end mb-6 relative z-10">
+                        <div>
+                            <h3 class="text-2xl font-display font-bold text-slate-900 dark:text-white">Empleo Local</h3>
+                            <p class="text-xs text-slate-500 dark:text-gray-400">Generación de trabajo digno.</p>
+                        </div>
+                        <span class="text-4xl font-bold text-slate-900 dark:text-white">+1200</span>
+                    </div>
+                    <div class="space-y-4 relative z-10">
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs text-slate-500 dark:text-gray-400 w-16 font-medium">Directo</span>
+                            <div class="h-2 flex-1 bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-indigo-500 w-[45%]"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs text-slate-500 dark:text-gray-400 w-16 font-medium">Indirecto</span>
+                            <div class="h-2 flex-1 bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-purple-500 w-[75%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-1 bg-white dark:bg-dark-surface border border-gray-100 dark:border-white/5 rounded-[2rem] p-6 flex flex-col justify-center items-center text-center shadow-lg transition-colors">
+                    <div class="w-12 h-12 rounded-full bg-rose-50 dark:bg-rose-500/20 flex items-center justify-center text-rose-500 dark:text-rose-400 mb-4 text-xl">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-1">$2.5M</h3>
+                    <p class="text-xs text-slate-500 dark:text-gray-400">Inversión Social Anual</p>
+                </div>
+                <div class="lg:col-span-1 bg-yellow-50 dark:bg-dark-surface border border-yellow-100 dark:border-white/5 rounded-[2rem] p-6 flex items-center justify-between shadow-lg transition-colors">
+                     <div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">80%</h3>
+                        <p class="text-xs text-slate-600 dark:text-gray-400">Compras Locales</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-yellow-200 dark:bg-yellow-500/20 flex items-center justify-center text-yellow-700 dark:text-yellow-400">
+                        <i class="fa-solid fa-truck"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GLOBAL MAP SECTION -->
+    <section id="global" class="py-32 bg-white dark:bg-dark-bg relative overflow-hidden transition-colors duration-300">
+        <div class="max-w-[1800px] mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <span class="text-accent-gold dark:text-accent-goldBright text-xs font-bold uppercase tracking-widest mb-4 block">Red Operativa AISA</span>
+                <h2 class="font-display text-5xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6 transition-colors">Conexión Global</h2>
+                <div class="flex flex-wrap justify-center gap-2 mb-8">
+                    <button class="px-6 py-2 rounded-full bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white text-xs font-bold uppercase hover:bg-slate-200 dark:hover:bg-white/20 transition-all">Global</button>
+                    <button class="px-6 py-2 rounded-full bg-white dark:bg-transparent border border-slate-200 dark:border-white/20 text-slate-700 dark:text-gray-300 text-xs font-bold uppercase hover:bg-slate-50 dark:hover:bg-white/10 transition-all flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" class="w-4 shadow-sm" alt="AR"> Argentina</button>
+                    <button class="px-6 py-2 rounded-full bg-white dark:bg-transparent border border-slate-200 dark:border-white/20 text-slate-700 dark:text-gray-300 text-xs font-bold uppercase hover:bg-slate-50 dark:hover:bg-white/10 transition-all flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" class="w-4 shadow-sm" alt="CA"> Canadá</button>
+                </div>
+            </div>
+            <div id="map-container" class="bg-white dark:bg-dark-surface rounded-[3rem] p-4 relative shadow-2xl border border-slate-100 dark:border-white/10 aspect-[16/9] md:aspect-[21/9] transition-colors">
+                <div class="w-full h-full bg-slate-50 dark:bg-black/20 rounded-[2.5rem] flex items-center justify-center relative overflow-hidden">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg" class="w-full h-full object-cover opacity-10 mix-blend-multiply dark:mix-blend-screen dark:invert" alt="Map">
+                     <div class="absolute inset-0 flex items-center justify-center">
+                        <p class="text-slate-400 dark:text-gray-500 font-display font-bold">Interactive D3 Map (Light Theme Render)</p>
+                     </div>
+                     <div class="absolute top-[65%] left-[28%] w-4 h-4 bg-accent-goldBright rounded-full shadow-[0_0_15px_rgba(250,204,21,0.8)] animate-pulse"></div>
+                     <div class="absolute top-[25%] left-[18%] w-3 h-3 bg-slate-400 dark:bg-gray-600 rounded-full"></div>
+                     <div class="absolute top-[35%] left-[48%] w-3 h-3 bg-slate-400 dark:bg-gray-600 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacto" class="relative pt-24 pb-12 bg-slate-50 dark:bg-dark-bg transition-colors duration-300">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <div class="glass-apple rounded-[3rem] p-12 md:p-16 shadow-xl border border-white dark:border-white/10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-12">
+                    <div class="lg:col-span-4">
+                        <div class="flex items-center gap-2 mb-8">
+                            <div class="font-display font-extrabold text-2xl tracking-tighter text-slate-900 dark:text-white transition-colors">
+                                AISA<span class="text-accent-goldBright">.</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 dark:text-gray-300 mb-8 max-w-sm leading-relaxed">
+                            Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 rounded-full bg-white/60 dark:bg-white/10 flex items-center justify-center hover:bg-accent-goldBright hover:text-black transition-all text-slate-700 dark:text-white shadow-sm border border-white dark:border-white/10"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-white/60 dark:bg-white/10 flex items-center justify-center hover:bg-accent-goldBright hover:text-black transition-all text-slate-700 dark:text-white shadow-sm border border-white dark:border-white/10"><i class="fa-brands fa-twitter text-xl"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-white/60 dark:bg-white/10 flex items center justify-center hover:bg-accent-goldBright hover:text-black transition-all text-slate-700 dark:text-white shadow-sm border border-white dark:border-white/10"><i class="fa-solid fa-envelope text-xl"></i></a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 mb-8">Compañía</h4>
+                        <ul class="space-y-4 text-sm font-medium text-slate-700 dark:text-gray-300">
+                            <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
+                            <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
+                            <li><a href="#" class="hover:text-accent-gold transition-colors">Carreras</a></li>
+                            <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-gray-400 mb-8">Sedes Globales</h4>
+                        <ul class="space-y-4 text-sm font-medium text-slate-700 dark:text-gray-300">
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA" class="w-4 rounded-sm shadow-sm"> Vancouver, Canadá (HQ)</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR" class="w-4 rounded-sm shadow-sm"> San Juan, Argentina</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US" class="w-4 rounded-sm shadow-sm"> Miami, USA</li>
+                            <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES" class="w-4 rounded-sm shadow-sm"> Madrid, España</li>
+                        </ul>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <div class="bg-white/50 dark:bg-white/5 p-8 rounded-3xl border border-white dark:border-white/10 shadow-sm">
+                            <h4 class="font-display font-bold text-xl mb-4 text-slate-900 dark:text-white">¿Hablamos?</h4>
+                            <p class="text-sm text-slate-600 dark:text-gray-300 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
+                            <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-goldBright text-black text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white hover:shadow-lg transition-all">Contactar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-8 border-t border-slate-200/50 dark:border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 dark:text-gray-400 uppercase tracking-widest">
+                    <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+                    <div class="flex gap-8 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-accent-gold transition-colors">Política de Privacidad</a>
+                        <a href="#" class="hover:text-accent-gold transition-colors">Términos de Uso</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS LIBRARIES -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 50
+        });
+        // Mobile menu toggle
+        const navToggle = document.getElementById('nav-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        if(navToggle && navMenu) {
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('hidden');
+                navMenu.classList.toggle('flex');
+                navMenu.classList.toggle('flex-col');
+                navMenu.classList.toggle('absolute');
+                navMenu.classList.toggle('top-full');
+                navMenu.classList.toggle('left-0');
+                navMenu.classList.toggle('w-full');
+                navMenu.classList.toggle('glass-apple');
+                navMenu.classList.toggle('p-6');
+                navMenu.classList.toggle('shadow-xl');
+            });
+        }
+        // THEME TOGGLE LOGIC
+        (function () {
+            const btn = document.getElementById('theme-toggle');
+            const htmlEl = document.documentElement;
+            if (!btn) return;
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                htmlEl.classList.toggle('dark');
+                try {
+                    localStorage.setItem('theme', htmlEl.classList.contains('dark') ? 'dark' : 'light');
+                } catch (err) {}
+            }, { capture: true });
+        })();
+        // Apply stored theme on load
+        (function(){
+            try {
+                const stored = localStorage.getItem('theme');
+                if (stored === 'dark') {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (err) {}
+        })();
+    </script>
+</body>
+</html>
