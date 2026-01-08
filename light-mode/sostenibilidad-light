@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sostenibilidad & ESG | Aisa Group</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Poppins"', 'sans-serif'],
+                        display: ['"Montserrat"', 'sans-serif'],
+                    },
+                    colors: {
+                        light: { bg: '#FAFAFA', surface: '#FFFFFF', panel: '#F3F4F6' },
+                        accent: {
+                            gold: '#EAB308',
+                            goldHover: '#CA8A04',
+                            green: '#059669', // Emerald 600 para mejor contraste en blanco
+                            blue: '#2563EB',
+                            purple: '#7C3AED'
+                        }
+                    },
+                    backgroundImage: {
+                        'frost-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1))',
+                        'eco-gradient': 'radial-gradient(circle at center, rgba(16, 185, 129, 0.1) 0%, rgba(250, 250, 250, 0) 70%)',
+                        // Grid pattern invertido (negro con baja opacidad)
+                        'grid-pattern': "url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%23000000\" fill-opacity=\"0.03\" fill-rule=\"evenodd\"%3E%3Cpath d=\"M0 40L40 0H20L0 20M40 40V20L20 40\"/%3E%3C/g%3E%3C/svg%3E')",
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'marquee': 'marquee 40s linear infinite',
+                        'marquee-reverse': 'marqueeReverse 40s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        marqueeReverse: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(0%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- ESTILOS BASE --- */
+        body { 
+            background-color: #FAFAFA;
+            color: #1F2937;
+            overflow-x: hidden;
+        }
+
+        /* --- APPLE GLASS LIGHT --- */
+        .glass-apple {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- PROGRESS RINGS --- */
+        .progress-ring__circle {
+            transition: stroke-dashoffset 2s ease-in-out;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        /* --- TIMELINE --- */
+        .timeline-line {
+            background: linear-gradient(to bottom, transparent, #059669, transparent);
+        }
+        
+        /* --- BEFORE/AFTER SLIDER --- */
+        .ba-slider {
+            position: relative;
+            overflow: hidden;
+        }
+        .ba-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .resize {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+            border-right: 2px solid #EAB308;
+        }
+        
+        /* --- SCROLLBAR LIGHT --- */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F3F4F6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D1D5DB;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #059669;
+        }
+
+        /* --- NEON GLOW (Adjusted for Light Mode) --- */
+        .neon-text {
+            /* Sombra más sutil o eliminada para light mode, o cambiada a un brillo suave */
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* --- RANGE SLIDER CUSTOM LIGHT --- */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #EAB308;
+            cursor: pointer;
+            margin-top: -10px;
+            box-shadow: 0 4px 10px rgba(234, 179, 8, 0.4);
+            border: 2px solid #fff;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.1); /* Darker track for visibility on white */
+            border-radius: 2px;
+        }
+
+        /* --- MODAL UTILS --- */
+        .modal-overlay { opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { transform: scale(0.95); opacity: 0; transition: all 0.3s ease; }
+        .modal-overlay.active .modal-content { transform: scale(1); opacity: 1; }
+        
+        /* --- UTILS --- */
+        .text-shadow-sm { text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent-green selection:text-white font-sans">
+
+    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg">
+        <i class="fa-solid fa-moon hidden dark:block"></i>
+        <i class="fa-solid fa-sun dark:hidden"></i>
+    </button>
+
+    <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-[1400px] mx-auto px-2">
+            <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-xl">
+                <a href="index.html" class="flex items-center group">
+                    <!-- Logo invertido a negro -->
+                    <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="h-8 w-auto filter brightness-0" />
+                </a>
+                
+                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none">
+                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-gray-700 hover:bg-black/5 transition-all">Inicio</a>
+                    <div class="relative group">
+                        <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-gray-700 flex items-center gap-1 hover:bg-black/5 transition-all">
+                            Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
+                        </a>
+                        <div class="mt-2 flex flex-col gap-2 lg:hidden">
+                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-600 hover:text-accent-gold transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-600 hover:text-accent-gold transition-colors">El Equipo</a>
+                        </div>
+                        <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 lg:group-hover:opacity-100 lg:group-hover:scale-100 transition-all origin-top-left z-50 hidden lg:block lg:group-hover:block">
+                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-gray-700 uppercase tracking-widest hover:text-accent-gold transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-gray-700 uppercase tracking-widest hover:text-accent-gold transition-colors">El Equipo</a>
+                        </div>
+                    </div>
+                    <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-gray-700 hover:bg-black/5 transition-all">Unidades</a>
+                    <a href="sostenibilidad.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold">Sostenibilidad &amp; ESG</a>
+                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-gray-700 hover:bg-black/5 transition-all">Prensa</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg bg-gray-900 text-white hover:bg-accent-gold hover:text-black transition-colors">
+                        Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
+                    </a>
+                    <button id="nav-toggle" class="lg:hidden text-xl text-gray-800 px-2"><i class="fa-solid fa-bars-staggered"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-40 pb-20 overflow-hidden min-h-screen flex flex-col justify-center">
+        <div class="absolute inset-0 z-0">
+            <!-- Imagen de fondo -->
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=3870&auto=format&fit=crop" class="w-full h-full object-cover opacity-30 scale-110 animate-pulse-slow" alt="Nature and Industry">
+            <!-- Fusión blanca perfecta -->
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/60 via-[#FAFAFA]/90 to-[#FAFAFA]"></div>
+            <div class="absolute inset-0 bg-grid-pattern opacity-100"></div>
+            
+            <!-- Orbes de color sutiles -->
+            <div class="absolute top-20 left-20 w-64 h-64 bg-emerald-500/20 rounded-full blur-[100px] animate-float"></div>
+            <div class="absolute bottom-20 right-20 w-96 h-96 bg-accent-gold/10 rounded-full blur-[120px] animate-float" style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="max-w-[1600px] mx-auto px-6 relative z-10 w-full mb-16">
+            <div class="flex flex-col items-center text-center mb-16">
+                
+                <h1 class="font-display text-5xl md:text-7xl lg:text-9xl font-bold text-gray-900 mb-8 leading-[0.9] tracking-tight" data-aos="fade-up">
+                    Futuro <br>
+                    <!-- Gradiente ajustado para fondo blanco -->
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-600 neon-text">Regenerativo.</span>
+                </h1>
+                
+                <p class="text-gray-500 text-lg md:text-2xl max-w-4xl mx-auto font-light leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+                    Integramos la eficiencia industrial de <strong>Gualcamayo</strong> con la energía limpia de <strong>Calicanto</strong> y la recuperación patrimonial de <strong>Chelsea</strong>. Medimos nuestro éxito no solo en onzas, sino en vidas transformadas.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-aos="fade-up" data-aos-delay="200">
+                
+                <div class="glass-apple p-6 rounded-[2rem] relative overflow-hidden group hover:bg-white transition-all duration-500 hover:shadow-lg border border-black/5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-cyan-100 text-cyan-600 rounded-xl group-hover:rotate-12 transition-transform duration-500"><i class="fa-solid fa-droplet text-2xl"></i></div>
+                        <span class="text-[10px] font-mono text-cyan-700 border border-cyan-200 bg-cyan-50 px-2 py-1 rounded">LIVE DATA</span>
+                    </div>
+                    <div class="relative h-2 bg-gray-200 rounded-full mb-4 overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-cyan-500 w-[85%] animate-pulse"></div>
+                    </div>
+                    <h3 class="text-4xl font-display font-bold text-gray-900 mb-1 counter" data-target="85">0</h3>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">% Recirculación Hídrica</p>
+                    <p class="text-[10px] text-gray-400 mt-2">Planta de Filtros - Mina Gualcamayo</p>
+                </div>
+
+                <div class="glass-apple p-6 rounded-[2rem] relative overflow-hidden group hover:bg-white transition-all duration-500 hover:shadow-lg border border-black/5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-emerald-100 text-emerald-600 rounded-xl group-hover:scale-110 transition-transform duration-500"><i class="fa-solid fa-leaf text-2xl"></i></div>
+                        <span class="text-[10px] font-mono text-emerald-700 border border-emerald-200 bg-emerald-50 px-2 py-1 rounded">TARGET 2030</span>
+                    </div>
+                    <div class="relative w-full h-16 mb-2">
+                        <svg class="w-full h-full" preserveAspectRatio="none">
+                            <path d="M0,50 Q20,40 40,45 T80,30 T120,10 T160,20 V64 H0 Z" fill="rgba(16, 185, 129, 0.1)" stroke="none"></path>
+                            <path d="M0,50 Q20,40 40,45 T80,30 T120,10 T160,20" fill="none" stroke="#059669" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-4xl font-display font-bold text-gray-900 mb-1 counter" data-target="60">0</h3>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">% Reducción Huella CO2</p>
+                    <p class="text-[10px] text-gray-400 mt-2">Parque Solar Calicanto</p>
+                </div>
+
+                <div class="glass-apple p-6 rounded-[2rem] relative overflow-hidden group hover:bg-white transition-all duration-500 hover:shadow-lg border border-black/5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-yellow-100 text-yellow-600 rounded-xl group-hover:-translate-y-1 transition-transform duration-500"><i class="fa-solid fa-users text-2xl"></i></div>
+                        <span class="text-[10px] font-mono text-yellow-700 border border-yellow-200 bg-yellow-50 px-2 py-1 rounded">LOCAL FIRST</span>
+                    </div>
+                    <div class="flex items-end gap-2 mb-4">
+                        <div class="h-8 w-2 bg-gray-200 rounded-sm"></div>
+                        <div class="h-12 w-2 bg-gray-200 rounded-sm"></div>
+                        <div class="h-10 w-2 bg-gray-200 rounded-sm"></div>
+                        <div class="h-16 w-2 bg-accent-gold rounded-sm animate-pulse"></div>
+                    </div>
+                    <h3 class="text-4xl font-display font-bold text-gray-900 mb-1 counter" data-target="92">0</h3>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">% Empleo Local</p>
+                    <p class="text-[10px] text-gray-400 mt-2">Jáchal, Iglesia & San Juan Capital</p>
+                </div>
+
+                <div class="glass-apple p-6 rounded-[2rem] relative overflow-hidden group hover:bg-white transition-all duration-500 hover:shadow-lg border border-black/5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-purple-100 text-purple-600 rounded-xl group-hover:rotate-[360deg] transition-transform duration-700"><i class="fa-solid fa-sack-dollar text-2xl"></i></div>
+                        <span class="text-[10px] font-mono text-purple-700 border border-purple-200 bg-purple-50 px-2 py-1 rounded">30 YEARS</span>
+                    </div>
+                    <div class="relative h-2 bg-gray-200 rounded-full mb-4 overflow-hidden">
+                        <div class="absolute top-0 left-0 h-full bg-purple-600 w-[100%]"></div>
+                    </div>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-lg text-purple-600 font-bold">$</span>
+                        <h3 class="text-4xl font-display font-bold text-gray-900 mb-1 counter" data-target="500">0</h3>
+                        <span class="text-lg text-gray-900 font-bold">M</span>
+                    </div>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Fondo Social RIGI</p>
+                    <p class="text-[10px] text-gray-400 mt-2">Infraestructura Pública Proyectada</p>
+                </div>
+
+                <div class="glass-apple p-6 rounded-[2rem] relative overflow-hidden group hover:bg-white transition-all duration-500 hover:shadow-lg border border-black/5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-orange-100 text-orange-600 rounded-xl group-hover:scale-110 transition-transform duration-500"><i class="fa-solid fa-recycle text-2xl"></i></div>
+                        <span class="text-[10px] font-mono text-orange-700 border border-orange-200 bg-orange-50 px-2 py-1 rounded">CIRCULAR</span>
+                    </div>
+                    <div class="relative w-16 h-16 mx-auto mb-2">
+                        <svg class="w-full h-full" viewBox="0 0 36 36">
+                            <path class="text-gray-200" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.8"/>
+                            <path class="text-orange-500" stroke-dasharray="90, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.8" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center font-bold text-gray-900 text-sm">90%</div>
+                    </div>
+                    <h3 class="text-center text-xl font-display font-bold text-gray-900 mb-1">Residuos</h3>
+                    <p class="text-center text-[10px] text-gray-500 uppercase tracking-widest">Reciclados / Reutilizados</p>
+                </div>
+
+                <div class="glass-apple p-6 rounded-[2rem] relative overflow-hidden group hover:bg-white transition-all duration-500 hover:shadow-lg border border-black/5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-red-100 text-red-600 rounded-xl group-hover:animate-pulse"><i class="fa-solid fa-helmet-safety text-2xl"></i></div>
+                        <span class="text-[10px] font-mono text-red-700 border border-red-200 bg-red-50 px-2 py-1 rounded">SAFETY</span>
+                    </div>
+                    <div class="text-center py-2">
+                        <h3 class="text-5xl font-display font-bold text-gray-900 mb-1 counter" data-target="365">0</h3>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">Días sin LTI</p>
+                        <p class="text-[10px] text-gray-400 mt-1">Cultura Cero Accidentes</p>
+                    </div>
+                </div>
+
+                <div class="glass-apple p-6 rounded-[2rem] relative overflow-hidden group hover:bg-white transition-all duration-500 hover:shadow-lg border border-black/5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-pink-100 text-pink-600 rounded-xl group-hover:rotate-6 transition-transform duration-500"><i class="fa-solid fa-venus-mars text-2xl"></i></div>
+                        <span class="text-[10px] font-mono text-pink-700 border border-pink-200 bg-pink-50 px-2 py-1 rounded">DIVERSITY</span>
+                    </div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="h-2 flex-1 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-pink-500 w-[30%]"></div>
+                        </div>
+                        <span class="text-gray-900 font-bold text-lg">30%</span>
+                    </div>
+                    <h3 class="text-lg font-display font-bold text-gray-900 mb-1">Mujeres en Liderazgo</h3>
+                    <p class="text-[10px] text-gray-500">Meta 2026 en posiciones gerenciales</p>
+                </div>
+
+                <div class="glass-apple p-6 rounded-[2rem] relative overflow-hidden group hover:bg-white transition-all duration-500 hover:shadow-lg border border-black/5">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-indigo-100 text-indigo-600 rounded-xl group-hover:translate-x-2 transition-transform duration-500"><i class="fa-solid fa-truck-fast text-2xl"></i></div>
+                        <span class="text-[10px] font-mono text-indigo-700 border border-indigo-200 bg-indigo-50 px-2 py-1 rounded">SUPPLY CHAIN</span>
+                    </div>
+                    <div class="text-right">
+                        <h3 class="text-4xl font-display font-bold text-gray-900 mb-1 counter" data-target="75">0</h3>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">% Compras Locales</p>
+                        <p class="text-[10px] text-gray-400 mt-2">Prioridad San Juan & San Luis</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <section class="py-24 bg-[#F3F4F6] border-t border-black/5 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-emerald-100/50 via-[#F3F4F6] to-[#F3F4F6] pointer-events-none"></div>
+
+        <div class="max-w-[1600px] mx-auto px-6 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-4 block">Nuestra Filosofía</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-8">Declaración de Sostenibilidad</h2>
+                <div class="max-w-4xl mx-auto text-gray-600 text-lg leading-relaxed space-y-6">
+                    <p>En Aisa Group, la sostenibilidad es el núcleo de nuestra estrategia empresarial. Nos comprometemos a operar de manera responsable, minimizando el impacto ambiental de nuestras actividades y promoviendo un desarrollo económico que beneficie tanto a nuestras comunidades como al planeta.</p>
+                    <p>Creemos que el crecimiento sostenible es la clave para garantizar un futuro próspero. Por ello, invertimos en tecnologías limpias, energías renovables y proyectos que respetan los ecosistemas locales. Nuestro objetivo es dejar un legado positivo, desarrollando soluciones innovadoras que impulsen el progreso económico mientras cuidamos del medio ambiente.</p>
+                    <p>Aisa Group se esfuerza por liderar con el ejemplo, integrando prácticas éticas en cada paso de nuestra cadena de valor y trabajando estrechamente con las comunidades donde operamos para garantizar que nuestras inversiones generen un impacto positivo a largo plazo. La sostenibilidad no es solo un compromiso, es la base de todo lo que hacemos.</p>
+                </div>
+            </div>
+
+            <h3 class="font-display text-2xl font-bold text-gray-900 mb-12 text-center" data-aos="fade-up">Ejes Estratégicos</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-apple p-8 rounded-[2rem] hover:bg-white transition-all group border border-black/5 hover:border-emerald-500/30 shadow-sm hover:shadow-lg">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h4 class="text-gray-900 font-bold text-lg mb-3 group-hover:text-emerald-600 transition-colors">Cuidado Ambiental</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">Nos ocupamos del efecto que nuestras acciones puedan tener sobre el entorno. Por ello, evitamos, mitigamos y/o compensamos los impactos en el aire, suelo y agua de cada una de nuestras actividades productivas.</p>
+                </div>
+
+                <div class="glass-apple p-8 rounded-[2rem] hover:bg-white transition-all group border border-black/5 hover:border-accent-gold/30 shadow-sm hover:shadow-lg">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center text-yellow-600 text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-people-group"></i>
+                    </div>
+                    <h4 class="text-gray-900 font-bold text-lg mb-3 group-hover:text-yellow-600 transition-colors">Gestión Social</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">Nos relacionamos con ética y transparencia con nuestros grupos de interés. Realizamos inversiones de envergadura para mejorar la calidad de vida de nuestras comunidades vecinas.</p>
+                </div>
+
+                <div class="glass-apple p-8 rounded-[2rem] hover:bg-white transition-all group border border-black/5 hover:border-cyan-400/30 shadow-sm hover:shadow-lg">
+                    <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center text-cyan-600 text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+                    <h4 class="text-gray-900 font-bold text-lg mb-3 group-hover:text-cyan-600 transition-colors">Gestión de Cambio Climático</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">Nos regimos por los estándares más exigentes y trabajamos con políticas de mejora continua para reducir la emisión de gases de efecto invernadero, el consumo energético de fuentes no renovables y la generación de residuos.</p>
+                </div>
+
+                <div class="glass-apple p-8 rounded-[2rem] hover:bg-white transition-all group border border-black/5 hover:border-indigo-400/30 shadow-sm hover:shadow-lg">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h4 class="text-gray-900 font-bold text-lg mb-3 group-hover:text-indigo-600 transition-colors">Desarrollo Sustentable</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">Procuramos que nuestras operaciones signifiquen oportunidades de crecimiento social y económico para las comunidades aledañas. Alentamos la formación de talentos y la contratación local.</p>
+                </div>
+
+                <div class="glass-apple p-8 rounded-[2rem] hover:bg-white transition-all group border border-black/5 hover:border-purple-400/30 shadow-sm hover:shadow-lg">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-hands-holding-circle"></i>
+                    </div>
+                    <h4 class="text-gray-900 font-bold text-lg mb-3 group-hover:text-purple-600 transition-colors">Derechos Humanos</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">La transparencia y la ética nos identifican. Estamos fuertemente comprometidos con la protección y el respeto por nuestros grupos de interés.</p>
+                </div>
+
+                <div class="glass-apple p-8 rounded-[2rem] hover:bg-white transition-all group border border-black/5 hover:border-red-400/30 shadow-sm hover:shadow-lg">
+                    <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-red-600 text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-helmet-safety"></i>
+                    </div>
+                    <h4 class="text-gray-900 font-bold text-lg mb-3 group-hover:text-red-600 transition-colors">Seguridad y Salud</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">En cada una de nuestras operaciones trabajamos con modernos estándares para preservar el bienestar de nuestros colaboradores, proveedores y vecinos.</p>
+                </div>
+
+                <div class="glass-apple p-8 rounded-[2rem] hover:bg-white transition-all group border border-black/5 hover:border-yellow-400/30 md:col-span-2 lg:col-span-3 lg:w-1/2 lg:mx-auto shadow-sm hover:shadow-lg">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center text-yellow-600 text-xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <h4 class="text-gray-900 font-bold text-lg mb-3 group-hover:text-yellow-600 transition-colors">Gobernanza</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">Gestionamos los riesgos de nuestras actividades de manera oportuna y responsable, nos relacionamos bajo estrictas normas de ética y transparencia y establecemos sistemas de control interno.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#FAFAFA] border-t border-black/5 relative overflow-hidden">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <h2 class="font-display text-4xl font-bold text-gray-900 mb-16 text-center">Hoja de Ruta <span class="text-accent-green">2030</span></h2>
+            <div class="relative">
+                <div class="absolute top-1/2 left-0 w-full h-1 bg-gray-200 -translate-y-1/2 hidden md:block"></div>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                    <div class="relative group" data-aos="fade-up" data-aos-delay="0">
+                        <div class="w-4 h-4 bg-emerald-500 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block shadow-[0_0_15px_#10B981]"></div>
+                        <div class="glass-apple p-6 rounded-2xl md:mb-12 border-l-4 border-emerald-500 md:border-l-0 md:border-b-4 hover:-translate-y-2 transition-transform shadow-sm hover:shadow-lg">
+                            <span class="text-4xl font-bold text-gray-200 absolute top-2 right-4">2024</span>
+                            <h4 class="text-emerald-600 font-bold mb-2">Adhesión RIGI</h4>
+                            <p class="text-xs text-gray-500">Inicio del plan de inversión de 1.000M USD en San Juan.</p>
+                        </div>
+                    </div>
+                    <div class="relative group" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-4 h-4 bg-accent-gold rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block shadow-[0_0_15px_#FACC15]"></div>
+                        <div class="glass-apple p-6 rounded-2xl md:mt-12 border-l-4 border-accent-gold md:border-l-0 md:border-t-4 hover:-translate-y-2 transition-transform shadow-sm hover:shadow-lg">
+                            <span class="text-4xl font-bold text-gray-200 absolute top-2 right-4">2025</span>
+                            <h4 class="text-yellow-600 font-bold mb-2">Calicanto Solar</h4>
+                            <p class="text-xs text-gray-500">Puesta en marcha de 51 MW de energía fotovoltaica.</p>
+                        </div>
+                    </div>
+                    <div class="relative group" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-4 h-4 bg-purple-500 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block shadow-[0_0_15px_#8B5CF6]"></div>
+                        <div class="glass-apple p-6 rounded-2xl md:mb-12 border-l-4 border-purple-500 md:border-l-0 md:border-b-4 hover:-translate-y-2 transition-transform shadow-sm hover:shadow-lg">
+                            <span class="text-4xl font-bold text-gray-200 absolute top-2 right-4">2026</span>
+                            <h4 class="text-purple-600 font-bold mb-2">Chelsea Estates</h4>
+                            <p class="text-xs text-gray-500">Inauguración del hub corporativo Ex-Cinzano.</p>
+                        </div>
+                    </div>
+                    <div class="relative group" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-4 h-4 bg-cyan-500 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block shadow-[0_0_15px_#22D3EE]"></div>
+                        <div class="glass-apple p-6 rounded-2xl md:mt-12 border-l-4 border-cyan-500 md:border-l-0 md:border-t-4 hover:-translate-y-2 transition-transform shadow-sm hover:shadow-lg">
+                            <span class="text-4xl font-bold text-gray-200 absolute top-2 right-4">2028</span>
+                            <h4 class="text-cyan-600 font-bold mb-2">Carbonatos Profundos</h4>
+                            <p class="text-xs text-gray-500">Plena producción subterránea en Gualcamayo.</p>
+                        </div>
+                    </div>
+                    <div class="relative group" data-aos="fade-up" data-aos-delay="400">
+                        <div class="w-4 h-4 bg-gray-900 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block shadow-[0_0_15px_gray]"></div>
+                        <div class="glass-apple p-6 rounded-2xl md:mb-12 border-l-4 border-gray-900 md:border-l-0 md:border-b-4 hover:-translate-y-2 transition-transform shadow-sm hover:shadow-lg">
+                            <span class="text-4xl font-bold text-gray-200 absolute top-2 right-4">2030</span>
+                            <h4 class="text-gray-900 font-bold mb-2">Net Zero Target</h4>
+                            <p class="text-xs text-gray-500">Neutralidad de carbono en operaciones directas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#F3F4F6] relative">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <span class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-4 block">Nuestro Ecosistema</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900">Impacto por Unidad de Negocio</h2>
+                </div>
+                
+                <div class="flex gap-2 mt-8 md:mt-0 bg-white p-1 rounded-full backdrop-blur-sm overflow-x-auto max-w-full border border-black/5 shadow-md">
+                    <button class="px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all bg-gray-900 text-white shadow-lg" onclick="showProject('gualcamayo', this)"><i class="fa-solid fa-mountain mr-2"></i> Gualcamayo</button>
+                    <button class="px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all text-gray-500 hover:text-gray-900" onclick="showProject('calicanto', this)"><i class="fa-solid fa-solar-panel mr-2"></i> Calicanto</button>
+                    <button class="px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all text-gray-500 hover:text-gray-900" onclick="showProject('chelsea', this)"><i class="fa-solid fa-building mr-2"></i> Chelsea/Cinzano</button>
+                </div>
+            </div>
+
+            <div id="project-container" class="relative min-h-[600px]">
+                <div id="gualcamayo" class="project-content grid grid-cols-1 lg:grid-cols-2 gap-16 items-center animate-fade-in">
+                    <div class="relative rounded-[3rem] overflow-hidden aspect-[4/3] group shadow-2xl border border-black/5">
+                        <img src="https://images.unsplash.com/photo-1578923307077-947761596a2e?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Gualcamayo">
+                        <!-- Gradient lighter overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-8 left-8 right-8 glass-apple p-6 rounded-2xl flex items-center justify-between border border-white/20">
+                            <div>
+                                <h4 class="text-gray-900 font-bold text-lg">Carbonatos Profundos</h4>
+                                <p class="text-xs text-gray-600">Extensión de Vida Útil +17 Años</p>
+                            </div>
+                            <div class="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white text-xl animate-pulse-slow">
+                                <i class="fa-solid fa-recycle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-4xl font-bold text-gray-900 mb-6">Minería Regenerativa</h3>
+                        <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                            En <strong>Minas Argentinas</strong>, subsidiaria de Aisa Group, estamos redefiniendo la extracción. El proyecto de Carbonatos Profundos no solo extiende la vida de la mina, sino que introduce una planta de tratamiento de última generación que reduce el consumo de agua fresca en un 40% adicional.
+                        </p>
+                        <div class="bg-white p-6 rounded-2xl border border-black/5 mb-8 shadow-sm">
+                            <h4 class="text-xs text-gray-500 uppercase tracking-widest mb-4 font-bold">Ciclo Cerrado del Agua</h4>
+                            <div class="flex justify-between items-center text-center">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-faucet-drip"></i></div>
+                                    <span class="text-[10px] text-gray-500">Captación</span>
+                                </div>
+                                <div class="h-0.5 flex-1 bg-gray-200 mx-2 relative"><i class="fa-solid fa-chevron-right absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-gray-400 text-xs"></i></div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mb-2 group-hover:rotate-12 transition-transform"><i class="fa-solid fa-industry"></i></div>
+                                    <span class="text-[10px] text-gray-500">Proceso</span>
+                                </div>
+                                <div class="h-0.5 flex-1 bg-gray-200 mx-2 relative"><i class="fa-solid fa-chevron-right absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-gray-400 text-xs"></i></div>
+                                <div class="flex flex-col items-center">
+                                    <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-2 group-hover:spin-slow transition-transform"><i class="fa-solid fa-rotate-left"></i></div>
+                                    <span class="text-[10px] text-gray-500">85% Reciclo</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="openModal('gualcamayo')" class="px-8 py-4 bg-emerald-600 text-white font-bold uppercase tracking-widest text-xs rounded-full hover:bg-emerald-500 transition-colors shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                            Ver Reporte Técnico Completo
+                        </button>
+                    </div>
+                </div>
+
+                <div id="calicanto" class="project-content grid grid-cols-1 lg:grid-cols-2 gap-16 items-center hidden animate-fade-in">
+                    <div class="relative rounded-[3rem] overflow-hidden aspect-[4/3] group shadow-2xl border border-black/5">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Calicanto Solar">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-8 left-8 right-8 glass-apple p-6 rounded-2xl flex items-center justify-between border border-white/20">
+                            <div>
+                                <h4 class="text-gray-900 font-bold text-lg">Parque Solar Calicanto</h4>
+                                <p class="text-xs text-gray-600">51 MW de Potencia Instalada</p>
+                            </div>
+                            <div class="w-12 h-12 bg-accent-gold rounded-full flex items-center justify-center text-white text-xl animate-spin-slow">
+                                <i class="fa-solid fa-sun"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-4xl font-bold text-gray-900 mb-6">Energía para el Futuro</h3>
+                        <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                            A través de <strong>Calicanto</strong>, Aisa Energy lidera la transición. Este parque solar en San Luis no solo inyecta energía limpia al SADI y abastecerá operaciones mineras.
+                        </p>
+                        <div class="bg-white p-6 rounded-2xl border border-black/5 mb-8 shadow-sm">
+                            <h4 class="text-xs text-gray-500 uppercase tracking-widest mb-4 font-bold">Matriz Energética Aisa Group</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-[10px] text-gray-500 mb-1"><span>Fósil</span><span>60%</span></div>
+                                    <div class="h-2 w-full bg-gray-200 rounded-full"><div class="h-full bg-gray-400 w-[60%] rounded-full"></div></div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-[10px] text-yellow-600 mb-1"><span>Solar (Calicanto)</span><span>30%</span></div>
+                                    <div class="h-2 w-full bg-gray-200 rounded-full"><div class="h-full bg-accent-gold w-[30%] rounded-full relative"><div class="absolute right-0 -top-1 w-2 h-4 bg-white opacity-50 blur-sm"></div></div></div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-[10px] text-emerald-600 mb-1"><span>Eólica (Proyectada)</span><span>10%</span></div>
+                                    <div class="h-2 w-full bg-gray-200 rounded-full"><div class="h-full bg-emerald-500 w-[10%] rounded-full"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="openModal('calicanto')" class="px-8 py-4 bg-accent-gold text-white font-bold uppercase tracking-widest text-xs rounded-full hover:bg-gray-900 transition-colors shadow-[0_0_20px_rgba(250,204,21,0.3)]">
+                            Ver Ficha Técnica
+                        </button>
+                    </div>
+                </div>
+
+                <div id="chelsea" class="project-content grid grid-cols-1 lg:grid-cols-2 gap-16 items-center hidden animate-fade-in">
+                    <div class="relative rounded-[3rem] overflow-hidden aspect-[4/3] group shadow-2xl border border-black/5">
+                        <div class="ba-slider w-full h-full" id="ba-slider">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" alt="After">
+                            <div class="resize" style="width: 50%">
+                                <img src="https://images.unsplash.com/photo-1516156008625-3a9d60da923c?q=80&w=2070&auto=format&fit=crop" alt="Before" class="grayscale brightness-50">
+                            </div>
+                            <input type="range" min="0" max="100" value="50" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-ew-resize z-20" oninput="this.previousElementSibling.style.width = this.value + '%'">
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-30">
+                                <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg"><i class="fa-solid fa-arrows-left-right text-black text-xs"></i></div>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-8 left-8 right-8 glass-apple p-6 rounded-2xl flex items-center justify-between border border-white/20 pointer-events-none z-10">
+                            <div>
+                                <h4 class="text-gray-900 font-bold text-lg">Chelsea Design Estates</h4>
+                                <p class="text-xs text-gray-600">Recuperación Patrimonial Ex-Cinzano</p>
+                            </div>
+                            <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white text-xl">
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-4xl font-bold text-gray-900 mb-6">Cultura & Comunidad</h3>
+                        <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                            La sostenibilidad también es cultural. <strong>Chelsea Design Estates</strong>, brazo inmobiliario de Aisa Group, está transformando la histórica bodega Cinzano en un hub urbano moderno, preservando la identidad arquitectónica de San Juan y revitalizando el tejido social del barrio.
+                        </p>
+                        <div class="space-y-6">
+                            <div class="flex gap-4 p-4 rounded-xl hover:bg-white/50 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 text-xl shrink-0 border border-purple-200 group-hover:rotate-12 transition-transform">
+                                    <i class="fa-solid fa-paint-roller"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-900 font-bold">Restauración Histórica</h4>
+                                    <p class="text-xs text-gray-500">Mantenimiento de 10.000 m² de fachadas originales y cavas subterráneas.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 p-4 rounded-xl hover:bg-white/50 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 text-xl shrink-0 border border-emerald-200 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-tree"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-900 font-bold">Espacios Verdes Públicos</h4>
+                                    <p class="text-xs text-gray-500">Creación de 2 hectáreas de parque abierto a la comunidad.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="openModal('chelsea')" class="mt-10 px-8 py-4 bg-purple-600 text-white font-bold uppercase tracking-widest text-xs rounded-full hover:bg-purple-500 transition-colors shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+                            Ver Masterplan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#FAFAFA] border-t border-black/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-yellow-50/50 via-[#FAFAFA] to-[#FAFAFA] pointer-events-none"></div>
+
+        <div class="max-w-[1400px] mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-accent-gold text-xs font-bold uppercase tracking-widest mb-4 block">Herramienta Interactiva</span>
+                <h2 class="font-display text-4xl font-bold text-gray-900">Simulador de Impacto Energético</h2>
+                <p class="text-gray-500 mt-4 max-w-2xl mx-auto">
+                    Visualice el poder de transformación de nuestros proyectos renovables. Desde la realidad operativa de Calicanto hasta la proyección masiva de Gualcamayo Solar bajo el RIGI.
+                </p>
+            </div>
+            
+            <div class="glass-apple p-8 md:p-12 rounded-[3rem] border border-black/5 shadow-xl relative overflow-hidden">
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-accent-gold/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+                <div class="flex flex-col lg:flex-row gap-16">
+                    
+                    <div class="w-full lg:w-5/12 flex flex-col justify-between">
+                        <div>
+                            <label class="text-xs font-bold uppercase tracking-widest text-gray-500 block mb-4">Seleccionar Escenario</label>
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <button class="flex-1 py-3 px-4 rounded-xl border border-accent-gold/30 bg-accent-gold/10 text-yellow-700 text-xs font-bold uppercase tracking-wider hover:bg-accent-gold hover:text-white transition-all active-scenario" onclick="setScenario('calicanto', this)">
+                                    Parque Calicanto
+                                </button>
+                                <button class="flex-1 py-3 px-4 rounded-xl border border-gray-200 bg-white text-gray-500 text-xs font-bold uppercase tracking-wider hover:bg-gray-100 transition-all" onclick="setScenario('gualcamayo_solar', this)">
+                                    Gualcamayo Solar (RIGI)
+                                </button>
+                            </div>
+
+                            <div class="bg-white p-6 rounded-2xl border border-black/5 mb-8 min-h-[180px] shadow-sm">
+                                <h4 class="text-gray-900 font-bold text-lg mb-2 flex items-center gap-2" id="projectTitle"><i class="fa-solid fa-location-dot text-accent-gold"></i> Parque Solar Calicanto</h4>
+                                <p class="text-xs text-gray-500 uppercase tracking-widest mb-4" id="projectLocation">Nogolí, San Luis • En Construcción</p>
+                                <p class="text-sm text-gray-600 leading-relaxed" id="projectDesc">
+                                    Con una inversión inicial de <strong>USD 35 Millones</strong>, este parque de 51 MW es el primer paso en la estrategia de diversificación energética. Emplazado en 71.9 hectáreas, inyectará energía limpia al SADI y abastecerá operaciones mineras.
+                                </p>
+                            </div>
+
+                            <label class="text-xs font-bold uppercase tracking-widest text-gray-500 block mb-4">Ajustar Potencia Instalada (MW)</label>
+                            <div class="relative mb-2">
+                                <input type="range" min="0" max="1000" value="51" class="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-accent-gold z-20 relative" id="mwRange" oninput="calculateImpact(this.value)">
+                                <div class="absolute top-4 left-0 w-full flex justify-between text-[9px] text-gray-400 font-mono mt-1">
+                                    <span>0</span>
+                                    <span>250</span>
+                                    <span>500</span>
+                                    <span>750</span>
+                                    <span>1000 MW</span>
+                                </div>
+                            </div>
+                            <div class="text-right mt-6">
+                                <span class="text-4xl font-display font-bold text-accent-gold" id="mwDisplay">51</span> <span class="text-sm text-gray-500 font-bold">MW</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full lg:w-7/12">
+                        <div class="grid grid-cols-2 gap-4 md:gap-6">
+                            <div class="bg-gradient-to-br from-white to-transparent p-6 rounded-[2rem] border border-black/5 text-center relative group shadow-sm hover:shadow-md transition-shadow">
+                                <div class="absolute top-4 right-4 text-emerald-500/20 group-hover:text-emerald-500/50 transition-colors group-hover:rotate-12 transition-transform duration-500"><i class="fa-solid fa-bolt text-3xl"></i></div>
+                                <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-2">Generación Estimada</p>
+                                <div class="text-2xl md:text-4xl font-display font-bold text-gray-900 mb-1"><span id="gwhValue">110</span> <span class="text-lg text-gray-500">GWh/año</span></div>
+                                <div class="h-1 w-12 bg-emerald-500 mx-auto rounded-full mt-4"></div>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-white to-transparent p-6 rounded-[2rem] border border-black/5 text-center relative group shadow-sm hover:shadow-md transition-shadow">
+                                <div class="absolute top-4 right-4 text-accent-gold/20 group-hover:text-accent-gold/50 transition-colors group-hover:scale-110 transition-transform duration-500"><i class="fa-solid fa-house-chimney text-3xl"></i></div>
+                                <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-2">Hogares Abastecidos</p>
+                                <div class="text-2xl md:text-4xl font-display font-bold text-gray-900 mb-1" id="homesValue">80,000</div>
+                                <div class="h-1 w-12 bg-accent-gold mx-auto rounded-full mt-4"></div>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-white to-transparent p-6 rounded-[2rem] border border-black/5 text-center relative group shadow-sm hover:shadow-md transition-shadow">
+                                <div class="absolute top-4 right-4 text-blue-400/20 group-hover:text-blue-400/50 transition-colors group-hover:translate-y-[-5px] transition-transform duration-500"><i class="fa-solid fa-cloud-arrow-up text-3xl"></i></div>
+                                <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-2">CO2 Evitado</p>
+                                <div class="text-2xl md:text-4xl font-display font-bold text-gray-900 mb-1"><span id="co2Value">50,000</span> <span class="text-lg text-gray-500">Tn</span></div>
+                                <div class="h-1 w-12 bg-blue-500 mx-auto rounded-full mt-4"></div>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-white to-transparent p-6 rounded-[2rem] border border-black/5 text-center relative group shadow-sm hover:shadow-md transition-shadow">
+                                <div class="absolute top-4 right-4 text-green-400/20 group-hover:text-green-400/50 transition-colors group-hover:scale-125 transition-transform duration-500"><i class="fa-solid fa-tree text-3xl"></i></div>
+                                <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-2">Árboles Equivalentes</p>
+                                <div class="text-2xl md:text-4xl font-display font-bold text-gray-900 mb-1" id="treesValue">2.5M</div>
+                                <div class="h-1 w-12 bg-green-500 mx-auto rounded-full mt-4"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 bg-white p-4 rounded-2xl flex items-center justify-center gap-3 text-xs text-gray-500 border border-black/5 shadow-sm">
+                            <i class="fa-solid fa-circle-info text-accent-gold"></i>
+                            <span>Cálculo basado en factor de capacidad solar promedio (24.6%) para la región de Cuyo.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8 bg-gray-50 border-t border-black/5 overflow-hidden">
+        <h4 class="text-center text-xs font-bold uppercase tracking-widest text-gray-500 mb-6">Estándares & Certificaciones</h4>
+        <div class="flex whitespace-nowrap animate-marquee">
+            <div class="flex items-center gap-12 mx-6 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-certificate text-4xl text-gray-800"></i> <span class="text-2xl font-display font-bold text-gray-800">ISO 14001</span>
+            </div>
+            <div class="flex items-center gap-12 mx-6 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-shield-halved text-4xl text-gray-800"></i> <span class="text-2xl font-display font-bold text-gray-800">ISO 45001</span>
+            </div>
+            <div class="flex items-center gap-12 mx-6 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-award text-4xl text-gray-800"></i> <span class="text-2xl font-display font-bold text-gray-800">Great Place to Work</span>
+            </div>
+            <div class="flex items-center gap-12 mx-6 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-leaf text-4xl text-gray-800"></i> <span class="text-2xl font-display font-bold text-gray-800">Carbon Neutral Certified</span>
+            </div>
+            <div class="flex items-center gap-12 mx-6 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-building text-4xl text-gray-800"></i> <span class="text-2xl font-display font-bold text-gray-800">LEED Silver</span>
+            </div>
+            <div class="flex items-center gap-12 mx-6 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-certificate text-4xl text-gray-800"></i> <span class="text-2xl font-display font-bold text-gray-800">ISO 14001</span>
+            </div>
+            <div class="flex items-center gap-12 mx-6 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-shield-halved text-4xl text-gray-800"></i> <span class="text-2xl font-display font-bold text-gray-800">ISO 45001</span>
+            </div>
+            <div class="flex items-center gap-12 mx-6 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-award text-4xl text-gray-800"></i> <span class="text-2xl font-display font-bold text-gray-800">Great Place to Work</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8 bg-gray-50 border-b border-black/5 overflow-hidden">
+        <h4 class="text-center text-xs font-bold uppercase tracking-widest text-gray-500 mb-6">Tecnologías & Alianzas</h4>
+        <div class="flex whitespace-nowrap animate-marquee-reverse">
+            <div class="flex items-center gap-16 mx-10 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-brands fa-aws text-4xl text-gray-800"></i>
+            </div>
+            <div class="flex items-center gap-16 mx-10 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-brands fa-google text-4xl text-gray-800"></i>
+            </div>
+            <div class="flex items-center gap-16 mx-10 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-microchip text-4xl text-gray-800"></i> <span class="text-xl font-bold text-gray-800">Siemens Energy</span>
+            </div>
+            <div class="flex items-center gap-16 mx-10 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-wind text-4xl text-gray-800"></i> <span class="text-xl font-bold text-gray-800">Vestas</span>
+            </div>
+            <div class="flex items-center gap-16 mx-10 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-tractor text-4xl text-gray-800"></i> <span class="text-xl font-bold text-gray-800">Caterpillar</span>
+            </div>
+            <div class="flex items-center gap-16 mx-10 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-brands fa-aws text-4xl text-gray-800"></i>
+            </div>
+            <div class="flex items-center gap-16 mx-10 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-brands fa-google text-4xl text-gray-800"></i>
+            </div>
+            <div class="flex items-center gap-16 mx-10 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+                <i class="fa-solid fa-microchip text-4xl text-gray-800"></i> <span class="text-xl font-bold text-gray-800">Siemens Energy</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#FAFAFA] relative" id="reporte">
+        <div class="max-w-[1400px] mx-auto px-6 text-center">
+            <div class="glass-apple rounded-[3rem] p-12 md:p-24 relative overflow-hidden group hover:border-emerald-500/30 transition-all border border-black/5 shadow-2xl">
+                <div class="absolute inset-0 bg-gradient-to-r from-emerald-100/30 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-700"></div>
+                <div class="absolute -top-24 -left-24 w-64 h-64 bg-accent-gold/10 rounded-full blur-[80px]"></div>
+                <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px]"></div>
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6 relative z-10">Transparencia Total</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-12 relative z-10 text-lg">
+                    Acceda a nuestro Reporte de Sostenibilidad 2024-2025 auditado bajo estándares GRI y SASB. Conozca en detalle nuestro desempeño en agua, emisiones y comunidad.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-6 relative z-10">
+                    <button class="px-10 py-5 rounded-full bg-emerald-600 text-white font-bold uppercase tracking-widest text-xs hover:bg-emerald-500 transition-colors flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(16,185,129,0.3)] group">
+                        <i class="fa-solid fa-file-pdf text-lg group-hover:-translate-y-1 transition-transform"></i> Descargar Reporte Completo
+                    </button>
+                    <button class="px-10 py-5 rounded-full border border-gray-300 text-gray-700 font-bold uppercase tracking-widest text-xs hover:bg-gray-100 transition-colors flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-chart-pie text-lg"></i> Ver Resumen Ejecutivo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto" class="bg-[#F3F4F6] text-gray-600 pt-32 pb-12 border-t border-black/5">
+        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+            <div class="lg:col-span-4">
+                <a href="#" class="inline-block mb-8">
+                    <!-- Logo dark filter -->
+                    <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8 filter brightness-0">
+                </a>
+                <p class="text-gray-500 mb-8 max-w-sm">
+                    Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-white transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-white transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-white transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+                </div>
+            </div>
+            <div class="lg:col-span-2">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-8">Compañía</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-600">
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
+                    <li><a href="carreras.html" class="hover:text-accent-gold transition-colors">Carreras</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-8">Sedes Globales</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-600">
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3">
+                <div class="glass-apple p-8 rounded-3xl">
+                    <h4 class="font-display font-bold text-xl mb-4 text-gray-900">¿Hablamos?</h4>
+                    <p class="text-sm text-gray-500 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
+                    <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold text-white text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-gray-900 transition-colors">
+                        Contactar
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-[1600px] mx-auto px-6 pt-8 border-t border-black/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 uppercase tracking-widest">
+            <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+            <div class="flex gap-8 mt-4 md:mt-0">
+                <a href="#" class="hover:text-gray-900">Política de Privacidad</a>
+                <a href="#" class="hover:text-gray-900">Términos de Uso</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="modal" class="fixed inset-0 z-[100] modal-overlay flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-white/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="modal-content bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-[2rem] border border-black/5 relative shadow-2xl p-8 md:p-12">
+            <button onclick="closeModal()" class="absolute top-6 right-6 w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors z-20">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-body">
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
+        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/60 backdrop-blur-[40px] modal-overlay-global"></div>
+        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/80 backdrop-blur-[40px] border border-white/20 shadow-2xl">
+            <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-gray-600 hover:bg-black/5 transition-colors z-[220]">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h4 class="text-2xl font-display font-bold mb-4 text-gray-900">Contacto</h4>
+            <div id="contact-toolbar" class="flex gap-2 mb-2">
+                <button type="button" data-command="bold" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-gray-700 hover:bg-accent-gold hover:text-white transition-colors"><i class="fa-solid fa-bold"></i></button>
+                <button type="button" data-command="italic" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-gray-700 hover:bg-accent-gold hover:text-white transition-colors"><i class="fa-solid fa-italic"></i></button>
+                <button type="button" data-command="insertUnorderedList" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-gray-700 hover:bg-accent-gold hover:text-white transition-colors"><i class="fa-solid fa-list-ul"></i></button>
+            </div>
+            <form id="contact-form" class="space-y-4">
+                <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-gray-100 backdrop-blur placeholder-gray-500 text-gray-900 focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
+                <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-gray-100 backdrop-blur placeholder-gray-500 text-gray-900 focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
+                <div id="contact-message" contenteditable="true" class="w-full p-3 rounded-xl bg-gray-100 backdrop-blur placeholder-gray-500 text-gray-900 focus:ring-2 focus:ring-accent-gold focus:outline-none h-40 overflow-auto"></div>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
+                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-gray-700 hover:bg-accent-gold hover:text-white transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                    <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                </div>
+            </form>
+            <p class="text-xs text-gray-500 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas. Luego elige el modo de contacto para abrir tu cliente de email o WhatsApp con el texto preparado.</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 800 });
+
+        // --- THEME TOGGLE LOGIC ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.theme === 'dark') {
+             htmlElement.classList.add('dark');
+        } else {
+             htmlElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+        });
+
+        // --- CONTACT MODAL LOGIC ---
+        const contactModal = document.getElementById('contact-modal');
+        const closeContactBtn = document.getElementById('close-contact');
+        const contactOverlay = document.getElementById('contact-modal-overlay');
+
+        function openContactModal(e) {
+            if(e) e.preventDefault();
+            contactModal.classList.remove('hidden');
+        }
+
+        function closeContactModal() {
+            contactModal.classList.add('hidden');
+        }
+
+        if(closeContactBtn) closeContactBtn.addEventListener('click', closeContactModal);
+        if(contactOverlay) contactOverlay.addEventListener('click', closeContactModal);
+
+        // --- PROGRESS RINGS ANIMATION ---
+        function setProgress(percent, element) {
+            const circle = element;
+            if(circle && circle.r) {
+                const radius = circle.r.baseVal.value;
+                const circumference = radius * 2 * Math.PI;
+                const offset = circumference - percent / 100 * circumference;
+                circle.style.strokeDashoffset = offset;
+            }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Logic to find and animate elements if needed, mostly handled by AOS
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const duration = 2000; 
+                        const increment = target / (duration / 16); 
+                        let current = 0;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                counter.innerText = target;
+                                clearInterval(timer);
+                            } else {
+                                counter.innerText = Math.ceil(current);
+                            }
+                        }, 16);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.glass-apple').forEach(el => observer.observe(el));
+
+        function showProject(id, btn) {
+            document.querySelectorAll('.project-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('grid'); 
+            });
+            const selected = document.getElementById(id);
+            selected.classList.remove('hidden');
+            selected.classList.add('grid');
+            const buttons = btn.parentElement.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('bg-gray-900', 'text-white', 'shadow-lg');
+                b.classList.add('text-gray-500');
+            });
+            btn.classList.add('bg-gray-900', 'text-white', 'shadow-lg');
+            btn.classList.remove('text-gray-500');
+        }
+
+        // --- NEW CALCULATOR LOGIC ---
+        function setScenario(scenario, btn) {
+            const buttons = btn.parentElement.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('bg-accent-gold/10', 'text-yellow-700', 'border-accent-gold/30');
+                b.classList.add('bg-white', 'text-gray-500', 'border-gray-200');
+            });
+            btn.classList.remove('bg-white', 'text-gray-500', 'border-gray-200');
+            btn.classList.add('bg-accent-gold/10', 'text-yellow-700', 'border-accent-gold/30');
+
+            const title = document.getElementById('projectTitle');
+            const location = document.getElementById('projectLocation');
+            const desc = document.getElementById('projectDesc');
+            const slider = document.getElementById('mwRange');
+
+            if (scenario === 'calicanto') {
+                title.innerHTML = '<i class="fa-solid fa-location-dot text-accent-gold"></i> Parque Solar Calicanto';
+                location.innerText = 'Nogolí, San Luis • En Construcción';
+                desc.innerHTML = 'Con una inversión inicial de <strong>USD 35 Millones</strong>, este parque de 51 MW es el primer paso en la estrategia de diversificación energética. Emplazado en 71.9 hectáreas, inyectará energía limpia al SADI y abastecerá operaciones mineras.';
+                slider.value = 51;
+            } else if (scenario === 'gualcamayo_solar') {
+                title.innerHTML = '<i class="fa-solid fa-bolt text-accent-gold"></i> Gualcamayo Solar (RIGI)';
+                location.innerText = 'Jáchal, San Juan • En Proyecto';
+                desc.innerHTML = 'Como parte de la adhesión al <strong>Régimen RIGI</strong>, Aisa Group proyecta un parque fotovoltaico masivo de hasta <strong>1000 MW</strong> (inversión est. USD 600M) para abastecer la demanda industrial y minera de la región.';
+                slider.value = 800;
+            }
+            calculateImpact(slider.value);
+        }
+
+        function calculateImpact(mw) {
+            document.getElementById('mwDisplay').innerText = mw;
+            
+            const ratioGWh = 110.1 / 51; 
+            const gwh = (mw * ratioGWh).toFixed(1);
+            
+            const ratioHomes = 80000 / 51; 
+            const homes = Math.ceil(mw * ratioHomes);
+
+            const ratioCO2 = 50000 / 51; 
+            const co2 = Math.ceil(mw * ratioCO2);
+
+            const ratioTrees = 2500000 / 51; 
+            const trees = (mw * ratioTrees);
+            
+            let treesDisplay = trees > 1000000 ? (trees/1000000).toFixed(1) + 'M' : Math.ceil(trees).toLocaleString();
+
+            document.getElementById('gwhValue').innerText = gwh;
+            document.getElementById('homesValue').innerText = homes.toLocaleString();
+            document.getElementById('co2Value').innerText = co2.toLocaleString();
+            document.getElementById('treesValue').innerText = treesDisplay;
+        }
+
+        calculateImpact(51);
+
+        // --- PROJECT MODALS CONTENT ---
+        const modalContent = {
+            gualcamayo: `
+                <span class="text-emerald-600 font-bold tracking-widest text-xs uppercase mb-4 block">Minería</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">Proyecto Carbonatos Profundos</h2>
+                <div class="w-20 h-1 bg-emerald-500 mb-8"></div>
+                <p class="lead text-xl text-gray-600 mb-8 leading-relaxed">Una segunda vida para Gualcamayo basada en la eficiencia y la tecnología. Transformando un pasivo ambiental potencial en un activo productivo sostenible.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-black/5">
+                        <h4 class="text-gray-900 font-bold mb-2 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation text-red-500"></i> Desafío</h4>
+                        <p class="text-gray-600 text-sm">El agotamiento de los óxidos superficiales amenazaba con el cierre de la mina, lo que hubiera impactado negativamente a 2000 familias de la región de Jáchal.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-black/5">
+                        <h4 class="text-gray-900 font-bold mb-2 flex items-center gap-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> Solución Aisa</h4>
+                        <p class="text-gray-600 text-sm">Inversión de 1.000M USD para explotar el cuerpo subterráneo con tecnología de flotación avanzada que permite recuperar oro de minerales refractarios de manera eficiente.</p>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1578923307077-947761596a2e?q=80&w=2070&auto=format&fit=crop" class="w-full rounded-3xl mb-12 shadow-xl">
+                <h3 class="text-3xl font-bold text-gray-900 mb-6">Gestión Hídrica de Vanguardia</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">La nueva planta de procesos incorpora un sistema de <strong>filtros de prensa</strong> para los relaves. Esta tecnología permite separar el agua de los sólidos antes de su disposición final, logrando recuperar hasta el <strong>85% del agua</strong> para recircularla al proceso industrial.</p>
+            `,
+            calicanto: `
+                <span class="text-yellow-600 font-bold tracking-widest text-xs uppercase mb-4 block">Energía</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">Parque Solar Calicanto</h2>
+                <div class="w-20 h-1 bg-accent-gold mb-8"></div>
+                <p class="lead text-xl text-gray-600 mb-8 leading-relaxed">Energía limpia para alimentar el desarrollo industrial. El primer paso hacia la descarbonización total de nuestras operaciones.</p>
+                <p class="text-gray-600 mb-6 text-lg">Ubicado en el departamento Belgrano, San Luis (a 8km de Nogolí), este parque de <strong>51 MW</strong> es la punta de lanza de Aisa Energy. No es solo un proyecto de generación; es una declaración de principios sobre cómo debe alimentarse la minería del futuro.</p>
+                <div class="bg-gradient-to-r from-yellow-50 to-transparent p-8 rounded-2xl border-l-4 border-accent-gold mb-12">
+                    <p class="text-gray-900 font-bold text-lg mb-2">Dato Clave de Impacto:</p>
+                    <p class="text-gray-600">Con una inversión de USD 35 millones, generará 110.1 GWh anuales, evitando 50.000 toneladas de CO2 al año.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <div class="bg-gray-50 p-4 rounded-xl border border-black/5">
+                        <div class="text-2xl font-bold text-gray-900">51 MW</div>
+                        <div class="text-xs text-gray-500 uppercase">Capacidad</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-black/5">
+                        <div class="text-2xl font-bold text-gray-900">71.9 Ha</div>
+                        <div class="text-xs text-gray-500 uppercase">Superficie</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-black/5">
+                        <div class="text-2xl font-bold text-gray-900">110 GWh</div>
+                        <div class="text-xs text-gray-500 uppercase">Generación Anual</div>
+                    </div>
+                </div>
+            `,
+            chelsea: `
+                <span class="text-purple-600 font-bold tracking-widest text-xs uppercase mb-4 block">Real Estate & Cultura</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">Recuperación Ex-Cinzano</h2>
+                <div class="w-20 h-1 bg-purple-500 mb-8"></div>
+                <p class="lead text-xl text-gray-600 mb-8 leading-relaxed">Donde la historia se encuentra con la innovación. Un proyecto de regeneración urbana sin precedentes en San Juan.</p>
+                <p class="text-gray-600 mb-6 text-lg">Aisa Group, a través de su desarrolladora <strong>Chelsea Design Estates</strong>, asumió el desafío de restaurar la icónica planta industrial de Cinzano.</p>
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" class="w-full rounded-3xl mb-12 shadow-xl">
+            `
+        };
+
+        function openModal(id) {
+            const content = modalContent[id];
+            if (content) {
+                document.getElementById('modal-body').innerHTML = content;
+                const modal = document.getElementById('modal');
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.add('active'), 10);
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+                closeContactModal();
+            }
+        });
+        
+        // MOBILE MENU INIT
+        (function () {
+            function initMobileMenu() {
+                const toggleBtn = document.getElementById('nav-toggle');
+                const navMenu = document.getElementById('nav-menu');
+
+                const resetMenuForDesktop = () => {
+                    if (window.innerWidth >= 1024 && navMenu) {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove(
+                            'flex',
+                            'flex-col',
+                            'items-center',
+                            'text-center',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'rounded-3xl',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    }
+                };
+
+                if (!toggleBtn || !navMenu) return;
+
+                resetMenuForDesktop();
+                window.addEventListener('resize', resetMenuForDesktop);
+
+                toggleBtn.addEventListener('click', () => {
+                    const isHidden = navMenu.classList.contains('hidden');
+
+                    if (isHidden) {
+                        navMenu.classList.remove('hidden');
+                        navMenu.classList.add(
+                            'flex',
+                            'flex-col',
+                            'items-center',
+                            'text-center',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'rounded-3xl',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    } else {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove(
+                            'flex',
+                            'flex-col',
+                            'items-center',
+                            'text-center',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'rounded-3xl',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenu);
+            } else {
+                initMobileMenu();
+            }
+        })();
+    </script>
+
+</body>
+</html>
