@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth dark">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +17,13 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- TAILWIND CSS -->
+    <script>
+        (() => {
+            const storedTheme = localStorage.getItem('theme');
+            const isDark = storedTheme ? storedTheme === 'dark' : true;
+            document.documentElement.classList.toggle('dark', isDark);
+        })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         // Configuración de Tailwind extendida. Aquí se definen fuentes,

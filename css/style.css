@@ -16,9 +16,14 @@ body {
 
 /* --- APPLE GLASS (iOS Style) --- */
 .glass-apple {
-    background: rgba(20, 20, 20, 0.65);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(25px) saturate(180%);
     -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+}
+.dark .glass-apple {
+    background: rgba(20, 20, 20, 0.65);
     border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
@@ -166,14 +171,18 @@ html:not(.dark) .text-outline {
 /* --- CORPORATE STRUCTURE CARD AS CIRCUIT --- */
 /* Apply the neon circuit-card effect to the structure cards inside the marquee. */
 .marquee-track .glass-apple {
-    background: rgba(15, 15, 15, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     /* Default glow color for corporate cards */
     --glow-color: #FACC15;
+}
+.dark .marquee-track .glass-apple {
+    background: rgba(15, 15, 15, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 .marquee-track .glass-apple::before {
     content: '';

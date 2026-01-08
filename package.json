@@ -4,7 +4,11 @@
   "version": "0.1.0",
   "description": "Aisa Group website + Liquid Command Center console",
   "scripts": {
-    "build": "node scripts/build.mjs"
+    "build": "node scripts/build.mjs",
+    "dev": "python3 -m http.server 4173",
+    "test:visual:baseline": "node tests/visual/run.mjs --mode=baseline",
+    "test:visual:diff": "node tests/visual/run.mjs --mode=diff",
+    "test:visual": "node tests/visual/run.mjs --mode=diff"
   },
   "engines": {
     "node": ">=18"
