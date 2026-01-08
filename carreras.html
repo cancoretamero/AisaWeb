@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth dark">
+<html lang="es" class="scroll-smooth" data-default-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,50 @@
 
     <!-- Animaciones -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Theme init (anti-FOUC + overrides for screenshots) -->
+    <script>
+        (function () {
+            const root = document.documentElement;
+            const params = new URLSearchParams(window.location.search);
+            const overrideTheme = params.get('__theme');
+            const isScreenshot = params.get('__screenshot') === '1';
+            const defaultTheme = root.getAttribute('data-default-theme') || 'dark';
+            const storedTheme = localStorage.getItem('theme');
+            let theme = storedTheme || defaultTheme;
+
+            if (overrideTheme === 'dark' || overrideTheme === 'light') {
+                theme = overrideTheme;
+                localStorage.setItem('theme', theme);
+            } else if (!storedTheme) {
+                localStorage.setItem('theme', theme);
+            }
+
+            root.classList.toggle('dark', theme === 'dark');
+
+            if (isScreenshot) {
+                root.classList.add('screenshot');
+                window.__disableAOS = true;
+            }
+        })();
+    </script>
+    <style>
+        html.screenshot *,
+        html.screenshot *::before,
+        html.screenshot *::after {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        html.screenshot #theme-toggle {
+            display: none !important;
+        }
+
+        html.screenshot [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    </style>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -592,7 +636,9 @@
     <!-- Scripts globales y de página -->
     <script>
         // Inicializar AOS
-        AOS.init({ once: true, duration: 800 });
+        if (window.AOS && !document.documentElement.classList.contains('screenshot')) {
+            AOS.init({ once: true, duration: 800 });
+        }
 
         // Inicializar partículas en fondo
         particlesJS("particles-js", {
@@ -802,9 +848,9 @@
             }
         })();
 
-        // Tema: activar modo oscuro según preferencia
+        // Tema: activar modo oscuro según preferencia guardada
         const htmlElement = document.documentElement;
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (localStorage.getItem('theme') === 'dark') {
             htmlElement.classList.add('dark');
         } else {
             htmlElement.classList.remove('dark');

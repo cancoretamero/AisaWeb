@@ -10,7 +10,7 @@
 
 // Inicializa las animaciones de AOS cuando el documento está listo
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.AOS) {
+    if (window.AOS && !document.documentElement.classList.contains('screenshot')) {
         AOS.init({ once: true, duration: 1000, offset: 50 });
     }
 });
@@ -131,20 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
 const themeBtn = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
 
-// Determina el tema inicial según localStorage o valor por defecto
-if (!localStorage.theme) {
-    htmlElement.classList.add('dark');
-} else if (localStorage.theme === 'dark') {
-    htmlElement.classList.add('dark');
-} else {
-    htmlElement.classList.remove('dark');
-}
-
 // Maneja el click en el botón para alternar el tema
 if (themeBtn) {
     themeBtn.addEventListener('click', () => {
         htmlElement.classList.toggle('dark');
-        localStorage.theme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+        localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
     });
 }
 

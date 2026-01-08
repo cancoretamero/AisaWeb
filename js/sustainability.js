@@ -1,5 +1,7 @@
 // Initialize AOS for animations on scroll
-AOS.init({ once: true, duration: 800 });
+if (window.AOS && !document.documentElement.classList.contains('screenshot')) {
+    AOS.init({ once: true, duration: 800 });
+}
 
 // Utility to animate SVG progress rings
 function setProgress(percent, element) {

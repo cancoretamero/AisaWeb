@@ -1,6 +1,6 @@
 QUIENES SOMOS LIGHT
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="scroll-smooth" data-default-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,50 @@ QUIENES SOMOS LIGHT
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Theme init (anti-FOUC + overrides for screenshots) -->
+    <script>
+        (function () {
+            const root = document.documentElement;
+            const params = new URLSearchParams(window.location.search);
+            const overrideTheme = params.get('__theme');
+            const isScreenshot = params.get('__screenshot') === '1';
+            const defaultTheme = root.getAttribute('data-default-theme') || 'light';
+            const storedTheme = localStorage.getItem('theme');
+            let theme = storedTheme || defaultTheme;
+
+            if (overrideTheme === 'dark' || overrideTheme === 'light') {
+                theme = overrideTheme;
+                localStorage.setItem('theme', theme);
+            } else if (!storedTheme) {
+                localStorage.setItem('theme', theme);
+            }
+
+            root.classList.toggle('dark', theme === 'dark');
+
+            if (isScreenshot) {
+                root.classList.add('screenshot');
+                window.__disableAOS = true;
+            }
+        })();
+    </script>
+    <style>
+        html.screenshot *,
+        html.screenshot *::before,
+        html.screenshot *::after {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        html.screenshot #theme-toggle {
+            display: none !important;
+        }
+
+        html.screenshot [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    </style>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -864,7 +908,9 @@ QUIENES SOMOS LIGHT
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <script>
-        AOS.init({ once: true, duration: 1000, offset: 50 });
+        if (window.AOS && !document.documentElement.classList.contains('screenshot')) {
+            AOS.init({ once: true, duration: 1000, offset: 50 });
+        }
 
         // Particles Configuration (Darker particles for light mode)
         particlesJS("particles-container", {
@@ -942,20 +988,12 @@ QUIENES SOMOS LIGHT
         const themeToggleBtn = document.getElementById('theme-toggle');
         const htmlElement = document.documentElement;
 
-        if (localStorage.theme === 'dark') {
-             htmlElement.classList.add('dark');
-        } else {
-             htmlElement.classList.remove('dark');
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
+            });
         }
-
-        themeToggleBtn.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            if (htmlElement.classList.contains('dark')) {
-                localStorage.theme = 'dark';
-            } else {
-                localStorage.theme = 'light';
-            }
-        });
 
         // --- CONTACT MODAL LOGIC ---
         const contactModal = document.getElementById('contact-modal');
