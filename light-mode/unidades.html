@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidades de Negocio | Aisa Group</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Poppins"', 'sans-serif'],
+                        display: ['"Montserrat"', 'sans-serif'],
+                    },
+                    colors: {
+                        light: { bg: '#FAFAFA', surface: '#FFFFFF', panel: '#F3F4F6' },
+                        accent: { gold: '#EAB308', goldHover: '#CA8A04' } // Gold un poco más oscuro para contraste en blanco
+                    },
+                    backgroundImage: {
+                        'frost-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1))',
+                        // Pattern específico de Unidades (Invertido a negro con baja opacidad)
+                        'tech-grid': "url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M0 0h40v40H0V0zm1 1h38v38H1V1z\" fill=\"%23000000\" fill-opacity=\"0.03\"/%3E%3C/svg%3E')",
+                    },
+                    backdropBlur: {
+                        'xl': '24px',
+                        '2xl': '40px',
+                    },
+                    animation: {
+                        'spin-slow': 'spin 10s linear infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #FAFAFA; color: #1F2937; overflow-x: hidden; }
+        
+        /* APPLE GLASS LIGHT (Estilo Global del Navbar) */
+        .glass-apple {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        /* HUD GLASS EFFECT LIGHT (Para el panel de detalle) */
+        .hud-glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        /* CARD STYLES (Game Unit Style) - LIGHT MODE V3 FIXES */
+        .unit-card {
+            position: relative;
+            background: #FFFFFF;
+            border: 1px solid rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 450px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .unit-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            /* AJUSTE 2 CORREGIDO: "Menos frosty, más imagen" 
+               - Gradiente a transparente puro arriba.
+               - Blanco solido abajo para texto.
+               - Blur mínimo.
+            */
+            background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 35%, rgba(255,255,255,0.05) 65%, rgba(255,255,255,0) 100%);
+            backdrop-filter: blur(1px); /* Blur casi inexistente para evitar el efecto "empañado" */
+            -webkit-backdrop-filter: blur(1px);
+            z-index: 10;
+            pointer-events: none; /* Asegura que no bloquee interacciones si fuera necesario */
+        }
+        .unit-card:hover {
+            border-color: var(--theme-color);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.1), 0 0 20px -5px var(--theme-color);
+        }
+        .unit-card .card-img {
+            transition: transform 0.7s ease;
+            filter: grayscale(0%); /* AJUSTE: Imagen a todo color por defecto para que se vea bien */
+        }
+        .unit-card:hover .card-img {
+            transform: scale(1.05);
+        }
+        
+        /* HUD OVERLAY (Full Screen Detail) */
+        .hud-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: #FAFAFA;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.8, 0, 0.2, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .hud-overlay.active {
+            transform: translateY(0);
+        }
+
+        /* TABS STYLING */
+        .hud-tab {
+            padding: 12px 24px;
+            border-bottom: 2px solid transparent;
+            color: #6B7280; /* Gray 500 */
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+        .hud-tab.active {
+            color: #111827; /* Gray 900 */
+            border-bottom-color: var(--theme-color);
+        }
+        
+        /* CUSTOM SCROLLBAR - LIGHT */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F3F4F6; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #EAB308; }
+        
+        /* LIQUID GLASS BUTTON - LIGHT */
+        .btn-liquid-glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .btn-liquid-glass:hover {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* CONTACT MODAL UTILS */
+        .modal-overlay-global { opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .modal-overlay-global.active { opacity: 1; visibility: visible; }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent-gold selection:text-white">
+
+    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg">
+        <i class="fa-solid fa-moon hidden dark:block"></i>
+        <i class="fa-solid fa-sun dark:hidden"></i>
+    </button>
+
+    <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-[1400px] mx-auto px-2">
+            <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-xl">
+                <a href="index.html" class="flex items-center group">
+                    <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="h-8 w-auto filter brightness-0" />
+                </a>
+                
+                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none">
+                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-gray-700 hover:bg-black/5 transition-all">Inicio</a>
+                    <div class="relative group">
+                        <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-gray-700 flex items-center gap-1 hover:bg-black/5 transition-all">
+                            Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
+                        </a>
+                        <div class="mt-2 flex flex-col gap-2 lg:hidden">
+                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-600 hover:text-accent-gold transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-600 hover:text-accent-gold transition-colors">El Equipo</a>
+                        </div>
+                        <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 lg:group-hover:opacity-100 lg:group-hover:scale-100 transition-all origin-top-left z-50 hidden lg:block lg:group-hover:block">
+                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-gray-700 uppercase tracking-widest hover:text-accent-gold transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-gray-700 uppercase tracking-widest hover:text-accent-gold transition-colors">El Equipo</a>
+                        </div>
+                    </div>
+                    <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-accent-gold">Unidades</a>
+                    
+                    <a href="sostenibilidad.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-gray-700 hover:bg-black/5 transition-all">Sostenibilidad &amp; ESG</a>
+                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-gray-700 hover:bg-black/5 transition-all">Prensa</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard text-[10px] font-bold uppercase tracking-widest shadow-lg bg-gray-900 text-white hover:bg-accent-gold hover:text-black transition-colors">
+                        Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
+                    </a>
+                    <button id="nav-toggle" class="lg:hidden text-xl text-gray-800 px-2"><i class="fa-solid fa-bars-staggered"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-40 pb-20 overflow-hidden min-h-[50vh] flex items-center justify-center">
+        <div class="absolute inset-0 z-0">
+            <!-- AJUSTE 1 CORREGIDO: Gradiente de Blanco a Fondo. Elimina grises para fusión total. -->
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-[#FAFAFA] to-[#FAFAFA]"></div>
+            <!-- Mascara para desvanecer el grid pattern suavemente hacia abajo -->
+            <div class="absolute inset-0 bg-tech-grid opacity-100 [mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]"></div>
+        </div>
+        
+        <div class="relative z-10 text-center max-w-4xl px-6" data-aos="zoom-in">
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded border border-black/5 bg-white/60 mb-8 backdrop-blur-md shadow-sm">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-gold opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-gold"></span>
+                </span>
+                <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-gray-500">System Status: Operational</span>
+            </div>
+            
+            <h1 class="font-display text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
+                ECOSISTEMA <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-gold to-yellow-600">ESTRATÉGICO</span>
+            </h1>
+            <p class="text-gray-500 text-sm md:text-base font-light max-w-2xl mx-auto uppercase tracking-widest">
+                Seleccione una unidad para acceder al dashboard de operaciones
+            </p>
+        </div>
+    </header>
+
+    <section class="pb-32 px-6 max-w-[1800px] mx-auto relative z-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="units-grid">
+            </div>
+    </section>
+
+    <div id="hud-overlay" class="hud-overlay">
+        
+        <div class="sticky top-0 z-[105] bg-[#FAFAFA]/90 backdrop-blur-xl border-b border-black/5 px-8 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl font-bold bg-black/5" id="hud-icon-box">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div>
+                    <h2 class="font-display font-bold text-xl text-gray-900 uppercase tracking-wider" id="hud-title">Unit Name</h2>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-[0.2em]" id="hud-subtitle">Subtitle</p>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex gap-8" id="hud-tabs">
+                </div>
+        </div>
+
+        <div class="p-0 md:p-0">
+            <div class="relative h-[50vh] w-full overflow-hidden">
+                <img id="hud-hero-img" src="" class="w-full h-full object-cover">
+                <!-- Gradiente invertido para fundir con fondo claro -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#FAFAFA] via-[#FAFAFA]/20 to-transparent"></div>
+                
+                <button onclick="closeHud()" class="absolute top-8 right-8 z-[120] w-12 h-12 rounded-full btn-liquid-glass text-gray-800 flex items-center justify-center group cursor-pointer">
+                    <i class="fa-solid fa-xmark text-xl group-hover:rotate-90 transition-transform duration-300"></i>
+                </button>
+
+                <div class="absolute bottom-12 left-8 md:left-16 max-w-3xl">
+                    <div class="flex gap-4 mb-4">
+                        <div class="px-3 py-1 bg-white/40 backdrop-blur border border-white/40 rounded text-[10px] uppercase font-bold text-gray-900 tracking-widest flex items-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-signal text-green-600"></i> Estado: <span id="hud-status">Activo</span>
+                        </div>
+                    </div>
+                    <p class="text-xl md:text-3xl font-light text-gray-900 leading-relaxed drop-shadow-sm" id="hud-intro">
+                        Intro text goes here...
+                    </p>
+                </div>
+            </div>
+
+            <div class="max-w-[1400px] mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-16">
+                
+                <div class="lg:col-span-8 space-y-16" id="hud-content-area">
+                    </div>
+
+                <div class="lg:col-span-4 space-y-8">
+                    <div class="hud-glass p-8 rounded-2xl sticky top-32">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-8 border-b border-black/5 pb-4">Métricas Clave</h4>
+                        <div class="space-y-8" id="hud-metrics">
+                            </div>
+                        
+                        <div class="mt-12 pt-8 border-t border-black/5">
+                            <button class="w-full py-4 bg-gray-900 text-white font-bold uppercase tracking-widest text-xs rounded hover:opacity-90 transition-opacity" onclick="openContactModal(event)">
+                                Contactar División
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer id="contacto" class="bg-[#F3F4F6] text-gray-600 pt-32 pb-12 border-t border-black/5">
+        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+            <div class="lg:col-span-4">
+                <a href="#" class="inline-block mb-8">
+                    <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8 filter brightness-0">
+                </a>
+                <p class="text-gray-500 mb-8 max-w-sm">
+                    Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-white transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-white transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-white transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+                </div>
+            </div>
+            <div class="lg:col-span-2">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-8">Compañía</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-600">
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
+                    <li><a href="carreras.html" class="hover:text-accent-gold transition-colors">Carreras</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-8">Sedes Globales</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-600">
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3">
+                <div class="glass-apple p-8 rounded-3xl">
+                    <h4 class="font-display font-bold text-xl mb-4 text-gray-900">¿Hablamos?</h4>
+                    <p class="text-sm text-gray-500 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
+                    <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold text-white text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-gray-900 transition-colors">
+                        Contactar
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-[1600px] mx-auto px-6 pt-8 border-t border-black/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 uppercase tracking-widest">
+            <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+            <div class="flex gap-8 mt-4 md:mt-0">
+                <a href="#" class="hover:text-gray-900">Política de Privacidad</a>
+                <a href="#" class="hover:text-gray-900">Términos de Uso</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
+        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/60 backdrop-blur-[40px] modal-overlay-global"></div>
+        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/80 backdrop-blur-[40px] border border-white/20 shadow-2xl">
+            <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-gray-600 hover:bg-black/5 transition-colors z-[220]">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h4 class="text-2xl font-display font-bold mb-4 text-gray-900">Contacto</h4>
+            <div id="contact-toolbar" class="flex gap-2 mb-2">
+                <button type="button" data-command="bold" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-gray-700 hover:bg-accent-gold hover:text-white transition-colors"><i class="fa-solid fa-bold"></i></button>
+                <button type="button" data-command="italic" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-gray-700 hover:bg-accent-gold hover:text-white transition-colors"><i class="fa-solid fa-italic"></i></button>
+                <button type="button" data-command="insertUnorderedList" class="glass-apple w-8 h-8 rounded-full flex items-center justify-center text-gray-700 hover:bg-accent-gold hover:text-white transition-colors"><i class="fa-solid fa-list-ul"></i></button>
+            </div>
+            <form id="contact-form" class="space-y-4">
+                <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-gray-100 backdrop-blur placeholder-gray-500 text-gray-900 focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Nombre" required>
+                <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-gray-100 backdrop-blur placeholder-gray-500 text-gray-900 focus:ring-2 focus:ring-accent-gold focus:outline-none" placeholder="Email" required>
+                <div id="contact-message" contenteditable="true" class="w-full p-3 rounded-xl bg-gray-100 backdrop-blur placeholder-gray-500 text-gray-900 focus:ring-2 focus:ring-accent-gold focus:outline-none h-40 overflow-auto"></div>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
+                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-gray-700 hover:bg-accent-gold hover:text-white transition-colors"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                    <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                </div>
+            </form>
+            <p class="text-xs text-gray-500 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas. Luego elige el modo de contacto para abrir tu cliente de email o WhatsApp con el texto preparado.</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 800 });
+
+        // --- DATA SOURCE ---
+        const units = [
+            {
+                id: 'mineria',
+                title: 'Minería',
+                subtitle: 'Operación y Desarrollo',
+                color: '#EAB308', 
+                icon: 'fa-gem',
+                status: 'Operativo / Expansión',
+                image: 'https://images.unsplash.com/photo-1693774557231-e2be6c3594e8?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                intro: 'Mina Gualcamayo en San Juan: reestructuración, saneamiento financiero y reinicio de exploración con prácticas sostenibles.',
+                metrics: [
+                    { label: 'Recursos Totales (GEO)', value: '5M+', unit: 'oz' },
+                    { label: 'Producción Proyectada', value: '120k', unit: 'oz/año' },
+                    { label: 'Vida Útil Extendida', value: '17+', unit: 'años' }
+                ],
+                tabs: ['Operación', 'Potencial', 'Destacados', 'Galería'],
+                content: {
+                    'Operación': `
+                        <div class="space-y-6 text-gray-600">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Adquisición y Transformación</h3>
+                            <p>En septiembre de 2023, Aisa Group adquirió el 100% de Minas Argentinas SA, operador de la mina Gualcamayo en Jáchal, San Juan. La operación, que iniciaba su cierre, fue sometida a una profunda reestructuración y saneamiento financiero, permitiendo el reinicio inmediato de la exploración.</p>
+                            
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Optimización Técnica</h3>
+                            <p>El foco actual está en la mejora operativa:</p>
+                            <ul class="list-disc pl-5 space-y-2 mt-2">
+                                <li>Optimización de la pila de lixiviación existente.</li>
+                                <li>Hallazgo de nuevas zonas de mineral en sectores considerados agotados.</li>
+                                <li>Rediseño y repotenciación del sistema de procesos.</li>
+                                <li>Reperfilado de taludes y ripeo para mejorar la infiltración y contacto solución-mineral.</li>
+                            </ul>
+                            <p class="mt-4 border-l-4 border-[#EAB308] pl-4 italic text-gray-800">Nuestro objetivo es elevar la recuperación y sostenibilidad, garantizando un impacto mínimo y maximizando el desarrollo socioeconómico de las comunidades de Jáchal.</p>
+                        </div>
+                    `,
+                    'Potencial': `
+                        <div class="space-y-6 text-gray-600">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Proyecto Carbonatos Profundos</h3>
+                            <p>Mientras la producción actual se centra en la recuperación secundaria de pilas (con <strong>343 mil onzas GEO recuperables certificadas</strong>), el futuro de la mina es subterráneo.</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+                                <div class="bg-gray-100 p-6 rounded-xl border border-black/5">
+                                    <div class="text-3xl font-bold text-gray-900 mb-1">> 5M</div>
+                                    <div class="text-xs uppercase tracking-widest text-gray-500">Onzas de Recursos</div>
+                                </div>
+                                <div class="bg-gray-100 p-6 rounded-xl border border-black/5">
+                                    <div class="text-3xl font-bold text-gray-900 mb-1">~ 3M</div>
+                                    <div class="text-xs uppercase tracking-widest text-gray-500">Onzas de Reservas</div>
+                                </div>
+                            </div>
+
+                            <p>El plan 2025–2026 contempla estudios de factibilidad e ingenierías para una nueva planta de procesos. Una vez en producción, se estiman <strong>120.000 onzas GEO/año</strong> durante un mínimo de 17 años.</p>
+                            <p>Además, se han renovado los esfuerzos de exploración buscando expandir el cuerpo de Carbonatos Profundos y desarrollar nuevos "targets" con evidencias de minerales primarios de alto potencial económico.</p>
+                        </div>
+                    `,
+                    'Destacados': `
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="flex items-start gap-4 p-4 bg-gray-100 rounded-xl border border-black/5">
+                                <i class="fa-solid fa-check text-[#EAB308] mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Recuperación Secundaria</h4>
+                                    <p class="text-sm text-gray-500">Reservas 2024: 343k onzas GEO (Certificación JORC).</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 bg-gray-100 rounded-xl border border-black/5">
+                                <i class="fa-solid fa-check text-[#EAB308] mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Recursos Masivos</h4>
+                                    <p class="text-sm text-gray-500">Carbonatos Profundos: 5M GEO recursos; >3M GEO reservas (NI 43-101).</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 bg-gray-100 rounded-xl border border-black/5">
+                                <i class="fa-solid fa-check text-[#EAB308] mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Infraestructura</h4>
+                                    <p class="text-sm text-gray-500">Instalaciones plenamente desarrolladas y operativas.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 bg-gray-100 rounded-xl border border-black/5">
+                                <i class="fa-solid fa-check text-[#EAB308] mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Ingeniería y Seguridad</h4>
+                                    <p class="text-sm text-gray-500">Planes avanzados con estudios metalúrgicos y ambientales en colaboración con consultoras internacionales.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `,
+                    'Galería': `
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <img src="https://images.unsplash.com/photo-1523848309072-c199db53f137?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rounded-xl w-full h-64 object-cover hover:scale-105 transition-transform duration-500 shadow-md">
+                            <img src="https://images.unsplash.com/photo-1628487749130-2d41acb1802a?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rounded-xl w-full h-64 object-cover hover:scale-105 transition-transform duration-500 shadow-md">
+                            <img src="https://images.unsplash.com/photo-1714659269550-20a99b2f5faa?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rounded-xl w-full h-64 object-cover hover:scale-105 transition-transform duration-500 md:col-span-2 shadow-md">
+                        </div>
+                    `
+                }
+            },
+            {
+                id: 'energia',
+                title: 'Energías Renovables',
+                subtitle: 'Inversiones en Parques Solares',
+                color: '#059669', 
+                icon: 'fa-bolt',
+                status: 'En Construcción',
+                image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072&auto=format&fit=crop',
+                intro: 'Unidad Calicanto: impulsando la transición energética con proyectos fotovoltaicos masivos en San Luis y San Juan.',
+                metrics: [
+                    { label: 'Parque San Luis', value: '51', unit: 'MW' },
+                    { label: 'Inversión San Luis', value: '35', unit: 'M USD' },
+                    { label: 'Potencial Gualcamayo', value: '1', unit: 'GW' }
+                ],
+                tabs: ['Calicanto', 'Visión Futura'],
+                content: {
+                    'Calicanto': `
+                         <div class="space-y-6 text-gray-600">
+                            <p class="text-lg"><strong>Calicanto</strong> es la unidad dedicada a energías renovables de Aisa Group. Actualmente, ejecutamos un proyecto insignia en la provincia de San Luis:</p>
+                            <div class="bg-[#10B981]/10 p-6 rounded-xl border border-[#10B981]/20 my-6">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Parque Fotovoltaico San Luis</h3>
+                                <div class="grid grid-cols-2 gap-4 mt-4">
+                                    <div>
+                                        <div class="text-xs text-gray-500 uppercase">Estado</div>
+                                        <div class="text-gray-900 font-bold">En Construcción</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500 uppercase">Potencia</div>
+                                        <div class="text-gray-900 font-bold">51 MW</div>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <div class="text-xs text-gray-500 uppercase">Inversión</div>
+                                        <div class="text-gray-900 font-bold">~ USD 35 Millones</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `,
+                    'Visión Futura': `
+                        <div class="space-y-6 text-gray-600">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Expansión RIGI</h3>
+                            <p>Estamos estudiando la adhesión al Régimen de Incentivo a las Grandes Inversiones (RIGI) para desarrollar un <strong>Parque Solar en Gualcamayo</strong> con una capacidad proyectada de <strong>800 a 1000 MW</strong>.</p>
+                            <p>El objetivo transversal del grupo es reinvertir sistemáticamente los beneficios generados por las distintas unidades de negocio en proyectos de energía renovable, cerrando el ciclo de sostenibilidad corporativa.</p>
+                        </div>
+                    `
+                }
+            },
+            {
+                id: 'pesca',
+                title: 'Pescado y Marisco',
+                subtitle: 'Producción y Exportación',
+                color: '#0891B2', 
+                icon: 'fa-fish-fins',
+                status: 'Líder de Mercado',
+                image: 'https://images.unsplash.com/photo-1592132886027-b7bbc39a22e5?q=80&w=1614&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                intro: 'Desde la Patagonia al mundo: Langostino rojo salvaje con integración vertical completa, flota propia y bases en Argentina y España.',
+                metrics: [
+                    { label: 'Exportación Anual', value: '15k', unit: 'tons' },
+                    { label: 'Países Destino', value: '50+', unit: '' },
+                    { label: 'Planta Principal', value: '10k', unit: 'm²' }
+                ],
+                tabs: ['Visión General', 'Infraestructura', 'Flota'],
+                content: {
+                    'Visión General': `
+                         <div class="space-y-6 text-gray-600">
+                            <p>Argentina es un actor clave global en el langostino salvaje. Aisa Group invierte estratégicamente en el sector desde 2022, colaborando con pesqueras en la Patagonia.</p>
+                            <p class="text-lg text-gray-900 font-bold">Hito 2025: Adquisición de Cabo Vírgenes</p>
+                            <p>En enero de 2025, concretamos la compra del grupo pesquero Cabo Vírgenes, una firma con 15 años de trayectoria en pesca, procesado y comercialización. Esto nos posiciona en la cadena global de mariscos premium.</p>
+                            <div class="flex gap-4 mt-4">
+                                <div class="px-4 py-2 bg-gray-100 rounded border border-black/5">Base: Chubut (Arg)</div>
+                                <div class="px-4 py-2 bg-gray-100 rounded border border-black/5">Base: Palencia (Esp)</div>
+                            </div>
+                        </div>
+                    `,
+                    'Infraestructura': `
+                        <div class="space-y-6 text-gray-600">
+                            <h3 class="text-2xl font-bold text-gray-900">Planta Argentina</h3>
+                            <p>Ubicada en Chubut, cuenta con más de <strong>10.000 m²</strong> de instalaciones modernas. Su capacidad de congelación alcanza las 60 toneladas/día, permitiendo una producción anual superior a las 10.000 toneladas con los más altos estándares de frescura y calidad.</p>
+                            <h3 class="text-2xl font-bold text-gray-900 mt-8">Hub Europa (Palencia)</h3>
+                            <p>Nuestro centro de operaciones en España coordina la logística internacional y comercialización. En algunos casos, realiza reprocesado para agregar valor al producto final antes de su distribución a más de 50 países.</p>
+                        </div>
+                    `,
+                    'Flota': `
+                         <div class="space-y-6 text-gray-600">
+                            <p>Operamos con una flota mixta de barcos propios y de terceros con abastecimiento exclusivo, garantizando el cumplimiento de la reglamentación internacional para la pesca de langostino austral.</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Barcos Fresqueros</li>
+                                <li>Barcos Congeladores</li>
+                            </ul>
+                            <div class="bg-[#22D3EE]/10 p-6 rounded-xl border border-[#22D3EE]/30 mt-6">
+                                <h4 class="font-bold text-[#0891B2] mb-2">Buque Insignia: Espartano</h4>
+                                <p class="text-sm">Destacamos el barco Espartano, con una capacidad de captura individual superior a las <strong>2.200 toneladas anuales</strong>.</p>
+                            </div>
+                        </div>
+                    `
+                }
+            },
+            {
+                id: 'carne',
+                title: 'Carne',
+                subtitle: 'Exportación de Vacuno',
+                color: '#DC2626', 
+                icon: 'fa-drumstick-bite',
+                status: 'Alta Demanda',
+                image: 'https://images.unsplash.com/photo-1615937657715-bc7b4b7962c1?q=80&w=2070&auto=format&fit=crop',
+                intro: 'Llevando la calidad de la carne argentina a más de 12 países mediante alianzas con los frigoríficos más importantes del país.',
+                metrics: [
+                    { label: 'Volumen Anual', value: '25k', unit: 'tons' },
+                    { label: 'Mercados', value: '12+', unit: 'países' },
+                    { label: 'Inicio Ops', value: '2022', unit: '' }
+                ],
+                tabs: ['Negocio'],
+                content: {
+                    'Negocio': `
+                        <div class="space-y-6 text-gray-600">
+                            <p class="text-lg leading-relaxed">En 2022 realizamos nuestra primera inversión estratégica en el sector de carne vacuna en Argentina, reconocido mundialmente por su calidad.</p>
+                            <p>Hoy, nuestras exportaciones superan las <strong>25.000 toneladas anuales</strong>, llegando a mesas en más de 12 países.</p>
+                            <div class="p-6 bg-gray-100 rounded-xl border-l-4 border-red-500">
+                                <h4 class="font-bold text-gray-900 mb-2">Modelo de Alianzas</h4>
+                                <p>No operamos solos. Colaboramos estrechamente con varios de los principales frigoríficos del país. Esto nos permite asegurar un suministro constante, mantener estándares de calidad premium y expandir nuestra red global de distribución de manera ágil.</p>
+                            </div>
+                        </div>
+                    `
+                }
+            },
+            {
+                id: 'agro',
+                title: 'Productos Agrícolas',
+                subtitle: 'Commodities y Valor Agregado',
+                color: '#EA580C', 
+                icon: 'fa-wheat-awn',
+                status: 'Global Supply',
+                image: 'https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=2568&auto=format&fit=crop',
+                intro: 'Socio estratégico confiable en la cadena global de suministro desde 2015. Vino, mosto, granos y aceites.',
+                metrics: [
+                    { label: 'Vino (China)', value: '20M', unit: 'L/año' },
+                    { label: 'Mosto', value: '7k', unit: 'tons/año' },
+                    { label: 'Cuota Mercado', value: '30%', unit: 'UE Central' }
+                ],
+                tabs: ['Trayectoria', 'Mercados'],
+                content: {
+                    'Trayectoria': `
+                        <div class="space-y-6 text-gray-600">
+                            <p>Desde 2015, nos hemos posicionado como un distribuidor de referencia en commodities agrícolas.</p>
+                            <ul class="space-y-4 mt-4">
+                                <li class="flex gap-3">
+                                    <span class="text-orange-600 font-bold">2017-2021:</span> 
+                                    Liderazgo en distribución de vino a granel en Europa Central, alcanzando más del 30% de la cuota de mercado en importaciones de la categoría.
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="text-orange-600 font-bold">2018:</span> 
+                                    Inicio de exportación de mosto de uva (~7.000 t/año) a distribuidores clave en Oriente Medio y América del Norte.
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="text-orange-600 font-bold">2020:</span> 
+                                    Expansión al mercado de granos en Asia y distribución de aceites vegetales desde Argentina a Europa.
+                                </li>
+                            </ul>
+                        </div>
+                    `,
+                    'Mercados': `
+                        <div class="space-y-6 text-gray-600">
+                            <h3 class="text-2xl font-bold text-gray-900">Foco en China y Medio Oriente</h3>
+                            <p>Desde 2019, colaboramos intensamente con importadores de vino en China, exportando aproximadamente <strong>20 millones de litros al año</strong>, principalmente de origen español y argentino.</p>
+                            <p>Nuestra red se extiende a América del Norte, Europa, Emiratos Árabes Unidos y Turquía, consolidándonos como un socio estratégico confiable en la seguridad alimentaria global.</p>
+                        </div>
+                    `
+                }
+            },
+            {
+                id: 'inmobiliario',
+                title: 'Inmobiliario',
+                subtitle: 'Desarrollo Urbano Premium',
+                color: '#9333EA', 
+                icon: 'fa-city',
+                status: 'En Desarrollo',
+                image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop',
+                intro: 'Proyecto "Sin Antecedentes" en la antigua Cinzano, San Juan: 6 hectáreas de regeneración urbana con vivienda, comercio y cultura.',
+                metrics: [
+                    { label: 'Terreno', value: '6', unit: 'Ha' },
+                    { label: 'Viviendas', value: '200', unit: 'unidades' },
+                    { label: 'Comercio', value: '70+', unit: 'locales' }
+                ],
+                tabs: ['El Proyecto', 'Componentes'],
+                content: {
+                    'El Proyecto': `
+                        <div class="space-y-6 text-gray-600">
+                            <p class="text-lg">En 2024 adquirimos un terreno de más de 6 hectáreas en la mejor zona residencial y comercial de la capital de San Juan: la <strong>Antigua Cinzano</strong>. Se trata de un desarrollo sin antecedentes en la región que recupera un ícono histórico.</p>
+                            <div class="p-6 bg-gray-100 rounded-xl border border-black/5 mt-6">
+                                <h4 class="font-bold text-purple-600 mb-2">Diseño de Clase Mundial</h4>
+                                <p class="text-sm">La arquitectura está a cargo de los mejores arquitectos locales en colaboración con un prestigioso estudio europeo, con el objetivo de dotar al complejo de un estilo único que destaque por su funcionalidad y buen gusto.</p>
+                            </div>
+                        </div>
+                    `,
+                    'Componentes': `
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600">
+                            <div class="p-4 bg-gray-100 rounded-lg hover:bg-purple-100 transition-colors">
+                                <i class="fa-solid fa-house mb-2 text-purple-600"></i>
+                                <h4 class="font-bold text-gray-900">Vivienda Premium</h4>
+                                <p class="text-sm">160–200 unidades residenciales.</p>
+                            </div>
+                            <div class="p-4 bg-gray-100 rounded-lg hover:bg-purple-100 transition-colors">
+                                <i class="fa-solid fa-store mb-2 text-purple-600"></i>
+                                <h4 class="font-bold text-gray-900">Centro Comercial</h4>
+                                <p class="text-sm">Más de 70 locales comerciales.</p>
+                            </div>
+                            <div class="p-4 bg-gray-100 rounded-lg hover:bg-purple-100 transition-colors">
+                                <i class="fa-solid fa-utensils mb-2 text-purple-600"></i>
+                                <h4 class="font-bold text-gray-900">Gastronomía & Cultura</h4>
+                                <p class="text-sm">Polo gastronómico para revalorizar el patrimonio histórico y un Museo.</p>
+                            </div>
+                            <div class="p-4 bg-gray-100 rounded-lg hover:bg-purple-100 transition-colors">
+                                <i class="fa-solid fa-hotel mb-2 text-purple-600"></i>
+                                <h4 class="font-bold text-gray-900">Hotel & Negocios</h4>
+                                <p class="text-sm">Sector de oficinas y hotelería.</p>
+                            </div>
+                        </div>
+                    `
+                }
+            }
+        ];
+
+        // --- RENDER GRID ---
+        const gridContainer = document.getElementById('units-grid');
+        
+        units.forEach(unit => {
+            const card = document.createElement('div');
+            card.className = 'unit-card rounded-[2rem] group';
+            card.style.setProperty('--theme-color', unit.color);
+            card.onclick = () => openHud(unit);
+            card.innerHTML = `
+                <img src="${unit.image}" class="card-img w-full h-full object-cover absolute inset-0">
+                <div class="absolute inset-0 p-8 flex flex-col justify-between z-20">
+                    <div class="flex justify-between items-start">
+                        <div class="w-14 h-14 rounded-2xl bg-white/60 backdrop-blur border border-white/40 flex items-center justify-center text-2xl shadow-sm" style="color: ${unit.color}">
+                            <i class="fa-solid ${unit.icon}"></i>
+                        </div>
+                        <div class="px-3 py-1 rounded-full bg-white/80 border border-white/50 text-[10px] uppercase font-bold tracking-wider text-gray-900 shadow-sm">
+                            ${unit.status}
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-display font-bold text-gray-900 mb-1 group-hover:translate-x-2 transition-transform duration-300 drop-shadow-sm">${unit.title}</h3>
+                        <p class="text-xs text-gray-600 uppercase tracking-widest mb-6 border-l-2 pl-3 font-semibold" style="border-color: ${unit.color}">${unit.subtitle}</p>
+                        <div class="grid grid-cols-3 gap-2 border-t border-black/10 pt-4">
+                            ${unit.metrics.map(m => `
+                                <div>
+                                    <div class="text-lg font-bold text-gray-800">${m.value}</div>
+                                    <div class="text-[9px] text-gray-500 uppercase">${m.label.split(' ')[0]}</div>
+                                </div>
+                            `).slice(0,3).join('')}
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[${unit.color}] to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity"></div>
+            `;
+            gridContainer.appendChild(card);
+        });
+
+        // --- HUD LOGIC ---
+        function openHud(unit) {
+            const overlay = document.getElementById('hud-overlay');
+            const iconBox = document.getElementById('hud-icon-box');
+            
+            // Set Header
+            document.getElementById('hud-title').innerText = unit.title;
+            document.getElementById('hud-title').style.color = unit.color;
+            document.getElementById('hud-subtitle').innerText = unit.subtitle;
+            
+            iconBox.style.backgroundColor = unit.color;
+            iconBox.style.color = 'white';
+            iconBox.innerHTML = `<i class="fa-solid ${unit.icon}"></i>`;
+
+            // Set Hero
+            document.getElementById('hud-hero-img').src = unit.image;
+            document.getElementById('hud-intro').innerText = unit.intro;
+            document.getElementById('hud-status').innerText = unit.status;
+
+            // Set Metrics Sidebar
+            const metricsContainer = document.getElementById('hud-metrics');
+            metricsContainer.innerHTML = unit.metrics.map(m => `
+                <div class="relative">
+                    <div class="flex justify-between items-end mb-2">
+                        <span class="text-sm text-gray-500 uppercase tracking-wider">${m.label}</span>
+                        <span class="text-2xl font-bold" style="color:${unit.color}">${m.value} <span class="text-sm text-gray-400">${m.unit}</span></span>
+                    </div>
+                    <div class="h-1 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div class="h-full rounded-full w-full animate-pulse-fast" style="background-color: ${unit.color}; width: ${Math.random() * 40 + 60}%"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Set Tabs & Content
+            const tabsContainer = document.getElementById('hud-tabs');
+            const contentArea = document.getElementById('hud-content-area');
+            
+            tabsContainer.innerHTML = '';
+            contentArea.innerHTML = '';
+
+            unit.tabs.forEach((tabName, index) => {
+                // Create Tab
+                const tab = document.createElement('div');
+                tab.className = `hud-tab ${index === 0 ? 'active' : ''}`;
+                tab.innerText = tabName;
+                tab.style.setProperty('--theme-color', unit.color);
+                tab.onclick = () => switchTab(index, unit);
+                tabsContainer.appendChild(tab);
+
+                // Create Content Section (Hidden by default except first)
+                const contentDiv = document.createElement('div');
+                contentDiv.id = `tab-content-${index}`;
+                contentDiv.className = index === 0 ? 'block animate-fade-in' : 'hidden';
+                contentDiv.innerHTML = unit.content[tabName];
+                contentArea.appendChild(contentDiv);
+            });
+
+            // Show HUD
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function switchTab(index, unit) {
+            // Update Tabs UI
+            const tabs = document.querySelectorAll('.hud-tab');
+            tabs.forEach((t, i) => {
+                if(i === index) t.classList.add('active');
+                else t.classList.remove('active');
+            });
+
+            // Show Content
+            const contents = document.querySelectorAll('#hud-content-area > div');
+            contents.forEach((c, i) => {
+                if(i === index) {
+                    c.classList.remove('hidden');
+                    c.classList.add('animate-fade-in'); 
+                } else {
+                    c.classList.add('hidden');
+                    c.classList.remove('animate-fade-in');
+                }
+            });
+        }
+
+        function closeHud() {
+            document.getElementById('hud-overlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') {
+                closeHud();
+                closeContactModal();
+            }
+        });
+
+        // --- THEME TOGGLE LOGIC ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.theme === 'dark') {
+             htmlElement.classList.add('dark');
+        } else {
+             htmlElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+        });
+
+        // --- CONTACT MODAL LOGIC ---
+        const contactModal = document.getElementById('contact-modal');
+        const closeContactBtn = document.getElementById('close-contact');
+        const contactOverlay = document.getElementById('contact-modal-overlay');
+
+        function openContactModal(e) {
+            if(e) e.preventDefault();
+            contactModal.classList.remove('hidden');
+        }
+
+        function closeContactModal() {
+            contactModal.classList.add('hidden');
+        }
+
+        if(closeContactBtn) closeContactBtn.addEventListener('click', closeContactModal);
+        if(contactOverlay) contactOverlay.addEventListener('click', closeContactModal);
+</script>
+    <script>
+        // MOBILE MENU INIT
+        (function () {
+            function initMobileMenu() {
+                const toggleBtn = document.getElementById('nav-toggle');
+                const navMenu = document.getElementById('nav-menu');
+
+                const resetMenuForDesktop = () => {
+                    if (window.innerWidth >= 1024 && navMenu) {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove(
+                            'flex',
+                            'flex-col',
+                            'items-center',
+                            'text-center',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'rounded-3xl',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    }
+                };
+
+                if (!toggleBtn || !navMenu) return;
+
+                resetMenuForDesktop();
+                window.addEventListener('resize', resetMenuForDesktop);
+
+                toggleBtn.addEventListener('click', () => {
+                    const isHidden = navMenu.classList.contains('hidden');
+
+                    if (isHidden) {
+                        navMenu.classList.remove('hidden');
+                        navMenu.classList.add(
+                            'flex',
+                            'flex-col',
+                            'items-center',
+                            'text-center',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'rounded-3xl',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    } else {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove(
+                            'flex',
+                            'flex-col',
+                            'items-center',
+                            'text-center',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'rounded-3xl',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenu);
+            } else {
+                initMobileMenu();
+            }
+        })();
+    </script>
+
+</body>
+</html>
