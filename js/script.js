@@ -127,27 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Modo oscuro y tema
-const themeBtn = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
-
-// Determina el tema inicial según localStorage o valor por defecto
-if (!localStorage.theme) {
-    htmlElement.classList.add('dark');
-} else if (localStorage.theme === 'dark') {
-    htmlElement.classList.add('dark');
-} else {
-    htmlElement.classList.remove('dark');
-}
-
-// Maneja el click en el botón para alternar el tema
-if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-        htmlElement.classList.toggle('dark');
-        localStorage.theme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
-    });
-}
-
 // Efecto parallax en el fondo del héroe
 const heroBg = document.getElementById('hero-bg');
 const navbar = document.getElementById('navbar');

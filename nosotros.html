@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="dark scroll-smooth">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+    <script>
+        (function() {
+            const storedTheme = localStorage.theme;
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -24,6 +34,11 @@
                         display: ['"Montserrat"', 'sans-serif'],
                     },
                     colors: {
+                        light: {
+                            bg: '#FAFAFA',
+                            surface: '#FFFFFF',
+                            panel: '#F3F4F6',
+                        },
                         dark: {
                             bg: '#000000',
                             surface: '#050505',
@@ -288,9 +303,9 @@
 </head>
 <body class="antialiased selection:bg-accent-gold selection:text-black">
 
-    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
-        <i class="fa-solid fa-moon dark:hidden"></i>
-        <i class="fa-solid fa-sun hidden dark:block"></i>
+    <button id="theme-toggle" aria-label="Cambiar tema" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+        <i class="fa-solid fa-moon hidden"></i>
+        <i class="fa-solid fa-sun hidden"></i>
     </button>
 
     <div id="cursor" class="hidden md:block"></div>
@@ -977,24 +992,6 @@
             }, 300);
         }
 
-        // --- THEME TOGGLE LOGIC ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            if (htmlElement.classList.contains('dark')) {
-                localStorage.theme = 'dark';
-            } else {
-                localStorage.theme = 'light';
-            }
-        });
 
         // --- CONTACT MODAL LOGIC ---
         const contactModal = document.getElementById('contact-modal');
@@ -1105,5 +1102,6 @@
         })();
     </script>
 
+    <script src="js/theme-toggle.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth dark">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +17,17 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Tailwind CSS -->
+    <script>
+        (function() {
+            const storedTheme = localStorage.theme;
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         // Configuración de Tailwind para colores y fuentes base utilizados en el sitio
@@ -29,6 +40,11 @@
                         display: ['"Montserrat"', 'sans-serif'],
                     },
                     colors: {
+                        light: {
+                            bg: '#FAFAFA',
+                            surface: '#FFFFFF',
+                            panel: '#F3F4F6',
+                        },
                         dark: {
                             bg: '#050505',
                             surface: '#0F0F0F',
@@ -802,13 +818,7 @@
             }
         })();
 
-        // Tema: activar modo oscuro según preferencia
-        const htmlElement = document.documentElement;
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
     </script>
+    <script src="js/theme-toggle.js"></script>
 </body>
 </html>

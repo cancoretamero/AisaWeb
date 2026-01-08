@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-    <html lang="es" class="scroll-smooth dark">
+    <html lang="es" class="scroll-smooth">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +12,18 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-        <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        (function() {
+            const storedTheme = localStorage.theme;
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
         <script>
             tailwind.config = {
@@ -25,6 +35,11 @@
                             display: ['"Montserrat"', 'sans-serif'],
                         },
                         colors: {
+                        light: {
+                            bg: '#FAFAFA',
+                            surface: '#FFFFFF',
+                            panel: '#F3F4F6',
+                        },
                             dark: {
                                 bg: '#050505',
                                 surface: '#0F0F0F',
@@ -175,9 +190,9 @@
     </head>
     <body class="antialiased selection:bg-accent-gold selection:text-black">
 
-        <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg">
-            <i class="fa-solid fa-moon dark:hidden"></i>
-            <i class="fa-solid fa-sun hidden dark:block"></i>
+        <button id="theme-toggle" aria-label="Cambiar tema" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg">
+            <i class="fa-solid fa-moon hidden"></i>
+            <i class="fa-solid fa-sun hidden"></i>
         </button>
 
         <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
@@ -243,7 +258,7 @@
                         <div class="overflow-hidden whitespace-nowrap mask-linear-fade w-full">
                             <div class="inline-block animate-ticker text-xs font-medium text-gray-300 flex items-center gap-12">
                                 <span class="flex items-center gap-2"><i class="fa-solid fa-bolt text-accent-gold"></i> Aisa Group adhiere al RIGI con una inversión histórica de USD 1.000M en San Juan.</span>
-                                <span class="flex items-center gap-2"><i class="fa-solid fa-sun text-accent-gold"></i> Comienza la construcción del Parque Solar Calicanto (51 MW) en San Luis.</span>
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-sun hidden"></i> Comienza la construcción del Parque Solar Calicanto (51 MW) en San Luis.</span>
                                 <span class="flex items-center gap-2"><i class="fa-solid fa-globe text-accent-gold"></i> Aisa Group en el Argentina-UK Summit: "Inversión con propósito".</span>
                                 <span class="flex items-center gap-2"><i class="fa-solid fa-fish text-accent-gold"></i> Adquisición estratégica de pesquera Cabo Vírgenes completada.</span>
                                 <span class="flex items-center gap-2"><i class="fa-solid fa-bolt text-accent-gold"></i> Aisa Group adhiere al RIGI con una inversión histórica de USD 1.000M en San Juan.</span>
@@ -808,25 +823,6 @@
                 });
             });
 
-            // --- THEME TOGGLE LOGIC (Del Index) ---
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const htmlElement = document.documentElement;
-
-            // Check local storage or system preference
-            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                htmlElement.classList.add('dark');
-            } else {
-                htmlElement.classList.remove('dark');
-            }
-
-            themeToggleBtn.addEventListener('click', () => {
-                htmlElement.classList.toggle('dark');
-                if (htmlElement.classList.contains('dark')) {
-                    localStorage.theme = 'dark';
-                } else {
-                    localStorage.theme = 'light';
-                }
-            });
 
             // --- CONTACT MODAL LOGIC (Del Index - Adaptado) ---
             const contactModal = document.getElementById('contact-modal');
@@ -1134,5 +1130,6 @@
             })();
         </script>
 
-    </body>
+        <script src="js/theme-toggle.js"></script>
+</body>
     </html>
