@@ -1,0 +1,1070 @@
+QUIENES SOMOS LIGHT
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiénes Somos | Aisa Group</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Poppins"', 'sans-serif'],
+                        display: ['"Montserrat"', 'sans-serif'],
+                    },
+                    colors: {
+                        light: { bg: '#FAFAFA', surface: '#FFFFFF', panel: '#F3F4F6' },
+                        accent: {
+                            gold: '#EAB308', // Gold ajustado para light mode
+                            goldGlow: '#F59E0B',
+                            emerald: '#059669', // Emerald ajustado
+                            emeraldGlow: '#10B981',
+                            purple: '#7C3AED', // Purple ajustado
+                            purpleGlow: '#8B5CF6',
+                            blue: '#2563EB', // Blue ajustado
+                            blueGlow: '#3B82F6',
+                            orange: '#EA580C' // Orange ajustado
+                        }
+                    },
+                    backgroundImage: {
+                        'glass-strong': 'linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4))',
+                        'glass-light': 'linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6))',
+                        'gold-gradient': 'linear-gradient(to right, #CA8A04, #EAB308, #F59E0B)',
+                        'purple-gradient': 'linear-gradient(to right, #6D28D9, #7C3AED, #8B5CF6)',
+                        'emerald-gradient': 'linear-gradient(to right, #047857, #059669, #10B981)',
+                        'radial-glow': 'radial-gradient(circle at center, rgba(234, 179, 8, 0.15) 0%, transparent 70%)',
+                        'frost-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1))',
+                    },
+                    animation: {
+                        'spin-slow': 'spin 40s linear infinite',
+                        'spin-slow-reverse': 'spin 50s linear infinite reverse',
+                        'counter-spin': 'spin 40s linear infinite reverse', 
+                        'counter-spin-reverse': 'spin 50s linear infinite',
+                        'pulse-glow': 'pulseGlow 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'text-shimmer': 'textShimmer 3s ease-out infinite alternate',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        spin: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 1, filter: 'brightness(100%)' },
+                            '50%': { opacity: 0.8, filter: 'brightness(110%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        textShimmer: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '100%': { backgroundPosition: '100% 50%' },
+                        }
+                    },
+                    backdropBlur: {
+                        'xl': '24px',
+                        '2xl': '40px',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- CORE STYLES --- */
+        body {
+            background-color: #FAFAFA;
+            color: #1F2937;
+            overflow-x: hidden;
+            cursor: none; /* Custom cursor maintained */
+        }
+
+        /* Custom Cursor - Inverted colors for Light Mode visibility */
+        #cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 20px; height: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.5); /* Dark border */
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background 0.3s;
+            mix-blend-mode: normal; /* Changed from difference for better visibility on white */
+            background-color: rgba(234, 179, 8, 0.2); /* Slight tint */
+        }
+        #cursor.hovered {
+            width: 50px; height: 50px;
+            background: rgba(234, 179, 8, 0.1);
+            border-color: #EAB308;
+        }
+
+        /* --- SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F3F4F6; }
+        ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #EAB308; }
+
+        /* --- GLASSMORPHISM & NAVBAR STYLES (Light Mode) --- */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apple Glass Style (Para el Navbar Maestro) */
+        .glass-apple {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(234, 179, 8, 0.3);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- TEXT EFFECTS --- */
+        .text-gradient-gold {
+            background: linear-gradient(to bottom, #EAB308, #CA8A04);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-emerald {
+            background: linear-gradient(to right, #059669, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- ORBITAL SYSTEM (Light Mode Fixes) --- */
+        .orbit-container-static {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px dashed rgba(0, 0, 0, 0.1); /* Darker dash for visibility */
+            pointer-events: none; 
+        }
+
+        .orbit-spinner {
+            width: 100%; height: 100%;
+            position: relative;
+        }
+
+        .planet-wrapper {
+            position: absolute;
+            width: 0; height: 0;
+            pointer-events: auto; 
+        }
+
+        .planet-node {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: #FFFFFF; /* White planet */
+            border: 2px solid rgba(0,0,0,0.1);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 20;
+            transform: translate(-50%, -50%); 
+        }
+
+        .planet-wrapper:hover ~ .orbit-spinner, 
+        .orbit-spinner:has(.planet-wrapper:hover) {
+            animation-play-state: paused !important;
+        }
+        
+        .planet-wrapper:hover .counter-rotate {
+            animation-play-state: paused !important;
+        }
+
+        .planet-node:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            border-color: #EAB308;
+            box-shadow: 0 0 30px rgba(234, 179, 8, 0.2);
+            z-index: 30;
+        }
+
+        /* Info Card Style - Light */
+        .info-card {
+            position: absolute;
+            bottom: 60px; 
+            left: 50%;
+            transform: translateX(-50%) translateY(20px) scale(0.9);
+            width: 280px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            pointer-events: none;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .info-card::after {
+            content: '';
+            position: absolute;
+            top: 100%; left: 50%;
+            margin-left: -8px;
+            border-width: 8px;
+            border-style: solid;
+            border-color: rgba(255,255,255,0.95) transparent transparent transparent;
+        }
+
+        .planet-node:hover + .info-card {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+
+        /* --- TIMELINE CINEMATIC --- */
+        .cine-timeline-item {
+            position: relative;
+            min-height: 90vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background-color: #FAFAFA;
+        }
+
+        .cine-bg { position: absolute; inset: 0; z-index: 0; }
+        .cine-bg img {
+            width: 100%; height: 100%; object-fit: cover; opacity: 0.15; /* Lighter opacity for light mode */
+            transform: scale(1.1); transition: transform 10s linear;
+            filter: grayscale(100%); /* Optional: keep cinematic feel but cleaner */
+        }
+        .cine-timeline-item:hover .cine-bg img { transform: scale(1); opacity: 0.25; }
+        .cine-content { position: relative; z-index: 10; max-width: 1400px; width: 100%; padding: 2rem; }
+
+        /* --- FLOATING PARTICLES --- */
+        #particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        
+        /* Noise reduced for light mode */
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9998; opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* --- MODAL UTILS (Para Contacto) --- */
+        .modal-overlay-global { opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .modal-overlay-global.active { opacity: 1; visibility: visible; }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent-gold selection:text-white">
+
+    <button id="theme-toggle" class="fixed bottom-8 right-8 z-[100] w-12 h-12 rounded-full glass-apple flex items-center justify-center text-lg text-accent-gold hover:scale-110 transition-transform cursor-pointer shadow-lg" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+        <i class="fa-solid fa-moon hidden dark:block"></i>
+        <i class="fa-solid fa-sun dark:hidden"></i>
+    </button>
+
+    <div id="cursor" class="hidden md:block"></div>
+
+    <div id="particles-container"></div>
+    <div class="noise-overlay"></div>
+
+    <nav id="navbar" class="fixed top-4 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-[1400px] mx-auto px-2">
+            <div class="glass-apple rounded-full px-6 py-3 flex justify-between items-center shadow-xl">
+                
+                <a href="index.html" class="flex items-center group cursor-pointer" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <!-- Inverted Logo -->
+                    <img src="images/aisa-logo.svg" alt="Aisa Group Logo" class="h-8 w-auto filter brightness-0" />
+                </a>
+
+                <div id="nav-menu" class="hidden lg:flex items-center gap-1 lg:static lg:bg-transparent lg:backdrop-blur-none">
+                    <a href="index.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-black/5 transition-all text-gray-600" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Inicio</a>
+                    <div class="relative group">
+                        <a href="nosotros.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest flex items-center gap-1 hover:bg-black/5 transition-all text-accent-gold" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                            Nosotros <i class="fa-solid fa-chevron-down text-[8px]"></i>
+                        </a>
+                        <div class="mt-2 flex flex-col gap-2 lg:hidden">
+                            <a href="quienes-somos.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-600 hover:text-accent-gold transition-colors">Quienes Somos</a>
+                            <a href="equipo.html" class="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-gray-600 hover:text-accent-gold transition-colors">El Equipo</a>
+                        </div>
+                        <div class="absolute left-0 mt-2 w-48 glass-apple rounded-xl py-2 opacity-0 scale-95 lg:group-hover:opacity-100 lg:group-hover:scale-100 transition-all origin-top-left z-50 hidden lg:block lg:group-hover:block">
+                            <a href="quienes-somos.html" class="block px-4 py-2 text-[11px] text-accent-gold uppercase tracking-widest hover:text-gray-900 transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Quienes Somos</a>
+                            <a href="equipo.html" class="block px-4 py-2 text-[11px] text-gray-600 uppercase tracking-widest hover:text-accent-gold transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">El Equipo</a>
+                        </div>
+                    </div>
+                    <a href="unidades.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-gray-600 hover:bg-black/5 transition-all" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Unidades</a>
+                    <a href="sostenibilidad.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-gray-600 hover:bg-black/5 transition-all" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Sostenibilidad &amp; ESG</a>
+                    <a href="prensa.html" class="px-5 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest text-gray-600 hover:bg-black/5 transition-all" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">Prensa</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="#" id="nav-contact-btn" onclick="openContactModal(event)" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-hoverboard bg-gray-900 text-white hover:bg-accent-gold hover:text-black text-[10px] font-bold uppercase tracking-widest shadow-lg transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                        Contacto <i class="fa-solid fa-arrow-right -rotate-45"></i>
+                    </a>
+                    <button id="nav-toggle" class="lg:hidden text-xl text-gray-800 px-2"><i class="fa-solid fa-bars-staggered"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0 bg-[#FAFAFA]">
+            <!-- White radial gradient fusion similar to Sostenibilidad page -->
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,white_0%,#FAFAFA_70%,#FAFAFA_100%)] z-10"></div>
+            <!-- Very faint background image -->
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" class="w-full h-full object-cover opacity-5 grayscale animate-pulse-slow" alt="World Connection">
+        </div>
+
+        <div class="relative z-30 max-w-[1600px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right" data-aos-duration="1200">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-accent-gold/30 bg-accent-gold/10 backdrop-blur-md mb-8">
+                    <span class="w-2 h-2 rounded-full bg-accent-gold animate-ping"></span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-yellow-700">Grupo Familiar de Inversión</span>
+                </div>
+
+                <h1 class="font-display text-6xl md:text-8xl font-black text-gray-900 mb-8 leading-[0.9] tracking-tighter">
+                    TRANSFORMAR <br>
+                    <span class="text-transparent bg-clip-text bg-gold-gradient drop-shadow-sm">EL PRESENTE</span>
+                </h1>
+
+                <p class="text-xl text-gray-500 font-light max-w-xl leading-relaxed mb-12 border-l-2 border-accent-gold pl-6">
+                    Combinamos la solidez de la tradición con la agilidad de un holding moderno. Invertimos con convicción en proyectos que <strong class="text-gray-900">trascienden generaciones</strong> y redefinen industrias.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#historia" class="px-8 py-4 bg-accent-gold text-white rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-lg flex items-center gap-2 hover:bg-yellow-600" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                        <i class="fa-solid fa-play"></i> Ver Historia
+                    </a>
+                    <a href="#orbital" class="px-8 py-4 glass-panel text-gray-800 rounded-full font-bold uppercase tracking-widest hover:bg-white transition-colors flex items-center gap-2" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                        <i class="fa-solid fa-atom"></i> Estrategia Orbital
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                <div class="glass-card p-8 rounded-3xl bg-gradient-to-br from-white to-transparent hover:border-accent-gold" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <i class="fa-solid fa-earth-americas text-4xl text-accent-gold mb-4 animate-float"></i>
+                    <h3 class="text-4xl font-display font-bold text-gray-900 mb-1">Global</h3>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest">Presencia Operativa</p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl bg-gradient-to-br from-white to-transparent mt-12 hover:border-accent-emerald" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <i class="fa-solid fa-chart-line text-4xl text-accent-emerald mb-4 animate-float" style="animation-delay: 1s;"></i>
+                    <h3 class="text-4xl font-display font-bold text-gray-900 mb-1">$1.6B</h3>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest">Pipeline de Inversión</p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl bg-gradient-to-br from-white to-transparent hover:border-accent-purple" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <i class="fa-solid fa-users-rays text-4xl text-accent-purple mb-4 animate-float" style="animation-delay: 2s;"></i>
+                    <h3 class="text-4xl font-display font-bold text-gray-900 mb-1">1000+</h3>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest">Empleos Generados</p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl bg-gradient-to-br from-white to-transparent mt-12 hover:border-accent-blue" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <i class="fa-regular fa-clock text-4xl text-accent-blue mb-4 animate-float" style="animation-delay: 3s;"></i>
+                    <h3 class="text-4xl font-display font-bold text-gray-900 mb-1">20+</h3>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest">Años de Trayectoria</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 animate-bounce">
+            <div class="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center p-1">
+                <div class="w-1 h-3 bg-accent-gold rounded-full animate-ping"></div>
+            </div>
+        </div>
+    </header>
+
+    <section id="orbital" class="py-32 bg-[#FAFAFA] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.05),transparent_70%)]"></div>
+        
+        <div class="max-w-[1600px] mx-auto px-6 relative z-10">
+            <div class="text-center mb-24" data-aos="fade-up">
+                <span class="text-accent-purple font-bold tracking-[0.3em] text-xs uppercase mb-4 block">Nuestro Núcleo</span>
+                <h2 class="font-display text-5xl md:text-7xl font-bold text-gray-900 mb-6">Estrategia <span class="text-transparent bg-clip-text bg-purple-gradient">Orbital</span></h2>
+                <p class="text-gray-500 max-w-2xl mx-auto text-lg">
+                    Un sistema gravitacional donde el Propósito es el centro que irradia capital, cultura y visión a todas las unidades operativas.
+                </p>
+            </div>
+
+            <div class="flex justify-center items-center h-[800px] relative orbit-system-container" data-aos="zoom-in" data-aos-duration="1500">
+                
+                <div class="absolute z-20 w-56 h-56 rounded-full bg-gradient-to-br from-accent-gold via-orange-400 to-red-500 shadow-[0_0_50px_rgba(255,165,0,0.3)] flex items-center justify-center group cursor-pointer hover:scale-105 transition-transform duration-500" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <div class="absolute inset-0 rounded-full border border-white/40 animate-pulse opacity-60"></div>
+                    <div class="text-center z-10 p-6">
+                        <img src="images/aisa-logo.svg" class="h-10 brightness-0 invert mx-auto mb-3" alt="Aisa">
+                        <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-1">Propósito</h3>
+                        <p class="text-[10px] text-white/90 leading-tight">Transformar el Presente</p>
+                    </div>
+                </div>
+
+                <div class="orbit-container-static w-[450px] h-[450px]">
+                    <div class="orbit-spinner animate-spin-slow">
+                        <div class="planet-wrapper" style="top: 0; left: 50%;">
+                            <div class="counter-rotate animate-counter-spin">
+                                <div class="planet-node border-accent-emerald shadow-[0_0_20px_rgba(16,185,129,0.2)] bg-white" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                                    <i class="fa-solid fa-mountain text-3xl text-accent-emerald"></i>
+                                </div>
+                                <div class="info-card">
+                                    <div class="flex items-center gap-3 mb-3 border-b border-gray-200 pb-2">
+                                        <div class="w-8 h-8 rounded bg-emerald-100 flex items-center justify-center text-accent-emerald"><i class="fa-regular fa-gem"></i></div>
+                                        <div>
+                                            <h4 class="text-accent-emerald font-bold text-sm uppercase">Minería Regenerativa</h4>
+                                            <p class="text-[10px] text-gray-500">San Juan, Argentina</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-600 leading-relaxed">Extracción responsable en Gualcamayo mediante el proyecto Carbonatos Profundos.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="planet-wrapper" style="top: 100%; left: 50%;">
+                            <div class="counter-rotate animate-counter-spin">
+                                <div class="planet-node border-accent-gold shadow-[0_0_20px_rgba(255,215,0,0.2)] bg-white" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                                    <i class="fa-solid fa-bolt text-3xl text-accent-gold"></i>
+                                </div>
+                                <div class="info-card">
+                                    <div class="flex items-center gap-3 mb-3 border-b border-gray-200 pb-2">
+                                        <div class="w-8 h-8 rounded bg-yellow-100 flex items-center justify-center text-accent-gold"><i class="fa-solid fa-solar-panel"></i></div>
+                                        <div>
+                                            <h4 class="text-accent-gold font-bold text-sm uppercase">Energía Limpia</h4>
+                                            <p class="text-[10px] text-gray-500">San Luis, Argentina</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-600 leading-relaxed">Liderando la transición energética con Calicanto Solar (51 MW) y plan RIGI de 1000 MW.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="orbit-container-static w-[800px] h-[800px]">
+                    <div class="orbit-spinner animate-spin-slow-reverse">
+                        <div class="planet-wrapper" style="top: 25%; left: 6.7%;">
+                            <div class="counter-rotate animate-counter-spin-reverse">
+                                <div class="planet-node border-accent-blue shadow-[0_0_20px_rgba(59,130,246,0.2)] bg-white" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                                    <i class="fa-solid fa-fish text-2xl text-accent-blue"></i>
+                                </div>
+                                <div class="info-card">
+                                    <div class="flex items-center gap-3 mb-3 border-b border-gray-200 pb-2">
+                                        <div class="w-8 h-8 rounded bg-blue-100 flex items-center justify-center text-accent-blue"><i class="fa-solid fa-water"></i></div>
+                                        <div>
+                                            <h4 class="text-accent-blue font-bold text-sm uppercase">Pesca Sostenible</h4>
+                                            <p class="text-[10px] text-gray-500">Chubut & España</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-600 leading-relaxed">Operaciones pesqueras de altura a través de Cabo Vírgenes, garantizando calidad de exportación.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="planet-wrapper" style="top: 75%; left: 93.3%;">
+                            <div class="counter-rotate animate-counter-spin-reverse">
+                                <div class="planet-node border-accent-purple shadow-[0_0_20px_rgba(139,92,246,0.2)] bg-white" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                                    <i class="fa-solid fa-city text-2xl text-accent-purple"></i>
+                                </div>
+                                <div class="info-card">
+                                    <div class="flex items-center gap-3 mb-3 border-b border-gray-200 pb-2">
+                                        <div class="w-8 h-8 rounded bg-purple-100 flex items-center justify-center text-accent-purple"><i class="fa-solid fa-building-columns"></i></div>
+                                        <div>
+                                            <h4 class="text-accent-purple font-bold text-sm uppercase">Real Estate</h4>
+                                            <p class="text-[10px] text-gray-500">San Juan Capital</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-600 leading-relaxed">Recuperación patrimonial del predio histórico Cinzano. Desarrollo urbano y cultural.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="planet-wrapper" style="top: 25%; left: 93.3%;">
+                            <div class="counter-rotate animate-counter-spin-reverse">
+                                <div class="planet-node border-accent-orange shadow-[0_0_20px_rgba(249,115,22,0.2)] bg-white" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                                    <i class="fa-solid fa-ship text-2xl text-accent-orange"></i>
+                                </div>
+                                <div class="info-card">
+                                    <div class="flex items-center gap-3 mb-3 border-b border-gray-200 pb-2">
+                                        <div class="w-8 h-8 rounded bg-orange-100 flex items-center justify-center text-accent-orange"><i class="fa-solid fa-earth-asia"></i></div>
+                                        <div>
+                                            <h4 class="text-accent-orange font-bold text-sm uppercase">Global Trading</h4>
+                                            <p class="text-[10px] text-gray-500">Mercados Globales</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-gray-600 leading-relaxed">Comercialización estratégica de commodities: soja, aceites, carnes y vinos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="historia" class="relative bg-[#FAFAFA]">
+        
+        <div class="cine-timeline-item">
+            <div class="cine-bg"><img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=2070&auto=format&fit=crop" alt="Vino"></div>
+            <!-- Overlay blanco suave para legibilidad -->
+            <div class="absolute inset-0 bg-white/70"></div>
+            <div class="cine-content grid grid-cols-1 md:grid-cols-2 gap-16 items-center" data-aos="fade-up">
+                <div>
+                    <span class="text-9xl font-display font-black text-gray-200 absolute -top-20 -left-10 z-0">2000s</span>
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6 relative z-10">Un Comienzo Audaz</h2>
+                    <div class="w-20 h-1 bg-accent-gold mb-8 relative z-10"></div>
+                    <p class="text-lg text-gray-600 leading-relaxed relative z-10 border-l-2 border-accent-gold pl-6">
+                        Nuestra historia comienza hace más de dos décadas. Nuestro objetivo era introducir vino embotellado con origen en Castilla-La Mancha (España) en el mercado chino, un hito que en aquel entonces era poco común en el comercio entre ambos países. Se lograron cerrar contratos para la exportación de millones de botellas, marcando el inicio de lo que sería un gran éxito familiar.
+                    </p>
+                </div>
+                <div class="glass-panel p-8 rounded-3xl border border-black/5 transform hover:scale-105 transition-transform duration-500">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-accent-gold rounded-full flex items-center justify-center text-white text-2xl"><i class="fa-solid fa-wine-glass"></i></div>
+                        <div>
+                            <h4 class="text-gray-900 font-bold text-xl">Castilla-La Mancha</h4>
+                            <p class="text-xs text-gray-500 uppercase tracking-widest">El Origen</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-100 p-4 rounded-xl text-center">
+                            <span class="block text-2xl font-bold text-yellow-600 mb-1">China</span>
+                            <span class="text-[10px] text-gray-500 uppercase">Mercado Objetivo</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-xl text-center">
+                            <span class="block text-2xl font-bold text-gray-800 mb-1">Millones</span>
+                            <span class="text-[10px] text-gray-500 uppercase">Botellas Exportadas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cine-timeline-item">
+            <div class="cine-bg"><img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2070&auto=format&fit=crop" alt="Logistica"></div>
+            <div class="absolute inset-0 bg-white/70"></div>
+            <div class="cine-content grid grid-cols-1 md:grid-cols-2 gap-16 items-center" data-aos="fade-up">
+                <div class="order-2 md:order-1 glass-panel p-8 rounded-3xl border border-black/5">
+                    <h4 class="text-gray-900 font-bold text-lg mb-6 flex items-center"><i class="fa-solid fa-plane-departure mr-3 text-accent-blue"></i> Destinos Clave</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 flex items-center gap-3 hover:bg-white transition-colors cursor-pointer group shadow-sm">
+                            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
+                                <img src="https://flagcdn.com/w160/es.png" class="w-full h-full object-cover" alt="España">
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-gray-800 group-hover:text-accent-blue transition-colors">España</span>
+                                <span class="text-[9px] text-gray-500 uppercase">Origen</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 flex items-center gap-3 hover:bg-white transition-colors cursor-pointer group shadow-sm">
+                            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
+                                <img src="https://flagcdn.com/w160/hu.png" class="w-full h-full object-cover" alt="Hungría">
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-gray-800 group-hover:text-accent-blue transition-colors">Hungría</span>
+                                <span class="text-[9px] text-gray-500 uppercase">Vino Tokaj</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 flex items-center gap-3 hover:bg-white transition-colors cursor-pointer group shadow-sm">
+                            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
+                                <img src="https://flagcdn.com/w160/it.png" class="w-full h-full object-cover" alt="Italia">
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-gray-800 group-hover:text-accent-blue transition-colors">Italia</span>
+                                <span class="text-[9px] text-gray-500 uppercase">Import</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 flex items-center gap-3 hover:bg-white transition-colors cursor-pointer group shadow-sm">
+                            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
+                                <img src="https://flagcdn.com/w160/ar.png" class="w-full h-full object-cover" alt="Argentina">
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-gray-800 group-hover:text-accent-blue transition-colors">Argentina</span>
+                                <span class="text-[9px] text-gray-500 uppercase">Malbec</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 flex items-center gap-3 hover:bg-white transition-colors cursor-pointer group col-span-2 md:col-span-1 shadow-sm">
+                            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
+                                <img src="https://flagcdn.com/w160/cl.png" class="w-full h-full object-cover" alt="Chile">
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-gray-800 group-hover:text-accent-blue transition-colors">Chile</span>
+                                <span class="text-[9px] text-gray-500 uppercase">Vinos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 text-right">
+                    <span class="text-9xl font-display font-black text-gray-200 absolute -top-20 -right-10 z-0">2015</span>
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6 relative z-10">Conexión Global</h2>
+                    <div class="w-20 h-1 bg-accent-blue ml-auto mb-8 relative z-10"></div>
+                    <p class="text-lg text-gray-600 leading-relaxed relative z-10 border-r-2 border-accent-blue pr-6">
+                        En 2015 la familia se embarcó en un proyecto de distribución de vinos de múltiples orígenes a nivel global, creando una red logística compleja y eficiente. Nos consolidamos como un actor clave en el mercado de Europa Central, destacándonos como el mayor importador de vino en esta región.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cine-timeline-item">
+            <div class="cine-bg"><img id="img-2022" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=2070&auto=format&fit=crop" alt="Diversificación"></div>
+            <div class="absolute inset-0 bg-white/70"></div>
+            <div class="cine-content text-center max-w-4xl mx-auto" data-aos="zoom-in">
+                <span class="inline-block px-4 py-1 rounded-full bg-gray-900 text-white font-bold text-sm mb-4 border border-black/10">2022</span>
+                <h2 class="text-5xl md:text-6xl font-display font-bold text-gray-900 mb-8">Diversificación Estratégica</h2>
+                <p class="text-xl text-gray-600 leading-relaxed mb-12">
+                    En 2022, decidimos emprender una nueva etapa. Sin abandonar el negocio del vino, diversificamos nuestro enfoque hacia otros sectores, incluyendo la industria de la carne de vacuno, mariscos, granos y aceites vegetales, con operaciones de distribución a nivel mundial.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="changeBg2022('beef')" class="px-6 py-3 rounded-xl bg-white/80 border border-gray-200 text-gray-800 backdrop-blur-md hover:bg-accent-gold hover:text-white transition-colors transform hover:scale-105 active:scale-95 shadow-sm"><i class="fa-solid fa-cow mr-2"></i> Carne Vacuna</button>
+                    <button onclick="changeBg2022('seafood')" class="px-6 py-3 rounded-xl bg-white/80 border border-gray-200 text-gray-800 backdrop-blur-md hover:bg-accent-blue hover:text-white transition-colors transform hover:scale-105 active:scale-95 shadow-sm"><i class="fa-solid fa-shrimp mr-2"></i> Mariscos</button>
+                    <button onclick="changeBg2022('grains')" class="px-6 py-3 rounded-xl bg-white/80 border border-gray-200 text-gray-800 backdrop-blur-md hover:bg-accent-orange hover:text-white transition-colors transform hover:scale-105 active:scale-95 shadow-sm"><i class="fa-solid fa-wheat-awn mr-2"></i> Granos</button>
+                    <button onclick="changeBg2022('oil')" class="px-6 py-3 rounded-xl bg-white/80 border border-gray-200 text-gray-800 backdrop-blur-md hover:bg-accent-emerald hover:text-white transition-colors transform hover:scale-105 active:scale-95 shadow-sm"><i class="fa-solid fa-bottle-droplet mr-2"></i> Aceites</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cine-timeline-item">
+            <div class="cine-bg"><img src="https://images.unsplash.com/photo-1754966357669-3341791bf550?q=80&w=2064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mineria"></div>
+            <div class="absolute inset-0 bg-white/70"></div>
+            <div class="cine-content grid grid-cols-1 md:grid-cols-2 gap-16 items-center" data-aos="fade-up">
+                <div>
+                    <span class="text-9xl font-display font-black text-gray-200 absolute -top-20 -left-10 z-0">2023</span>
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6 relative z-10">Nuevo Capítulo: Minería</h2>
+                    <div class="w-20 h-1 bg-accent-emerald mb-8 relative z-10"></div>
+                    <p class="text-lg text-gray-600 leading-relaxed relative z-10 border-l-2 border-accent-emerald pl-6">
+                        El año 2023 marcó un nuevo capítulo para el grupo en la industria minera con la adquisición del 100% de las acciones de <strong class="text-emerald-700">Minas Argentinas S.A. (Gualcamayo)</strong>, en San Juan, Argentina.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed mt-4 relative z-10 border-l-2 border-accent-emerald pl-6">
+                        Hoy en día, esta empresa no solo mantiene la producción de oro, sino que también está invirtiendo en exploración para la expansión del proyecto <em>Carbonatos Profundos</em> y el desarrollo de nuevos targets hasta ahora inexplorados en Gualcamayo.
+                    </p>
+                </div>
+                <div class="glass-panel p-8 rounded-3xl border-l-4 border-accent-emerald relative group overflow-hidden">
+                    <div class="absolute inset-0 bg-emerald-50 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+                    <div class="relative z-10">
+                        <img src="https://images.unsplash.com/photo-1600363503477-a8d1d6d57dfc?q=80&w=1644&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-48 object-cover rounded-xl mb-6 shadow-lg grayscale group-hover:grayscale-0 transition-all duration-500" alt="Gold">
+                        <h4 class="text-gray-900 font-bold text-2xl mb-2">Gualcamayo</h4>
+                        <p class="text-sm text-gray-500">San Juan, Argentina</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cine-timeline-item">
+            <div class="cine-bg"><img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2070&auto=format&fit=crop" alt="Futuro"></div>
+            <div class="absolute inset-0 bg-white/70"></div>
+            <div class="cine-content grid grid-cols-1 md:grid-cols-2 gap-16 items-center" data-aos="fade-up">
+                <div class="order-2 md:order-1 space-y-6">
+                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-accent-gold transform hover:scale-105 transition-transform duration-300 group hover:shadow-lg">
+                        <h4 class="text-yellow-700 font-bold text-xl mb-2 group-hover:text-yellow-600 transition-colors"><i class="fa-solid fa-solar-panel mr-2 group-hover:animate-pulse"></i> Energía Renovable</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            En 2024, se han iniciado importantes proyectos de energía renovable en Argentina, incluyendo la adquisición de terrenos para la construcción de varios parques fotovoltaicos con una capacidad total de 800 MW. <strong>Calicanto Solar</strong>, ya ha comenzado su fase de construcción en San Luis, Argentina, con una capacidad de 23 MW, teniendo ya el terreno alineado y procediendo a la instalación de los componentes para final de año.
+                        </p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl border-l-4 border-accent-purple transform hover:scale-105 transition-transform duration-300 group hover:shadow-lg">
+                        <h4 class="text-purple-700 font-bold text-xl mb-2 group-hover:text-purple-600 transition-colors"><i class="fa-solid fa-building-columns mr-2 group-hover:animate-bounce"></i> Legado Urbano</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Además, se adquirió en Agosto del 2024 el predio de <strong>Cinzano</strong>, en la ciudad de San Juan, donde se construirán viviendas, oficinas, un museo, restaurantes y un centro comercial, contribuyendo al desarrollo urbano y turístico de la región.
+                        </p>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 text-right">
+                    <span class="text-9xl font-display font-black text-gray-200 absolute -top-20 -right-10 z-0">2024</span>
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6 relative z-10">Futuro Sostenible</h2>
+                    <div class="w-20 h-1 bg-gray-900 ml-auto mb-8 relative z-10"></div>
+                    <p class="text-lg text-gray-600 leading-relaxed relative z-10 border-r-2 border-gray-900 pr-6">
+                        El presente es de construcción. Energía limpia y regeneración urbana marcan el ritmo de nuestro 2024.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="estructura" class="py-32 bg-[#F3F4F6] border-t border-black/5 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-purple-100 via-[#F3F4F6] to-[#F3F4F6] pointer-events-none"></div>
+        
+        <div class="max-w-[1600px] mx-auto px-6 relative z-10">
+            <div class="text-center mb-20">
+                <span class="text-accent-gold font-bold tracking-[0.3em] text-xs uppercase mb-4 block">Estructura Sólida</span>
+                <h2 class="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6">Gobernanza</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">La base para una gestión coherente y consistente que permea desde la familia hasta las operaciones.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[350px]">
+                
+                <div class="md:col-span-2 row-span-1 glass-card p-10 rounded-[2.5rem] relative overflow-hidden group hover:shadow-lg" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <div class="absolute inset-0 bg-gradient-to-r from-yellow-50 to-transparent opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <div class="p-4 bg-yellow-100 rounded-2xl text-accent-gold text-3xl"><i class="fa-solid fa-users-line"></i></div>
+                            <span class="px-3 py-1 rounded-full border border-gray-200 text-[10px] uppercase font-bold text-gray-500">Estratégico</span>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-display font-bold text-gray-900 mb-2">Consejo Familiar</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-4">Protección del legado y visión a largo plazo. Decisiones con "Founder's Mentality" que aseguran la continuidad de los valores.</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs bg-gray-100 px-3 py-1 rounded-lg text-gray-600">Juanjo Retamero</span>
+                                <span class="text-xs bg-gray-100 px-3 py-1 rounded-lg text-gray-600">Pablo Retamero</span>
+                                <span class="text-xs bg-gray-100 px-3 py-1 rounded-lg text-gray-600">Canco Retamero</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-1 row-span-1 glass-card p-8 rounded-[2.5rem] relative overflow-hidden group hover:border-accent-purple hover:shadow-lg" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-purple-100 rounded-full blur-[40px] group-hover:bg-purple-200 transition-colors"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-between">
+                        <div class="p-3 bg-purple-100 w-fit rounded-xl text-accent-purple text-2xl"><i class="fa-solid fa-heart"></i></div>
+                        <div>
+                            <h3 class="text-2xl font-display font-bold text-gray-900 mb-2">Fundación</h3>
+                            <p class="text-xs text-gray-500 leading-relaxed">Brazo social y filantrópico. Agente de cambio sistémico en las comunidades.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-1 row-span-1 glass-card p-8 rounded-[2.5rem] relative overflow-hidden group hover:border-accent-blue hover:shadow-lg" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-100 rounded-full blur-[40px] group-hover:bg-blue-200 transition-colors"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-between">
+                        <div class="p-3 bg-blue-100 w-fit rounded-xl text-accent-blue text-2xl"><i class="fa-solid fa-building-shield"></i></div>
+                        <div>
+                            <h3 class="text-2xl font-display font-bold text-gray-900 mb-2">Corporate</h3>
+                            <p class="text-xs text-gray-500 leading-relaxed">Alineación estratégica, HR, Finanzas y Business Intelligence.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-4 row-span-1 glass-card p-10 rounded-[2.5rem] relative overflow-hidden flex items-center justify-between group hover:shadow-lg" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+                    <div class="relative z-10 max-w-xl">
+                        <h3 class="text-3xl font-display font-bold text-gray-900 mb-4">The Aisa Way of Doing Business</h3>
+                        <p class="text-gray-500">Nuestra metodología única: Tomamos oportunidades intuitivas, les aportamos visión y valores, inyectamos capital y aseguramos tracción y cumplimiento.</p>
+                    </div>
+                    <div class="relative z-10 hidden lg:flex gap-8">
+                        <div class="text-center group-hover:-translate-y-2 transition-transform duration-500">
+                            <div class="w-16 h-16 rounded-full border border-gray-200 flex items-center justify-center text-2xl mb-2 mx-auto bg-white"><i class="fa-regular fa-lightbulb text-accent-gold"></i></div>
+                            <span class="text-xs font-bold uppercase text-gray-600">Intuición</span>
+                        </div>
+                        <div class="w-8 h-px bg-gray-200 self-center"></div>
+                        <div class="text-center group-hover:-translate-y-2 transition-transform duration-500 delay-100">
+                            <div class="w-16 h-16 rounded-full border border-gray-200 flex items-center justify-center text-2xl mb-2 mx-auto bg-white"><i class="fa-solid fa-sack-dollar text-accent-emerald"></i></div>
+                            <span class="text-xs font-bold uppercase text-gray-600">Capital</span>
+                        </div>
+                        <div class="w-8 h-px bg-gray-200 self-center"></div>
+                        <div class="text-center group-hover:-translate-y-2 transition-transform duration-500 delay-200">
+                            <div class="w-16 h-16 rounded-full border border-gray-200 flex items-center justify-center text-2xl mb-2 mx-auto bg-white"><i class="fa-solid fa-rocket text-accent-purple"></i></div>
+                            <span class="text-xs font-bold uppercase text-gray-600">Tracción</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto" class="bg-[#F3F4F6] text-gray-600 pt-32 pb-12 border-t border-black/5">
+        <div class="max-w-[1600px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+            <div class="lg:col-span-4">
+                <a href="#" class="inline-block mb-8">
+                    <!-- Logo dark filter -->
+                    <img src="images/aisa-logo.svg" alt="Aisa Group" class="h-8 filter brightness-0">
+                </a>
+                <p class="text-gray-500 mb-8 max-w-sm">
+                    Inversiones estratégicas que impulsan el desarrollo económico y la sostenibilidad global.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-white transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-white transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-apple flex items-center justify-center hover:bg-accent-gold hover:text-white transition-all"><i class="fa-solid fa-envelope text-xl"></i></a>
+                </div>
+            </div>
+            <div class="lg:col-span-2">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-8">Compañía</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-600">
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Nuestro Equipo</a></li>
+                    <li><a href="carreras.html" class="hover:text-accent-gold transition-colors">Carreras</a></li>
+                    <li><a href="#" class="hover:text-accent-gold transition-colors">Prensa</a></li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3">
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-8">Sedes Globales</h4>
+                <ul class="space-y-4 text-sm font-medium text-gray-600">
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ca.png" alt="CA"> Vancouver, Canadá (HQ)</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/ar.png" alt="AR"> San Juan, Argentina</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/us.png" alt="US"> Miami, USA</li>
+                    <li class="flex items-center gap-2"><img src="https://flagcdn.com/w20/es.png" alt="ES"> Madrid, España</li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3">
+                <div class="glass-apple p-8 rounded-3xl">
+                    <h4 class="font-display font-bold text-xl mb-4 text-gray-900">¿Hablamos?</h4>
+                    <p class="text-sm text-gray-500 mb-6">Estamos abiertos a nuevas oportunidades de inversión y colaboración.</p>
+                    <a href="#" id="footer-contact-btn" class="inline-block w-full py-3 bg-accent-gold text-white text-center font-bold uppercase tracking-widest text-xs rounded-full hover:bg-gray-900 transition-colors">
+                        Contactar
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-[1600px] mx-auto px-6 pt-8 border-t border-black/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 uppercase tracking-widest">
+            <p>© 2025 Aisa Group. Todos los derechos reservados.</p>
+            <div class="flex gap-8 mt-4 md:mt-0">
+                <a href="#" class="hover:text-gray-900">Política de Privacidad</a>
+                <a href="#" class="hover:text-gray-900">Términos de Uso</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="contact-modal" class="fixed inset-0 flex items-center justify-center hidden z-[210]">
+        <div id="contact-modal-overlay" class="absolute inset-0 bg-white/60 backdrop-blur-[40px] modal-overlay-global" onclick="closeContactModal()"></div>
+        <div class="rounded-3xl p-6 md:p-8 relative z-[215] max-w-lg w-[90%] overflow-visible bg-white/80 backdrop-blur-[40px] border border-white/20 shadow-2xl">
+            <button id="close-contact" class="absolute top-4 right-4 w-10 h-10 rounded-full glass-apple flex items-center justify-center text-xl text-gray-600 hover:bg-black/5 transition-colors z-[220]" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h4 class="text-2xl font-display font-bold mb-4 text-gray-900">Contacto</h4>
+            <div id="contact-toolbar" class="flex gap-2 mb-2">
+                <button type="button" class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-700 hover:bg-accent-gold hover:text-white transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-bold"></i></button>
+                <button type="button" class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-700 hover:bg-accent-gold hover:text-white transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-italic"></i></button>
+                <button type="button" class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-700 hover:bg-accent-gold hover:text-white transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-list-ul"></i></button>
+            </div>
+            <form id="contact-form" class="space-y-4">
+                <input type="text" id="contact-name" class="w-full p-3 rounded-xl bg-gray-100 backdrop-blur placeholder-gray-500 text-gray-900 focus:ring-2 focus:ring-accent-gold focus:outline-none border border-white/50" placeholder="Nombre" required>
+                <input type="email" id="contact-email" class="w-full p-3 rounded-xl bg-gray-100 backdrop-blur placeholder-gray-500 text-gray-900 focus:ring-2 focus:ring-accent-gold focus:outline-none border border-white/50" placeholder="Email" required>
+                <div id="contact-message" contenteditable="true" class="w-full p-3 rounded-xl bg-gray-100 backdrop-blur placeholder-gray-500 text-gray-900 focus:ring-2 focus:ring-accent-gold focus:outline-none h-40 overflow-auto border border-white/50"></div>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-2">
+                    <button type="button" id="send-email" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-gray-700 hover:bg-accent-gold hover:text-white transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-solid fa-envelope"></i> Enviar Email</button>
+                    <button type="button" id="send-whatsapp" class="flex-1 py-3 rounded-full glass-apple flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-xs text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors" onmouseenter="hoverCursor()" onmouseleave="unhoverCursor()"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                </div>
+            </form>
+            <p class="text-xs text-gray-500 mt-3">Completa tus datos y formatea tu mensaje usando la barra de herramientas. Luego elige el modo de contacto para abrir tu cliente de email o WhatsApp con el texto preparado.</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        AOS.init({ once: true, duration: 1000, offset: 50 });
+
+        // Particles Configuration (Darker particles for light mode)
+        particlesJS("particles-container", {
+            "particles": {
+                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#000000" }, // Dark particles
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.1, "random": true }, // Subtle opacity
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#000000", "opacity": 0.05, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "bubble" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "bubble": { "distance": 200, "size": 4, "duration": 2, "opacity": 0.4, "speed": 3 } }
+            },
+            "retina_detect": true
+        });
+
+        // Orbital System Interaction
+        const planets = document.querySelectorAll('.planet');
+        
+        planets.forEach(planet => {
+            planet.addEventListener('mouseenter', () => {
+                // Pause animations handled by CSS hover
+            });
+        });
+
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        function hoverCursor() {
+            cursor.classList.add('hovered');
+        }
+
+        function unhoverCursor() {
+            cursor.classList.remove('hovered');
+        }
+
+        // 2022 Section Background Change Logic
+        function changeBg2022(type) {
+            const img = document.getElementById('img-2022');
+            let src = '';
+            
+            switch(type) {
+                case 'beef':
+                    src = 'https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=2070&auto=format&fit=crop';
+                    break;
+                case 'seafood':
+                    src = 'https://images.unsplash.com/photo-1615141982880-13131e1c30c3?q=80&w=2070&auto=format&fit=crop';
+                    break;
+                case 'grains':
+                    src = 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=2070&auto=format&fit=crop';
+                    break;
+                case 'oil':
+                    src = 'https://images.unsplash.com/photo-1474979266404-7cadd259c366?q=80&w=2070&auto=format&fit=crop';
+                    break;
+                default:
+                    src = 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=2070&auto=format&fit=crop';
+            }
+            
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = src;
+                img.style.opacity = 0.15; // Lower opacity for light mode cinematic bg
+            }, 300);
+        }
+
+        // --- THEME TOGGLE LOGIC ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.theme === 'dark') {
+             htmlElement.classList.add('dark');
+        } else {
+             htmlElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+        });
+
+        // --- CONTACT MODAL LOGIC ---
+        const contactModal = document.getElementById('contact-modal');
+        const closeContactBtn = document.getElementById('close-contact');
+        const contactOverlay = document.getElementById('contact-modal-overlay');
+
+        function openContactModal(e) {
+            if(e) e.preventDefault();
+            contactModal.classList.remove('hidden');
+        }
+
+        function closeContactModal() {
+            contactModal.classList.add('hidden');
+        }
+
+        if(closeContactBtn) closeContactBtn.addEventListener('click', closeContactModal);
+        if(contactOverlay) contactOverlay.addEventListener('click', closeContactModal);
+
+        // Escape Key Listener for Modals
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') {
+                closeContactModal();
+            }
+        });
+    </script>
+    <script>
+        // MOBILE MENU INIT
+        (function () {
+            function initMobileMenu() {
+                const toggleBtn = document.getElementById('nav-toggle');
+                const navMenu = document.getElementById('nav-menu');
+
+                const resetMenuForDesktop = () => {
+                    if (window.innerWidth >= 1024 && navMenu) {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove(
+                            'flex',
+                            'flex-col',
+                            'items-center',
+                            'text-center',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'rounded-3xl',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    }
+                };
+
+                if (!toggleBtn || !navMenu) return;
+
+                resetMenuForDesktop();
+                window.addEventListener('resize', resetMenuForDesktop);
+
+                toggleBtn.addEventListener('click', () => {
+                    const isHidden = navMenu.classList.contains('hidden');
+
+                    if (isHidden) {
+                        navMenu.classList.remove('hidden');
+                        navMenu.classList.add(
+                            'flex',
+                            'flex-col',
+                            'items-center',
+                            'text-center',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'rounded-3xl',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    } else {
+                        navMenu.classList.add('hidden');
+                        navMenu.classList.remove(
+                            'flex',
+                            'flex-col',
+                            'items-center',
+                            'text-center',
+                            'absolute',
+                            'top-full',
+                            'left-0',
+                            'w-full',
+                            'p-6',
+                            'gap-6',
+                            'glass-apple',
+                            'rounded-3xl',
+                            'backdrop-blur-lg',
+                            'z-50'
+                        );
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initMobileMenu);
+            } else {
+                initMobileMenu();
+            }
+        })();
+    </script>
+
+</body>
+</html>
