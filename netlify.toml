@@ -9,22 +9,4 @@
 [functions]
   directory = "netlify/functions"
 
-[[redirects]]
-  from = "/console"
-  to = "/console/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/console/*"
-  to = "/console/index.html"
-  status = 200
-
-[[headers]]
-  for = "/console/*"
-  [headers.values]
-    Cache-Control = "no-store"
-    X-Robots-Tag = "noindex, nofollow, noarchive"
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "no-referrer"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    
