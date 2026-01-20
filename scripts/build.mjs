@@ -25,7 +25,9 @@ const DIRS_TO_COPY = [
   "images",
   "videos",
   "console",
-  "data" // la usaremos para content.json más adelante
+  
+    "admin",
+"data" // la usaremos para content.json más adelante
 ];
 
 /**
