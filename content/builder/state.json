@@ -1,0 +1,30 @@
+{
+  "pages": [
+    {
+      "id": "p1",
+      "name": "Home",
+      "slug": "/index.html",
+      "blocks": [
+        {
+          "id": "b1",
+          "type": "Hero",
+          "title": "Energía del Futuro",
+          "subtitle": "Global Holdings",
+          "body": "Liderando la transición energética con tecnología de punta.",
+          "align": "center",
+          "overlay": 60,
+          "cta": "Nuestros Proyectos",
+          "imageId": "m3"
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "id": "m3",
+      "url": "https://images.unsplash.com/photo-1497436072909-60f360e1d4b0?auto=format&fit=crop&q=80&w=800",
+      "name": "oficina.jpg"
+    }
+  ],
+  "news": []
+}
