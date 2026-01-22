@@ -10,3 +10,22 @@
   directory = "netlify/functions"
 
     
+[[redirects]]
+from = "/admin/builder"
+to = "/admin/builder/index.html"
+status = 200
+
+[[redirects]]
+from = "/admin/builder/*"
+to = "/admin/builder/index.html"
+status = 200
+
+[[headers]]
+for = "/admin/builder/*"
+  [headers.values]
+  Cache-Control = "no-store"
+  X-Robots-Tag = "noindex, nofollow, noarchive"
+  X-Frame-Options = "DENY"
+  X-Content-Type-Options = "nosniff"
+  Referrer-Policy = "no-referrer"
+  Permissions-Policy = "camera=(), microphone=(), geolocation=()"
